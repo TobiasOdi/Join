@@ -1,0 +1,558 @@
+/* ============================================================================= GENERAL ================================================================== */
+* {
+  font-family: "Inter";
+  box-sizing: border-box;
+}
+
+body,
+head {
+  margin: 0;
+  border: 0;
+  padding: 0;
+  background-color: #f6f7f8;
+  font-size: 16px;
+  font-style: normal;
+  line-height: 120%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.buttonDark {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #2a3647;
+  width: 110px;
+  height: 48px;
+  border: 1px solid #2a3647;
+  border-radius: 8px;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.buttonDarkText {
+  width: 100%;
+  height: 25px;
+  font-family: "Inter";
+  font-weight: 700;
+  font-size: 21px;
+  color: white;
+}
+
+.buttonLight {
+  background-color: #fff;
+  width: 110px;
+  height: 48px;
+  border: 1px solid #2a3647;
+  border-radius: 8px;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.buttonLightText {
+  width: 100%;
+  height: 25px;
+  font-family: "Inter";
+  font-weight: 700;
+  font-size: 21px;
+  color: #2a3647;
+}
+
+.inputContainer{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+
+}
+
+.inputContainer img {
+  width: 20px;
+  height: 18px;
+}
+
+.inputFieldContainer {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.inputFieldContainer img {
+  position: absolute;
+  width: 20px;
+  height: 18px;
+  bottom: 15px;
+  right: 15px;
+}
+
+.inputFieldContainer .img {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 18px;
+}
+
+.inputFieldContainer2 {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+}
+
+.inputFields{
+  box-sizing: border-box;
+  padding: 13px 21px;
+  gap: 10px;
+  width: 422px;
+  height: 51px;
+  background: #ffffff;
+  border: 1px solid #d1d1d1;
+  border-radius: 10px;
+  font-size: 21px;
+}
+
+::placeholder {
+  width: 100%;
+  height: 25px;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 21px;
+  line-height: 120%;
+  color: #d1d1d1;
+}
+
+/* ================================================================ SIDEBAR / TOPBAR / MAIN CONTAINER ====================================================== */
+li {
+  text-decoration: none;
+  list-style: none;
+  display: flex;
+  gap: 18px;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 20px 0px;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.mainBoardContainerDisplay {
+  display: none;
+}
+
+.mainSummaryContainerDisplay {
+  display: block;
+}
+
+.mainAddTaskContainerDisplay {
+  display: none;
+}
+
+.mainContactsContainerDisplay {
+  display: none;
+}
+
+.mainLegalNoticeContainerDisplay {
+  display: none;
+}
+
+.mainhelpContainerDisplay {
+  display: none;
+}
+
+.mainContainer {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  display: flex;
+}
+
+.sideNavBar {
+  position: relative;
+  height: 100%;
+  width: 232px;
+  background-color: #2a3647;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  z-index: 2;
+}
+
+.sideNavBarList {
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  height: 100%;
+  width: 100%;
+}
+
+.sideNavBarList > div {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+  cursor: pointer;
+}
+
+.sideNavBarList > div:hover {
+  background-color: #091931;
+}
+
+.sideNavBarTask {
+  display: flex;
+  align-items: center;
+  width: 150px;
+  gap: 25px;
+}
+
+.sideNavBarTask span {
+  color: white;
+}
+
+.sideNavBarLegalNotice {
+  position: absolute;
+  bottom: 30px;
+  margin: 50px 0px 25px 0px;
+}
+
+.placeholderRight {
+  position: relative;
+  width: calc(100vw - 232px);
+}
+
+.placeholderTop {
+  position: relative;
+  top: 0px;
+  height: 89px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
+  padding: 1rem 2rem 1rem 4rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 2;
+}
+
+.topNavBarRightImg {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.topNavBarRightImg a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.topNavBarRightImgQuestionmark {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.topNavBarRightImgPicture {
+  border-radius: 50%;
+  border: 3px solid white;
+  cursor: pointer;
+  height: 40px;
+  width: 40px;
+}
+
+.topNavBarRightImgExclamationmark {
+  height: 33px;
+  width: 33px;
+  cursor: pointer;
+  display: none;
+}
+
+.logoutButton {
+  position: absolute;
+  right: 65px;
+  top: 70px;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  width: 120px;
+  height: 45px;
+  border-radius: 10px 0 10px 10px;
+  padding: 15px;
+  background-color: rgba(42, 54, 71, 1);
+  cursor: pointer;
+}
+
+.logoutButton > span {
+  color: white;
+  font-weight: bold;
+}
+
+.topNavBarRightImgPicture:hover {
+  scale: 1.05;
+}
+
+.placeholderBottom {
+  height: 100%;
+}
+
+/* .placeholderLeft {
+  position: relative;
+  left: 0px;
+  height: calc(100% - 89px);
+} */
+
+/* Logo TopLeftCorner */
+.sideNavBarLogo {
+  position: absolute;
+  top: 66px;
+  left: 66px;
+  z-index: 3;
+}
+
+.whiteLogo {
+  position: relative;
+  width: 100px;
+  height: 121px;
+}
+
+.blackLogo {
+  position: relative;
+  display: none;
+}
+
+/* SideBar */
+.svg {
+  width: 25px;
+  height: 25px;
+}
+
+.legalnotice {
+  margin-top: 100px;
+  margin-bottom: 25px;
+}
+
+
+/* ================================== SNACKBAR =======================================*/
+
+/* The snackbar - position it at the bottom and in the middle of the screen */
+#missingSignedUp, #alreadySignedUp, #successfullySignedUp, #userDoesNotExist, #pwEmailIncorrect, #sendEmail {
+  visibility: hidden; /* Hidden by default. Visible on click */
+  min-width: 280px; /* Set a default minimum width */
+  margin-left: -140px; /* Divide value of min-width by 2 */
+  background-color: #2A3647; /* Black background color */
+  color: #fff; /* White text color */
+  text-align: center; /* Centered text */
+  border-radius: 10px; /* Rounded borders */
+  padding: 16px 8px; /* Padding */
+  position: fixed; /* Sit on top of the screen */
+  z-index: 1; /* Add a z-index if needed */
+  left: 50%; /* Center the snackbar */
+  bottom: 30px; /* 30px from the bottom */
+}
+
+#missingSignedUp {
+  background-color: red;
+}
+
+/* Show the snackbar when clicking on a button (class added with JavaScript) */
+#missingSignedUp.show, #alreadySignedUp.show, #successfullySignedUp.show, #userDoesNotExist.show, #pwEmailIncorrect.show, #sendEmail.show {
+  visibility: visible; /* Show the snackbar */
+  /* Add animation: Take 0.5 seconds to fade in and out the snackbar.
+  However, delay the fade out process for 2.5 seconds */
+  -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+/* Animations to fade the snackbar in and out */
+@-webkit-keyframes fadein {
+  from {bottom: 0; opacity: 0;}
+  to {bottom: 30px; opacity: 1;}
+}
+
+@keyframes fadein {
+  from {bottom: 0; opacity: 0;}
+  to {bottom: 30px; opacity: 1;}
+}
+
+@-webkit-keyframes fadeout {
+  from {bottom: 30px; opacity: 1;}
+  to {bottom: 0; opacity: 0;}
+}
+
+@keyframes fadeout {
+  from {bottom: 30px; opacity: 1;}
+  to {bottom: 0; opacity: 0;}
+}
+
+/* =========================== RESPONSIVENESS ======================= */
+@media (max-width: 950px) {
+  .placeholderTop {
+    padding-left: 2rem;
+  }
+}
+
+@media (max-width: 780px) {
+  .inputFields {
+    width: 350px;
+  }
+}
+
+@media (max-width: 720px) {
+  .topNavBarLeftText {
+    display: none;
+  }
+
+  .topNavBarRightImgExclamationmark {
+    display: flex;
+  }
+
+  .placeholderTop {
+    width: 100%;
+    justify-content: flex-end;
+  }
+
+  .mainContainer {
+    flex-direction: column-reverse;
+  }
+
+  .placeholderRight {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: calc(100vh - 80px);
+    display: flex;
+    flex-direction: column;
+  }
+  .placeholderBottom {
+    height: calc(100vh - 169px);
+  }
+  .sideNavBarLogo {
+    top: 20px;
+    left: 25px;
+  }
+  .whiteLogo {
+    display: none;
+  }
+  .blackLogo {
+    display: flex;
+    z-index: 2;
+    width: 32px;
+    height: 39px;
+  }
+  .sideNavBar {
+    height: 100%;
+    width: 100%;
+    display: flex;
+  }
+  .sideNavBarList {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: row;
+    padding: 12px;
+  }
+
+  .sideNavBarTask {
+    /* display: flex; */
+    flex-direction: column;
+    /* justify-content: center;
+    align-items: center; */
+    gap: 10px;
+    width: auto;
+  }
+
+  .sideNavBarTask img {
+    width: 22px;
+    height: 22px;
+  }
+
+  .sideNavBarTask span {
+    font-size: 14px;
+  }
+
+  .sideNavBarLegalNotice {
+    display: none !important;
+  }
+}
+
+@media (max-width: 600px) {
+  .inputFields {
+    padding: 13px 21px;
+    gap: 10px;
+    width: 327px;
+    height: 41px;
+      width: 100%;
+  }
+  
+  ::placeholder {
+    width: 100%;
+    height: 25px;
+    font-size: 21px;
+    line-height: 120%;
+  }
+}
+
+@media (max-width: 480px) {
+  .inputContainer {
+    padding-left: 2rem;
+    padding-right: 2rem;
+    width: 100%;
+  }
+
+  .inputFieldContainer {
+    width: 100%;
+    margin-left: 10px;
+    margin-right: 10px;
+  }  
+
+  .inputFields, .inputContainer, .inputFieldContainer   {
+    width: 100%;
+  }
+
+  .inputFields {
+    font-size: 16px;
+  }
+
+  ::placeholder {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 380px) {
+  .inputContainer {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+   }
+}
+
+@media (max-width: 320px) {
+  .sideNavBarTask span {
+    display: none;
+  }
+}
+
+@media (max-width: 300px) {
+  .inputFieldContainer {
+    margin-left: 10px;
+    margin-right: 10px;
+  }  
+}
+

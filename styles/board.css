@@ -1,0 +1,1084 @@
+/* ================================ BOARD MAIN ================================ */
+.placeholderBoard {
+  height: calc(100vh - 89px);
+  padding: 2rem;
+  padding: 1rem 1rem 1rem 2rem;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-self: flex-start;
+  align-items: flex-start;
+  gap: 15px;
+}
+
+.placeholderBoardTop {
+  width: 100%;
+/*   height: 100px;
+ */display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.placeholderBoardTop h1 {
+  font-size: 61px;
+}
+
+.placeholderBoardTopRight {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+/* .placeholderBoardTopRight > .inputContainer {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+} */
+
+.placeholderBoardTopRight .inputContainer {
+  width: 300px;
+}
+
+/* .findTaskInputField {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 13px 21px;
+  gap: 10px;
+  width: 251px;
+  height: 51px;
+  background: #FFFFFF;
+  border: 1px solid #A8A8A8;
+  border-radius: 10px;
+} */
+
+.inputFields {
+  box-sizing: border-box;
+  /* gap: 10px; */
+  padding: 10px;
+  width: 251px;
+  height: 51px;
+  background: #ffffff;
+  border: 1px solid #d1d1d1;
+  border-radius: 10px;
+}
+
+.placeholderBoardTop .inputFields {
+  height: 45px;
+
+}
+
+::placeholder {
+  width: 100px;
+  height: 25px;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 21px;
+  line-height: 120%;
+  color: #d1d1d1;
+}
+
+.inputContainer {
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.inputContainer img {
+  width: 20px;
+  height: 18px;
+}
+
+.inputFieldContainer {
+  position: relative;
+}
+
+.inputFieldContainer img {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+}
+
+.img {
+  right: 22px !important;
+}
+
+.inputFieldContainer .inputFieldVerticalLine {
+  position: absolute;
+  top: 20%;
+  right: 3.15rem;
+  width: 0px;
+  height: 31px;
+  border: 1px solid #d1d1d1;
+}
+
+/* .inputFieldVerticalLine {
+    position: absolute;
+    width: 0px;
+    height: 31px;
+    border: 1px solid #d1d1d1;
+  } */
+
+.addTaskButton {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 18px 10px;
+  gap: 10px;
+
+  width: 120px;
+  height: 45px;
+
+  background: #2a3647;
+  border: 1px solid #2a3647;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 21px;
+  color: #ffffff;
+}
+
+.addTaskButton > span {
+  font-size: 16px;
+
+}
+
+.boardParts {
+  width: 380px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin-right: 1rem;
+  margin-bottom: 1rem;
+}
+
+.placeholderBoardBottom {
+  height: calc(100vh - 235px);
+  display: flex;
+  flex-wrap: wrap;
+  flex-grow: 1;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  overflow: auto;
+}
+
+/* ================================ SCROLLBAR ====================================== */
+.placeholderBoardBottom::-webkit-scrollbar {
+  width: 10px;
+  scrollbar-gutter: stable;
+}
+
+.placeholderBoardBottom::-webkit-scrollbar-thumb {
+  background-color: #a8a8a8;
+  border: 2px solid white;
+  border-radius: 6px;
+}
+
+.placeholderBoardBottom::-webkit-scrollbar-button {
+  color: #a8a8a8;
+}
+
+.placeholderBoardBottom::-webkit-scrollbar-button {
+  display: block;
+  background-repeat: no-repeat;
+  background-size: 50%;
+  background-position: center;
+}
+
+.placeholderBoardBottom::-webkit-scrollbar-button:vertical:start:increment {
+  background-image: url(../img/upArrow.svg);
+  background-size: 10px 4px;
+}
+
+.placeholderBoardBottom::-webkit-scrollbar-button:vertical:start:decrement {
+  display: none;
+}
+
+.placeholderBoardBottom::-webkit-scrollbar-button:vertical:end:increment {
+  display: none;
+}
+
+.placeholderBoardBottom::-webkit-scrollbar-button:vertical:end:decrement {
+  background-image: url(../img/downArrow.svg);
+  background-size: 10px 4px;
+}
+
+/* ================================================================================== */
+
+.boardTask {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 0px 20px;
+  font-weight: 700;
+  font-size: 21px;
+}
+
+.boardTask > div:last-of-type {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.boardTask img {
+  width: 22px;
+  height: 22px;
+  color: #2a3647;
+}
+
+.toDoCard {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.boardContainer {
+  /* height: 100%; */
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  border-radius: 15px;
+  padding: 18px 20.5px;
+  background-color: #ffffff;
+  box-shadow: 0px 0px 14px 3px rgba(0, 0, 0, 0.04);
+  cursor: pointer;
+  /* border: 1px solid black; */
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.boardContainerTop {
+  width: 100%;
+  /*   width: 103px;
+ */
+  height: 27px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.boardContainerTop > div:first-of-type {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 110px;
+  background-color: #ff7a00;
+  border-radius: 8px;
+}
+
+.boardContainerTop > div:first-of-type > div {
+  color: white;
+}
+
+.boardContainerTop > div:first-of-type img {
+  height: 15px;
+  width: auto;
+  cursor: pointer;
+}
+
+.boardContainerTop > div:first-of-type img:hover {
+  scale: 1.1; 
+}
+
+.boardContainerTop > div:last-of-type {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 3px;
+}
+.boardContainerTop > div:last-of-type > div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 5px;
+}
+
+.boardContainerTop > div:last-of-type > div:hover {
+  box-shadow: 0 0 2px 2px rgba(0,0,0,0.3);
+}
+
+
+.boardContainerTop > div:last-of-type img {
+  width: 20px;
+  height: 20px;
+}
+
+.boardContainerHeadline h2 {
+  font-weight: 700;
+  font-size: 16px;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.boardContainerDescripton span {
+  font-weight: 400;
+  font-size: 16px;
+  color: #a8a8a8;
+}
+
+.boardContainerProgress {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+}
+
+.progress {
+  height: 5px;
+  background-color: #f4f4f4;
+  border-radius: 5px;
+  width: 50%;
+  border: 1px solid purple;
+}
+
+.progressBar {
+  height: 100%;
+  background-color: #4caf50;
+  width: 0%;
+  transition: width 0.5s ease-in-out;
+}
+
+.progressInNumbers {
+  display: flex;
+  min-width: 60px;
+  font-size: 12px;
+}
+
+.noSubtasks {
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.boardContainerUserBubbles {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.userBubble {
+  display: flex;
+  position: relative;
+}
+
+.userBubbleOne {
+  width: 35px;
+  height: 35px;
+  border-radius: 100%;
+  background-color: #0190e0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  border: 1px solid white;
+  font-size: 12px;
+}
+
+.userBubbleTwo {
+  position: absolute;
+  left: 27px;
+  width: 35px;
+  height: 35px;
+  border-radius: 100%;
+  background-color: #ee00d6;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  border: 1px solid white;
+  font-size: 12px;
+}
+
+.userBubbleConcatenation {
+  position: absolute;
+  left: 54px;
+  width: 35px;
+  height: 35px;
+  border-radius: 100%;
+  background-color: #2a3647;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  border: 1px solid white;
+  font-size: 12px;
+}
+
+/* ================================ OPEN TASK ================================ */
+.openTaskBackground {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(5px);
+  background-color: rgba(0, 0, 0, 0.2);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  padding: 15px;
+  z-index: 10;
+}
+
+.openTaskContainer {
+  position: relative;
+  width: 500px;
+  height: 100%;
+  border-radius: 30px;
+}
+
+.openTask {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  background-color: #ffffff;
+  padding: 40px;
+  gap: 20px;
+  border-radius: 30px;
+  overflow: hidden;
+}
+
+.openTaskTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.openTaskTop > div:first-of-type {
+  width: 142px;
+  height: 40px;
+  border-radius: 8px;
+  padding: 4px 37px;
+  gap: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.openTaskTop > div:first-of-type > p {
+  font-size: 22px;
+  color: white;
+  margin: 0;
+}
+
+.selectCategoryContainer {
+  position: relative;
+  width: 150px;
+  height: 40px;
+  border-radius: 8px;
+  padding: 0 !important;
+}
+
+.selectCategory {
+  width: 150px;
+  height: inherit;
+  font-size: 20px;
+  background: transparent;
+  border: none;
+  color: white;
+  padding: 5px !important;
+  z-index: 2;
+}
+
+.selectArrow {
+  position: absolute;
+  top: 10px;
+  right: 8px;
+  width: 22px;
+  height: 22px;
+  z-index: 1;
+}
+
+.openTaskTop > div:last-of-type {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.openTaskTop > div:last-of-type:hover {
+  box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+}
+
+
+.openTaskHeader {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 10px;
+  hyphens: auto;
+
+}
+
+.openTaskHeader > h1 {
+  font-size: 45px;
+  color: #2a3647;
+  margin: 0;
+  padding: 0;
+}
+
+#titleEdit  {
+  font-weight: 400;
+  font-size: 35px;
+}
+
+#descriptionEdit {
+  font-size: 24px;
+}
+
+.openTaskHeader p {
+  color: #2a3647;
+  font-size: 22px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding: 0;
+}
+
+#editDueDate {
+  padding: 0;
+
+}
+
+.openTaskHeader input {
+  border: none;
+  /* border-bottom: 1px solid #2a3647; */
+  padding-left: 0;
+  color: #2a3647;
+  width: 100%;
+}
+
+.openTaskHeader input:first-of-type {
+  font-size: 40px;
+  font-weight: bold;
+}
+
+.openTaskHeader > div > div:first-of-type {
+  font-weight: bold;
+  font-size: 21px;
+  width: 160px;
+}
+
+/* .openTaskHeader > div:last-of-type > div:first-of-type {
+  width: 100%;
+} */
+
+.openTaskMain {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 10px;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  overflow: auto;
+}
+
+.openTaskMain > div > div:first-of-type {
+  font-weight: bold;
+  font-size: 21px;
+  width: 160px;
+}
+
+.openTaskMain > div:last-of-type > div:first-of-type {
+  width: 100%;
+}
+
+.openTaskDate,
+.openTaskPriority {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+}
+
+.openTaskDate > div:last-of-type {
+  font-size: 20px;
+}
+
+.openTaskDate > input {
+  border: none;
+  /* border-bottom: 1px solid #2a3647; */
+}
+
+.openTaskPriorityEdit {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.prioButtonsEdit > button:hover {
+  box-shadow: 0 4px 4px 0 rgb(0 0 0 / 25%);
+  width: 110%;
+
+}
+
+.prioButton2 {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 10px;
+  gap: 10px;
+  border: 1px solid #d1d1d1 !important;
+  border-radius: 10px;
+  font-size: 21px;
+  font-weight: 400;
+  background-color: rgb(255, 255, 255);
+  width: 100%;
+  position: relative;
+  transition: all 100ms ease-in-out;
+}
+
+.openTaskSubtask {
+  width: 100%;
+/*   min-height: 120px;
+ */  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  overflow: hidden;
+  gap: 15px;
+}
+
+.boardSubtaskContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 10px;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  overflow: auto;
+}
+
+.openTaskAssigned {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  overflow: hidden;
+  gap: 15px;
+}
+
+.assignedToContainer {
+  width: 100%;
+  height: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 10px;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  overflow: auto;
+}
+
+/* ================================ SCROLLBAR ====================================== */
+.assignedToContainer::-webkit-scrollbar,
+.boardSubtaskContainer::-webkit-scrollbar,
+.openTaskMain::-webkit-scrollbar {
+  width: 10px;
+  scrollbar-gutter: stable;
+}
+
+/* .contactList::-webkit-scrollbar-track {
+  background-color: white;
+} */
+
+.assignedToContainer::-webkit-scrollbar-thumb,
+.boardSubtaskContainer::-webkit-scrollbar-thumb,
+.openTaskMain::-webkit-scrollbar-thumb {
+  background-color: #a8a8a8;
+  border: 2px solid white;
+  border-radius: 6px;
+}
+
+.assignedToContainer::-webkit-scrollbar-button,
+.boardSubtaskContainer::-webkit-scrollbar-button,
+.openTaskMain::-webkit-scrollbar-button {
+  color: #a8a8a8;
+}
+
+.assignedToContainer::-webkit-scrollbar-button,
+.boardSubtaskContainer::-webkit-scrollbar-button,
+.openTaskMain::-webkit-scrollbar-button {
+  display: block;
+  background-repeat: no-repeat;
+  background-size: 50%;
+  background-position: center;
+}
+
+/* .assignedToContainer::-webkit-scrollbar-button:vertical:start:increment {
+  background-image: url(../img/upArrow.svg);
+  background-size: 10px 4px;  
+} */
+
+.assignedToContainer::-webkit-scrollbar-button:vertical:start:decrement,
+.boardSubtaskContainer::-webkit-scrollbar-button:vertical:start:decrement,
+.openTaskMain::-webkit-scrollbar-button:vertical:start:decrement {
+  display: none;
+}
+
+.assignedToContainer::-webkit-scrollbar-button:vertical:end:increment,
+.boardSubtaskContainer::-webkit-scrollbar-button:vertical:end:increment,
+.openTaskMain::-webkit-scrollbar-button:vertical:end:increment {
+  display: none;
+}
+
+/* .assignedToContainer::-webkit-scrollbar-button:vertical:end:decrement {
+  background-image: url(../img/downArrow.svg);   
+  background-size: 10px 4px;  
+} */
+/* =========================================================================== */
+
+.openTaskAssignedPerson,
+.openSubtask {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  gap: 10px;
+}
+
+.openSubtask {
+  position: relative;
+}
+
+.openTaskAssignedPerson > div:first-of-type {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  /*   background-color: #9327ff; */
+}
+
+.openSubtask > div:last-of-type {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  height: 25px;
+  border-radius: 50%;
+  /*   background-color: #9327ff; */
+}
+
+.coverCheckbox {
+  position: absolute !important;
+  top: -2px !important;
+  left: -2px !important;
+  height: 100% !important;
+  width: 100% !important;
+  opacity: 0;
+}
+
+.openTaskAssignedPerson span {
+  color: white;
+}
+
+.openTaskButtonContainer {
+  position: absolute;
+  right: 40px;
+  bottom: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.openTaskEditButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 57px;
+  height: 57px;
+  border-radius: 0 10px 10px 0;
+  background-color: #2a3647;
+  border: 1px solid #2a3647;
+  cursor: pointer;
+}
+
+.openTaskEditButton:hover {
+  box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.1);
+}
+
+.deleteTaskButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 57px;
+  height: 57px;
+  border-radius: 10px 0 0 10px;
+  background-color: white;
+  border: 1px solid #2a3647;
+  cursor: pointer;
+}
+
+.deleteTaskButton:hover {
+  box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.1);
+}
+
+.cancleTaskEditButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 65px;
+  height: 45px;
+  border-radius: 10px;
+  background-color: white;
+  border: 1px solid #2a3647;
+  font-weight: bold;
+  cursor: pointer;
+  margin-right: 1rem;
+  gap: 15px;
+}
+
+.saveChangesTask {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 65px;
+  height: 45px;
+  border-radius: 10px;
+  background-color: #2a3647;
+  border: 1px solid #2a3647;
+  font-weight: bold;
+  color: white;
+  cursor: pointer;
+}
+
+.priorityImg {
+  width: 17px;
+  height: 12px;
+}
+
+/* ================================ RESPONSIVENESS ================================ */
+
+@media (max-width: 880px) {
+  .placeholderBoardTop {
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+
+  .placeholderBoardTopLeft > h1{
+    margin: 0;
+    margin-bottom: 10px;
+  }
+
+  .inputFields {
+    width: 200px;
+    height: 40px;
+  }
+
+  .inputFieldContainer .inputFieldVerticalLine {
+    height: 25px;
+  }
+
+  .img {
+    right: 16px !important;
+  }
+
+  .boardParts {
+    width: 100%;
+  }
+}
+
+@media (max-width: 720px) {
+  .placeholderBoard {
+    height: calc(100vh - 163px);
+    padding-left: 1rem;
+    padding-right: 0;
+  }
+  .placeholderBoardTopLeft > h1 {
+    margin-right: 1rem;
+    font-size: 47px;
+  }
+  .placeholderBoardTop {
+    padding-right: 0.5rem;
+  }
+  .placeholderBoardTopRight .inputFields {
+    height: 45px;
+  }
+
+  /*  .openTaskDateEdit {
+      flex-direction: column;
+      align-items: flex-start;
+    } */
+
+
+@media (max-width: 480px) {
+  .openTaskBackground {
+    padding: 0;
+    top: 89px;
+    height: calc(100vh - 163px);
+  }
+
+  .openTaskContainer {
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+  }
+
+  .openTask {
+    padding: 15px;
+    border-radius: 0;
+    gap: 10px;
+  }
+  .placeholderBoardTop {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .placeholderBoardTopRight {
+    gap: 0;
+  }
+
+  .placeholderBoardTopRight .inputFieldContainer {
+    width: 200px;
+  }
+
+  .placeholderBoardTopRight .inputContainer {
+    width: 200px;
+  }
+
+  .placeholderBoardTopRight .addTaskButton {
+    width: 80px;
+  }
+
+  .placeholderBoardTopRight {
+    width: 100%;
+  }
+
+  .openTaskMain > div > div:first-of-type {
+    width: 100px;
+    margin-right: 20px;
+  }
+
+  .openTaskPriorityEdit > div {
+    width: 100%;
+  }
+
+  .openTaskHeader {
+    gap: 0;
+  }
+
+/*   .openTaskMain {
+    justify-content: flex-start;
+    margin-top: 2rem;
+  } */
+
+  .openTaskHeader > h1,
+  #titleEdit {
+    font-size: 31px;
+  }
+
+  .prioButton2 {
+    height: 35px;
+  }
+
+  .deleteTaskButton, .openTaskEditButton {
+    height: 45px;
+    width: 45px;
+  } 
+
+  .openTaskButtonContainer {
+   right: 10px; 
+   bottom: 10px;
+  }
+}
+
+/* @media (max-width: 400px) {
+
+.prioButtonsEdit {
+  flex-wrap: nowrap !important;
+}
+
+} */
+
+@media (max-width: 450px) {
+  .prioButtonsEdit {
+    width: 100%;
+    }
+  }
+  .prioButtonEdit {
+    max-width: 120px;
+    max-height: 40px;
+  }
+}
+
+@media (max-width: 410px) {
+  .openTaskPriorityEdit {
+    flex-direction: row;
+  }
+
+  .prioButtonsEdit {
+    gap: 5px !important;
+  }
+  .prioButtonEdit {
+    width: 40px !important;
+  }
+  .prioButtonEdit > div:first-of-type{
+    display: none;
+  }
+
+}
+
+
+@media (max-width: 380px) {
+  .openTaskHeader > h1,
+  #titleEdit {
+    font-size: 25px;
+  }
+
+  .openTaskHeader > p,
+  #descriptionEdit {
+    font-size: 18px;
+  }
+
+  .openTaskTop > div:first-of-type > p {
+    font-size: 22px;
+  }
+
+  .openTaskMain > div > div:first-of-type,
+  .openTaskDate > div:last-of-type {
+    font-size: 18px;
+  }
+  
+}
+
+@media (max-width: 320px) {
+  .placeholderBoardTopRight {
+    width: 100%;
+  }
+
+  .placeholderBoardTopRight .addTaskButton {
+    display: none;
+  }
+}
