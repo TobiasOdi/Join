@@ -10,7 +10,7 @@ let orange = "#FF3D00";
 let lightorange = "#FFA800";
 let green = "#7AE229";
 
-/* ================================== INCLUDE HTML ================================================== */
+/* ======================================================= INCLUDE HTML ========================================================== */
 //Source: https://developer-akademie.teachable.com/courses/902235/lectures/31232815
 async function includeHTML() {
     let includeElements = document.querySelectorAll('[w3-include-html]');
@@ -35,7 +35,6 @@ async function includeHTML() {
 }
 
 // ================================================ INIT FUNCTION ==========================================================
-// Immer als erste Funktion ausführen!
 async function init() {
     setURL('https://tobias-odermatt.developerakademie.net/Projekte/Join/smallest_backend_ever');
     await downloadFromServer();
@@ -102,7 +101,7 @@ async function validateSignup(userData, contactData, user, name, surname, email,
         } else {
             users.push(userData);
             contacts.push(contactData);
-            await save();
+            await saveUsers();
             await saveContacts();
             displaySignedUpPopup('successfullySignedUp');
             setInterval(backToLoginScreen, 1200);
@@ -116,14 +115,14 @@ function backToLoginScreen() {
     window.location.href = '../login.html';
 }
 
-async function save() {
+async function saveUsers() {
     let usersAsString = JSON.stringify(users);
     await backend.setItem('users', usersAsString);
 }
 
 // ================================================ LOGIN ==========================================================
 window.addEventListener('keydown', (event) => {
-    if(window.location.href === 'https://gruppenarbeit-486join.developerakademie.net/login.html') { // =>  'http://127.0.0.1:5501/login.html' => IMMER ANPASSEN!!!
+    if(window.location.href === 'https://tobias-odermatt.developerakademie.net/Projekte/Join/login.html') { // =>  'http://127.0.0.1:5501/login.html' => IMMER ANPASSEN!!!
         if(event.keyCode == 13) {
             login();
         }
@@ -176,15 +175,6 @@ function guestLogin() {
     localStorage.setItem('userIdLogin', userIdLogin);
 }
 
-function showLogoutButton() {
-    let logoutButton = document.getElementById('logoutButton');
-    if (logoutButton.style.display == "flex") {
-        logoutButton.style.display = "none";
-    } else {
-        logoutButton.style.display = "flex";
-    }
-}
-
 /* ================================================================= RESET PASSWORD ================================================================= */
 function checkForCorrectEmail() {
     let sendEmailToResetPw = document.getElementById('sendEmailToResetPw').value;
@@ -205,14 +195,12 @@ function checkForCorrectEmail() {
 } 
 
 function resetPassword() {
-
     let urlParams = new URLSearchParams(window.location.search);
     let userEmail = urlParams.get('email');
     let newPassword = document.getElementById('newPassword');
     let confirmPassword = document.getElementById('confirmPassword');
     let existingEmail = users.find(u => u.email == userEmail)
     let currentUser = users.indexOf(existingEmail);
-
     validatePassword(newPassword, confirmPassword, existingEmail, currentUse);
 }
 
@@ -220,7 +208,7 @@ function validatePassword(newPassword, confirmPassword, existingEmail, currentUs
     if (newPassword.value == confirmPassword.value) {
         if (existingEmail) {
             users[currentUser]['password'] = confirmPassword.value;
-            save();
+            saveUsers();
             displaySignedUpPopup('passwordReset');
             setInterval(backToLoginScreen, 1200);
         }
@@ -229,12 +217,28 @@ function validatePassword(newPassword, confirmPassword, existingEmail, currentUs
     }
 }
 
-/* ================================== TOP BAR FUNCTION ============================================ */
+/* ================================================================= TOP BAR FUNCTIONS ================================================================= */
+/**
+ * This function shows and hides the logout button.
+ */
+function toggleLogoutButton() {
+    let logoutButton = document.getElementById('logoutButton');
+    if (logoutButton.style.display == "flex") {
+        logoutButton.style.display = "none";
+    } else {
+        logoutButton.style.display = "flex";
+    }
+}
+
+/**
+ * This function logs the current user out and returns the user to the login page.
+ */
 function logout() {
     localStorage.removeItem("userName");
     window.location.href = 'login.html';
 }
 
+/* ================================================================= SIDE BAR FUNCTIONS ================================================================= */
 function debounce(func, delay) {
     let timeoutId;
     return function (...args) {
@@ -255,14 +259,14 @@ function displayPage(pageId) {
     document.getElementById(pageId).style.display = "block";
 }
 
-/* ================================== SNACKBAR =======================================*/
+/* ================================================================= SNACKBAR ================================================================= */
 function displaySignedUpPopup(popupId) {
     var x = document.getElementById(popupId);
     x.className = "show";
     setTimeout(function () { x.className = x.className.replace("show", ""); }, 3000);
 }
 
-/* ================================== ACTIVE TAB =======================================*/
+/* ================================================================= ACTIVE TAB ================================================================= */
 function activeTab() {
     let currentElement = document.getElementById('contactID' + c);
     let allElements = document.querySelectorAll('.contact');

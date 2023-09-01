@@ -22,28 +22,28 @@ function updateHTML() {
             document.getElementById("toDoCard").innerHTML = ``;
             for (let i = 0; i < toDo.length; i++) {
                 let element = toDo[i]; 
-                document.getElementById("toDoCard").innerHTML += generateToDoHTMLToDo(element, index, 'toDo');
+                document.getElementById("toDoCard").innerHTML += generateToDoHTMLToDo(element, 'toDo');
             }
 
             let inProgress = tasks.filter(t => t["statusCategory"] == "inProgress");
             document.getElementById("inProgress").innerHTML = ``;
             for (let i = 0; i < inProgress.length; i++) {
                 let element = inProgress[i];
-                document.getElementById("inProgress").innerHTML += generateToDoHTML(element, index, 'inProgress');
+                document.getElementById("inProgress").innerHTML += generateToDoHTML(element, 'inProgress');
             }
 
             let awaitingFeedback = tasks.filter(t => t["statusCategory"] == "awaitingFeedback");
             document.getElementById("awaitingFeedback").innerHTML = ``;
             for (let i = 0; i < awaitingFeedback.length; i++) {
                 let element = awaitingFeedback[i];
-                document.getElementById("awaitingFeedback").innerHTML += generateToDoHTML(element, index, 'awaitingFeedback');
+                document.getElementById("awaitingFeedback").innerHTML += generateToDoHTML(element, 'awaitingFeedback');
             }
 
             let done = tasks.filter(t => t["statusCategory"] == "done");
             document.getElementById("done").innerHTML = ``;
             for (let i = 0; i < done.length; i++) {
                 let element = done[i];
-                document.getElementById("done").innerHTML += generateToDoHTMLDone(element, index, 'done');
+                document.getElementById("done").innerHTML += generateToDoHTMLDone(element, 'done');
             }
         }
         for (let i = 0; i < tasks.length; i++) {
@@ -59,105 +59,6 @@ function updateHTML() {
 
 function pushArrayToDo() {
     toDos = tasks;
-}
-
-function generateToDoHTMLToDo(element, index, currentStatusCategory) {
-    return `
-        <div class="boardContainer" draggable="true" ondragstart="startDragging(${element["taskId"]})" onclick="openTask(${element["taskId"]})">
-            <div class="boardContainerTop">
-                <div style = "background-color:${element["categoryColor"]}">
-                    <div>${element["category"]}</div>
-                </div>
-                <div onclick="doNotOpenTask(event)">
-                     <div id="pushToNextCategory${element["taskId"]}" onclick="pushToNextCategory('${currentStatusCategory}', ${element["taskId"]})">
-                        <img src="./img/next.svg">
-                    </div>
-                </div>
-                    
-                </div>
-            <div class="boardContainerHeadline">
-                <h2>${element["title"]}</h2>
-            </div>
-            <div class="boardContainerDescripton">
-                <span>${element["description"]}</span>
-            </div>
-            <div id="boardContainerProgress(${element["taskId"]})" class="boardContainerProgress" onclick="openTask(${element["taskId"]})" >
-            </div>
-            <div class="boardContainerUserBubbles">
-                <div class="userBubble" id="userBubble${element["taskId"]}"></div>
-                <div>
-                    <img class="priorityImg" src="./img/${element["priorityValue"]}.svg">
-                </div>
-            </div>
-        </div>
-    `;
-}
-
-function generateToDoHTML(element, index, currentStatusCategory) {
-    return `
-        <div class="boardContainer" draggable="true" ondragstart="startDragging(${element["taskId"]})" onclick="openTask(${element["taskId"]})">
-            <div class="boardContainerTop">
-                <div style = "background-color:${element["categoryColor"]}">
-                    <div>${element["category"]}</div>
-                </div>
-                <div onclick="doNotOpenTask(event)">
-                    <div id="pushToPreviousCategory${element["taskId"]}" onclick="pushToPreviousCategory('${currentStatusCategory}', ${element["taskId"]})">
-                        <img src="./img/previous.svg">
-                    </div>
-                    <div id="pushToNextCategory${element["taskId"]}" onclick="pushToNextCategory('${currentStatusCategory}', ${element["taskId"]})">
-                        <img src="./img/next.svg">
-                    </div>
-                </div>
-                    
-                </div>
-            <div class="boardContainerHeadline">
-                <h2>${element["title"]}</h2>
-            </div>
-            <div class="boardContainerDescripton">
-                <span>${element["description"]}</span>
-            </div>
-            <div id="boardContainerProgress(${element["taskId"]})" class="boardContainerProgress" onclick="openTask(${element["taskId"]})" >
-            </div>
-            <div class="boardContainerUserBubbles">
-                <div class="userBubble" id="userBubble${element["taskId"]}"></div>
-                <div>
-                    <img class="priorityImg" src="./img/${element["priorityValue"]}.svg">
-                </div>
-            </div>
-        </div>
-    `;
-}
-
-function generateToDoHTMLDone(element, index, currentStatusCategory) {
-    return `
-        <div class="boardContainer" draggable="true" ondragstart="startDragging(${element["taskId"]})" onclick="openTask(${element["taskId"]})">
-            <div class="boardContainerTop">
-                <div style = "background-color:${element["categoryColor"]}">
-                    <div>${element["category"]}</div>
-                </div>
-                <div onclick="doNotOpenTask(event)">
-                    <div id="pushToPreviousCategory${element["taskId"]}" onclick="pushToPreviousCategory('${currentStatusCategory}', ${element["taskId"]})">
-                        <img src="./img/previous.svg">
-                    </div>
-                </div>
-                    
-                </div>
-            <div class="boardContainerHeadline">
-                <h2>${element["title"]}</h2>
-            </div>
-            <div class="boardContainerDescripton">
-                <span>${element["description"]}</span>
-            </div>
-            <div id="boardContainerProgress(${element["taskId"]})" class="boardContainerProgress" onclick="openTask(${element["taskId"]})" >
-            </div>
-            <div class="boardContainerUserBubbles">
-                <div class="userBubble" id="userBubble${element["taskId"]}"></div>
-                <div>
-                    <img class="priorityImg" src="./img/${element["priorityValue"]}.svg">
-                </div>
-            </div>
-        </div>
-    `;
 }
 
 function calculateProgressbar(i) {
@@ -340,77 +241,14 @@ async function pushToNextCategory(category, taskId) {
 
 function openTask(currentTaskId) {
     document.getElementById('openTaskBackground').style.display = 'flex';
-
     let existingTask = tasks.find(u => u.taskId == currentTaskId)
     let currentTask = tasks.indexOf(existingTask);
-
     let openTaskContainer = document.getElementById('openTaskContainer');
     openTaskContainer.innerHTML = '';
     openTaskContainer.innerHTML = openTaskTemplate(currentTask);
-
     renderSubtasks(currentTask);
     renderAssignedUsers(currentTask);
     prioritySymbol(currentTask);
-}
-
-function openTaskTemplate(currentTask, categoryColor) {
-    return `
-        <div id="openTask" class="openTask">
-            <div class="openTaskTop">
-                <div style="background-color: ${tasks[currentTask]['categoryColor']};">
-                    <p>${tasks[currentTask]['category']}</p>
-                </div>
-                <div onclick="closeTask()">
-                    <img src="../img/close.svg">
-                </div>
-            </div>
-
-            <div class="openTaskHeader">
-                 <h1>${tasks[currentTask]['title']}</h1>
-                 <p>${tasks[currentTask]['description']}</p>
-                 <div class="openTaskDate">
-                    <div>Due date:</div>
-                    <div>${tasks[currentTask]['dueDate']}</div>
-                </div>
-
-                <div class="openTaskPriority">
-                    <div>Priority:</div>
-                    <div>
-                        <div>
-                            <button class="prioButton2" id="priority">
-                                <span>${tasks[currentTask]['priorityValue']}</span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="openTaskMain">
-                <div class="openTaskSubtask">
-                    <div>Subtasks:</div>
-                    <div id="subtaskContainer" class="boardSubtaskContainer">
-
-                    </div>                
-                </div>
-
-                <div class="openTaskAssigned">
-                     <div>Assigned To:</div>
-                     <div id="assignedToContainer" class="assignedToContainer">
-
-                    </div>                
-                </div>
-            </div>
-        </div>
-
-        <div class="openTaskButtonContainer">
-            <div class="deleteTaskButton" onclick="deleteTask(${currentTask})">
-                <img src="./img/deleteTask.svg">
-            </div>
-            <div class="openTaskEditButton" onclick="editTask(${currentTask})">
-                <img src="./img/editWhite.svg">
-            </div>
-        </div>
-     `;
 }
 
 function deleteTask(currentTask) {
@@ -434,26 +272,6 @@ function renderSubtasks(currentTask){
     }
 };
 
-function renderSubtasksUndoneTemplate(subtask){
-    return `
-        <div class="openSubtask">
-            <input type="checkbox" disabled>
-            <div>${subtask}</div>
-        </div>
-    `;
-}
-
-function renderSubtasksTemplate(subtask) {
-    return `
-        <div class="openSubtask">
-            <div class="coverCheckbox" style="z-index: 2";></div>
-            <input type="checkbox" checked style="z-index: 0";>
-            <div>${subtask}</div>
-        </div>
-    `;
-}
-
-
 function renderAssignedUsers(currentTask) {
     let assignedUsers = tasks[currentTask]['assignTo'];
 
@@ -469,17 +287,6 @@ function renderAssignedUsers(currentTask) {
 
         document.getElementById('assignedToContainer').innerHTML += renderAssignedUserTemplate(assignColor, assignFirstLetters, assignName, assignSurname);
     }
-}
-
-function renderAssignedUserTemplate(assignColor, assignFirstLetters, assignName, assignSurname){
-    return `
-        <div class="openTaskAssignedPerson">
-            <div style="background-color: ${assignColor};">
-                <span>${assignFirstLetters.toUpperCase()}</span>
-            </div>
-            <div>${assignName} ${assignSurname}</div>
-        </div>
-    `;
 }
 
 function prioritySymbol(currentTask) {
@@ -515,86 +322,6 @@ function editTask(currentTask) {
     renderAssignedUsersEdit(currentTask);
 }
 
-function editOpenTaskTemplate(currentTask) {
-    return `
-        <div id="openTask${currentTask}" class="openTask">
-            <div class="openTaskTop">
-                <div class="selectCategoryContainer" style="background-color: ${tasks[currentTask]['categoryColor']};">
-                    <select class="selectCategory" name="category" id="editSelectCategory">
-                        <option value="Marketing" style="background-color: #0038ff;">Marketing</option>
-                        <option value="Media" style="background-color: #ffc702;">Media</option>
-                        <option value="Backoffice" style="background-color: #1FD7C1;">Backoffice</option>
-                        <option value="Design" style="background-color: #ff7a00;">Design</option>
-                        <option value="Sales" style="background-color: #fc71ff;">Sales</option>
-                    </select>
-                    <img class="selectArrow" src="./img/arrowDown.png">
-                </div>
-
-                <div onclick="closeTask()">
-                    <img src="../img/close.svg">
-                </div>
-            </div>
-
-            <div class="openTaskHeader">
-                <input placeholder="${tasks[currentTask]['title']}" class="titleEdit" id="titleEdit" required="">
-                <input placeholder="${tasks[currentTask]['description']}" class="descriptionEdit" id="descriptionEdit" required="">
-            </div>
-
-            <div class="openTaskMain">
-
-                <div class="openTaskDate openTaskDateEdit">
-                    <div>Due date:</div>
-                    <input class="date" type="date" class="editDueDate" id="editDueDate" value="${tasks[currentTask]['dueDate']}">
-                </div>
-
-                <div class="openTaskPriority openTaskPriorityEdit">
-                    <div>Priority:</div>
-                    <div>
-                        <div class="prioButtons prioButtonsEdit">
-                            <button class="urgent prioButtonEdit" id="urgentEdit" type="button" onclick="selectUrgentEdit(), savePriorityValueEdit('urgent', ${currentTask})">
-                                <div>Urgent</div>
-                                <img id="imgUrgentEdit" src="./img/urgent.svg">
-                            </button>
-                            <button class="medium prioButtonEdit" id="mediumEdit" type="button" onclick="selectMediumEdit(), savePriorityValueEdit('medium', ${currentTask})">
-                                <div>Medium</div>
-                                <img id="imgMediumEdit" src="./img/medium.svg">
-                            </button>
-                            <button class="low prioButtonEdit" id="lowEdit" type="button" onclick="selectLowEdit(), savePriorityValueEdit('low', ${currentTask})">
-                                <div>Low</div>
-                                <img id="imgLowEdit" src="./img/low.svg">
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="openTaskSubtask">
-                    <div>Subtasks:</div>
-                    <div id="subtaskContainerEdit" class="boardSubtaskContainer">
-
-                    </div>                
-                </div>
-
-                <div class="openTaskAssigned">
-                    <div>Assigned To:</div>
-                    <div id="assignedToContainerEdit" class="assignedToContainer">
-
-                    </div>                
-                </div>
-            </div>
-        </div>
-
-        <div class="openTaskButtonContainer">
-            <div class="cancleTaskEditButton" onclick="closeTask()">
-                Cancle
-            </div>
-            <div class="saveChangesTask" onclick="saveEditedTask(${currentTask})">
-                Save
-            </div>
-
-        </div>
-    `;
-}
-
 function renderUrgency(currentTask) {
     if (tasks[currentTask]['priorityValue'] == 'urgent') {
         selectUrgentEdit();
@@ -622,24 +349,6 @@ function renderSubtasksEdit(currentTask){
     }
 };
 
-function subtasksEditUndoneTemplate(subtaskIndex, currentTask, subtask) {
-    return `
-        <div class="openSubtask" onclick="saveCompletedTasks(${subtaskIndex}, ${currentTask})">
-            <input id="subtask${subtaskIndex}" type="checkbox" value="${subtaskIndex}" checked>
-            <div>${subtask}</div>
-        </div>
-    `;
-}
-
-function subtasksEditTemplate(subtaskIndex, currentTask, subtask) {
-    return `
-        <div class="openSubtask" onclick="saveCompletedTasks(${subtaskIndex}, ${currentTask})">
-            <input id="subtask${subtaskIndex}" type="checkbox" value="${subtaskIndex}">
-            <div>${subtask}</div>
-        </div>
-    `;
-}
-
 async function saveCompletedTasks(subtaskIndex, currentTask) {
     let currentSubtask = document.getElementById('subtask' + subtaskIndex);
     if(!currentSubtask.checked == true) {
@@ -666,30 +375,6 @@ function renderAssignedUsersEdit(currentTask) {
             document.getElementById('assignedToContainerEdit').innerHTML += assignedUserEditTemplate(j, assignFirstLetters);
         }
     }
-}
-
-function assignedUserEditCheckedTemplate(j, assignFirstLetters) {
-    return `
-        <div class="openTaskAssignedPerson" onclick="saveSelectedUsersEdit()">
-            <input type="checkbox" value="${users[j]['userid']}" checked>
-            <div style="background-color: ${users[j]['userColor']};">
-                <span>${assignFirstLetters}</span>
-            </div>
-            <div>${users[j]['name']} ${users[j]['surname']}</div>
-        </div>
-    `;
-}
-
-function assignedUserEditTemplate(j, assignFirstLetters) {
-    return `
-        <div class="openTaskAssignedPerson" onclick="saveSelectedUsersEdit()">
-            <input type="checkbox" value="${users[j]['userid']}">
-            <div style="background-color: ${users[j]['userColor']};">
-                <span>${assignFirstLetters}</span>
-            </div>
-            <div>${users[j]['name']} ${users[j]['surname']}</div>
-        </div>
-    `;
 }
 
 function saveSelectedUsersEdit() {
