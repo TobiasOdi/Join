@@ -35,6 +35,9 @@ async function includeHTML() {
 }
 
 // ================================================ INIT FUNCTION ==========================================================
+/**
+ * This function accesses the users, tasks and contacts data that is stored on the ftp server.
+ */
 async function init() {
     setURL('https://tobias-odermatt.developerakademie.net/Projekte/Join/smallest_backend_ever');
     await downloadFromServer();
@@ -44,6 +47,9 @@ async function init() {
     setInterval(setUserColor, 200);
 }
 
+/**
+ * This function sets the color of the user. Border around the user icon in the top right corner.
+ */
 function setUserColor() {
     if(window.location.href === 'https://tobias-odermatt.developerakademie.net/Projekte/Join/join.html' + window.location.search) { // => http://127.0.0.1:5501/join.html => IMMER ANPASSEN!!!
      let queryString = window.location.search.slice(4);
@@ -59,11 +65,16 @@ function setUserColor() {
 }
 
 // ================================================ SIGN UP ==========================================================
-// Am besten eine separate "register.js" Datei erstellen
+/**
+ * This function generates the user id.
+ */
 function generateUserId() {
     id = Math.floor((Math.random() * 1000000) + 1);
 }
 
+/**
+ * This function adds a new user to the users array and saves it on the ftp server.
+ */
 async function addUser() {
     generateUserId();
     let name = document.getElementById('name');
@@ -82,6 +93,10 @@ async function addUser() {
     validateSignup(userData, contactData, user, name, surname, email, password);
 }
 
+/**
+ * This function checkes if the user id already exists.
+ * @param {number} id - index of the current user
+ */
 function checkForExistingUserId(id){
     for (let i = 0; i < users.length; i++) {
         if (users[i]['userid'].includes === id) {
@@ -90,6 +105,16 @@ function checkForExistingUserId(id){
     }
 }
 
+/**
+ * This function validates the sign up form and throws an error if necessary.
+ * @param {array} userData - array with all the user data
+ * @param {array} contactData - array with all the user data for the contacts
+ * @param {string} user - existing email address in the users array
+ * @param {string} name - the name of the user
+ * @param {string} surname - the surname of the user
+ * @param {string} email - the email address of the user
+ * @param {*} password - the passowrd of the user
+ */
 async function validateSignup(userData, contactData, user, name, surname, email, password) {
     if (userData.name && userData.surname && userData.email && userData.password && userData.userColor && userData.userColor != "") {
         if(user) {
@@ -110,17 +135,25 @@ async function validateSignup(userData, contactData, user, name, surname, email,
         displaySignedUpPopup('missingSignedUp');
     };
 }
-
+ /**
+  * This function brings you back to the main login.html.
+  */
 function backToLoginScreen() {
     window.location.href = '../login.html';
 }
 
+/**
+ * This function saves the user data in the users array on the ftp server.
+ */
 async function saveUsers() {
     let usersAsString = JSON.stringify(users);
     await backend.setItem('users', usersAsString);
 }
 
 // ================================================ LOGIN ==========================================================
+/**
+ * This event listener lets you lets you login with the enter key.
+ */
 window.addEventListener('keydown', (event) => {
     if(window.location.href === 'https://tobias-odermatt.developerakademie.net/Projekte/Join/login.html') { // =>  'http://127.0.0.1:5501/login.html' => IMMER ANPASSEN!!!
         if(event.keyCode == 13) {
@@ -129,6 +162,9 @@ window.addEventListener('keydown', (event) => {
     }
 });
 
+/**
+ * This function logs you into an existing user account.
+ */
 function login() {
     let emailLog = document.getElementById('emailLog');
     let passwordLog = document.getElementById('passwordLog');
@@ -140,6 +176,9 @@ function login() {
     validateLogin(emailLog, passwordLog, existingUser, existingPw, user);
 }
 
+/**
+ * This function validates the login up form and throws an error if necessary.
+ */
 function validateLogin(emailLog, passwordLog, existingUser, existingPw, user) {
     if(emailLog.value == '' || passwordLog.value == '') {
         displaySignedUpPopup('missingSignedUp');
@@ -167,6 +206,9 @@ function validateLogin(emailLog, passwordLog, existingUser, existingPw, user) {
     }
 }
 
+/**
+ * This function logs the user in as a guest (without email or password).
+ */
 function guestLogin() {
     let userName = "Guest";
     localStorage.setItem('userName', userName);
@@ -176,6 +218,9 @@ function guestLogin() {
 }
 
 /* ================================================================= RESET PASSWORD ================================================================= */
+/**
+ * This function validates the forgot password form and throws an error if necessary.
+ */
 function checkForCorrectEmail() {
     let sendEmailToResetPw = document.getElementById('sendEmailToResetPw').value;
     let existingEmail = users.find(u => u.email == sendEmailToResetPw);
@@ -194,6 +239,9 @@ function checkForCorrectEmail() {
     return true;
 } 
 
+/**
+ * This function validates the reset password form and throws an error if necessary.
+ */
 function resetPassword() {
     let urlParams = new URLSearchParams(window.location.search);
     let userEmail = urlParams.get('email');
@@ -204,6 +252,13 @@ function resetPassword() {
     validatePassword(newPassword, confirmPassword, existingEmail, currentUse);
 }
 
+/**
+ * This function validates the new password and throws an error if necessary.
+ * @param {*} newPassword - input of the new passoword
+ * @param {*} confirmPassword - input of the new confirmed password
+ * @param {*} existingEmail - email adress of an existing user
+ * @param {*} currentUser - index of the current user
+ */
 function validatePassword(newPassword, confirmPassword, existingEmail, currentUser) {
     if (newPassword.value == confirmPassword.value) {
         if (existingEmail) {
@@ -239,6 +294,12 @@ function logout() {
 }
 
 /* ================================================================= SIDE BAR FUNCTIONS ================================================================= */
+/**
+ * 
+ * @param {*} func 
+ * @param {*} delay 
+ * @returns 
+ */
 function debounce(func, delay) {
     let timeoutId;
     return function (...args) {
@@ -249,6 +310,10 @@ function debounce(func, delay) {
     };
 }
 
+/**
+ * This function displays the html templates.
+ * @param {string} pageId - id of the of the html template that needs to be displayed
+ */
 function displayPage(pageId) {
     document.getElementById("mainSummaryContainerDisplay").style.display = "none";
     document.getElementById("mainBoardContainerDisplay").style.display = "none";
@@ -260,6 +325,10 @@ function displayPage(pageId) {
 }
 
 /* ================================================================= SNACKBAR ================================================================= */
+/**
+ * This funktion displays the snackbar.
+ * @param {string} popupId - id of the snackbar
+ */
 function displaySignedUpPopup(popupId) {
     var x = document.getElementById(popupId);
     x.className = "show";
@@ -267,6 +336,9 @@ function displaySignedUpPopup(popupId) {
 }
 
 /* ================================================================= ACTIVE TAB ================================================================= */
+/**
+ * This funciton displays the active tab on the side nav bar.
+ */
 function activeTab() {
     let currentElement = document.getElementById('contactID' + c);
     let allElements = document.querySelectorAll('.contact');
