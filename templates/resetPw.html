@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="../styles/fonts.css">
 
     <!-- ============================== SCRIPTS ================================= -->
-    <script src="../backend.js"></script>
+    <script src="../mainScript.js"></script>
     <script src="../mini_backend.js"></script>
 
     <!-- ============================ Favicon =========================== -->
@@ -27,7 +27,7 @@
   </head>
   <body onload="init()">
 
-    <div class="mainContainer">
+    <div class="mainContainerLogin">
 
       <div class="header">
         <div class="startScreen forgotPwScreen">
@@ -35,34 +35,42 @@
         </div>
       </div>
     
-        <div class="contentContainer">
-            <div class="loginScreen loginScreen2">
-                <div class="loginHeading loginHeading2">
-                  <h1>Reset your password</h1>
-                  <div class="blueLigne"></div>
+      <div class="contentContainer">
+        <div class="loginScreen loginScreen2">
+
+          <div class="loginHeading loginHeading2">
+            <h1>Reset your password</h1>
+            <div class="blueLigne"></div>
+          </div>
+
+          <span>Change your account password</span>
+
+          <div class="inputContainer">
+            <form class="inputFieldContainer2" onsubmit="resetPassword(); return false">
+              <div class="inputContainer">
+                <div class="inputFieldContainer">
+                  <input id="newPassword" class="inputFields" type="password" placeholder="New password" required />
                 </div>
+              </div>
 
-                <span>Change your account password</span>
-
-                <div class="inputContainer">
-
-                    <form class="inputFieldContainer2" onsubmit="resetPassword(); return false">
-                        <input id="newPassword" type="password" class="inputFields" placeholder="New password" required/>
-                        <input id="confirmPassword" type="password" class="inputFields" placeholder="Confirm password" required/>
-
-                        <button class="loginButton" type="submit">Continue</button>
-                    </form>
+              <div class="inputContainer">
+                <div class="inputFieldContainer">
+                  <input id="confirmPassword" class="inputFields" type="password" placeholder="Confirm password" required />
                 </div>
+              </div>
 
-            </div>
-<!--             <button class="loginButton"><img src="./img/SendCheck.svg">An E-Mail has been sent to you</button>
- -->
+              <button class="buttonDark" type="submit">
+                <div class="buttonDarkText">Continue</div>
+              </button>
+            </form>
+          </div>
         </div>
+      </div>
     </div>
 
-      <!-- ================================== SNACKBAR PW RESET/INCORRECT ======================================= -->
-      <div id="passwordReset">Your password has succesfully been reset!</div>
-      <div id="passwordsNotIdentical">Passwords are not identical!</div>
+    <!-- ================================== SNACKBAR PW RESET/INCORRECT ======================================= -->
+    <div id="passwordReset">Your password has succesfully been reset!</div>
+    <div id="passwordsNotIdentical">Passwords are not identical!</div>
 
   </body>
 </html>

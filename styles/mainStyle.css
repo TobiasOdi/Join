@@ -111,11 +111,10 @@ a {
 }
 
 .inputFields{
-  box-sizing: border-box;
-  padding: 13px 21px;
+  padding: 12px 21px;
   gap: 10px;
   width: 422px;
-  height: 51px;
+  height: 48px;
   background: #ffffff;
   border: 1px solid #d1d1d1;
   border-radius: 10px;
