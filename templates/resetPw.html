@@ -28,7 +28,6 @@
   <body onload="init()">
 
     <div class="mainContainerLogin">
-
       <div class="header">
         <div class="startScreen forgotPwScreen">
           <img id="startScreenLogo" class="logo logoForgotPwScreen" src="../img/blacklogo.svg"  />
@@ -36,6 +35,15 @@
       </div>
     
       <div class="contentContainer">
+        <!-- == Legal Notice - w3-include-html ==-->
+        <div class="arrowBackLegalNotice" id="arrowBackLegalNotice" onclick="back()">
+          <img src="./img/arrowLeft.svg">
+        </div> 
+        <div class="mainLegalNoticeContainerDisplay" id="mainLegalNoticeContainerDisplay">
+          <div w3-include-html="templates\legalNotice.html"></div>
+        </div>
+        <!-- =================================== -->
+
         <div class="loginScreen loginScreen2">
 
           <div class="loginHeading loginHeading2">
@@ -65,6 +73,11 @@
             </form>
           </div>
         </div>
+      </div>
+
+      <div class="policies" id="policies">
+        <div>Privacy Policy</div>
+        <div onclick="displayPageLogin('mainLegalNoticeContainerDisplay')">Legal notice</div>
       </div>
     </div>
 

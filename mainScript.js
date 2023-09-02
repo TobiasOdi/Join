@@ -8,7 +8,7 @@ let black = "#000000";
 let white = "#FFFFFF";
 let orange = "#FF3D00";
 let lightorange = "#FFA800";
-let green = "#7AE229";
+let green = "#7AE229";  
 
 /* ======================================================= INCLUDE HTML ========================================================== */
 //Source: https://developer-akademie.teachable.com/courses/902235/lectures/31232815
@@ -142,6 +142,13 @@ function backToLoginScreen() {
     window.location.href = '../login.html';
 }
 
+function back() {
+    document.getElementById('mainLegalNoticeContainerDisplay').style.display = "none";
+    document.getElementById('arrowBackLegalNotice').style.display = "none";
+    document.getElementById('loginScreen').style.display = "block";
+    document.getElementById('policies').style.display = "block";
+}
+
 /**
  * This function saves the user data in the users array on the ftp server.
  */
@@ -200,7 +207,7 @@ function validateLogin(emailLog, passwordLog, existingUser, existingPw, user) {
             let userId = users[currentUser]['userid'];
             let userColor = users[currentUser]['userColor'];
 
-            window.location.href = 'https://gruppenarbeit-486join.developerakademie.net/join.html?id=' + userId // => IMMER ANPASSEN!!!
+            window.location.href = 'https://tobias-odermatt.developerakademie.net/Projekte/Join/join.html?id=' + userId // => IMMER ANPASSEN!!!
             // ../join.html?id=' + userId; // => IMMER ANPASSEN!!!
         }
     }
@@ -315,13 +322,27 @@ function debounce(func, delay) {
  * @param {string} pageId - id of the of the html template that needs to be displayed
  */
 function displayPage(pageId) {
-    document.getElementById("mainSummaryContainerDisplay").style.display = "none";
-    document.getElementById("mainBoardContainerDisplay").style.display = "none";
-    document.getElementById("mainAddTaskContainerDisplay").style.display = "none";
-    document.getElementById("mainContactsContainerDisplay").style.display = "none";
+    //document.getElementById("mainSummaryContainerDisplay").style.display = "none";
+    //document.getElementById("mainBoardContainerDisplay").style.display = "none";
+    //document.getElementById("mainAddTaskContainerDisplay").style.display = "none";
+    //document.getElementById("mainContactsContainerDisplay").style.display = "none";
     document.getElementById("mainLegalNoticeContainerDisplay").style.display = "none";
-    document.getElementById("mainhelpContainerDisplay").style.display = "none";
+    //document.getElementById("mainhelpContainerDisplay").style.display = "none";
     document.getElementById(pageId).style.display = "block";
+    document.getElementById('arrowBackLegalNotice').style.display = "block";
+}
+
+/**
+ * This function displays the html templates.
+ * @param {string} pageId - id of the of the html template that needs to be displayed
+ */
+function displayPageLogin(pageId) {
+    document.getElementById("mainLegalNoticeContainerDisplay").style.display = "none";
+    //document.getElementById("mainhelpContainerDisplay").style.display = "none";
+    document.getElementById(pageId).style.display = "block";
+    document.getElementById('arrowBackLegalNotice').style.display = "block";
+    document.getElementById('loginScreen').style.display = "none";
+    document.getElementById('policies').style.display = "none";
 }
 
 /* ================================================================= SNACKBAR ================================================================= */

@@ -7,13 +7,13 @@
     <title>Forgot Password</title>
 
     <!-- ============================== CSS FILES ================================= -->
-    <link rel="stylesheet" href="../styles/mainStyle.css">
+    <link rel="stylesheet" href="../mainStyle.css">
     <link rel="stylesheet" href="../styles/login.css">
     <link rel="stylesheet" href="../styles/fonts.css">
     <!-- ============================== SCRIPTS ================================= -->
     <script src="../mainScript.js"></script>
-    <script src="../script.js"></script>
-    <script src="../mini_backend.js"></script>
+    <script src="../mainScript.js"></script>
+    <script src="../js/mini_backend.js"></script>
 
     <!-- ============================ Favicon =========================== -->
     <link rel="apple-touch-icon" sizes="180x180" href="../img/favicon/apple-touch-icon.png">
@@ -35,31 +35,45 @@
       </div>
 
       <div class="contentContainer">
-          <div class="loginScreen loginScreenPw">
+        <!-- == Legal Notice - w3-include-html ==-->
+        <div class="arrowBackLegalNotice" id="arrowBackLegalNotice" onclick="back()">
+          <img src="./img/arrowLeft.svg">
+        </div> 
+        <div class="mainLegalNoticeContainerDisplay" id="mainLegalNoticeContainerDisplay">
+          <div w3-include-html="templates\legalNotice.html"></div>
+        </div>
+        <!-- =================================== -->
 
-              <div class="arrowBack" onclick="backToLoginScreen()">
-                <img src="../img/arrowLeft.svg">
-              </div>       
-                     
-              <div class="loginHeading">
-                <h1>I forgot my password</h1>
-                <div class="blueLigne"></div>
+        <div class="loginScreen loginScreenPw">
+
+            <div class="arrowBack" onclick="backToLoginScreen()">
+              <img src="../img/arrowLeft.svg">
+            </div>       
+                    
+            <div class="loginHeading">
+              <h1>I forgot my password</h1>
+              <div class="blueLigne"></div>
+            </div>
+
+            <span>Don't worry! We will send you an email with the instructions to reset your password.</span>
+
+            <!-- <form id="forgotPwForm" class="inputContainer" onsubmit="checkForCorrectEmail(event)"> -->
+            <form id="forgotPwForm" class="inputContainer" onsubmit="checkForCorrectEmail()" action="https://tobias-odermatt.developerakademie.net/Projekte/Join/send_mail.php" method="post">
+              <div class="inputFieldContainer">
+                  <input id="sendEmailToResetPw" name="sendEmailToResetPw" class="inputFields" type="email" placeholder="Email"/>
+                  <img src="../img/letter.svg" class="img" />
               </div>
+                  <!--  <input name="userId" class="userIdForgotPw" type="number"/>  -->
+              <button id="submitButton" type="submit" class="buttonDark">
+                <div class="buttonDarkText">Send me the email</div>
+              </button>
+            </form>
+        </div>
+      </div>
 
-              <span>Don't worry! We will send you an email with the instructions to reset your password.</span>
-
-              <!-- <form id="forgotPwForm" class="inputContainer" onsubmit="checkForCorrectEmail(event)"> -->
-              <form id="forgotPwForm" class="inputContainer" onsubmit="checkForCorrectEmail()" action="https://tobias-odermatt.developerakademie.net/Projekte/Join/send_mail.php" method="post">
-                <div class="inputFieldContainer">
-                    <input id="sendEmailToResetPw" name="sendEmailToResetPw" class="inputFields" type="email" placeholder="Email"/>
-                    <img src="../img/letter.svg" class="img" />
-                </div>
-                    <!--  <input name="userId" class="userIdForgotPw" type="number"/>  -->
-                <button id="submitButton" type="submit" class="buttonDark">
-                  <div class="buttonDarkText">Send me the email</div>
-                </button>
-              </form>
-          </div>
+      <div class="policies" id="policies">
+        <div>Privacy Policy</div>
+        <div onclick="displayPageLogin('mainLegalNoticeContainerDisplay')">Legal notice</div>
       </div>
       
     </div>

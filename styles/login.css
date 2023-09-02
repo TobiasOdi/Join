@@ -24,12 +24,11 @@
 .signUpField {
   position: absolute;
   top: 25px;
-  right: 50px;
+  right: 25px;
   display: flex;
   justify-self: center;
   align-items: center;
   gap: 10px;
-  width: 279px;
   height: 49px;
 }
 
@@ -55,8 +54,10 @@
   width: 100%;
   height: calc(100vh - 185px);
   display: flex;
-  justify-content: center;
-  align-items: flex-start;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+
 }
 
 .loginScreen {
@@ -93,6 +94,13 @@
   top: 24px;
   left: 20px;
   display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.arrowBackLegalNotice {
+  display: none;
   justify-content: center;
   align-items: center;
   cursor: pointer;
@@ -155,6 +163,34 @@
   width: 15px;
   height: 15px;
   border-radius: 50%;
+}
+
+.privacyPolicyContainer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+}
+
+.privacyPolicyContainer > input {
+  height: 16px;
+  width: 16px;
+}
+
+.privacyPolicyContainer > div {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 4px;
+  font-size: 16px;
+  color: #A8A8A8;
+}
+
+.privacyPolicy {
+  font-size: 16px;
+  color: #29ABE2;
+  cursor: pointer;
 }
 
 .rememberOrForgetFields {
@@ -582,6 +618,20 @@
     font-size: 17px;
     width: 130px;
     height: 40px;
+ }
+
+ .policies {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+ }
+
+ .policies > div {
+    font-size: 16px;
+    color: #A8A8A8;
+    cursor: pointer;
  }
 
   .contentContainer {

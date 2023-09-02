@@ -18,17 +18,6 @@ let editContactPopUp = document.getElementById('editContactBackground');
 let bgColor;
 let firstLetters;
 
-/*     async function initContacts() {
-        setURL('https://gruppenarbeit-486join.developerakademie.net/smallest_backend_ever');
-        await downloadFromServer();
-        contacts = JSON.parse(backend.getItem('contacts')) || [];
-        users = JSON.parse(backend.getItem('users')) || [];
-        tasks = JSON.parse(backend.getItem('tasks')) || [];
-    
-        renderLetters();
-    }  */
-
-
 function renderLetters() {
     let contactList = document.getElementById('contactList');
     contactList.innerHTML = '';

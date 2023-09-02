@@ -7,14 +7,13 @@
     <title>SignUp</title>
     
     <!-- ============================== CSS FILES ================================= -->
-    <link rel="stylesheet" href="../styles/mainStyle.css" />
+    <link rel="stylesheet" href="../mainStyle.css" />
     <link rel="stylesheet" href="../styles/login.css" />
     <link rel="stylesheet" href="../styles/fonts.css">
 
     <!-- ============================== SCRIPTS ================================= -->
     <script src="../mainScript.js"></script>
-    <script src="../mini_backend.js"></script>
-    <script src="../js/contacts.js"></script>
+    <script src="../js/mini_backend.js"></script>
 
     <!-- ============================ Favicon =========================== -->
     <link rel="apple-touch-icon" sizes="180x180" href="../img/favicon/apple-touch-icon.png">
@@ -38,6 +37,15 @@
 
       <!--============================== SIGN UP SECTION ================================-->
       <div class="contentContainer">
+        <!-- == Legal Notice - w3-include-html ==-->
+        <div class="arrowBackLegalNotice" id="arrowBackLegalNotice" onclick="back()">
+          <img src="./img/arrowLeft.svg">
+        </div> 
+        <div class="mainLegalNoticeContainerDisplay" id="mainLegalNoticeContainerDisplay">
+          <div w3-include-html="templates\legalNotice.html"></div>
+        </div>
+        <!-- =================================== -->
+
         <div class="loginScreen signUpScreen">
 
           <div class="arrowBack" onclick="backToLoginScreen()">
@@ -109,6 +117,12 @@
                 </select>
               </div>
             </div>
+
+            <div class="privacyPolicyContainer">
+              <input type="checkbox" required>
+              <div>I accept the <div class="privacyPolicy">Privacy Policy</div></div>
+            </div>
+
             <button class="buttonDark" type="submit">
               <div class="buttonDarkText">Sign up</div>
             </button>
@@ -116,9 +130,12 @@
 
         </div>
       </div>
+
+      <div class="policies" id="policies">
+        <div>Privacy Policy</div>
+        <div onclick="displayPageLogin('mainLegalNoticeContainerDisplay')">Legal notice</div>
+      </div>
     </div>
-
-
 
 <!-- ================================== SNACKBAR missing SIGNE UP ======================================= -->
 <div id="missingSignedUp">Oops there is probably a value missing</div>
