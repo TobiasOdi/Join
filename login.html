@@ -9,7 +9,8 @@
 
   <!-- ============================== CSS FILES ================================= -->
   <link rel="stylesheet" href="./mainStyle.css" />
-  <link rel="stylesheet" href="./styles/login.css" />
+  <link rel="stylesheet" href="./styles/login.css"/>
+  <link rel="stylesheet" href="./styles/legalNotice.css">
   <link rel="stylesheet" href="./styles/fonts.css">
   <!-- ============================== SCRIPTS ================================= -->
   <script src="./mainScript.js"></script>
@@ -48,17 +49,17 @@
     </div>
 
     <!--============================== LOGIN SECTION ================================-->
-    <div class="contentContainer">
+    <div class="contentContainer" id="contentContainerLogin1">
       <!-- == Legal Notice - w3-include-html ==-->
-      <div class="arrowBackLegalNotice" id="arrowBackLegalNotice" onclick="back()">
+      <div class="arrowBackLegalNotice" id="arrowBackLegalNotice1" onclick="back(1)">
         <img src="./img/arrowLeft.svg">
       </div> 
-      <div class="mainLegalNoticeContainerDisplay" id="mainLegalNoticeContainerDisplay">
+      <div class="mainLegalNoticeContainerDisplay" id="mainLegalNoticeContainerDisplay1">
         <div w3-include-html="templates\legalNotice.html"></div>
       </div>
       <!-- =================================== -->
 
-      <div class="loginScreen" id="loginScreen">
+      <div class="loginScreen" id="loginScreen1">
 
         <div class="loginHeading">
           <h1>Log in</h1>
@@ -101,9 +102,9 @@
       </div>
     </div>
 
-    <div class="policies" id="policies">
+    <div class="policies" id="policies1">
       <div>Privacy Policy</div>
-      <div onclick="displayPageLogin('mainLegalNoticeContainerDisplay')">Legal notice</div>
+      <div onclick="displayPageLogin('mainLegalNoticeContainerDisplay', 1)">Legal notice</div>
     </div>
 
   </div>

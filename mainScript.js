@@ -142,11 +142,12 @@ function backToLoginScreen() {
     window.location.href = '../login.html';
 }
 
-function back() {
-    document.getElementById('mainLegalNoticeContainerDisplay').style.display = "none";
-    document.getElementById('arrowBackLegalNotice').style.display = "none";
-    document.getElementById('loginScreen').style.display = "block";
-    document.getElementById('policies').style.display = "block";
+function back(n) {
+    document.getElementById('mainLegalNoticeContainerDisplay' + n).style.display = "none";
+    document.getElementById('arrowBackLegalNotice' + n).style.display = "none";
+    document.getElementById('loginScreen' + n).style.display = "flex";
+    document.getElementById('policies' + n).style.display = "flex";
+    document.getElementById('contentContainerLogin' + n).classList.remove('displayPageLogin');
 }
 
 /**
@@ -322,27 +323,25 @@ function debounce(func, delay) {
  * @param {string} pageId - id of the of the html template that needs to be displayed
  */
 function displayPage(pageId) {
-    //document.getElementById("mainSummaryContainerDisplay").style.display = "none";
-    //document.getElementById("mainBoardContainerDisplay").style.display = "none";
-    //document.getElementById("mainAddTaskContainerDisplay").style.display = "none";
-    //document.getElementById("mainContactsContainerDisplay").style.display = "none";
+    document.getElementById("mainSummaryContainerDisplay").style.display = "none";
+    document.getElementById("mainBoardContainerDisplay").style.display = "none";
+    document.getElementById("mainAddTaskContainerDisplay").style.display = "none";
+    document.getElementById("mainContactsContainerDisplay").style.display = "none";
     document.getElementById("mainLegalNoticeContainerDisplay").style.display = "none";
-    //document.getElementById("mainhelpContainerDisplay").style.display = "none";
+    document.getElementById("mainhelpContainerDisplay").style.display = "none";
     document.getElementById(pageId).style.display = "block";
-    document.getElementById('arrowBackLegalNotice').style.display = "block";
 }
 
 /**
- * This function displays the html templates.
- * @param {string} pageId - id of the of the html template that needs to be displayed
+ * This function displays the html template legal notice.
+ * @param {number} pageId - number of the the id
  */
-function displayPageLogin(pageId) {
-    document.getElementById("mainLegalNoticeContainerDisplay").style.display = "none";
-    //document.getElementById("mainhelpContainerDisplay").style.display = "none";
-    document.getElementById(pageId).style.display = "block";
-    document.getElementById('arrowBackLegalNotice').style.display = "block";
-    document.getElementById('loginScreen').style.display = "none";
-    document.getElementById('policies').style.display = "none";
+function displayPageLogin(n) {
+    document.getElementById('contentContainerLogin' + n).classList.add('displayPageLogin');
+    document.getElementById('mainLegalNoticeContainerDisplay' + n).style.display = "flex";
+    document.getElementById('arrowBackLegalNotice' +n).style.display = "flex";
+    document.getElementById('loginScreen' + n).style.display = "none";
+    document.getElementById('policies' + n).style.display = "none";
 }
 
 /* ================================================================= SNACKBAR ================================================================= */

@@ -46,6 +46,10 @@
     height: calc(100vh - 89px);
 }
 
+.innerLegalNoticeContainerLogin {
+    height: calc(100vh - 203px);
+}
+
 .legalNoticeContainer ul li, .helpContainer ul li {
     color: black;
     display: list-item;

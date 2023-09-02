@@ -36,17 +36,17 @@
       </div>
 
       <!--============================== SIGN UP SECTION ================================-->
-      <div class="contentContainer">
+      <div class="contentContainer" id="contentContainerLogin2">
         <!-- == Legal Notice - w3-include-html ==-->
-        <div class="arrowBackLegalNotice" id="arrowBackLegalNotice" onclick="back()">
+        <div class="arrowBackLegalNotice" id="arrowBackLegalNotice2" onclick="back(2)">
           <img src="./img/arrowLeft.svg">
         </div> 
-        <div class="mainLegalNoticeContainerDisplay" id="mainLegalNoticeContainerDisplay">
+        <div class="mainLegalNoticeContainerDisplay" id="mainLegalNoticeContainerDisplay2">
           <div w3-include-html="templates\legalNotice.html"></div>
         </div>
         <!-- =================================== -->
 
-        <div class="loginScreen signUpScreen">
+        <div class="loginScreen signUpScreen" id="loginScreen2">
 
           <div class="arrowBack" onclick="backToLoginScreen()">
             <img src="../img/arrowLeft.svg">
@@ -131,9 +131,9 @@
         </div>
       </div>
 
-      <div class="policies" id="policies">
+      <div class="policies" id="policies2">
         <div>Privacy Policy</div>
-        <div onclick="displayPageLogin('mainLegalNoticeContainerDisplay')">Legal notice</div>
+        <div onclick="displayPageLogin('mainLegalNoticeContainerDisplay', 2)">Legal notice</div>
       </div>
     </div>
 
