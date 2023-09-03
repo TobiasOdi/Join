@@ -1,5 +1,4 @@
 /* =============================== SUMMARY FUNCTIONS =================================== */
-
 function counters() {
     taskCounter();
     inProgressCounter();
@@ -109,6 +108,7 @@ function abbreviateName(name, maxLength) {
         let words = name.split(' ');
         let firstWord = words[0];
         let secondWordInitial = words[1].charAt(0);
+        debugger;
         return `${firstWord} ${secondWordInitial}.`;
     }
 }

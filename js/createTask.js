@@ -36,47 +36,47 @@ let prevPriorityElement = null; // keep track of previously clicked button
         let taskData = {taskId: taskId, statusCategory: statusCategory, title: title.value, description: description.value, category: category, categoryColor: categoryColor, assignTo: assignTo, dueDate: dueDate.value, priorityValue: priorityValue, subtasks: subtasks};
         tasks.push(taskData);
         await saveTasks();
-        displaySignedUpPopup('taskCreated');
+        displaySnackbar('taskCreated');
         clearAllInputs();
         document.getElementById('assignedToChoices').classList.add('d-none');
         await updateHTML();
         displayPage('mainBoardContainerDisplay');
     } else {
-        displaySignedUpPopup('missingSignedUpTask');
+        displaySnackbar('missingSignedUpTask');
     }
 } */
 
 async function createTask() {
     if(!document.getElementById('title').value) {
         document.getElementById('title').classList.add('redBorder');
-        displaySignedUpPopup('missingSignedUpTask');
+        displaySnackbar('missingSignedUpTask');
     } 
     
     if(!document.getElementById('description').value) {
         document.getElementById('description').classList.add('redBorder');
-        displaySignedUpPopup('missingSignedUpTask');
+        displaySnackbar('missingSignedUpTask');
     } 
     
     if(!document.getElementById('dueDate').value){
         document.getElementById('dueDate').classList.add('redBorder');
-        displaySignedUpPopup('missingSignedUpTask');
+        displaySnackbar('missingSignedUpTask');
     } 
     
     if(priority == "") {
         document.getElementById('urgent').classList.add('redBorder');
         document.getElementById('medium').classList.add('redBorder');
         document.getElementById('low').classList.add('redBorder');
-        displaySignedUpPopup('missingSignedUpTask');
+        displaySnackbar('missingSignedUpTask');
     } 
     
     if(categoryValue == "") {
         document.getElementById('selectCategoryForm').classList.add('redBorder');
-        displaySignedUpPopup('missingSignedUpTask');
+        displaySnackbar('missingSignedUpTask');
     } 
     
     if(selectedValues.length == 0){
         document.getElementById('assignedTo').classList.add('redBorder');
-        displaySignedUpPopup('missingSignedUpTask');
+        displaySnackbar('missingSignedUpTask');
     } 
 
     if(document.getElementById('title').value) {
@@ -118,7 +118,7 @@ async function createTask() {
         let taskData = {taskId: taskId, statusCategory: statusCategory, title: title.value, description: description.value, category: category, categoryColor: categoryColor, assignTo: assignTo, dueDate: dueDate.value, priorityValue: priorityValue, subtasks: subtasks};
         tasks.push(taskData);
         await saveTasks();
-        displaySignedUpPopup('taskCreated');
+        displaySnackbar('taskCreated');
         clearAllInputs();
         document.getElementById('assignedToChoices').classList.add('d-none');
         await updateHTML();

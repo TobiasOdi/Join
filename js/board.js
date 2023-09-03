@@ -1,4 +1,4 @@
-/* ============================================= VARIABLES ========================================= */
+/* =============================================================================== VARIABLES =================================================================== */
 let allTasks = [];
 let toDos = [];
 let userChar = [];
@@ -12,7 +12,7 @@ let numerator;
 let denominator;
 let progress;
 
-/* ========================================= BOARD FUNCTIONS ========================================= */
+/* ============================================================================ BOARD FUNCTIONS ======================================================================== */
 function updateHTML() {
     if (tasks.length > 0) {
         for (let index = 0; index < tasks.length; index++) {
@@ -54,6 +54,7 @@ function updateHTML() {
             generateProgressbarHtml(i, taskId, progress, numerator, denominator);
         }
         createBubbles();
+        checkForEmptyCategories();
     }
 }
 
@@ -79,9 +80,9 @@ function calculateProgressbar(i) {
 
 function generateProgressbarHtml(i, taskId, progress, numerator, denominator) {
         if(tasks[i]['subtasks'].length === 0) {
-            document.getElementById(`boardContainerProgress(${taskId})`).innerHTML = `
-            <div class="noSubtasks">No subtasks</div>
-        `;
+        //    document.getElementById(`boardContainerProgress(${taskId})`).innerHTML = `
+        //    <div class="noSubtasks">No subtasks</div>
+        //`;
         } else {
             document.getElementById(`boardContainerProgress(${taskId})`).innerHTML = `
             <div class="progress">
@@ -89,7 +90,7 @@ function generateProgressbarHtml(i, taskId, progress, numerator, denominator) {
                 </div>
             </div>
             <div class="progressInNumbers">
-                ${numerator} / ${denominator} Done
+                ${numerator}/${denominator} Subtasks
             </div>
             `;
         }
@@ -177,6 +178,12 @@ function generateRandomColor() {
     return `rgb(${r}, ${g}, ${b})`;
 }
 
+function checkForEmptyCategories() {
+
+}
+
+/* ============================================================================ DRAG & DROP ======================================================================== */
+
 //Source: www.w3schools.com/html/html5_draganddrop.asp
 function startDragging(id) {
     currentDraggedElement = tasks.findIndex(obj => obj.taskId === id);
@@ -201,6 +208,7 @@ function doNotOpenTask(event) {
     event.stopPropagation();
 }
 
+/* ======================================================================= TASK FUNCTIONS ================================================================================= */
 async function pushToPreviousCategory(category, taskId) {
     let currentTaskId = tasks.find(t => t.taskId == taskId);
     let currentTask = tasks.indexOf(currentTaskId);

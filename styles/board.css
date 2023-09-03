@@ -1,4 +1,4 @@
-/* ================================ BOARD MAIN ================================ */
+/* =============================================================== BOARD MAIN =================================================================== */
 .placeholderBoard {
   height: calc(100vh - 89px);
   padding: 2rem;
@@ -153,19 +153,20 @@
 }
 
 .boardParts {
-  width: 380px;
+  width: 23%;
   display: flex;
   flex-direction: column;
   gap: 24px;
-  margin-right: 1rem;
   margin-bottom: 1rem;
 }
 
 .placeholderBoardBottom {
   height: calc(100vh - 235px);
+  width: 100%;
   display: flex;
   flex-wrap: wrap;
   flex-grow: 1;
+  gap: 25px;
   overflow-x: hidden;
   overflow-y: scroll;
   overflow: auto;
@@ -218,7 +219,6 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  padding: 0px 20px;
   font-weight: 700;
   font-size: 21px;
 }
@@ -231,8 +231,8 @@
 }
 
 .boardTask img {
-  width: 22px;
-  height: 22px;
+  width: 24px;
+  height: 24px !important;
   color: #2a3647;
 }
 
@@ -339,17 +339,17 @@
 }
 
 .progress {
-  height: 5px;
-  background-color: #f4f4f4;
+  height: 7px;
+  background-color: #F4F4F4;
   border-radius: 5px;
   width: 50%;
-  border: 1px solid purple;
 }
 
 .progressBar {
   height: 100%;
-  background-color: #4caf50;
+  background-color: #4589FF;
   width: 0%;
+  border-radius: 5px;
   transition: width 0.5s ease-in-out;
 }
 
@@ -374,22 +374,24 @@
 .userBubble {
   display: flex;
   position: relative;
+  margin-left: 10px;
 }
 
 .userBubbleOne {
   width: 35px;
   height: 35px;
   border-radius: 100%;
-  background-color: #0190e0;
-  display: flex;
+/*   background-color: #0190e0;
+ */  display: flex;
   justify-content: center;
   align-items: center;
   color: white;
-  border: 1px solid white;
+  border: 2px solid white;
   font-size: 12px;
+  margin-left: -10px;
 }
 
-.userBubbleTwo {
+/* .userBubbleTwo {
   position: absolute;
   left: 27px;
   width: 35px;
@@ -417,9 +419,8 @@
   color: white;
   border: 1px solid white;
   font-size: 12px;
-}
+} */
 
-/* ================================ OPEN TASK ================================ */
 .openTaskBackground {
   position: absolute;
   top: 0;
@@ -699,7 +700,7 @@
   overflow: auto;
 }
 
-/* ================================ SCROLLBAR ====================================== */
+/* =============================================================== SCROLLBAR =================================================================== */
 .assignedToContainer::-webkit-scrollbar,
 .boardSubtaskContainer::-webkit-scrollbar,
 .openTaskMain::-webkit-scrollbar {
@@ -878,8 +879,7 @@
   height: 12px;
 }
 
-/* ================================ RESPONSIVENESS ================================ */
-
+/* =============================================================== RESPONSIVENESS =================================================================== */
 @media (max-width: 880px) {
   .placeholderBoardTop {
     flex-direction: column;
@@ -926,12 +926,6 @@
   .placeholderBoardTopRight .inputFields {
     height: 45px;
   }
-
-  /*  .openTaskDateEdit {
-      flex-direction: column;
-      align-items: flex-start;
-    } */
-
 
 @media (max-width: 480px) {
   .openTaskBackground {
@@ -989,11 +983,6 @@
     gap: 0;
   }
 
-/*   .openTaskMain {
-    justify-content: flex-start;
-    margin-top: 2rem;
-  } */
-
   .openTaskHeader > h1,
   #titleEdit {
     font-size: 31px;
@@ -1047,9 +1036,7 @@
   .prioButtonEdit > div:first-of-type{
     display: none;
   }
-
 }
-
 
 @media (max-width: 380px) {
   .openTaskHeader > h1,
@@ -1070,7 +1057,6 @@
   .openTaskDate > div:last-of-type {
     font-size: 18px;
   }
-  
 }
 
 @media (max-width: 320px) {

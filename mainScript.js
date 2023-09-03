@@ -11,6 +11,20 @@ let lightorange = "#FFA800";
 let green = "#7AE229";  
 
 /* ======================================================= INCLUDE HTML ========================================================== */
+async function includeHTMLLogin() {
+    let includeElements = document.querySelectorAll('[w3-include-html]');
+    for (let i = 0; i < includeElements.length; i++) {
+        let element = includeElements[i];
+        file = element.getAttribute("w3-include-html"); // "includes/header.html"
+        let resp = await fetch(file);
+        if (resp.ok) {
+            element.innerHTML = await resp.text();
+        } else {
+            element.innerHTML = 'Page not found';
+        }
+    }
+}
+
 //Source: https://developer-akademie.teachable.com/courses/902235/lectures/31232815
 async function includeHTML() {
     let includeElements = document.querySelectorAll('[w3-include-html]');
@@ -152,6 +166,7 @@ function back(pageId, n, arrowId) {
     document.getElementById('loginScreen' + n).style.display = "flex";
     document.getElementById('policies' + n).style.display = "flex";
     document.getElementById('contentContainerLogin' + n).classList.remove('displayPageLogin');
+    document.getElementById('innerLegalNoticeContainer').classList.remove('innerLegalNoticeContainerLogin');
 }
 
 /**
@@ -347,6 +362,7 @@ function displayPageLogin(pageId, n, arrowId) {
     document.getElementById(arrowId + n).style.display = "flex";
     document.getElementById('loginScreen' + n).style.display = "none";
     document.getElementById('policies' + n).style.display = "none";
+    document.getElementById('innerLegalNoticeContainer').classList.add('innerLegalNoticeContainerLogin');
 }
 
 /* ================================================================= SNACKBAR ================================================================= */
