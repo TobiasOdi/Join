@@ -23,58 +23,39 @@
     </div>
 
     <div class="placeholderBoardBottom">
-        <div class="boardParts" ondrop="moveTo('toDo')" ondragover="allowDrop(event)">
-            <!-- toDoHeadline -->
+        <div class="boardParts" ondrop="moveTo('toDo'); removeHighlight('toDo')" ondragleave="removeHighlight('toDo')" ondragover="allowDrop(event); highlight('toDo')">
             <div class="boardTask">
                 <div>To do</div>
                 <div onclick="displayPage('mainAddTaskContainerDisplay')"><img src="../img/plusbuttonv1.svg" style="height: 15px;"></div>
             </div>
-            <!-- toDoCards -->
-            <div class="toDoCard" id="toDoCard">
-
-            </div>
-
-
-            <!-- 
-                    
-                
-                    <div class="boardContainerUserBubbles">
-                        <div class="userBubble">
-                            <div class="userBubbleOne">SM</div>
-                            <div class="userBubbleTwo">MV</div>
-                            <div class="userBubbleConcatenation">+2</div>
-                        </div>
-                        <div><img src="img/greenArrow.svg"></div>
-                    </div>
-                </div> -->
-
+            <div id="toDo" class="boardCategoryContainer"></div>
         </div>
 
-        <div class="boardParts" ondrop="moveTo('inProgress')" ondragover="allowDrop(event)">
+        <div class="boardParts" ondrop="moveTo('inProgress'); removeHighlight('inProgress')" ondragleave="removeHighlight('inProgress')" ondragover="allowDrop(event); highlight('inProgress')">
             <!-- inProgress -->
             <div class="boardTask">
                 <div>In Progress</div>
                 <div onclick="displayPage('mainAddTaskContainerDisplay')"><img src="../img/plusbuttonv1.svg" style="height: 15px;"></div>
             </div>
-            <div id="inProgress"></div>
+            <div id="inProgress" class="boardCategoryContainer"></div>
         </div>
 
-        <div class="boardParts" ondrop="moveTo('awaitingFeedback')" ondragover="allowDrop(event)">
+        <div class="boardParts" ondrop="moveTo('awaitingFeedback'); removeHighlight('awaitingFeedback')" ondragleave="removeHighlight('awaitingFeedback')" ondragover="allowDrop(event); highlight('awaitingFeedback')">
             <!-- AwaitingFeedback -->
             <div class="boardTask">
                 <div>Awaiting Feedback</div>
                 <div onclick="displayPage('mainAddTaskContainerDisplay')"><img src="../img/plusbuttonv1.svg" style="height: 15px;"></div>
             </div>
-            <div id="awaitingFeedback"></div>
+            <div id="awaitingFeedback" class="boardCategoryContainer"></div>
         </div>
 
-        <div class="boardParts" ondrop="moveTo('done')" ondragover="allowDrop(event)">
+        <div class="boardParts" ondrop="moveTo('done'); removeHighlight('done')" ondragleave="removeHighlight('done')" ondragover="allowDrop(event); highlight('done')">
             <!-- Done -->
             <div class="boardTask">
                 <div>Done</div>
                 <div onclick="displayPage('mainAddTaskContainerDisplay')"><img src="../img/plusbuttonv1.svg" style="height: 15px;"></div>
             </div>
-            <div id="done"></div>
+            <div id="done" class="boardCategoryContainer"></div>
         </div>
     </div>
 </div>

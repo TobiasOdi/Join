@@ -19,10 +19,10 @@ function updateHTML() {
             let taskId = tasks[index]["taskId"];
 
             let toDo = tasks.filter(t => t["statusCategory"] == "toDo");
-            document.getElementById("toDoCard").innerHTML = ``;
+            document.getElementById("toDo").innerHTML = ``;
             for (let i = 0; i < toDo.length; i++) {
                 let element = toDo[i]; 
-                document.getElementById("toDoCard").innerHTML += generateToDoHTMLToDo(element, 'toDo');
+                document.getElementById("toDo").innerHTML += generateToDoHTMLToDo(element, 'toDo');
             }
 
             let inProgress = tasks.filter(t => t["statusCategory"] == "inProgress");
@@ -54,8 +54,8 @@ function updateHTML() {
             generateProgressbarHtml(i, taskId, progress, numerator, denominator);
         }
         createBubbles();
-        checkForEmptyCategories();
     }
+    checkForEmptyCategories();
 }
 
 function pushArrayToDo() {
@@ -179,7 +179,42 @@ function generateRandomColor() {
 }
 
 function checkForEmptyCategories() {
+    let toDoCategory = document.getElementById('toDo');
+    let inProgressCategory = document.getElementById('inProgress');
+    let awaitingFeedbackCategory = document.getElementById('awaitingFeedback');
+    let doneCategory = document.getElementById('done');
 
+    if(toDoCategory.innerHTML == ""){
+        toDoCategory.innerHTML += `
+            <div class="emptyCategory">
+                <div class="emptyCategoryText">No tasks To do</div>
+            </div>
+        `;
+    } 
+
+    if(inProgressCategory.innerHTML == ""){
+        inProgressCategory.innerHTML += `
+            <div class="emptyCategory">
+                <div class="emptyCategoryText">No tasks To do</div>
+            </div>
+        `;
+    } 
+    
+    if(awaitingFeedbackCategory.innerHTML == ""){
+        awaitingFeedbackCategory.innerHTML += `
+            <div class="emptyCategory">
+                <div class="emptyCategoryText">No tasks To do</div>
+            </div>
+        `;
+    } 
+
+    if(doneCategory.innerHTML == ""){
+        doneCategory.innerHTML += `
+            <div class="emptyCategory">
+                <div class="emptyCategoryText">No tasks To do</div>
+            </div>
+        `;
+    } 
 }
 
 /* ============================================================================ DRAG & DROP ======================================================================== */
@@ -193,6 +228,15 @@ function moveTo(statusCategory) {
     tasks[currentDraggedElement]["statusCategory"] = statusCategory;
     updateTasks();
     updateHTML();
+}
+
+function highlight(id) {
+    if(document.getElementById(id) !== id)
+    document.getElementById(id).classList.add('dragAreahighlight');
+}
+
+function removeHighlight(id) {
+    document.getElementById(id).classList.remove('dragAreahighlight');
 }
 
 async function updateTasks() {
