@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="../styles/fonts.css">
     <!-- ============================== SCRIPTS ================================= -->
     <script src="../mainScript.js"></script>
-    <script src="../mainScript.js"></script>
+    <script src="../js/contacts.js"></script>
     <script src="../js/mini_backend.js"></script>
 
     <!-- ============================ Favicon =========================== -->
@@ -51,7 +51,7 @@
             <!-- <form id="forgotPwForm" class="inputContainer" onsubmit="checkForCorrectEmail(event)"> -->
             <form id="forgotPwForm" class="inputContainer" onsubmit="checkForCorrectEmail()" action="https://tobias-odermatt.developerakademie.net/Projekte/Join/send_mail.php" method="post">
               <div class="inputFieldContainer">
-                  <input id="sendEmailToResetPw" name="sendEmailToResetPw" class="inputFields" type="email" placeholder="Email"/>
+                  <input id="sendEmailToResetPw" name="sendEmailToResetPw" class="inputFields" type="email" placeholder="Email" required/>
                   <img src="../img/letter.svg" class="img" />
               </div>
                   <!--  <input name="userId" class="userIdForgotPw" type="number"/>  -->
@@ -64,12 +64,9 @@
       
     </div>
 
-    <!-- ================================== SNACKBAR USER NOT EXISTING ======================================= -->
+    <!-- ================================== SNACKBAR USER DOES NOT EXIST ======================================= -->
     <div id="userDoesNotExistTwo">User does not exist, please sign up</div>
     
-    <!-- ================================== SNACKBAR NO EMAIL INSERTED ======================================= -->
-    <div id="noEmailInsertedPopup">Please insert you E-Mail</div>
-
     <!-- ================================== SNACKBAR E-MAIL SENT ======================================= -->
     <div id="sendEmail"><img src="../img/emailSent.svg">An E-Mail has been sent to you</div>
 

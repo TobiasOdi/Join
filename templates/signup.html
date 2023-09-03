@@ -9,10 +9,12 @@
     <!-- ============================== CSS FILES ================================= -->
     <link rel="stylesheet" href="../mainStyle.css" />
     <link rel="stylesheet" href="../styles/login.css" />
+    <link rel="stylesheet" href="../styles/legalNotice.css">
     <link rel="stylesheet" href="../styles/fonts.css">
 
     <!-- ============================== SCRIPTS ================================= -->
     <script src="../mainScript.js"></script>
+    <script src="../js/contacts.js"></script>
     <script src="../js/mini_backend.js"></script>
 
     <!-- ============================ Favicon =========================== -->
@@ -38,11 +40,20 @@
       <!--============================== SIGN UP SECTION ================================-->
       <div class="contentContainer" id="contentContainerLogin2">
         <!-- == Legal Notice - w3-include-html ==-->
-        <div class="arrowBackLegalNotice" id="arrowBackLegalNotice2" onclick="back(2)">
-          <img src="./img/arrowLeft.svg">
+        <div class="arrowBackLegalNotice" id="arrowBackLegalNotice2" onclick="back('mainLegalNoticeContainerDisplay','2', 'arrowBackLegalNotice')">
+          <img src="../img/arrowLeft.svg">
         </div> 
         <div class="mainLegalNoticeContainerDisplay" id="mainLegalNoticeContainerDisplay2">
-          <div w3-include-html="templates\legalNotice.html"></div>
+          <div w3-include-html="./templates/legalNotice.html"></div>
+        </div>
+        <!-- =================================== -->
+
+        <!-- == Privacy Policy - w3-include-html ==-->
+        <div class="arrowBackLegalNotice" id="arrowBackPrivacyPolicy2" onclick="back('mainPrivacyPolicyContainerDisplay','2', 'arrowBackPrivacyPolicy')">
+          <img src="../img/arrowLeft.svg">
+        </div> 
+        <div class="mainLegalNoticeContainerDisplay" id="mainPrivacyPolicyContainerDisplay2">
+          <div w3-include-html="./legalNotice.html"></div>
         </div>
         <!-- =================================== -->
 
@@ -132,13 +143,10 @@
       </div>
 
       <div class="policies" id="policies2">
-        <div>Privacy Policy</div>
-        <div onclick="displayPageLogin(2)">Legal notice</div>
+        <div onclick="displayPageLogin('mainPrivacyPolicyContainerDisplay', '2','arrowBackPrivacyPolicy')">Privacy Policy</div>
+        <div onclick="displayPageLogin('mainLegalNoticeContainerDisplay', '2', 'arrowBackLegalNotice')">Legal notice</div>
       </div>
     </div>
-
-<!-- ================================== SNACKBAR missing SIGNE UP ======================================= -->
-<div id="missingSignedUp">Oops there is probably a value missing</div>
 
 <!-- ================================== SNACKBAR ALREADY SIGNE UP ======================================= -->
 <div id="alreadySignedUp">You have already signed up, go back to login</div>

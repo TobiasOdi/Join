@@ -9,7 +9,7 @@ $message = "Hi there,\n
 \nhttps://tobias-odermatt.developerakademie.net/Join/templates/resetPw.html?email=" . $recipient "\n
 \nIf you did not ask to reset your password, you can ignore this email.\n
 \nThanks,\n
-\nYour JOIN team"\n;
+\nYour JOIN team"n;
 
 ########### CONFIG END ###########
 

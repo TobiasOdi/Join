@@ -348,10 +348,21 @@ a {
 }
 
 
-/* ================================== SNACKBAR =======================================*/
-
+/* ================================================================ SNACKBAR ====================================================== */
 /* The snackbar - position it at the bottom and in the middle of the screen */
-#missingSignedUp, #alreadySignedUp, #successfullySignedUp, #userDoesNotExist, #pwEmailIncorrect, #sendEmail {
+#alreadySignedUp, 
+#successfullySignedUp, 
+#userDoesNotExist, 
+#userDoesNotExistTwo, 
+#pwEmailIncorrect, 
+#sendEmail, 
+#passwordReset, 
+#passwordsNotIdentical, 
+#contactCreated, 
+#contactChangesSaved,
+#missingSignedUpTask, 
+#taskCreated, 
+#missingSignedUp {
   visibility: hidden; /* Hidden by default. Visible on click */
   min-width: 280px; /* Set a default minimum width */
   margin-left: -140px; /* Divide value of min-width by 2 */
@@ -366,12 +377,24 @@ a {
   bottom: 30px; /* 30px from the bottom */
 }
 
-#missingSignedUp {
+#missingSignedUpTask, #missingSignedUp {
   background-color: red;
 }
 
 /* Show the snackbar when clicking on a button (class added with JavaScript) */
-#missingSignedUp.show, #alreadySignedUp.show, #successfullySignedUp.show, #userDoesNotExist.show, #pwEmailIncorrect.show, #sendEmail.show {
+#alreadySignedUp.show, 
+#successfullySignedUp.show, 
+#userDoesNotExist.show, 
+#userDoesNotExistTwo.show, 
+#pwEmailIncorrect.show, 
+#sendEmail.show, 
+#passwordReset.show, 
+#passwordsNotIdentical.show, 
+#contactCreated.show, 
+#contactChangesSaved.show,
+#missingSignedUpTask.show, 
+#taskCreated.show, 
+#missingSignedUp.show {
   visibility: visible; /* Show the snackbar */
   /* Add animation: Take 0.5 seconds to fade in and out the snackbar.
   However, delay the fade out process for 2.5 seconds */
@@ -400,7 +423,7 @@ a {
   to {bottom: 0; opacity: 0;}
 }
 
-/* =========================== RESPONSIVENESS ======================= */
+/* ================================================================ RESPONSIVENESS ====================================================== */
 @media (max-width: 950px) {
   .placeholderTop {
     padding-left: 2rem;

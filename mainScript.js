@@ -51,7 +51,8 @@ async function init() {
  * This function sets the color of the user. Border around the user icon in the top right corner.
  */
 function setUserColor() {
-    if(window.location.href === 'https://tobias-odermatt.developerakademie.net/Projekte/Join/join.html' + window.location.search) { // => http://127.0.0.1:5501/join.html => IMMER ANPASSEN!!!
+    // 'https://tobias-odermatt.developerakademie.net/Projekte/Join/join.html'
+    if(window.location.href === 'http://127.0.0.1:5500/join.html' + window.location.search) { // => IMMER ANPASSEN!!!
      let queryString = window.location.search.slice(4);
      let urlId = parseInt(queryString);
  
@@ -113,38 +114,41 @@ function checkForExistingUserId(id){
  * @param {string} name - the name of the user
  * @param {string} surname - the surname of the user
  * @param {string} email - the email address of the user
- * @param {*} password - the passowrd of the user
+ * @param {string} password - the passowrd of the user
  */
 async function validateSignup(userData, contactData, user, name, surname, email, password) {
-    if (userData.name && userData.surname && userData.email && userData.password && userData.userColor && userData.userColor != "") {
-        if(user) {
-            displaySignedUpPopup('alreadySignedUp');
-            name.value = '';
-            surname.value = '';
-            email.value = '';
-            password.value = '';
-        } else {
-            users.push(userData);
-            contacts.push(contactData);
-            await saveUsers();
-            await saveContacts();
-            displaySignedUpPopup('successfullySignedUp');
-            setInterval(backToLoginScreen, 1200);
-        } 
+    if(user) {
+        displaySignedUpPopup('alreadySignedUp');
+        name.value = '';
+        surname.value = '';
+        email.value = '';
+        password.value = '';
     } else {
-        displaySignedUpPopup('missingSignedUp');
-    };
+        users.push(userData);
+        contacts.push(contactData);
+        await saveUsers();
+        await saveContacts();
+        displaySignedUpPopup('successfullySignedUp');
+        setInterval(backToLoginScreen, 1200);
+    } 
 }
  /**
   * This function brings you back to the main login.html.
   */
 function backToLoginScreen() {
-    window.location.href = '../login.html';
+    window.location.href = 'http://127.0.0.1:5500/login.html'; // => IMMER ANPASSEN!!!
+    // 'https://tobias-odermatt.developerakademie.net/Projekte/Join/login.html'
 }
 
-function back(n) {
-    document.getElementById('mainLegalNoticeContainerDisplay' + n).style.display = "none";
-    document.getElementById('arrowBackLegalNotice' + n).style.display = "none";
+/**
+ * This function closes the legal notice/privacy policy on the login/sing up page.
+ * @param {string} pageId - id of a container
+ * @param {string} n - id coun
+ * @param {string} arrowId - id of a container 
+ */
+function back(pageId, n, arrowId) {
+    document.getElementById(pageId + n).style.display = "none";
+    document.getElementById(arrowId + n).style.display = "none";
     document.getElementById('loginScreen' + n).style.display = "flex";
     document.getElementById('policies' + n).style.display = "flex";
     document.getElementById('contentContainerLogin' + n).classList.remove('displayPageLogin');
@@ -163,7 +167,8 @@ async function saveUsers() {
  * This event listener lets you lets you login with the enter key.
  */
 window.addEventListener('keydown', (event) => {
-    if(window.location.href === 'https://tobias-odermatt.developerakademie.net/Projekte/Join/login.html') { // =>  'http://127.0.0.1:5501/login.html' => IMMER ANPASSEN!!!
+    // 'https://tobias-odermatt.developerakademie.net/Projekte/Join/login.html'
+    if(window.location.href === 'http://127.0.0.1:5500/login.html') { // => IMMER ANPASSEN!!!
         if(event.keyCode == 13) {
             login();
         }
@@ -208,8 +213,8 @@ function validateLogin(emailLog, passwordLog, existingUser, existingPw, user) {
             let userId = users[currentUser]['userid'];
             let userColor = users[currentUser]['userColor'];
 
-            window.location.href = 'https://tobias-odermatt.developerakademie.net/Projekte/Join/join.html?id=' + userId // => IMMER ANPASSEN!!!
-            // ../join.html?id=' + userId; // => IMMER ANPASSEN!!!
+            // 'https://tobias-odermatt.developerakademie.net/Projekte/Join/join.html'
+            window.location.href = 'http://127.0.0.1:5500/join.html?id=' + userId // => IMMER ANPASSEN!!!
         }
     }
 }
@@ -225,7 +230,7 @@ function guestLogin() {
     localStorage.setItem('userIdLogin', userIdLogin);
 }
 
-/* ================================================================= RESET PASSWORD ================================================================= */
+/* ================================================================= FORGOT PASSWORD ================================================================= */
 /**
  * This function validates the forgot password form and throws an error if necessary.
  */
@@ -233,10 +238,7 @@ function checkForCorrectEmail() {
     let sendEmailToResetPw = document.getElementById('sendEmailToResetPw').value;
     let existingEmail = users.find(u => u.email == sendEmailToResetPw);
     //let correctUser = users.indexOf(existingEmail);
-    if (sendEmailToResetPw == '') {
-        displaySignedUpPopup('noEmailInsertedPopup');
-        return false;
-    }
+    
     if ((users.find(u => u.email == sendEmailToResetPw)) == null) {
         displaySignedUpPopup('userDoesNotExistTwo');
         return false;
@@ -247,6 +249,7 @@ function checkForCorrectEmail() {
     return true;
 } 
 
+/* ================================================================= RESET PASSWORD ================================================================= */
 /**
  * This function validates the reset password form and throws an error if necessary.
  */
@@ -336,17 +339,17 @@ function displayPage(pageId) {
  * This function displays the html template legal notice.
  * @param {number} pageId - number of the the id
  */
-function displayPageLogin(n) {
+function displayPageLogin(pageId, n, arrowId) {
     document.getElementById('contentContainerLogin' + n).classList.add('displayPageLogin');
-    document.getElementById('mainLegalNoticeContainerDisplay' + n).style.display = "flex";
-    document.getElementById('arrowBackLegalNotice' +n).style.display = "flex";
+    document.getElementById(pageId + n).style.display = "flex";
+    document.getElementById(arrowId + n).style.display = "flex";
     document.getElementById('loginScreen' + n).style.display = "none";
     document.getElementById('policies' + n).style.display = "none";
 }
 
 /* ================================================================= SNACKBAR ================================================================= */
 /**
- * This funktion displays the snackbar.
+ * This funktion displays the snackbars.
  * @param {string} popupId - id of the snackbar
  */
 function displaySignedUpPopup(popupId) {

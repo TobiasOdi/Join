@@ -68,6 +68,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 10px;
 }
 
 .allCardsBorderRadius {
@@ -91,13 +92,13 @@
 
 }
 
-.middleCard, topC {
+.middleCard {
   width: 550px;
   height: 150px;
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 61px;
+  gap: 40px;
 }
 
 .allBottomCards {
@@ -171,6 +172,7 @@
 .middleCardDeadline {
   display: flex;
   justify-content: center;
+  align-items: center;
   flex-direction: column;
 }
 
@@ -190,6 +192,7 @@
   position: relative;
   display: flex;
   flex-direction: column;
+  gap: 30px;
 }
 
 .greeting {
@@ -283,6 +286,7 @@
   .summaryMainContainer {
     height: calc(100vh - 163px);
     align-items: flex-start;
+    padding-top: 0;
     padding-bottom: 1rem;
     padding-right: 0;
     overflow-y: hidden;
@@ -291,6 +295,7 @@
   .summaryLeftContainer {
     width: 100%;
     height: 100%;
+    padding-top: 1.5rem;
     padding-right: 0.5rem;
     overflow: auto;
   }

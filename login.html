@@ -51,11 +51,20 @@
     <!--============================== LOGIN SECTION ================================-->
     <div class="contentContainer" id="contentContainerLogin1">
       <!-- == Legal Notice - w3-include-html ==-->
-      <div class="arrowBackLegalNotice" id="arrowBackLegalNotice1" onclick="back(1)">
+      <div class="arrowBackLegalNotice" id="arrowBackLegalNotice1" onclick="back('mainLegalNoticeContainerDisplay','1', 'arrowBackLegalNotice')">
         <img src="./img/arrowLeft.svg">
       </div> 
       <div class="mainLegalNoticeContainerDisplay" id="mainLegalNoticeContainerDisplay1">
-        <div w3-include-html="templates\legalNotice.html"></div>
+        <div w3-include-html="./templates/legalNotice.html"></div>
+      </div>
+      <!-- =================================== -->
+
+      <!-- == Privacy Policy - w3-include-html ==-->
+      <div class="arrowBackLegalNotice" id="arrowBackPrivacyPolicy1" onclick="back('mainPrivacyPolicyContainerDisplay','1', 'arrowBackPrivacyPolicy')">
+        <img src="./img/arrowLeft.svg">
+      </div> 
+      <div class="mainLegalNoticeContainerDisplay" id="mainPrivacyPolicyContainerDisplay1">
+        <div w3-include-html="./templates/legalNotice.html"></div>
       </div>
       <!-- =================================== -->
 
@@ -103,13 +112,13 @@
     </div>
 
     <div class="policies" id="policies1">
-      <div>Privacy Policy</div>
-      <div onclick="displayPageLogin(1)">Legal notice</div>
+      <div onclick="displayPageLogin('mainPrivacyPolicyContainerDisplay', '1','arrowBackPrivacyPolicy')">Privacy Policy</div>
+      <div onclick="displayPageLogin('mainLegalNoticeContainerDisplay', '1', 'arrowBackLegalNotice')">Legal notice</div>
     </div>
 
   </div>
 
-  <!-- ================================== SNACKBAR USER NOT EXISTING ======================================= -->
+  <!-- ================================== SNACKBAR USER DOES NOT EXIST ======================================= -->
   <div id="userDoesNotExist">User does not exist, please sign up!</div>
 
   <!-- ================================== SNACKBAR PW/EMAIL INCORRECT ======================================= -->
