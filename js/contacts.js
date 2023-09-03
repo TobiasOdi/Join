@@ -125,7 +125,7 @@ function doNotClose(event) {
 
 function createContact() {
     if (document.getElementById('contactName').value == '' || document.getElementById('contactEmail').value == '') {
-        showSnackbar('inputRequired');
+        displaySnackbar('inputRequired');
     } else {
         randomBackground();
         let newContact = {name: document.getElementById('contactName').value, surname: document.getElementById('contactSurname').value, email: document.getElementById('contactEmail').value, phone: document.getElementById('contactPhone').value, contactColor: bgColor};
@@ -137,11 +137,11 @@ function createContact() {
             document.getElementById('contactEmail').value = '';
             document.getElementById('contactPhone').value = '';
             renderLetters();
-            showSnackbar('contactCreated');
+            displaySnackbar('contactCreated');
             document.getElementById('addContactBackground').style.display = 'none';
         }
         else {
-            showSnackbar('incorrectEMail');
+            displaySnackbar('incorrectEMail');
         }
     }
 }
@@ -289,7 +289,7 @@ function editContact(i) {
 
 function saveChanges(i) {
     if (document.getElementById('editContactName').value == '' || document.getElementById('editContactSurname').value == '' || document.getElementById('editContactEmail').value == '') {
-        showSnackbar('inputRequired');
+        displaySnackbar('inputRequired');
     } else {
         if (document.getElementById('editContactEmail').value.search('@') > -1) {
 
@@ -306,10 +306,10 @@ function saveChanges(i) {
         
             saveContacts();
             renderLetters();
-            showSnackbar('contactChangesSaved');
+            displaySnackbar('contactChangesSaved');
             document.getElementById('editContactBackground').style.display = 'none';
         } else {
-            showSnackbar('incorrectEMail');
+            displaySnackbar('incorrectEMail');
         }
     }
     openContactInfo(i);
@@ -328,13 +328,4 @@ function backToContactsList() {
     document.getElementById('newContactButton').classList.remove('d-none');
 }
 
-/* ================================== SNACKBAR =======================================*/
-function showSnackbar(id) {
-        // Get the snackbar DIV
-        var x = document.getElementById(id);
-        // Add the "show" class to DIV
-        x.className = "show";
-        // After 3 seconds, remove the show class from DIV
-        setTimeout(function () { x.className = x.className.replace("show", ""); }, 3000);
-}
 

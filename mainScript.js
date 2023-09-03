@@ -118,7 +118,7 @@ function checkForExistingUserId(id){
  */
 async function validateSignup(userData, contactData, user, name, surname, email, password) {
     if(user) {
-        displaySignedUpPopup('alreadySignedUp');
+        displaySnackbar('alreadySignedUp');
         name.value = '';
         surname.value = '';
         email.value = '';
@@ -128,7 +128,7 @@ async function validateSignup(userData, contactData, user, name, surname, email,
         contacts.push(contactData);
         await saveUsers();
         await saveContacts();
-        displaySignedUpPopup('successfullySignedUp');
+        displaySnackbar('successfullySignedUp');
         setInterval(backToLoginScreen, 1200);
     } 
 }
@@ -194,12 +194,12 @@ function login() {
  */
 function validateLogin(emailLog, passwordLog, existingUser, existingPw, user) {
     if(emailLog.value == '' || passwordLog.value == '') {
-        displaySignedUpPopup('missingSignedUp');
+        displaySnackbar('missingSignedUp');
     } else {
         if(existingUser && !existingPw) {
-            displaySignedUpPopup('pwEmailIncorrect');
+            displaySnackbar('pwEmailIncorrect');
         } else if(!existingUser) {
-            displaySignedUpPopup('userDoesNotExist')
+            displaySnackbar('userDoesNotExist')
         } else if(user) {
             //********************************** */
             let userName = user.name;
@@ -240,10 +240,10 @@ function checkForCorrectEmail() {
     //let correctUser = users.indexOf(existingEmail);
     
     if ((users.find(u => u.email == sendEmailToResetPw)) == null) {
-        displaySignedUpPopup('userDoesNotExistTwo');
+        displaySnackbar('userDoesNotExist2');
         return false;
     }
-    displaySignedUpPopup('sendEmail');
+    displaySnackbar('sendEmail');
     document.getElementById('sendEmailToResetPw').value = '';
     setInterval(backToLoginScreen, 1200);
     return true;
@@ -260,7 +260,7 @@ function resetPassword() {
     let confirmPassword = document.getElementById('confirmPassword');
     let existingEmail = users.find(u => u.email == userEmail)
     let currentUser = users.indexOf(existingEmail);
-    validatePassword(newPassword, confirmPassword, existingEmail, currentUse);
+    validatePassword(newPassword, confirmPassword, existingEmail, currentUser);
 }
 
 /**
@@ -275,11 +275,13 @@ function validatePassword(newPassword, confirmPassword, existingEmail, currentUs
         if (existingEmail) {
             users[currentUser]['password'] = confirmPassword.value;
             saveUsers();
-            displaySignedUpPopup('passwordReset');
+            displaySnackbar('passwordReset');
             setInterval(backToLoginScreen, 1200);
+        } else {
+            displaySnackbar('userDoesNotExist3');
         }
     } else {
-        displaySignedUpPopup('passwordsNotIdentical');
+        displaySnackbar('passwordsNotIdentical');
     }
 }
 
@@ -352,9 +354,12 @@ function displayPageLogin(pageId, n, arrowId) {
  * This funktion displays the snackbars.
  * @param {string} popupId - id of the snackbar
  */
-function displaySignedUpPopup(popupId) {
+function displaySnackbar(popupId) {
+    // Get the snackbar DIV
     var x = document.getElementById(popupId);
+    // Add the "show" class to DIV
     x.className = "show";
+    // After 3 seconds, remove the show class from DIV
     setTimeout(function () { x.className = x.className.replace("show", ""); }, 3000);
 }
 

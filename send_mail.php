@@ -2,14 +2,14 @@
 
 ########### CONFIG ###############
 $recipient = $_POST['sendEmailToResetPw'];
-$redirect = 'login.html';
+$redirect = 'http://127.0.0.1:5500/login.html';
 $name = 'JOIN Support Team';
 $message = "Hi there,\n
 \nClick on the following link to reset your JOIN password for your " . $recipient . " account.\n
 \nhttps://tobias-odermatt.developerakademie.net/Join/templates/resetPw.html?email=" . $recipient "\n
 \nIf you did not ask to reset your password, you can ignore this email.\n
 \nThanks,\n
-\nYour JOIN team"n;
+\nYour JOIN team\n";
 
 ########### CONFIG END ###########
 

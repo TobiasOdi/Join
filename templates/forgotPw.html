@@ -48,13 +48,12 @@
 
             <span>Don't worry! We will send you an email with the instructions to reset your password.</span>
 
-            <!-- <form id="forgotPwForm" class="inputContainer" onsubmit="checkForCorrectEmail(event)"> -->
             <form id="forgotPwForm" class="inputContainer" onsubmit="checkForCorrectEmail()" action="https://tobias-odermatt.developerakademie.net/Projekte/Join/send_mail.php" method="post">
               <div class="inputFieldContainer">
                   <input id="sendEmailToResetPw" name="sendEmailToResetPw" class="inputFields" type="email" placeholder="Email" required/>
                   <img src="../img/letter.svg" class="img" />
               </div>
-                  <!--  <input name="userId" class="userIdForgotPw" type="number"/>  -->
+
               <button id="submitButton" type="submit" class="buttonDark">
                 <div class="buttonDarkText">Send me the email</div>
               </button>
@@ -65,7 +64,7 @@
     </div>
 
     <!-- ================================== SNACKBAR USER DOES NOT EXIST ======================================= -->
-    <div id="userDoesNotExistTwo">User does not exist, please sign up</div>
+    <div id="userDoesNotExist2">User does not exist, please sign up</div>
     
     <!-- ================================== SNACKBAR E-MAIL SENT ======================================= -->
     <div id="sendEmail"><img src="../img/emailSent.svg">An E-Mail has been sent to you</div>
