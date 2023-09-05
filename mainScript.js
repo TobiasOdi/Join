@@ -40,7 +40,6 @@ async function includeHTML() {
     }
 
     await init();
-    pushArrayToDo();
     updateHTML();
     searchFunction();
     counters();

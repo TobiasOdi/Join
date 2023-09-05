@@ -6,12 +6,22 @@ let id;
 let taskId;
  */
 
-let selectedValues = []; // Define an empty array to store the selected values
-
+let selectedUsers = []; // Define an empty array to store the selected values
 let priority = "";
 let allValueCheck = false;
 let categoryValue = "";
+let categoryColor;
+let categories = [
+    {'categoryName': 'Marketing', 'color': 'rgb(0, 56, 255)'},
+    {'categoryName': 'Media', 'color': 'rgb(255, 199, 2)'},
+    {'categoryName': 'Backoffice', 'color': 'rgb(31, 215, 193)'},
+    {'categoryName': 'Design', 'color': 'rgb(255, 122, 0)'},
+    {'categoryName': 'Sales', 'color': 'rgb(252, 113, 255)'}
+];
 let previousCategoryValue = "";
+let statusCategory;
+let editedTaskPriority = [];
+
 
 /* let black = "#000000";
 let white = "#FFFFFF";
@@ -21,16 +31,22 @@ let green = "#7AE229"; */
 
 let prevPriorityElement = null; // keep track of previously clicked button
 
+
+
+function setStatusCategory(statusCategoryToDo) {
+    statusCategory  = statusCategoryToDo
+}
+
 // ================================================ CREATE TASK ==========================================================
 /* async function createTask() {
-    if (document.getElementById('title').value && document.getElementById('description').value && document.getElementById('dueDate').value && priority && categoryValue != "" && selectedValues.length !== 0) {
+    if (document.getElementById('title').value && document.getElementById('description').value && document.getElementById('dueDate').value && priority && categoryValue != "" && selectedUsers.length !== 0) {
         let taskId = generateTaskId();
         let statusCategory = "toDo";
         let title = document.getElementById('title');
         let description = document.getElementById('description');
         let category = categoryValue.charAt(0).toUpperCase() + categoryValue.slice(1);
         let categoryColor = addBackgroundColorCategory(category);
-        let assignTo = selectedValues;
+        let assignTo = selectedUsers;
         let dueDate = document.getElementById('dueDate'); 
         let priorityValue = priority;
         let taskData = {taskId: taskId, statusCategory: statusCategory, title: title.value, description: description.value, category: category, categoryColor: categoryColor, assignTo: assignTo, dueDate: dueDate.value, priorityValue: priorityValue, subtasks: subtasks};
@@ -74,7 +90,7 @@ async function createTask() {
         displaySnackbar('missingSignedUpTask');
     } 
     
-    if(selectedValues.length == 0){
+    if(selectedUsers.length == 0){
         document.getElementById('assignedTo').classList.add('redBorder');
         displaySnackbar('missingSignedUpTask');
     } 
@@ -101,18 +117,18 @@ async function createTask() {
         document.getElementById('selectCategoryForm').classList.remove('redBorder');
     } 
     
-    if(selectedValues.length !== 0){
+    if(selectedUsers.length !== 0){
         document.getElementById('assignedTo').classList.remove('redBorder');
     } 
     
-    if (document.getElementById('title').value && document.getElementById('description').value && document.getElementById('dueDate').value && priority && categoryValue != "" && selectedValues.length !== 0) {
-        let taskId = generateTaskId();
-        let statusCategory = "toDo";
-        let title = document.getElementById('title');
-        let description = document.getElementById('description');
-        let category = categoryValue.charAt(0).toUpperCase() + categoryValue.slice(1);
-        let categoryColor = addBackgroundColorCategory(category);
-        let assignTo = selectedValues;
+    if (document.getElementById('title').value && document.getElementById('description').value && document.getElementById('dueDate').value && priority && categoryValue != "" && selectedUsers.length !== 0) {
+        let taskId = generateTaskId(); // OK
+        // statusCategory > is beeing set wehn clicked on "Add Task" Tab or on plus sign on the board
+        let title = document.getElementById('title'); // OK
+        let description = document.getElementById('description'); // OK
+        let category = categoryValue.charAt(0).toUpperCase() + categoryValue.slice(1); // To be checked
+        let categoryColor = addBackgroundColorCategory(category); // To be checked
+        let assignTo = selectedUsers; // To be checked
         let dueDate = document.getElementById('dueDate'); 
         let priorityValue = priority;
         let taskData = {taskId: taskId, statusCategory: statusCategory, title: title.value, description: description.value, category: category, categoryColor: categoryColor, assignTo: assignTo, dueDate: dueDate.value, priorityValue: priorityValue, subtasks: subtasks};
@@ -126,8 +142,6 @@ async function createTask() {
     }
 }
 
-
-
 function generateTaskId() {
     taskId = Math.floor((Math.random() * 1000000) + 1);
     return taskId;
@@ -140,26 +154,26 @@ async function saveTasks() {
 
 setTimeout(() => {
     //saveSelectedUsers();
-    saveSelectedPriority();
+    //saveSelectedPriority();
     saveSelectedCategory();
 }, 1500);
 
-// Add an event listener to the checkboxes to update the selectedValues array
+// Add an event listener to the checkboxes to update the selectedUsers array
 function saveSelectedUsers() {
     document.querySelectorAll('input[type="checkbox"]').forEach((checkbox) => {
         checkbox.addEventListener('change', (event) => {
             const selectedValue = event.target.value;
             if (event.target.checked) {
-                if (!selectedValues.includes(selectedValue)) { // Check for duplicates
-                    selectedValues.push(selectedValue);
+                if (!selectedUsers.includes(selectedValue)) { // Check for duplicates
+                    selectedUsers.push(selectedValue);
                 }
             } else {
-                const index = selectedValues.indexOf(selectedValue);
+                const index = selectedUsers.indexOf(selectedValue);
                 if (index > -1) {
-                    selectedValues.splice(index, 1);
+                    selectedUsers.splice(index, 1);
                 }
             }
-            //console.log(selectedValues); // Print the selected values to the console
+            //console.log(selectedUsers); // Print the selected values to the console
         });
     });
 }
@@ -170,13 +184,53 @@ function deselectUsers() {
     });
 }
 
-/* =============== PRIORITY =============== */
-function saveSelectedPriority() {
-    Array.from(document.getElementsByClassName("prioButton")).forEach((button) => {
-        button.addEventListener('click', (event) => {
-            priority = event.target.id;
-        });
-    });
+function clearAllInputs() {
+    document.getElementById('title').value = '';
+    document.getElementById('description').value = '';
+    document.getElementById('dueDate').value = '';
+    selectedUsers = [];
+    subtasks = [];
+    priority = "";
+    categoryValue = "";
+    document.getElementById('urgent').style.backgroundColor = white;
+    document.getElementById('medium').style.backgroundColor = white;
+    document.getElementById('low').style.backgroundColor = white;
+    document.getElementById('urgent').style.color = black;
+    document.getElementById('medium').style.color = black;
+    document.getElementById('low').style.color = black;
+    document.getElementById('imgUrgent').style.filter = '';
+    document.getElementById('imgMedium').style.filter = '';
+    document.getElementById('imgLow').style.filter = '';
+    document.getElementById('subtaskList').innerHTML = "";
+    deselectUsers();
+}
+
+// ================================================ PRIORITY FUNCTIONS ==========================================================
+function selectUrgent() {
+    select("urgent", ["medium", "low"], ["imgMedium", "imgLow"], ["urgent"], ["imgUrgent"]);
+    saveSelectedPriority();
+}
+
+function selectUrgentEdit() {
+    select("urgentEdit", ["mediumEdit", "lowEdit"], ["imgMediumEdit", "imgLowEdit"], ["urgentEdit"], ["imgUrgentEdit"]);
+}
+
+function selectMedium() {
+    select("medium", ["urgent", "low"], ["imgUrgent", "imgLow"], ["medium"], ["imgMedium"]);
+    saveSelectedPriority();
+}
+
+function selectMediumEdit() {
+    select("mediumEdit", ["urgentEdit", "lowEdit"], ["imgUrgentEdit", "imgLowEdit"], ["mediumEdit"], ["imgMediumEdit"]);
+}
+
+function selectLow() {
+    select("low", ["urgent", "medium"], ["imgUrgent", "imgMedium"], ["low"], ["imgLow"]);
+    saveSelectedPriority();
+}
+
+function selectLowEdit() {
+    select("lowEdit", ["urgentEdit", "mediumEdit"], ["imgUrgentEdit", "imgMediumEdit"], ["lowEdit"], ["imgLowEdit"]);
 }
 
 function select(id, idsToDeselect, filtersToDeselect, idsToSelect, filtersToSelect) {
@@ -233,35 +287,16 @@ function select(id, idsToDeselect, filtersToDeselect, idsToSelect, filtersToSele
     }
 }
 
-function selectUrgent() {
-    select("urgent", ["medium", "low"], ["imgMedium", "imgLow"], ["urgent"], ["imgUrgent"]);
+
+function saveSelectedPriority() {
+    Array.from(document.getElementsByClassName("prioButton")).forEach((button) => {
+        button.addEventListener('click', (event) => {
+            priority = event.target.id;
+        });
+    });
 }
 
-function selectUrgentEdit() {
-    select("urgentEdit", ["mediumEdit", "lowEdit"], ["imgMediumEdit", "imgLowEdit"], ["urgentEdit"], ["imgUrgentEdit"]);
-}
-
-function selectMedium() {
-    select("medium", ["urgent", "low"], ["imgUrgent", "imgLow"], ["medium"], ["imgMedium"]);
-}
-
-function selectMediumEdit() {
-    select("mediumEdit", ["urgentEdit", "lowEdit"], ["imgUrgentEdit", "imgLowEdit"], ["mediumEdit"], ["imgMediumEdit"]);
-}
-
-function selectLow() {
-    select("low", ["urgent", "medium"], ["imgUrgent", "imgMedium"], ["low"], ["imgLow"]);
-}
-
-function selectLowEdit() {
-    select("lowEdit", ["urgentEdit", "mediumEdit"], ["imgUrgentEdit", "imgMediumEdit"], ["lowEdit"], ["imgLowEdit"]);
-}
-
-let editedTaskPriority = [];
-
-/* ===================================== */
-
-/* =============== CATEGORY =============== */
+// ================================================ CATEGORY FUNCTIONS ==========================================================
 function addBackgroundColorCategory(element) {
     if (element == "Marketing") {
         return "#0038ff";
@@ -299,28 +334,69 @@ function saveSelectedCategory() {
         });
     });
 }
-/* ===================================== */
 
-function clearAllInputs() {
-    document.getElementById('title').value = '';
-    document.getElementById('description').value = '';
-    document.getElementById('dueDate').value = '';
-    selectedValues = [];
-    subtasks = [];
-    priority = "";
-    categoryValue = "";
-    document.getElementById('urgent').style.backgroundColor = white;
-    document.getElementById('medium').style.backgroundColor = white;
-    document.getElementById('low').style.backgroundColor = white;
-    document.getElementById('urgent').style.color = black;
-    document.getElementById('medium').style.color = black;
-    document.getElementById('low').style.color = black;
-    document.getElementById('imgUrgent').style.filter = '';
-    document.getElementById('imgMedium').style.filter = '';
-    document.getElementById('imgLow').style.filter = '';
-    document.getElementById('subtaskList').innerHTML = "";
-    deselectUsers();
+/* add Option
+function myFunction() {
+    var x = document.getElementById("mySelect");
+    var option = document.createElement("option");
+    option.text = "Kiwi";
+    x.add(option, x[0]);
 }
+
+var x = document.getElementById("mySelect");
+var option = document.createElement("option");
+option.text = "Kiwi";
+x.add(option);
+
+remove Option
+var element = document.getElementById( "selectNow" );
+element.remove( element.selectedIndex ); */
+
+// ================================================ ADD NEW CATEGORY FUNCTIONS ==========================================================
+/**
+ * This function adds a new category to the the category array.
+ */
+async function addNewCategory() {
+    let newCategory = document.getElementById('newCategory').value;
+
+    if (!newCategory == '') {
+        generateCategoryColor();
+        await categories.push({'categoryName': newCategory, 'color': categoryColor});
+        document.getElementById('newCategory').value = '';
+    }
+
+    document.getElementById('plusNewCategoryImg').classList.remove('d-none');
+    document.getElementById('clearNewCategoryImg').classList.add('d-none');
+    document.getElementById('addNewCategoryImg').classList.add('d-none');
+}
+
+/**
+ * This function generates a random color.
+ */
+function generateCategoryColor() {
+    let x = Math.floor(Math.random() * 256)
+    let y = Math.floor(Math.random() * 256)
+    let z = Math.floor(Math.random() * 256)
+    categoryColor = `rgb(${x}, ${y}, ${z})`;
+}
+
+/**
+ * This function deletes the new category.
+ */
+function deleteNewCategory(i) {
+    categories.splice(i, 1);
+}
+
+/**
+ * This function clears the categories array and changes the symbol back to the "Plus"-symbol.
+ */
+function clearNewCategory() {
+    document.getElementById('newCategory').value = "";
+    document.getElementById('plusNewCategoryImg').classList.remove('d-none');
+    document.getElementById('clearNewCategoryImg').classList.add('d-none');
+    document.getElementById('addNewCategoryImg').classList.add('d-none');
+}
+
 
 
 // ================================================ SITE FUNCTIONS ==========================================================
@@ -358,13 +434,29 @@ function changeSubIcon() {
     document.getElementById('addSubtaskImg').classList.remove('d-none');
 }
 
+function changeNewCatIcon() {
+    document.getElementById('plusNewCategoryImg').classList.add('d-none');
+    document.getElementById('clearNewCategoryImg').classList.remove('d-none');
+    document.getElementById('addNewCategoryImg').classList.remove('d-none');
+}
+
 //Ändert die Symbole für Unteraufgaben in die Symbole "Löschen" und "Hinzufügen", wenn das Eingabefeld geändert wird.
 function inputChangeSubIcons() {
     document.getElementById('plusSubtaskImg').classList.add('d-none');
     document.getElementById('clearSubtaskImg').classList.remove('d-none');
     document.getElementById('addSubtaskImg').classList.remove('d-none');
 }
-//Fügt eine Unteraufgabe zur Liste und zum Unteraufgaben-Array hinzu, wenn die Schaltfläche "Hinzufügen" angeklickt wird.
+
+function inputChangeNewCatIcons() {
+    document.getElementById('plusNewCategoryImg').classList.add('d-none');
+    document.getElementById('clearNewCategoryImg').classList.remove('d-none');
+    document.getElementById('addNewCategoryImg').classList.remove('d-none');
+}
+
+// ================================================ SUBTASK FUNCTIONS ==========================================================
+/**
+ * This function adds a subtask to the the subtask array.
+ */
 async function addSubtask() {
     let subtask = document.getElementById('subtask').value;
 
@@ -378,6 +470,9 @@ async function addSubtask() {
     document.getElementById('addSubtaskImg').classList.add('d-none');
 }
 
+/**
+ * This function renders the subtasks into the subtask container.
+ */
 function renderAddSubtasks() {
     document.getElementById('subtaskList').innerHTML = '';
 
@@ -391,15 +486,22 @@ function renderAddSubtasks() {
     }
 }
 
+/**
+ * This function deletes the subtask.
+ */
 function deleteAddSubtask(i) {
     subtasks.splice(i, 1);
     renderAddSubtasks();
 }
 
-//Löscht das Unteraufgabeneingabefeld und ändert die Unteraufgabensymbole zurück in das "Plus"-Symbol
+/**
+ * This function clears the subtask array and changes the subtask symbol back to the "Plus"-symbol.
+ */
 function clearSubtask() {
     document.getElementById('subtask').value = "";
     document.getElementById('plusSubtaskImg').classList.remove('d-none');
     document.getElementById('clearSubtaskImg').classList.add('d-none');
     document.getElementById('addSubtaskImg').classList.add('d-none');
 }
+
+

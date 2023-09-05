@@ -116,6 +116,40 @@ function generateToDoHTMLDone(element, currentStatusCategory) {
     `;
 }
 
+/**
+ * This function returns the progressbar template (one subtask).
+ * @param {number} progress - percentage of the completed subtasks
+ * @param {number} numerator - the number 0
+ * @param {number} denominator - number of subtasks in the current task
+ * @returns 
+ */
+function progressbarTaskTemplate(progress, numerator, denominator) {
+    return `
+    <div class="progress">
+        <div class="progressBar" style="width: ${progress}%";>
+        </div>
+    </div>
+    <div class="progressInNumbers">${numerator}/${denominator} Subtask</div>`;
+}
+
+/**
+ * This function returns the progressbar template (more than one subtak).
+ * @param {number} progress - percentage of the completed subtasks
+ * @param {number} numerator - the value 0
+ * @param {number} denominator - number of subtasks in the current task
+ * @returns 
+ */
+function progressbarTasksTemplate(progress, numerator, denominator) {
+    return `
+    <div class="progress">
+        <div class="progressBar" style="width: ${progress}%";>
+        </div>
+    </div>
+    <div class="progressInNumbers">${numerator}/${denominator} Subtasks</div>`;
+}
+
+
+
 /* ========================================= OPEN TASK TEMPLATE ========================================= */
 /**
  * This function return the template for an opened task.

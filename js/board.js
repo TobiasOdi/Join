@@ -1,6 +1,5 @@
 /* =============================================================================== VARIABLES =================================================================== */
 let allTasks = [];
-let toDos = [];
 let userChar = [];
 let allUsers = [];
 let currentDraggedElement;
@@ -16,50 +15,63 @@ let progress;
 function updateHTML() {
     if (tasks.length > 0) {
         for (let index = 0; index < tasks.length; index++) {
-            let taskId = tasks[index]["taskId"];
+            filterToDo();
+            filterInProgress();
+            filterAwaitingFeedback();
+            filterDone();
 
-            let toDo = tasks.filter(t => t["statusCategory"] == "toDo");
-            document.getElementById("toDo").innerHTML = ``;
-            for (let i = 0; i < toDo.length; i++) {
-                let element = toDo[i]; 
-                document.getElementById("toDo").innerHTML += generateToDoHTMLToDo(element, 'toDo');
-            }
-
-            let inProgress = tasks.filter(t => t["statusCategory"] == "inProgress");
-            document.getElementById("inProgress").innerHTML = ``;
-            for (let i = 0; i < inProgress.length; i++) {
-                let element = inProgress[i];
-                document.getElementById("inProgress").innerHTML += generateToDoHTML(element, 'inProgress');
-            }
-
-            let awaitingFeedback = tasks.filter(t => t["statusCategory"] == "awaitingFeedback");
-            document.getElementById("awaitingFeedback").innerHTML = ``;
-            for (let i = 0; i < awaitingFeedback.length; i++) {
-                let element = awaitingFeedback[i];
-                document.getElementById("awaitingFeedback").innerHTML += generateToDoHTML(element, 'awaitingFeedback');
-            }
-
-            let done = tasks.filter(t => t["statusCategory"] == "done");
-            document.getElementById("done").innerHTML = ``;
-            for (let i = 0; i < done.length; i++) {
-                let element = done[i];
-                document.getElementById("done").innerHTML += generateToDoHTMLDone(element, 'done');
-            }
+            let taskId = tasks[index]['taskId'];
+            let subtasksProgress;
+            calculateProgressbar(index, subtasksProgress, numerator, denominator);
+            generateProgressbarHtml(index, taskId, progress, numerator, denominator);
         }
-        for (let i = 0; i < tasks.length; i++) {
+
+        /* for (let i = 0; i < tasks.length; i++) {
             let taskId = tasks[i]['taskId'];
             let subtasksProgress;
 
             calculateProgressbar(i, subtasksProgress, numerator, denominator);
             generateProgressbarHtml(i, taskId, progress, numerator, denominator);
-        }
+        } */
         createBubbles();
     }
     checkForEmptyCategories();
 }
 
-function pushArrayToDo() {
-    toDos = tasks;
+function filterToDo() {
+    let toDo = tasks.filter(t => t["statusCategory"] == "toDo");
+    document.getElementById("toDo").innerHTML = ``;
+    for (let i = 0; i < toDo.length; i++) {
+        let element = toDo[i]; 
+        document.getElementById("toDo").innerHTML += generateToDoHTMLToDo(element, 'toDo');
+    }
+}
+
+function filterInProgress() {
+    let inProgress = tasks.filter(t => t["statusCategory"] == "inProgress");
+    document.getElementById("inProgress").innerHTML = ``;
+    for (let i = 0; i < inProgress.length; i++) {
+        let element = inProgress[i];
+        document.getElementById("inProgress").innerHTML += generateToDoHTML(element, 'inProgress');
+    }
+}
+
+function filterAwaitingFeedback() {
+    let awaitingFeedback = tasks.filter(t => t["statusCategory"] == "awaitingFeedback");
+    document.getElementById("awaitingFeedback").innerHTML = ``;
+    for (let i = 0; i < awaitingFeedback.length; i++) {
+        let element = awaitingFeedback[i];
+        document.getElementById("awaitingFeedback").innerHTML += generateToDoHTML(element, 'awaitingFeedback');
+    }
+}
+
+function filterDone() {
+    let done = tasks.filter(t => t["statusCategory"] == "done");
+    document.getElementById("done").innerHTML = ``;
+    for (let i = 0; i < done.length; i++) {
+        let element = done[i];
+        document.getElementById("done").innerHTML += generateToDoHTMLDone(element, 'done');
+    }
 }
 
 function calculateProgressbar(i) {
@@ -79,40 +91,12 @@ function calculateProgressbar(i) {
 }
 
 function generateProgressbarHtml(i, taskId, progress, numerator, denominator) {
-        if(tasks[i]['subtasks'].length === 0) {
-        //    document.getElementById(`boardContainerProgress(${taskId})`).innerHTML = `
-        //    <div class="noSubtasks">No subtasks</div>
-        //`;
-        } else {
-            document.getElementById(`boardContainerProgress(${taskId})`).innerHTML = `
-            <div class="progress">
-                <div class="progressBar" style="width: ${progress}%";>
-                </div>
-            </div>
-            <div class="progressInNumbers">
-                ${numerator}/${denominator} Subtasks
-            </div>
-            `;
-        }
-}
+    if(tasks[i]['subtasks'].length == 0) {
 
-function getFirstLetter(index, i) {
-    if (i < tasks[index]["assignTo"].length) {
-        let y = tasks[index]["assignTo"][i];
-        let x = users.filter(obj => {
-            if (obj.userid == y) {
-                return obj.name;
-            }
-        });
-        let x1 = users.filter(obj => {
-            if (obj.userid == y) {
-                return obj.surname;
-            }
-        });
-        x = x[0]["name"].split(' ').map(word => word.charAt(0)).join('');
-        x1 = x1[0]["surname"].split(' ').map(word => word.charAt(0)).join('');
-        let xx1 = x.toUpperCase() + x1.toUpperCase();
-        return xx1;
+    } else if(tasks[i]['subtasks'].length === 1) {
+        document.getElementById(`boardContainerProgress(${taskId})`).innerHTML = progressbarTaskTemplate(progress, numerator, denominator);
+    } else {
+        document.getElementById(`boardContainerProgress(${taskId})`).innerHTML = progressbarTasksTemplate(progress, numerator, denominator);
     }
 }
 
@@ -120,55 +104,69 @@ function createBubbles() {
     for (let j = 0; j < tasks.length; j++) {
         let bubbleTaskId = tasks[j]["taskId"];
 
-        if (tasks[j]["assignTo"].length < 3) {
-            for (let i = 0; i < tasks[j]["assignTo"].length; i++) {
-                let name = getFirstLetter(j, i);
-                document.getElementById(`userBubble${[bubbleTaskId]}`).innerHTML += `
-                    <div class="userBubbleOne" id="userBubbleOne${[j]}${[i]}">${name}</div>
-                    `;
-                let userBubbleOne = document.getElementById(`userBubbleOne${[j]}${[i]}`);
+        if (tasks[j]["assignTo"].length <= 3) {
+            bubblesLessThanThree(j, bubbleTaskId);
 
-                let currentUserId = tasks[j]['assignTo'][i];
-                let existingUser = users.find(u => u.userid == parseInt(currentUserId));
-                let correctUser = users.indexOf(existingUser);
-                let correctUserBg = users[correctUser]['userColor']
-                userBubbleOne.style.backgroundColor = correctUserBg;
-            }
-        }
-        else if (tasks[j]["assignTo"].length >= 3) {
-            for (let i = 0; i < 2; i++) {
-                let name = getFirstLetter(j, i);
-                document.getElementById(`userBubble${[bubbleTaskId]}`).innerHTML += `
-                    <div class="userBubbleOne" id="userBubbleOne${[j]}${[i]}">${name}</div>
-                    `;
-                let userBubbleOne = document.getElementById(`userBubbleOne${[j]}${[i]}`);
-
-                let currentUserId = tasks[j]['assignTo'][i];
-                let existingUser = users.find(u => u.userid == parseInt(currentUserId));
-                let correctUser = users.indexOf(existingUser);
-                let correctUserBg = users[correctUser]['userColor']
-                userBubbleOne.style.backgroundColor = correctUserBg;
-            }
-
-            let remainingCount = tasks[j]["assignTo"].length - 2;
-            document.getElementById(`userBubble${[bubbleTaskId]}`).innerHTML += `
-                <div class="userBubbleOne" id="userBubbleOne${[j]}${[2]}">+${remainingCount}</div>
-                `;
-            let userBubbleOne = document.getElementById(`userBubbleOne${[j]}${[2]}`);
-            userBubbleOne.style.backgroundColor = "black";
-
+        } else if (tasks[j]["assignTo"].length > 3) {
+            bubblesMoreThanThree(j, bubbleTaskId);
+            getRemainingCount(j, bubbleTaskId);
         }
     }
 }
 
-function changeColorBubble() {
-    let colors = [];
-    let numColors = 42;
-    for (let i = 0; i < numColors; i++) {
-        colors.push(generateRandomColor());
+function bubblesLessThanThree(j, bubbleTaskId) {
+    for (let i = 0; i < tasks[j]["assignTo"].length; i++) {
+        let assignedUsers = tasks[j]['assignTo'];
+        let name = getFirstLetter(assignedUsers, i);
+
+        document.getElementById(`userBubble${[bubbleTaskId]}`).innerHTML += `
+            <div class="userBubbleOne" id="userBubbleOne${[j]}${[i]}">${name}</div>`;
+
+        let userBubble = document.getElementById(`userBubbleOne${[j]}${[i]}`);
+        userBubble.style.backgroundColor = getUserColor(assignedUsers, i);
     }
-    let randomColor = Math.floor(Math.random() * colors.length);
-    return colors[randomColor];
+}
+
+function bubblesMoreThanThree(j, bubbleTaskId) {
+    for (let i = 0; i < 2; i++) {
+        let assignedUsers = tasks[j]['assignTo'];
+        let name = getFirstLetter(assignedUsers, i);
+
+        document.getElementById(`userBubble${[bubbleTaskId]}`).innerHTML += `
+            <div class="userBubbleOne" id="userBubbleOne${[j]}${[i]}">${name}</div>`;
+
+        let userBubble = document.getElementById(`userBubbleOne${[j]}${[i]}`);
+        userBubble.style.backgroundColor = getUserColor(assignedUsers, i);
+    }
+}
+
+function getFirstLetter(assignedUsers, i) {
+    let assignedUser = assignedUsers[i];
+    let existingUser = users.find(u => u.userid == parseInt(assignedUser));
+    let correctUser = users.indexOf(existingUser);
+    let assignName = users[correctUser]['name'];
+    assignName.toUpperCase();
+    let assignSurname = users[correctUser]['surname'];
+    assignSurname.toUpperCase();
+    let assignFirstLetters = assignName.charAt(0) + assignSurname.charAt(0);
+    return assignFirstLetters;
+}
+
+function getUserColor(assignedUsers, i) {
+    let assignedUser = assignedUsers[i];
+    let existingUser = users.find(u => u.userid == parseInt(assignedUser));
+    let correctUser = users.indexOf(existingUser);
+    let assignColor = users[correctUser]['userColor'];
+    return assignColor;
+}
+
+function getRemainingCount(j, bubbleTaskId) {
+    let remainingCount = tasks[j]["assignTo"].length - 2;
+    document.getElementById(`userBubble${[bubbleTaskId]}`).innerHTML += `
+        <div class="userBubbleOne" id="userBubbleOne${[j]}${[2]}">+${remainingCount}</div>
+        `;
+    let userBubbleOne = document.getElementById(`userBubbleOne${[j]}${[2]}`);
+    userBubbleOne.style.backgroundColor = "black";
 }
 
 function generateRandomColor() {
@@ -187,7 +185,7 @@ function checkForEmptyCategories() {
     if(toDoCategory.innerHTML == ""){
         toDoCategory.innerHTML += `
             <div class="emptyCategory">
-                <div class="emptyCategoryText">No tasks To do</div>
+                <div class="emptyCategoryText">No tasks to do</div>
             </div>
         `;
     } 
@@ -195,7 +193,7 @@ function checkForEmptyCategories() {
     if(inProgressCategory.innerHTML == ""){
         inProgressCategory.innerHTML += `
             <div class="emptyCategory">
-                <div class="emptyCategoryText">No tasks To do</div>
+                <div class="emptyCategoryText">No tasks in progress</div>
             </div>
         `;
     } 
@@ -203,7 +201,7 @@ function checkForEmptyCategories() {
     if(awaitingFeedbackCategory.innerHTML == ""){
         awaitingFeedbackCategory.innerHTML += `
             <div class="emptyCategory">
-                <div class="emptyCategoryText">No tasks To do</div>
+                <div class="emptyCategoryText">No tasks awaiting feedback</div>
             </div>
         `;
     } 
@@ -211,7 +209,7 @@ function checkForEmptyCategories() {
     if(doneCategory.innerHTML == ""){
         doneCategory.innerHTML += `
             <div class="emptyCategory">
-                <div class="emptyCategoryText">No tasks To do</div>
+                <div class="emptyCategoryText">No tasks done</div>
             </div>
         `;
     } 
@@ -226,7 +224,7 @@ function startDragging(id) {
 
 function moveTo(statusCategory) {
     tasks[currentDraggedElement]["statusCategory"] = statusCategory;
-    updateTasks();
+    saveTasks();
     updateHTML();
 }
 
@@ -237,11 +235,6 @@ function highlight(id) {
 
 function removeHighlight(id) {
     document.getElementById(id).classList.remove('dragAreahighlight');
-}
-
-async function updateTasks() {
-    let tasksAsString = JSON.stringify(tasks);
-    await backend.setItem('tasks', tasksAsString);
 }
 
 function allowDrop(ev) {
@@ -303,10 +296,12 @@ function openTask(currentTaskId) {
     prioritySymbol(currentTask);
 }
 
-function deleteTask(currentTask) {
+async function deleteTask(currentTask) {
     tasks.splice(currentTask, 1);
-    updateTasks();
+    await saveTasks();
+    await init();
     updateHTML();
+    //pushArrayToDo();
     document.getElementById('openTaskBackground').style.display = 'none';
 }
 
@@ -322,7 +317,7 @@ function renderSubtasks(currentTask){
             document.getElementById('subtaskContainer').innerHTML += renderSubtasksTemplate(subtask);
         }
     }
-};
+}
 
 function renderAssignedUsers(currentTask) {
     let assignedUsers = tasks[currentTask]['assignTo'];
@@ -457,7 +452,7 @@ async function saveEditedTask(currentTask) {
     tasks[currentTask]['dueDate'] = document.getElementById('editDueDate').value;
     tasks[currentTask]['priorityValue'] = priorityValueEdit;
     tasks[currentTask]['assignTo'] = usersTaskEdit;
-    await updateTasks();
+    await saveTasks();
     updateHTML();
     usersTaskEdit = [];
     document.getElementById('openTaskBackground').style.display = 'none';
