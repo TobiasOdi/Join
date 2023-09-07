@@ -362,6 +362,7 @@ a {
 #contactChangesSaved,
 #missingSignedUpTask, 
 #taskCreated, 
+#newCategoryAdded,
 #missingSignedUp {
   visibility: hidden; /* Hidden by default. Visible on click */
   min-width: 280px; /* Set a default minimum width */
@@ -395,6 +396,7 @@ a {
 #contactChangesSaved.show,
 #missingSignedUpTask.show, 
 #taskCreated.show, 
+#newCategoryAdded.show,
 #missingSignedUp.show {
   visibility: visible; /* Show the snackbar */
   /* Add animation: Take 0.5 seconds to fade in and out the snackbar.

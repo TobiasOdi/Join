@@ -57,6 +57,7 @@ async function init() {
     users = JSON.parse(backend.getItem('users')) || [];
     tasks = JSON.parse(backend.getItem('tasks')) || [];
     contacts = JSON.parse(backend.getItem('contacts')) || [];
+    //categories = JSON.parse(backend.getItem('categories')) || [];
     setInterval(setUserColor, 200);
 }
 

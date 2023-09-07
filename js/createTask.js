@@ -10,15 +10,14 @@ let selectedUsers = []; // Define an empty array to store the selected values
 let priority = "";
 let allValueCheck = false;
 let categoryValue = "";
-let categoryColor;
+let categoryColorValue = "";
 let categories = [
-    {'categoryName': 'Marketing', 'color': 'rgb(0, 56, 255)'},
-    {'categoryName': 'Media', 'color': 'rgb(255, 199, 2)'},
-    {'categoryName': 'Backoffice', 'color': 'rgb(31, 215, 193)'},
-    {'categoryName': 'Design', 'color': 'rgb(255, 122, 0)'},
-    {'categoryName': 'Sales', 'color': 'rgb(252, 113, 255)'}
+    {'categoryName': 'Marketing', 'color': 'rgb(0, 56, 255)', 'categoryType': 'default'},
+    {'categoryName': 'Media', 'color': 'rgb(255, 199, 2)', 'categoryType': 'default'},
+    {'categoryName': 'Backoffice', 'color': 'rgb(31, 215, 193)', 'categoryType': 'default'},
+    {'categoryName': 'Design', 'color': 'rgb(255, 122, 0)', 'categoryType': 'default'},
+    {'categoryName': 'Sales', 'color': 'rgb(252, 113, 255)', 'categoryType': 'default'}
 ];
-let previousCategoryValue = "";
 let statusCategory;
 let editedTaskPriority = [];
 
@@ -31,7 +30,11 @@ let green = "#7AE229"; */
 
 let prevPriorityElement = null; // keep track of previously clicked button
 
-
+// ================================================ INIT FUNCTIONS ==========================================================
+function initCreateTask() {
+    setStatusCategory('toDo');
+    renderCategories();
+}
 
 function setStatusCategory(statusCategoryToDo) {
     statusCategory  = statusCategoryToDo
@@ -126,11 +129,11 @@ async function createTask() {
         // statusCategory > is beeing set wehn clicked on "Add Task" Tab or on plus sign on the board
         let title = document.getElementById('title'); // OK
         let description = document.getElementById('description'); // OK
-        let category = categoryValue.charAt(0).toUpperCase() + categoryValue.slice(1); // To be checked
-        let categoryColor = addBackgroundColorCategory(category); // To be checked
+        let category = categoryValue;
+        let categoryColor = categoryColorValue;
         let assignTo = selectedUsers; // To be checked
-        let dueDate = document.getElementById('dueDate'); 
-        let priorityValue = priority;
+        let dueDate = document.getElementById('dueDate'); // To be checked
+        let priorityValue = priority; // To be checked
         let taskData = {taskId: taskId, statusCategory: statusCategory, title: title.value, description: description.value, category: category, categoryColor: categoryColor, assignTo: assignTo, dueDate: dueDate.value, priorityValue: priorityValue, subtasks: subtasks};
         tasks.push(taskData);
         await saveTasks();
@@ -151,12 +154,6 @@ async function saveTasks() {
     let tasksAsString = JSON.stringify(tasks);
     await backend.setItem('tasks', tasksAsString);
 }
-
-setTimeout(() => {
-    //saveSelectedUsers();
-    //saveSelectedPriority();
-    saveSelectedCategory();
-}, 1500);
 
 // Add an event listener to the checkboxes to update the selectedUsers array
 function saveSelectedUsers() {
@@ -203,6 +200,7 @@ function clearAllInputs() {
     document.getElementById('imgLow').style.filter = '';
     document.getElementById('subtaskList').innerHTML = "";
     deselectUsers();
+    renderCategories();
 }
 
 // ================================================ PRIORITY FUNCTIONS ==========================================================
@@ -297,77 +295,82 @@ function saveSelectedPriority() {
 }
 
 // ================================================ CATEGORY FUNCTIONS ==========================================================
-function addBackgroundColorCategory(element) {
-    if (element == "Marketing") {
-        return "#0038ff";
-    } else if (element == "Media") {
-        return "#ffc702";
-    } else if (element == "Backoffice") {
-        return "#1FD7C1";
-    } else if (element == "Design") {
-        return "#ff7a00";
-    } else if (element == "Sales") {
-        return "#fc71ff";
+
+function renderCategories() {
+    let selectCategoryForm = document.getElementById('selectCategoryForm');
+    selectCategoryForm.innerHTML = "";
+
+    selectCategoryForm.innerHTML += `
+        <div class="sectorTop" id='placeholderCategory'>
+            <p>Select task category</p>
+            <img src="/img/arrow.svg">
+        </div>
+
+        <div class="categoryChoices d-none" id="categoryChoices"></div>
+    `;
+
+    let categoryConatiner = document.getElementById('categoryChoices');
+    categoryConatiner.innerHTML = "";
+    for (let i = 0; i < categories.length; i++) {
+        let categoryName = categories[i]['categoryName'];
+        let categoryColor = categories[i]['color'];
+        let categoryType = categories[i]['categoryType']
+
+        if(categoryType == 'default') {
+            categoryConatiner.innerHTML += `
+            <div class="category" onclick="saveSelectedCategory('${categoryName}', '${categoryColor}'), doNotAdd(event)">
+                <div>${categoryName}</div>
+                <div class="circle" style="background: ${categoryColor};"></div>
+            </div>`;
+        } else {
+            categoryConatiner.innerHTML += `
+            <div class="category" onclick="saveSelectedCategory('${categoryName}', '${categoryColor}'), doNotAdd(event)">
+                <div>${categoryName} <img src="../img/delete.svg" onclick="deleteNewCategory(${i}), doNotAdd(event)">
+                </div>
+                <div class="circle" style="background: ${categoryColor};"></div>
+            </div>`;
+        }
     }
 }
 
-function saveSelectedCategory() {
-    Array.from(document.getElementsByClassName("category")).forEach((item) => {
-        item.addEventListener('click', (event) => {
-            let newCategoryValue = event.target.id;
-            let upperCaseValue = newCategoryValue.charAt(0).toUpperCase() + newCategoryValue.slice(1);
-            if (event.target.id) {
-                if (newCategoryValue !== categoryValue) {
-                    previousCategoryValue = categoryValue;
-                    categoryValue = newCategoryValue;
-                    document.getElementById("selectCategory").innerHTML = `
-                    ${upperCaseValue}
-                `;
-                    let parentDiv = document.getElementById(`${categoryValue}`).parentNode;
-                    //parentDiv.style.display = "none";
-                    if (previousCategoryValue) {
-                        let restoredParentDiv = document.getElementById(`${previousCategoryValue}`).parentNode;
-                        restoredParentDiv.style.display = "flex";
-                    }
-                }
-            }
-        });
-    });
+function saveSelectedCategory(categoryName, categoryColor) {
+    categoryValue = categoryName;
+    categoryColorValue = categoryColor;
+    document.getElementById('categoryChoices').classList.add('d-none');
+    let placeholderCategory = document.getElementById('placeholderCategory')
+    placeholderCategory.innerHTML = `
+        <div class="category">
+            <div>${categoryName}</div>
+            <div class="circle" style="background: ${categoryColor};"></div>
+        </div>
+        <img src="/img/arrow.svg">
+    `;
 }
 
-/* add Option
-function myFunction() {
-    var x = document.getElementById("mySelect");
-    var option = document.createElement("option");
-    option.text = "Kiwi";
-    x.add(option, x[0]);
+/**
+ * This function prevents the inherit function to run.
+ * @param {*} event 
+ */
+function doNotAdd(event) {
+    event.stopPropagation();
 }
 
-var x = document.getElementById("mySelect");
-var option = document.createElement("option");
-option.text = "Kiwi";
-x.add(option);
-
-remove Option
-var element = document.getElementById( "selectNow" );
-element.remove( element.selectedIndex ); */
-
-// ================================================ ADD NEW CATEGORY FUNCTIONS ==========================================================
 /**
  * This function adds a new category to the the category array.
  */
 async function addNewCategory() {
     let newCategory = document.getElementById('newCategory').value;
-
     if (!newCategory == '') {
         generateCategoryColor();
-        await categories.push({'categoryName': newCategory, 'color': categoryColor});
+        categories.push({'categoryName': newCategory, 'color': categoryColor, 'categoryType': 'custom'});
+        await saveCategories();
+        renderCategories();
         document.getElementById('newCategory').value = '';
     }
-
     document.getElementById('plusNewCategoryImg').classList.remove('d-none');
     document.getElementById('clearNewCategoryImg').classList.add('d-none');
     document.getElementById('addNewCategoryImg').classList.add('d-none');
+    displaySnackbar('newCategoryAdded');
 }
 
 /**
@@ -380,11 +383,30 @@ function generateCategoryColor() {
     categoryColor = `rgb(${x}, ${y}, ${z})`;
 }
 
+async function saveCategories() {
+    let categoriesAsString = JSON.stringify(categories);
+    await backend.setItem('categories', categoriesAsString);
+}
+
 /**
- * This function deletes the new category.
+ * This function deletes an added category.
  */
-function deleteNewCategory(i) {
+async function deleteNewCategory(i) {
+    if(categoryValue == categories[i]['categoryName']) {
+        categoryValue = "";
+        categoryColorValue = "";
+    
+    }
     categories.splice(i, 1);
+    await saveCategories();
+    let placeholderCategory = document.getElementById('placeholderCategory')
+    placeholderCategory.innerHTML = `
+        <div class="sectorTop" id='placeholderCategory'>
+        <p>Select task category</p>
+        <img src="/img/arrow.svg">
+        </div>
+    `;
+    renderCategories();
 }
 
 /**
@@ -396,8 +418,6 @@ function clearNewCategory() {
     document.getElementById('clearNewCategoryImg').classList.add('d-none');
     document.getElementById('addNewCategoryImg').classList.add('d-none');
 }
-
-
 
 // ================================================ SITE FUNCTIONS ==========================================================
 function addAssignedToList() {

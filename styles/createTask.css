@@ -174,11 +174,11 @@ span {
 .sectorTop {
   display: flex;
   justify-content: space-between;
-  line-height: 0;
   align-items: center;
   font-size: 18px;
   padding: 5px 20px;
   cursor: pointer;
+  height: 50px;
 }
 
 .selectionContainer {
@@ -190,17 +190,28 @@ span {
 .categoryChoices {
   display: flex;
   flex-direction: column;
-  margin-top: 20px;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 10px;
+  padding: 0px 20px 7px 20px;
 }
 
 .category {
+  width: 100%;
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  padding: 7px 20px;
+  cursor: pointer;
+  padding: 3px;
 }
 
 .category:hover {
   background-color: lightgray;
+}
+
+.category img {
+  width: 15px;
+  height: 15px;
 }
 
 .date {
@@ -211,7 +222,6 @@ span {
   height: 12px;
   width: 12px;
   border-radius: 100%;
-  margin-left: 15px;
   border: white;
 }
 
