@@ -20,6 +20,7 @@ let categories = [
 ];
 let statusCategory;
 let editedTaskPriority = [];
+let firstLettersAvailableUser;
 
 
 /* let black = "#000000";
@@ -30,14 +31,56 @@ let green = "#7AE229"; */
 
 let prevPriorityElement = null; // keep track of previously clicked button
 
-// ================================================ INIT FUNCTIONS ==========================================================
+// ================================================ MAIN SITE FUNCTIONS ==========================================================
+
 function initCreateTask() {
     setStatusCategory('toDo');
     renderCategories();
+    renderAvailableUsers();
 }
 
 function setStatusCategory(statusCategoryToDo) {
     statusCategory  = statusCategoryToDo
+}
+
+function openDropdown(id) {
+    if (document.getElementById(id).classList.contains('d-none')) {
+        document.getElementById(id).classList.remove('d-none');
+    }
+    else if (!document.getElementById(id).classList.contains('d-none')) {
+        document.getElementById(id).classList.add('d-none');
+    }
+}
+
+function setDateToday() {
+    let today = new Date().toISOString().split('T')[0];
+    document.getElementById("dueDate").setAttribute('min', String(today));
+}
+
+//Ändert die Symbole für Unteraufgaben in die Symbole "Löschen" und "Hinzufügen", wenn das Eingabefeld für die Unteraufgabe angeklickt wird.//
+function changeSubIcon() {
+    document.getElementById('plusSubtaskImg').classList.add('d-none');
+    document.getElementById('clearSubtaskImg').classList.remove('d-none');
+    document.getElementById('addSubtaskImg').classList.remove('d-none');
+}
+
+function changeNewCatIcon() {
+    document.getElementById('plusNewCategoryImg').classList.add('d-none');
+    document.getElementById('clearNewCategoryImg').classList.remove('d-none');
+    document.getElementById('addNewCategoryImg').classList.remove('d-none');
+}
+
+//Ändert die Symbole für Unteraufgaben in die Symbole "Löschen" und "Hinzufügen", wenn das Eingabefeld geändert wird.
+function inputChangeSubIcons() {
+    document.getElementById('plusSubtaskImg').classList.add('d-none');
+    document.getElementById('clearSubtaskImg').classList.remove('d-none');
+    document.getElementById('addSubtaskImg').classList.remove('d-none');
+}
+
+function inputChangeNewCatIcons() {
+    document.getElementById('plusNewCategoryImg').classList.add('d-none');
+    document.getElementById('clearNewCategoryImg').classList.remove('d-none');
+    document.getElementById('addNewCategoryImg').classList.remove('d-none');
 }
 
 // ================================================ CREATE TASK ==========================================================
@@ -57,45 +100,45 @@ function setStatusCategory(statusCategoryToDo) {
         await saveTasks();
         displaySnackbar('taskCreated');
         clearAllInputs();
-        document.getElementById('assignedToChoices').classList.add('d-none');
+        document.getElementById('avatarPicker').classList.add('d-none');
         await updateHTML();
         displayPage('mainBoardContainerDisplay');
     } else {
-        displaySnackbar('missingSignedUpTask');
+        displaySnackbar('missingInput');
     }
 } */
 
 async function createTask() {
     if(!document.getElementById('title').value) {
         document.getElementById('title').classList.add('redBorder');
-        displaySnackbar('missingSignedUpTask');
+        displaySnackbar('missingInput');
     } 
     
     if(!document.getElementById('description').value) {
         document.getElementById('description').classList.add('redBorder');
-        displaySnackbar('missingSignedUpTask');
+        displaySnackbar('missingInput');
     } 
     
     if(!document.getElementById('dueDate').value){
         document.getElementById('dueDate').classList.add('redBorder');
-        displaySnackbar('missingSignedUpTask');
+        displaySnackbar('missingInput');
     } 
     
     if(priority == "") {
         document.getElementById('urgent').classList.add('redBorder');
         document.getElementById('medium').classList.add('redBorder');
         document.getElementById('low').classList.add('redBorder');
-        displaySnackbar('missingSignedUpTask');
+        displaySnackbar('missingInput');
     } 
     
     if(categoryValue == "") {
         document.getElementById('selectCategoryForm').classList.add('redBorder');
-        displaySnackbar('missingSignedUpTask');
+        displaySnackbar('missingInput');
     } 
     
     if(selectedUsers.length == 0){
         document.getElementById('assignedTo').classList.add('redBorder');
-        displaySnackbar('missingSignedUpTask');
+        displaySnackbar('missingInput');
     } 
 
     if(document.getElementById('title').value) {
@@ -139,7 +182,7 @@ async function createTask() {
         await saveTasks();
         displaySnackbar('taskCreated');
         clearAllInputs();
-        document.getElementById('assignedToChoices').classList.add('d-none');
+        document.getElementById('avatarPicker').classList.add('d-none');
         await updateHTML();
         displayPage('mainBoardContainerDisplay');
     }
@@ -153,32 +196,6 @@ function generateTaskId() {
 async function saveTasks() {
     let tasksAsString = JSON.stringify(tasks);
     await backend.setItem('tasks', tasksAsString);
-}
-
-// Add an event listener to the checkboxes to update the selectedUsers array
-function saveSelectedUsers() {
-    document.querySelectorAll('input[type="checkbox"]').forEach((checkbox) => {
-        checkbox.addEventListener('change', (event) => {
-            const selectedValue = event.target.value;
-            if (event.target.checked) {
-                if (!selectedUsers.includes(selectedValue)) { // Check for duplicates
-                    selectedUsers.push(selectedValue);
-                }
-            } else {
-                const index = selectedUsers.indexOf(selectedValue);
-                if (index > -1) {
-                    selectedUsers.splice(index, 1);
-                }
-            }
-            //console.log(selectedUsers); // Print the selected values to the console
-        });
-    });
-}
-
-function deselectUsers() {
-    document.querySelectorAll('input[type="checkbox"]').forEach((checkbox) => {
-        checkbox.checked = false;
-    });
 }
 
 function clearAllInputs() {
@@ -199,8 +216,42 @@ function clearAllInputs() {
     document.getElementById('imgMedium').style.filter = '';
     document.getElementById('imgLow').style.filter = '';
     document.getElementById('subtaskList').innerHTML = "";
-    deselectUsers();
     renderCategories();
+    renderAvailableUsers();
+}
+
+// ================================================ ASSIGN USER FUNCTIONS ==========================================================
+function renderAvailableUsers() {
+    let avatarPicker = document.getElementById('avatarPicker');
+    avatarPicker.innerHTML = "";
+    for (let i = 0; i < users.length; i++) {
+        let availableUserId = users[i]['userid'];
+        getFirstLetterAvailableUser(i)
+        avatarPicker.innerHTML += `
+            <div id="${availableUserId}" class="contactIcon" onclick="selectUser(${availableUserId})">
+                <div>${firstLettersAvailableUser}</div>
+            </div>
+        `;
+    }
+}
+
+function getFirstLetterAvailableUser(i) {
+    let x = users[i]['name'];
+    x = x.split(' ').map(word => word.charAt(0)).join('');
+    let y = users[i]['surname'];
+    y = y.split(' ').map(word => word.charAt(0)).join('');
+    firstLettersAvailableUser = x.toUpperCase() + y.toUpperCase();
+}
+
+function selectUser(availableUserId) {
+    let user = document.getElementById(availableUserId);
+    user.classList.toggle('avatarSelected');
+
+    if(selectedUsers.includes(availableUserId)){
+        selectedUsers = selectedUsers.filter(a => a != availableUserId)
+    } else {
+        selectedUsers.push(availableUserId)
+    }
 }
 
 // ================================================ PRIORITY FUNCTIONS ==========================================================
@@ -295,44 +346,32 @@ function saveSelectedPriority() {
 }
 
 // ================================================ CATEGORY FUNCTIONS ==========================================================
-
+/**
+ * This function renders the alle the categories from the "categories" array.
+ */
 function renderCategories() {
     let selectCategoryForm = document.getElementById('selectCategoryForm');
     selectCategoryForm.innerHTML = "";
-
-    selectCategoryForm.innerHTML += `
-        <div class="sectorTop" id='placeholderCategory'>
-            <p>Select task category</p>
-            <img src="/img/arrow.svg">
-        </div>
-
-        <div class="categoryChoices d-none" id="categoryChoices"></div>
-    `;
-
+    selectCategoryForm.innerHTML += categoryPlaceholderTemplate();
     let categoryConatiner = document.getElementById('categoryChoices');
     categoryConatiner.innerHTML = "";
     for (let i = 0; i < categories.length; i++) {
         let categoryName = categories[i]['categoryName'];
         let categoryColor = categories[i]['color'];
         let categoryType = categories[i]['categoryType']
-
         if(categoryType == 'default') {
-            categoryConatiner.innerHTML += `
-            <div class="category" onclick="saveSelectedCategory('${categoryName}', '${categoryColor}'), doNotAdd(event)">
-                <div>${categoryName}</div>
-                <div class="circle" style="background: ${categoryColor};"></div>
-            </div>`;
+            categoryConatiner.innerHTML += defaultCategoryTemplate(categoryName, categoryColor);
         } else {
-            categoryConatiner.innerHTML += `
-            <div class="category" onclick="saveSelectedCategory('${categoryName}', '${categoryColor}'), doNotAdd(event)">
-                <div>${categoryName} <img src="../img/delete.svg" onclick="deleteNewCategory(${i}), doNotAdd(event)">
-                </div>
-                <div class="circle" style="background: ${categoryColor};"></div>
-            </div>`;
+            categoryConatiner.innerHTML += newCategoryTemplate(categoryName, categoryColor, i);
         }
     }
 }
 
+/**
+ * This function saves the selected category in the "categoryValue" variable and displays the selected category.
+ * @param {string} categoryName - name of the new category
+ * @param {string} categoryColor - color of the new category
+ */
 function saveSelectedCategory(categoryName, categoryColor) {
     categoryValue = categoryName;
     categoryColorValue = categoryColor;
@@ -356,21 +395,23 @@ function doNotAdd(event) {
 }
 
 /**
- * This function adds a new category to the the category array.
+ * This function adds a new category to the the "categoires" array.
  */
 async function addNewCategory() {
     let newCategory = document.getElementById('newCategory').value;
-    if (!newCategory == '') {
+    if (newCategory !== '') {
         generateCategoryColor();
         categories.push({'categoryName': newCategory, 'color': categoryColor, 'categoryType': 'custom'});
         await saveCategories();
         renderCategories();
         document.getElementById('newCategory').value = '';
+        displaySnackbar('newCategoryAdded');
+        document.getElementById('plusNewCategoryImg').classList.remove('d-none');
+        document.getElementById('clearNewCategoryImg').classList.add('d-none');
+        document.getElementById('addNewCategoryImg').classList.add('d-none');
+    } else {
+        displaySnackbar('missingInput');
     }
-    document.getElementById('plusNewCategoryImg').classList.remove('d-none');
-    document.getElementById('clearNewCategoryImg').classList.add('d-none');
-    document.getElementById('addNewCategoryImg').classList.add('d-none');
-    displaySnackbar('newCategoryAdded');
 }
 
 /**
@@ -383,6 +424,9 @@ function generateCategoryColor() {
     categoryColor = `rgb(${x}, ${y}, ${z})`;
 }
 
+/**
+ * This function saves the "categories" array on the server.
+ */
 async function saveCategories() {
     let categoriesAsString = JSON.stringify(categories);
     await backend.setItem('categories', categoriesAsString);
@@ -395,7 +439,6 @@ async function deleteNewCategory(i) {
     if(categoryValue == categories[i]['categoryName']) {
         categoryValue = "";
         categoryColorValue = "";
-    
     }
     categories.splice(i, 1);
     await saveCategories();
@@ -419,75 +462,23 @@ function clearNewCategory() {
     document.getElementById('addNewCategoryImg').classList.add('d-none');
 }
 
-// ================================================ SITE FUNCTIONS ==========================================================
-function addAssignedToList() {
-    document.getElementById('assignedToChoices').innerHTML = '';
-    for (let i = 0; i < users.length; i++) {
-        let userID = users[i]["userid"];
-        // let contact = users[i];
-        let name = users[i]["name"];
-        document.getElementById('assignedToChoices').innerHTML += `
-        <div class="assignedToLine" onclick="saveSelectedUsers()">
-            <label for="assigned-to-${i}" id="assigned_name${i}">${name}</label>
-            <input type="checkbox" id="assigned-to-${i}"value="${userID}">
-        </div>`
-    }
-}
-
-function openDropdown(id) {
-    if (document.getElementById(id).classList.contains('d-none')) {
-        document.getElementById(id).classList.remove('d-none');
-    }
-    else if (!document.getElementById(id).classList.contains('d-none')) {
-        document.getElementById(id).classList.add('d-none');
-    }
-}
-
-function setDateToday() {
-    let today = new Date().toISOString().split('T')[0];
-    document.getElementById("dueDate").setAttribute('min', String(today));
-}
-//Ändert die Symbole für Unteraufgaben in die Symbole "Löschen" und "Hinzufügen", wenn das Eingabefeld für die Unteraufgabe angeklickt wird.//
-function changeSubIcon() {
-    document.getElementById('plusSubtaskImg').classList.add('d-none');
-    document.getElementById('clearSubtaskImg').classList.remove('d-none');
-    document.getElementById('addSubtaskImg').classList.remove('d-none');
-}
-
-function changeNewCatIcon() {
-    document.getElementById('plusNewCategoryImg').classList.add('d-none');
-    document.getElementById('clearNewCategoryImg').classList.remove('d-none');
-    document.getElementById('addNewCategoryImg').classList.remove('d-none');
-}
-
-//Ändert die Symbole für Unteraufgaben in die Symbole "Löschen" und "Hinzufügen", wenn das Eingabefeld geändert wird.
-function inputChangeSubIcons() {
-    document.getElementById('plusSubtaskImg').classList.add('d-none');
-    document.getElementById('clearSubtaskImg').classList.remove('d-none');
-    document.getElementById('addSubtaskImg').classList.remove('d-none');
-}
-
-function inputChangeNewCatIcons() {
-    document.getElementById('plusNewCategoryImg').classList.add('d-none');
-    document.getElementById('clearNewCategoryImg').classList.remove('d-none');
-    document.getElementById('addNewCategoryImg').classList.remove('d-none');
-}
-
 // ================================================ SUBTASK FUNCTIONS ==========================================================
 /**
  * This function adds a subtask to the the subtask array.
  */
 async function addSubtask() {
     let subtask = document.getElementById('subtask').value;
-
-    if (!subtask == '') {
-        await subtasks.push({'subtaskName': subtask, 'status': 'undone'});
+    if (subtask !== '') {
+        subtasks.push({'subtaskName': subtask, 'status': 'undone'});
         document.getElementById('subtask').value = '';
         renderAddSubtasks();
+        displaySnackbar('newSubtaskAdded');
+        document.getElementById('plusSubtaskImg').classList.remove('d-none');
+        document.getElementById('clearSubtaskImg').classList.add('d-none');
+        document.getElementById('addSubtaskImg').classList.add('d-none');
+    } else {
+        displaySnackbar('missingInput');
     }
-    document.getElementById('plusSubtaskImg').classList.remove('d-none');
-    document.getElementById('clearSubtaskImg').classList.add('d-none');
-    document.getElementById('addSubtaskImg').classList.add('d-none');
 }
 
 /**
@@ -523,5 +514,3 @@ function clearSubtask() {
     document.getElementById('clearSubtaskImg').classList.add('d-none');
     document.getElementById('addSubtaskImg').classList.add('d-none');
 }
-
-

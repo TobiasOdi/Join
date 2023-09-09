@@ -1,4 +1,4 @@
-/* ========================================= BOARD TASKS TEMPLATE ========================================= */
+/* ========================================================== BOARD TASKS TEMPLATE ========================================= */
 /**
  * This function returns the template for the tasks in the "todo" category.
  * @param {number} element - index of the current task in the filtered category.
@@ -420,4 +420,52 @@ function assignedUserEditTemplate(j, assignFirstLetters) {
             <div>${users[j]['name']} ${users[j]['surname']}</div>
         </div>
     `;
+}
+
+/* ========================================= CREATE TASK TEMPLATES ========================================= */
+
+/**
+ * This function returns the template for the category placeholder on the create task html.
+ * @returns 
+ */
+function categoryPlaceholderTemplate() {
+ return `
+    <div class="sectorTop" id='placeholderCategory'>
+        <p>Select task category</p>
+        <img src="/img/arrow.svg">
+    </div>
+
+    <div class="categoryChoices d-none" id="categoryChoices"></div>
+    `;
+}
+
+/**
+ * This function returns the template for the default categories.
+ * @param {string} categoryName - name of the category
+ * @param {string} categoryColor - color of the category
+ * @returns 
+ */
+function defaultCategoryTemplate(categoryName, categoryColor){
+    return `
+        <div class="category" onclick="saveSelectedCategory('${categoryName}', '${categoryColor}'), doNotAdd(event)">
+            <div>${categoryName}</div>
+            <div class="circle" style="background: ${categoryColor};"></div>
+        </div>
+        `;
+}
+
+/**
+ * This function returns the template for the new categories.
+ * @param {string} categoryName - name of the category
+ * @param {string} categoryColor - color of the category
+ * @returns 
+ */
+function newCategoryTemplate(categoryName, categoryColor, i){
+    return `
+        <div class="category" onclick="saveSelectedCategory('${categoryName}', '${categoryColor}'), doNotAdd(event)">
+            <div>${categoryName} <img src="../img/delete.svg" onclick="deleteNewCategory(${i}), doNotAdd(event)">
+            </div>
+            <div class="circle" style="background: ${categoryColor};"></div>
+        </div>
+        `;
 }

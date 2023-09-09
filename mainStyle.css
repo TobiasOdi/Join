@@ -362,7 +362,9 @@ a {
 #contactChangesSaved,
 #missingSignedUpTask, 
 #taskCreated, 
+#newSubtaskAdded,
 #newCategoryAdded,
+#missingInput,
 #missingSignedUp {
   visibility: hidden; /* Hidden by default. Visible on click */
   min-width: 280px; /* Set a default minimum width */
@@ -378,7 +380,7 @@ a {
   bottom: 30px; /* 30px from the bottom */
 }
 
-#missingSignedUpTask, #missingSignedUp {
+#missingInput, #missingSignedUp {
   background-color: red;
 }
 
@@ -396,7 +398,9 @@ a {
 #contactChangesSaved.show,
 #missingSignedUpTask.show, 
 #taskCreated.show, 
+#newSubtaskAdded.show,
 #newCategoryAdded.show,
+#missingInput.show,
 #missingSignedUp.show {
   visibility: visible; /* Show the snackbar */
   /* Add animation: Take 0.5 seconds to fade in and out the snackbar.
