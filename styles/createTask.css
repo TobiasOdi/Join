@@ -182,6 +182,11 @@ span {
   height: 50px;
 }
 
+.sectorTopSelectedUsers {
+  justify-content: flex-start;
+  gap: 5px;
+}
+
 .selectionContainer {
   display: flex;
   flex-direction: column;
@@ -231,9 +236,26 @@ span {
 .assignedToChoices {
   display: flex;
   flex-direction: column;
-  margin-top: 20px;
+  align-items: flex-start;
+  padding: 0px 20px 7px 20px;
   height: 200px;
+  gap: 5px;
   overflow-y: scroll;
+
+}
+
+.avatarContainer {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex;
+  gap: 10px;
+  opacity: 0.5;
+  cursor: pointer;
+}
+
+.avatarContainer:hover {
+  opacity: 1;
 }
 
 .avatar {
@@ -242,19 +264,26 @@ span {
   align-items: center;
   width: 40px;
   height: 40px;
-  opacity: 0.6;
   border-radius: 50%;
   border: 4px solid transparent;
-  cursor: pointer;
 }
 
-.avatar:hover {
-  opacity: 1;
+.nameText {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.nameText > div {
+  font-size: 12px;
 }
 
 .avatarSelected {
   opacity: 1;
-  border: 4px solid rgb(120, 120, 181);
+}
+
+.avatarSelectedIcon {
+  border: 3px solid #2a3647;
 }
 
 /* ======================================================================================================================== */

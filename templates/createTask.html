@@ -38,7 +38,7 @@
                     <div class="selectionContainer preventSelect">
                         <span>Assigned To</span>
                         <div class="selectWrapper selectWrapperHeight assignedToWrapper" id="assignedTo">
-                            <div class="sectorTop" onclick="openDropdown('avatarPicker')">
+                            <div id="selectedUsersPlaceholder" class="sectorTop" onclick="openDropdown('avatarPicker'), checkForSelectedUsers()">
                                 <p id="assignedToHeader">Select contacts to assign</p><img src="/img/Vector 2.png">
                             </div>
                             <div class="assignedToChoices d-none" id="avatarPicker">

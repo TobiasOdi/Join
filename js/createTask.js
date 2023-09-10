@@ -226,10 +226,18 @@ function renderAvailableUsers() {
     avatarPicker.innerHTML = "";
     for (let i = 0; i < users.length; i++) {
         let availableUserId = users[i]['userid'];
+        let userName = users[i]['name'];
+        let userSurname = users[i]['surname'];
+        let userColor = users[i]['userColor']
         getFirstLetterAvailableUser(i)
         avatarPicker.innerHTML += `
-            <div id="${availableUserId}" class="contactIcon" onclick="selectUser(${availableUserId})">
-                <div>${firstLettersAvailableUser}</div>
+            <div id="${availableUserId}" class="avatarContainer" onclick="selectUser(${availableUserId})">
+                <div id="icon${availableUserId}"class="avatar" style="background-color: ${userColor};">
+                    <div>${firstLettersAvailableUser}</div>
+                </div>
+                <div class="nameText">
+                    <div>${userName} ${userSurname}</div>
+                </div>
             </div>
         `;
     }
@@ -245,12 +253,38 @@ function getFirstLetterAvailableUser(i) {
 
 function selectUser(availableUserId) {
     let user = document.getElementById(availableUserId);
+    let userIcon = document.getElementById('icon' + availableUserId);
     user.classList.toggle('avatarSelected');
+    userIcon.classList.toggle('avatarSelectedIcon');
 
     if(selectedUsers.includes(availableUserId)){
         selectedUsers = selectedUsers.filter(a => a != availableUserId)
     } else {
         selectedUsers.push(availableUserId)
+    }
+}
+
+function checkForSelectedUsers() {
+    if(selectedUsers !== "") {
+        let selectedUsersPlaceholder = document.getElementById('selectedUsersPlaceholder');
+        selectedUsersPlaceholder.innerHTML = "";
+
+        for (let i = 0; i < selectedUsers.length; i++) {
+            let userId = selectedUsers[i];
+            let existingUser = users.find(u => u.userid == userId);
+            let currentUser = users.indexOf(existingUser);
+            debugger;
+
+            let userColor = users[currentUser]['userColor'];
+            getFirstLetterAvailableUser(currentUser)
+            selectedUsersPlaceholder.innerHTML += `
+                <div class="avatarContainer">
+                    <div class="avatar" style="background-color: ${userColor};">
+                        <div>${firstLettersAvailableUser}</div>
+                    </div>
+                </div>
+            `;
+        }
     }
 }
 
