@@ -46,9 +46,11 @@ function setStatusCategory(statusCategoryToDo) {
 function openDropdown(id) {
     if (document.getElementById(id).classList.contains('d-none')) {
         document.getElementById(id).classList.remove('d-none');
+        checkForSelectedUsers();
     }
     else if (!document.getElementById(id).classList.contains('d-none')) {
         document.getElementById(id).classList.add('d-none');
+        checkForSelectedUsers();
     }
 }
 
@@ -222,6 +224,10 @@ function clearAllInputs() {
 
 // ================================================ ASSIGN USER FUNCTIONS ==========================================================
 function renderAvailableUsers() {
+    let assignedToForm = document.getElementById('assignedToForm');
+    assignedToForm.innerHTML = "";
+    assignedToForm.innerHTML += assignToPlaceholderTemplate();
+
     let avatarPicker = document.getElementById('avatarPicker');
     avatarPicker.innerHTML = "";
     for (let i = 0; i < users.length; i++) {
@@ -231,7 +237,7 @@ function renderAvailableUsers() {
         let userColor = users[i]['userColor']
         getFirstLetterAvailableUser(i)
         avatarPicker.innerHTML += `
-            <div id="${availableUserId}" class="avatarContainer" onclick="selectUser(${availableUserId})">
+            <div id="${availableUserId}" class="avatarContainer" onclick="selectUser(${availableUserId}), doNotAdd(event)">
                 <div id="icon${availableUserId}"class="avatar" style="background-color: ${userColor};">
                     <div>${firstLettersAvailableUser}</div>
                 </div>
@@ -258,23 +264,28 @@ function selectUser(availableUserId) {
     userIcon.classList.toggle('avatarSelectedIcon');
 
     if(selectedUsers.includes(availableUserId)){
-        selectedUsers = selectedUsers.filter(a => a != availableUserId)
+        selectedUsers = selectedUsers.filter(a => a != availableUserId);
+        checkForSelectedUsers();
+
     } else {
-        selectedUsers.push(availableUserId)
+        selectedUsers.push(availableUserId);
+        checkForSelectedUsers();
     }
 }
 
 function checkForSelectedUsers() {
-    if(selectedUsers !== "") {
+    if(selectedUsers == "") {
         let selectedUsersPlaceholder = document.getElementById('selectedUsersPlaceholder');
         selectedUsersPlaceholder.innerHTML = "";
-
+        selectedUsersPlaceholder.innerHTML += `
+            <p id="assignedToHeader">Select contacts to assign</p>
+        `;
+    } else if (selectedUsers !== ""){
+        selectedUsersPlaceholder.innerHTML = "";
         for (let i = 0; i < selectedUsers.length; i++) {
             let userId = selectedUsers[i];
             let existingUser = users.find(u => u.userid == userId);
             let currentUser = users.indexOf(existingUser);
-            debugger;
-
             let userColor = users[currentUser]['userColor'];
             getFirstLetterAvailableUser(currentUser)
             selectedUsersPlaceholder.innerHTML += `

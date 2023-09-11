@@ -469,3 +469,22 @@ function newCategoryTemplate(categoryName, categoryColor, i){
         </div>
         `;
 }
+
+/**
+ * This function returns the template for the assigned users placeholder on the create task html.
+ * @returns 
+ */
+function assignToPlaceholderTemplate() {
+    return `
+        <div class="sectorTop">
+            <div id="selectedUsersPlaceholder">
+                <p id="assignedToHeader">Select contacts to assign</p>
+            </div>
+            <img src="/img/Vector 2.png">
+        </div>
+
+        <div class="assignedToChoices d-none" id="avatarPicker"></div>
+       `;
+   }
+
+   
