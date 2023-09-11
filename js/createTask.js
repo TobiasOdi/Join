@@ -1,10 +1,4 @@
 // ================================================ VARIABLES ==========================================================
-/* let users = [];
-let tasks = [];
-let id;
-let taskId;
- */
-
 let selectedUsers = [];
 let priority = "";
 let allValueCheck = false;
@@ -20,18 +14,10 @@ let categories = [
 let statusCategory;
 let editedTaskPriority = [];
 let firstLettersAvailableUser;
-
-
-/* let black = "#000000";
-let white = "#FFFFFF";
-let orange = "#FF3D00";
-let lightorange = "#FFA800";
-let green = "#7AE229"; */
-
 let prevPriorityElement = null; // keep track of previously clicked button
+let taskData;
 
 // ================================================ MAIN SITE FUNCTIONS ==========================================================
-
 /**
  * This function sets the status category of the task and renders the elements.
  */
@@ -110,42 +96,12 @@ function inputChangeNewCatIcons() {
 }
 
 // ================================================ CREATE TASK ==========================================================
-/* async function createTask() {
-    if (document.getElementById('title').value && document.getElementById('description').value && document.getElementById('dueDate').value && priority && categoryValue != "" && selectedUsers.length !== 0) {
-        let taskId = generateTaskId();
-        let statusCategory = "toDo";
-        let title = document.getElementById('title');
-        let description = document.getElementById('description');
-        let category = categoryValue.charAt(0).toUpperCase() + categoryValue.slice(1);
-        let categoryColor = addBackgroundColorCategory(category);
-        let assignTo = selectedUsers;
-        let dueDate = document.getElementById('dueDate'); 
-        let priorityValue = priority;
-        let taskData = {taskId: taskId, statusCategory: statusCategory, title: title.value, description: description.value, category: category, categoryColor: categoryColor, assignTo: assignTo, dueDate: dueDate.value, priorityValue: priorityValue, subtasks: subtasks};
-        tasks.push(taskData);
-        await saveTasks();
-        displaySnackbar('taskCreated');
-        clearAllInputs();
-        document.getElementById('avatarPicker').classList.add('d-none');
-        await updateHTML();
-        displayPage('mainBoardContainerDisplay');
-    } else {
-        displaySnackbar('missingInput');
-    }
-} */
-
+/**
+ * This function creates a task if all the required fields/values are filled in.
+ */
 async function createTask() {
     if (document.getElementById('title').value && document.getElementById('description').value && document.getElementById('dueDate').value && priority && categoryValue != "" && selectedUsers.length !== 0) {
-        let taskId = generateTaskId();
-        // statusCategory > is beeing set wehn clicked on "Add Task" Tab or on plus sign on the board
-        let title = document.getElementById('title');
-        let description = document.getElementById('description');
-        let category = categoryValue;
-        let categoryColor = categoryColorValue;
-        let assignTo = selectedUsers;
-        let dueDate = document.getElementById('dueDate');
-        let priorityValue = priority;
-        let taskData = {taskId: taskId, statusCategory: statusCategory, title: title.value, description: description.value, category: category, categoryColor: categoryColor, assignTo: assignTo, dueDate: dueDate.value, priorityValue: priorityValue, subtasks: subtasks};
+        setTaskParameters();
         tasks.push(taskData);
         await saveTasks();
         displaySnackbar('taskCreated');
@@ -158,6 +114,25 @@ async function createTask() {
     }
 }
 
+/**
+ * This function sets all the task parameters.
+ */
+function setTaskParameters() {
+    let taskId = generateTaskId();
+    // statusCategory > is beeing set wehn clicked on "Add Task" Tab or on plus sign on the board
+    let title = document.getElementById('title');
+    let description = document.getElementById('description');
+    let category = categoryValue;
+    let categoryColor = categoryColorValue;
+    let assignTo = selectedUsers;
+    let dueDate = document.getElementById('dueDate');
+    let priorityValue = priority;
+    taskData = {taskId: taskId, statusCategory: statusCategory, title: title.value, description: description.value, category: category, categoryColor: categoryColor, assignTo: assignTo, dueDate: dueDate.value, priorityValue: priorityValue, subtasks: subtasks};
+}
+
+/**
+ * This function runs the highlight functions.
+ */
 function highlightInputs() {
     highlightEmptyTitleInput();
     highlightEmptyDescriptionInput();
@@ -168,6 +143,9 @@ function highlightInputs() {
     displaySnackbar('missingInput');
 }
 
+/**
+ * This function highlights the title input field if empty when the form is beeing submitted.
+ */
 function highlightEmptyTitleInput() {
     if(!document.getElementById('title').value) {
         document.getElementById('title').classList.add('redBorder');
@@ -176,6 +154,9 @@ function highlightEmptyTitleInput() {
     } 
 }
 
+/**
+ * This function highlights the title input description if empty when the form is beeing submitted.
+ */
 function highlightEmptyDescriptionInput() {
     if(!document.getElementById('description').value) {
         document.getElementById('description').classList.add('redBorder');
@@ -184,6 +165,9 @@ function highlightEmptyDescriptionInput() {
     } 
 }
 
+/**
+ * This function highlights the due date input field if empty when the form is beeing submitted.
+ */
 function highlightEmptyDueDateInput() {
     if(!document.getElementById('dueDate').value){
         document.getElementById('dueDate').classList.add('redBorder');
@@ -192,6 +176,9 @@ function highlightEmptyDueDateInput() {
     } 
 }
 
+/**
+ * This function highlights the priority input field if empty when the form is beeing submitted.
+ */
 function highlightEmptyPriorityInput() {
     if(priority == "") {
         document.getElementById('urgent').classList.add('redBorder');
@@ -204,6 +191,9 @@ function highlightEmptyPriorityInput() {
     } 
 }
 
+/**
+ * This function highlights the category input field if empty when the form is beeing submitted.
+ */
 function highlightEmptyCategoryInput() {
     if(categoryValue == "") {
         document.getElementById('selectCategoryForm').classList.add('redBorder');
@@ -212,6 +202,9 @@ function highlightEmptyCategoryInput() {
     }
 }
 
+/**
+ * This function highlights the selected users input field if empty when the form is beeing submitted.
+ */
 function highlightEmptySelectedUsersInput() {
     if(selectedUsers.length == 0){
         document.getElementById('assignedToForm').classList.add('redBorder');
@@ -220,16 +213,26 @@ function highlightEmptySelectedUsersInput() {
     } 
 }
 
+/**
+ * This function returns a ramndly generated number.
+ * @returns 
+ */
 function generateTaskId() {
     taskId = Math.floor((Math.random() * 1000000) + 1);
     return taskId;
 }
 
+/**
+ * This function saves the task data in the "tasks" array on the ftp server.
+ */
 async function saveTasks() {
     let tasksAsString = JSON.stringify(tasks);
     await backend.setItem('tasks', tasksAsString);
 }
 
+/**
+ * This function resets all the parameters.
+ */
 function clearAllInputs() {
     document.getElementById('title').value = '';
     document.getElementById('description').value = '';
@@ -239,21 +242,16 @@ function clearAllInputs() {
     selectedUsers = [];
     renderAvailableUsers();
     checkForSelectedUsers()
+    clearPriority();
     subtasks = [];
-    priority = "";
-    clearPriorityButtons();
     document.getElementById('subtaskList').innerHTML = "";
-    document.getElementById('title').classList.remove('redBorder');
-    document.getElementById('description').classList.remove('redBorder');
-    document.getElementById('dueDate').classList.remove('redBorder');
-    document.getElementById('urgent').classList.remove('redBorder');
-    document.getElementById('medium').classList.remove('redBorder');
-    document.getElementById('low').classList.remove('redBorder');
-    document.getElementById('selectCategoryForm').classList.remove('redBorder');
-    document.getElementById('assignedToForm').classList.remove('redBorder');
+    clearHighlightedFields();
 }
 
-function clearPriorityButtons() {
+/**
+ * This function resets the appearance of the priority buttons.
+ */
+function clearPriority() {
     document.getElementById('urgent').style.backgroundColor = white;
     document.getElementById('medium').style.backgroundColor = white;
     document.getElementById('low').style.backgroundColor = white;
@@ -263,6 +261,21 @@ function clearPriorityButtons() {
     document.getElementById('imgUrgent').style.filter = '';
     document.getElementById('imgMedium').style.filter = '';
     document.getElementById('imgLow').style.filter = '';
+    priority = "";
+}
+
+/**
+ * This function removes all red borders.
+ */
+function clearHighlightedFields() {
+    document.getElementById('title').classList.remove('redBorder');
+    document.getElementById('description').classList.remove('redBorder');
+    document.getElementById('dueDate').classList.remove('redBorder');
+    document.getElementById('urgent').classList.remove('redBorder');
+    document.getElementById('medium').classList.remove('redBorder');
+    document.getElementById('low').classList.remove('redBorder');
+    document.getElementById('selectCategoryForm').classList.remove('redBorder');
+    document.getElementById('assignedToForm').classList.remove('redBorder');
 }
 
 // ================================================ ASSIGN USER FUNCTIONS ==========================================================
@@ -575,8 +588,7 @@ async function deleteNewCategory(i) {
         <div class="sectorTop" id='placeholderCategory'>
         <p>Select task category</p>
         <img src="/img/arrow.svg">
-        </div>
-    `;
+        </div>`;
     renderCategories();
 }
 
