@@ -1,4 +1,3 @@
-//setDateToday();
 // ================================================ VARIABLES ==========================================================
 /* let users = [];
 let tasks = [];
@@ -6,7 +5,7 @@ let id;
 let taskId;
  */
 
-let selectedUsers = []; // Define an empty array to store the selected values
+let selectedUsers = [];
 let priority = "";
 let allValueCheck = false;
 let categoryValue = "";
@@ -33,16 +32,28 @@ let prevPriorityElement = null; // keep track of previously clicked button
 
 // ================================================ MAIN SITE FUNCTIONS ==========================================================
 
+/**
+ * This function sets the status category of the task and renders the elements.
+ */
 function initCreateTask() {
     setStatusCategory('toDo');
     renderCategories();
     renderAvailableUsers();
+    setDateToday();
 }
 
+/**
+ * This function sets the value for the statusCategory
+ * @param {string} statusCategoryToDo - status of the task
+ */
 function setStatusCategory(statusCategoryToDo) {
-    statusCategory  = statusCategoryToDo
+    statusCategory  = statusCategoryToDo;
 }
 
+/**
+ * This function opens and closes the dropdowns.
+ * @param {*} id - id of the container
+ */
 function openDropdown(id) {
     if (document.getElementById(id).classList.contains('d-none')) {
         document.getElementById(id).classList.remove('d-none');
@@ -54,31 +65,44 @@ function openDropdown(id) {
     }
 }
 
+/**
+ * This function sets the date.
+ */
 function setDateToday() {
     let today = new Date().toISOString().split('T')[0];
     document.getElementById("dueDate").setAttribute('min', String(today));
 }
 
-//Ändert die Symbole für Unteraufgaben in die Symbole "Löschen" und "Hinzufügen", wenn das Eingabefeld für die Unteraufgabe angeklickt wird.//
+/**
+ * This function changes the symbols for the subtasks to "delete" and "add" symbol when the inputfield is beeing clicked.
+ */
 function changeSubIcon() {
     document.getElementById('plusSubtaskImg').classList.add('d-none');
     document.getElementById('clearSubtaskImg').classList.remove('d-none');
     document.getElementById('addSubtaskImg').classList.remove('d-none');
 }
 
+/**
+ * This function changes the symbols for the categories to "delete" and "add" symbol when the inputfield is beeing clicked.
+ */
 function changeNewCatIcon() {
     document.getElementById('plusNewCategoryImg').classList.add('d-none');
     document.getElementById('clearNewCategoryImg').classList.remove('d-none');
     document.getElementById('addNewCategoryImg').classList.remove('d-none');
 }
 
-//Ändert die Symbole für Unteraufgaben in die Symbole "Löschen" und "Hinzufügen", wenn das Eingabefeld geändert wird.
+/**
+ * This function changes the symbols for the subtasks to "delete" and "add" symbol when the inputfield is beeing changed.
+ */
 function inputChangeSubIcons() {
     document.getElementById('plusSubtaskImg').classList.add('d-none');
     document.getElementById('clearSubtaskImg').classList.remove('d-none');
     document.getElementById('addSubtaskImg').classList.remove('d-none');
 }
 
+/**
+ * This function changes the symbols for the categories to "delete" and "add" symbol when the inputfield is beeing changed.
+ */
 function inputChangeNewCatIcons() {
     document.getElementById('plusNewCategoryImg').classList.add('d-none');
     document.getElementById('clearNewCategoryImg').classList.remove('d-none');
@@ -111,74 +135,16 @@ function inputChangeNewCatIcons() {
 } */
 
 async function createTask() {
-    if(!document.getElementById('title').value) {
-        document.getElementById('title').classList.add('redBorder');
-        displaySnackbar('missingInput');
-    } 
-    
-    if(!document.getElementById('description').value) {
-        document.getElementById('description').classList.add('redBorder');
-        displaySnackbar('missingInput');
-    } 
-    
-    if(!document.getElementById('dueDate').value){
-        document.getElementById('dueDate').classList.add('redBorder');
-        displaySnackbar('missingInput');
-    } 
-    
-    if(priority == "") {
-        document.getElementById('urgent').classList.add('redBorder');
-        document.getElementById('medium').classList.add('redBorder');
-        document.getElementById('low').classList.add('redBorder');
-        displaySnackbar('missingInput');
-    } 
-    
-    if(categoryValue == "") {
-        document.getElementById('selectCategoryForm').classList.add('redBorder');
-        displaySnackbar('missingInput');
-    } 
-    
-    if(selectedUsers.length == 0){
-        document.getElementById('assignedTo').classList.add('redBorder');
-        displaySnackbar('missingInput');
-    } 
-
-    if(document.getElementById('title').value) {
-        document.getElementById('title').classList.remove('redBorder');
-    } 
-    
-    if(document.getElementById('description').value) {
-        document.getElementById('description').classList.remove('redBorder');
-    } 
-    
-    if(document.getElementById('dueDate').value){
-        document.getElementById('dueDate').classList.remove('redBorder');
-    } 
-    
-    if(priority !== "") {
-        document.getElementById('urgent').classList.remove('redBorder');
-        document.getElementById('medium').classList.remove('redBorder');
-        document.getElementById('low').classList.remove('redBorder');
-    } 
-    
-    if(categoryValue !== "") {
-        document.getElementById('selectCategoryForm').classList.remove('redBorder');
-    } 
-    
-    if(selectedUsers.length !== 0){
-        document.getElementById('assignedTo').classList.remove('redBorder');
-    } 
-    
     if (document.getElementById('title').value && document.getElementById('description').value && document.getElementById('dueDate').value && priority && categoryValue != "" && selectedUsers.length !== 0) {
-        let taskId = generateTaskId(); // OK
+        let taskId = generateTaskId();
         // statusCategory > is beeing set wehn clicked on "Add Task" Tab or on plus sign on the board
-        let title = document.getElementById('title'); // OK
-        let description = document.getElementById('description'); // OK
+        let title = document.getElementById('title');
+        let description = document.getElementById('description');
         let category = categoryValue;
         let categoryColor = categoryColorValue;
-        let assignTo = selectedUsers; // To be checked
-        let dueDate = document.getElementById('dueDate'); // To be checked
-        let priorityValue = priority; // To be checked
+        let assignTo = selectedUsers;
+        let dueDate = document.getElementById('dueDate');
+        let priorityValue = priority;
         let taskData = {taskId: taskId, statusCategory: statusCategory, title: title.value, description: description.value, category: category, categoryColor: categoryColor, assignTo: assignTo, dueDate: dueDate.value, priorityValue: priorityValue, subtasks: subtasks};
         tasks.push(taskData);
         await saveTasks();
@@ -187,7 +153,71 @@ async function createTask() {
         document.getElementById('avatarPicker').classList.add('d-none');
         await updateHTML();
         displayPage('mainBoardContainerDisplay');
+    } else {
+        highlightInputs(); 
     }
+}
+
+function highlightInputs() {
+    highlightEmptyTitleInput();
+    highlightEmptyDescriptionInput();
+    highlightEmptyDueDateInput();
+    highlightEmptyPriorityInput();
+    highlightEmptyCategoryInput();
+    highlightEmptySelectedUsersInput();
+    displaySnackbar('missingInput');
+}
+
+function highlightEmptyTitleInput() {
+    if(!document.getElementById('title').value) {
+        document.getElementById('title').classList.add('redBorder');
+    } else if(document.getElementById('title').value) {
+        document.getElementById('title').classList.remove('redBorder');
+    } 
+}
+
+function highlightEmptyDescriptionInput() {
+    if(!document.getElementById('description').value) {
+        document.getElementById('description').classList.add('redBorder');
+    } else if(document.getElementById('description').value) {
+        document.getElementById('description').classList.remove('redBorder');
+    } 
+}
+
+function highlightEmptyDueDateInput() {
+    if(!document.getElementById('dueDate').value){
+        document.getElementById('dueDate').classList.add('redBorder');
+    } else if(document.getElementById('dueDate').value){
+        document.getElementById('dueDate').classList.remove('redBorder');
+    } 
+}
+
+function highlightEmptyPriorityInput() {
+    if(priority == "") {
+        document.getElementById('urgent').classList.add('redBorder');
+        document.getElementById('medium').classList.add('redBorder');
+        document.getElementById('low').classList.add('redBorder');
+    } else if(priority !== "") {
+        document.getElementById('urgent').classList.remove('redBorder');
+        document.getElementById('medium').classList.remove('redBorder');
+        document.getElementById('low').classList.remove('redBorder');
+    } 
+}
+
+function highlightEmptyCategoryInput() {
+    if(categoryValue == "") {
+        document.getElementById('selectCategoryForm').classList.add('redBorder');
+    } else if(categoryValue !== "") {
+        document.getElementById('selectCategoryForm').classList.remove('redBorder');
+    }
+}
+
+function highlightEmptySelectedUsersInput() {
+    if(selectedUsers.length == 0){
+        document.getElementById('assignedToForm').classList.add('redBorder');
+    } else if(selectedUsers.length !== 0){
+        document.getElementById('assignedToForm').classList.remove('redBorder');
+    } 
 }
 
 function generateTaskId() {
@@ -204,10 +234,26 @@ function clearAllInputs() {
     document.getElementById('title').value = '';
     document.getElementById('description').value = '';
     document.getElementById('dueDate').value = '';
+    categoryValue = "";
+    renderCategories();
     selectedUsers = [];
+    renderAvailableUsers();
+    checkForSelectedUsers()
     subtasks = [];
     priority = "";
-    categoryValue = "";
+    clearPriorityButtons();
+    document.getElementById('subtaskList').innerHTML = "";
+    document.getElementById('title').classList.remove('redBorder');
+    document.getElementById('description').classList.remove('redBorder');
+    document.getElementById('dueDate').classList.remove('redBorder');
+    document.getElementById('urgent').classList.remove('redBorder');
+    document.getElementById('medium').classList.remove('redBorder');
+    document.getElementById('low').classList.remove('redBorder');
+    document.getElementById('selectCategoryForm').classList.remove('redBorder');
+    document.getElementById('assignedToForm').classList.remove('redBorder');
+}
+
+function clearPriorityButtons() {
     document.getElementById('urgent').style.backgroundColor = white;
     document.getElementById('medium').style.backgroundColor = white;
     document.getElementById('low').style.backgroundColor = white;
@@ -217,17 +263,16 @@ function clearAllInputs() {
     document.getElementById('imgUrgent').style.filter = '';
     document.getElementById('imgMedium').style.filter = '';
     document.getElementById('imgLow').style.filter = '';
-    document.getElementById('subtaskList').innerHTML = "";
-    renderCategories();
-    renderAvailableUsers();
 }
 
 // ================================================ ASSIGN USER FUNCTIONS ==========================================================
+/**
+ * This function renders the alle the users from the "users" array. 
+ */
 function renderAvailableUsers() {
     let assignedToForm = document.getElementById('assignedToForm');
     assignedToForm.innerHTML = "";
     assignedToForm.innerHTML += assignToPlaceholderTemplate();
-
     let avatarPicker = document.getElementById('avatarPicker');
     avatarPicker.innerHTML = "";
     for (let i = 0; i < users.length; i++) {
@@ -236,19 +281,14 @@ function renderAvailableUsers() {
         let userSurname = users[i]['surname'];
         let userColor = users[i]['userColor']
         getFirstLetterAvailableUser(i)
-        avatarPicker.innerHTML += `
-            <div id="${availableUserId}" class="avatarContainer" onclick="selectUser(${availableUserId}), doNotAdd(event)">
-                <div id="icon${availableUserId}"class="avatar" style="background-color: ${userColor};">
-                    <div>${firstLettersAvailableUser}</div>
-                </div>
-                <div class="nameText">
-                    <div>${userName} ${userSurname}</div>
-                </div>
-            </div>
-        `;
+        avatarPicker.innerHTML += assignUserTemplate(availableUserId, userColor, firstLettersAvailableUser, userName, userSurname);
     }
 }
 
+/**
+ * This function returns the first letter of the name and surname of the current user.
+ * @param {index} i - index of the current user
+ */
 function getFirstLetterAvailableUser(i) {
     let x = users[i]['name'];
     x = x.split(' ').map(word => word.charAt(0)).join('');
@@ -257,78 +297,129 @@ function getFirstLetterAvailableUser(i) {
     firstLettersAvailableUser = x.toUpperCase() + y.toUpperCase();
 }
 
+/**
+ * This function selects a user. Adds classes to the div's and pushes the user id to the "selectedUsers" array.
+ * @param {number} availableUserId - id of the user
+ */
 function selectUser(availableUserId) {
     let user = document.getElementById(availableUserId);
     let userIcon = document.getElementById('icon' + availableUserId);
     user.classList.toggle('avatarSelected');
     userIcon.classList.toggle('avatarSelectedIcon');
-
     if(selectedUsers.includes(availableUserId)){
         selectedUsers = selectedUsers.filter(a => a != availableUserId);
         checkForSelectedUsers();
-
     } else {
         selectedUsers.push(availableUserId);
         checkForSelectedUsers();
     }
 }
 
+/**
+ * This function renders the selected users into the placeholder div.
+ */
 function checkForSelectedUsers() {
+    let selectedUsersPlaceholder = document.getElementById('selectedUsersPlaceholder');
     if(selectedUsers == "") {
-        let selectedUsersPlaceholder = document.getElementById('selectedUsersPlaceholder');
-        selectedUsersPlaceholder.innerHTML = "";
-        selectedUsersPlaceholder.innerHTML += `
-            <p id="assignedToHeader">Select contacts to assign</p>
-        `;
+        selectedUsersEmpty();
     } else if (selectedUsers !== ""){
-        selectedUsersPlaceholder.innerHTML = "";
-        for (let i = 0; i < selectedUsers.length; i++) {
-            let userId = selectedUsers[i];
-            let existingUser = users.find(u => u.userid == userId);
-            let currentUser = users.indexOf(existingUser);
-            let userColor = users[currentUser]['userColor'];
-            getFirstLetterAvailableUser(currentUser)
-            selectedUsersPlaceholder.innerHTML += `
-                <div class="avatarContainer">
-                    <div class="avatar" style="background-color: ${userColor};">
-                        <div>${firstLettersAvailableUser}</div>
-                    </div>
-                </div>
-            `;
-        }
+        selectedUsersAvailable();
+    }
+}
+
+/**
+ * This function renders the placeholder when the "selectedUsers" array is empty.
+ */
+function selectedUsersEmpty() {
+    selectedUsersPlaceholder.innerHTML = "";
+    selectedUsersPlaceholder.innerHTML += `
+        <p id="assignedToHeader">Select contacts to assign</p>
+    `;
+}
+
+/**
+ * This function renders the user icons when the "selectedUsers" array contains users.
+ */
+function selectedUsersAvailable() {
+    selectedUsersPlaceholder.innerHTML = "";
+    for (let i = 0; i < selectedUsers.length; i++) {
+        let userId = selectedUsers[i];
+        let existingUser = users.find(u => u.userid == userId);
+        let currentUser = users.indexOf(existingUser);
+        let userColor = users[currentUser]['userColor'];
+        getFirstLetterAvailableUser(currentUser)
+        selectedUsersPlaceholder.innerHTML += selectedUsersPlaceholderTemplate(userColor, firstLettersAvailableUser);
     }
 }
 
 // ================================================ PRIORITY FUNCTIONS ==========================================================
+/**
+ * This function sets the priorityValue and changes the appearance of the urgent button.
+ */
 function selectUrgent() {
     select("urgent", ["medium", "low"], ["imgMedium", "imgLow"], ["urgent"], ["imgUrgent"]);
     saveSelectedPriority();
 }
 
+/**
+ * This function sets the priorityValue and changes the appearance of the urgentEdit button.
+ */
 function selectUrgentEdit() {
     select("urgentEdit", ["mediumEdit", "lowEdit"], ["imgMediumEdit", "imgLowEdit"], ["urgentEdit"], ["imgUrgentEdit"]);
 }
 
+/**
+ * This function sets the priorityValue and changes the appearance of the medium button.
+ */
 function selectMedium() {
     select("medium", ["urgent", "low"], ["imgUrgent", "imgLow"], ["medium"], ["imgMedium"]);
     saveSelectedPriority();
 }
 
+/**
+ * This function sets the priorityValue and changes the appearance of the mediumEdit button.
+ */
 function selectMediumEdit() {
     select("mediumEdit", ["urgentEdit", "lowEdit"], ["imgUrgentEdit", "imgLowEdit"], ["mediumEdit"], ["imgMediumEdit"]);
 }
 
+/**
+ * This function sets the priorityValue and changes the appearance of the low button.
+ */
 function selectLow() {
     select("low", ["urgent", "medium"], ["imgUrgent", "imgMedium"], ["low"], ["imgLow"]);
     saveSelectedPriority();
 }
 
+/**
+ * This function sets the priorityValue and changes the appearance of the lowEdit button.
+ */
 function selectLowEdit() {
     select("lowEdit", ["urgentEdit", "mediumEdit"], ["imgUrgentEdit", "imgMediumEdit"], ["lowEdit"], ["imgLowEdit"]);
 }
 
+/**
+ * This function changes the appearance of the buttons.
+ * @param {*} id - id of the priority button
+ * @param {array} idsToDeselect - id's to deselect
+ * @param {array} filtersToDeselect - filters to deselect
+ * @param {array} idsToSelect -  id's to select
+ * @param {array} filtersToSelect - filters to select
+ */
 function select(id, idsToDeselect, filtersToDeselect, idsToSelect, filtersToSelect) {
     // Set background and color for IDs to deselect
+    deselectPriorityButtons(idsToDeselect, filtersToDeselect);
+
+    // Set background and color for IDs to select
+    selectPriorityButtons(idsToSelect, filtersToSelect);
+}
+
+/**
+ * This function changes the appearance of priorty buttons that are not selected.
+ * @param {array} idsToDeselect - id's to deselect
+ * @param {array} filtersToDeselect - filters to deselect
+ */
+function deselectPriorityButtons(idsToDeselect, filtersToDeselect) {
     for (var i = 0; i < idsToDeselect.length; i++) {
         var element = document.getElementById(idsToDeselect[i]);
         element.style.background = "white";
@@ -338,40 +429,30 @@ function select(id, idsToDeselect, filtersToDeselect, idsToSelect, filtersToSele
             imgElement.style.filter = "";
         }
     }
+}
 
-    // Set background and color for IDs to select
+/**
+ * This function changes the appearance of the priorty button that is selected.
+ * @param {array} idsToSelect - id's to select
+ * @param {array} filtersToSelect - filters to select
+ */
+function selectPriorityButtons(idsToSelect, filtersToSelect) {
     for (var i = 0; i < idsToSelect.length; i++) {
         var element = document.getElementById(idsToSelect[i]);
-        switch (idsToSelect[i]) {
-            case "urgent":
-                element.style.background = orange;
-                element.style.color = white;
-                break;
-            case "urgentEdit":
-                element.style.background = orange;
-                element.style.color = white;
-                break;
+        if(idsToSelect[i] == 'urgent' || idsToSelect[i] == 'urgentEdit') {
+            element.style.background = orange;
+            element.style.color = white;
 
-            case "medium":
-                element.style.background = lightorange;
-                element.style.color = white; // change to white
-                break;
-            case "mediumEdit":
-                element.style.background = lightorange;
-                element.style.color = white; // change to white
-                break;
+        } else if (idsToSelect[i] == 'medium' || idsToSelect[i] == 'mediumEdit') {
+            element.style.background = lightorange;
+            element.style.color = white;
 
-            case "low":
-                element.style.background = green;
-                element.style.color = white; // change to white
-                break;
-            case "lowEdit":
-                element.style.background = green;
-                element.style.color = white; // change to white
-                break;
-            default:
-                element.style.background = white;
-                element.style.color = black;
+        } else if (idsToSelect[i] == 'low' || idsToSelect[i] == 'lowEdit') {
+            element.style.background = green;
+            element.style.color = white;
+        } else {
+            element.style.background = white;
+            element.style.color = black;
         }
 
         if (filtersToSelect[i]) {
@@ -381,7 +462,9 @@ function select(id, idsToDeselect, filtersToDeselect, idsToSelect, filtersToSele
     }
 }
 
-
+/**
+ * This function sets the priorty value to the selected priority.
+ */
 function saveSelectedPriority() {
     Array.from(document.getElementsByClassName("prioButton")).forEach((button) => {
         button.addEventListener('click', (event) => {

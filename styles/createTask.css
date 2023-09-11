@@ -333,9 +333,9 @@ span {
   cursor: pointer;
 }
 
-.prioButton:hover {
+.prioButton:hover,
+.prioButtonEdit:hover {
   box-shadow: 0 4px 4px 0 rgb(0 0 0 / 25%);
-  width: 110%;
 }
 
 .featuresContainer {

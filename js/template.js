@@ -30,7 +30,7 @@ function generateToDoHTMLToDo(element, currentStatusCategory) {
             <div class="boardContainerUserBubbles">
                 <div class="userBubble" id="userBubble${element["taskId"]}"></div>
                 <div>
-                    <img class="priorityImg" src="./img/${element["priorityValue"]}.svg">
+                    <img class="priorityImg" src="../img/${element["priorityValue"]}.svg">
                 </div>
             </div>
         </div>
@@ -71,7 +71,7 @@ function generateToDoHTML(element, currentStatusCategory) {
             <div class="boardContainerUserBubbles">
                 <div class="userBubble" id="userBubble${element["taskId"]}"></div>
                 <div>
-                    <img class="priorityImg" src="./img/${element["priorityValue"]}.svg">
+                    <img class="priorityImg" src="../img/${element["priorityValue"]}.svg">
                 </div>
             </div>
         </div>
@@ -109,7 +109,7 @@ function generateToDoHTMLDone(element, currentStatusCategory) {
             <div class="boardContainerUserBubbles">
                 <div class="userBubble" id="userBubble${element["taskId"]}"></div>
                 <div>
-                    <img class="priorityImg" src="./img/${element["priorityValue"]}.svg">
+                    <img class="priorityImg" src="../img/${element["priorityValue"]}.svg">
                 </div>
             </div>
         </div>
@@ -485,6 +485,29 @@ function assignToPlaceholderTemplate() {
 
         <div class="assignedToChoices d-none" id="avatarPicker"></div>
        `;
-   }
+}
+
+function assignUserTemplate(availableUserId, userColor, firstLettersAvailableUser, userName, userSurname) {
+    return `
+        <div id="${availableUserId}" class="avatarContainer" onclick="selectUser(${availableUserId}), doNotAdd(event)">
+            <div id="icon${availableUserId}"class="avatar" style="background-color: ${userColor};">
+                <div>${firstLettersAvailableUser}</div>
+            </div>
+            <div class="nameText">
+                <div>${userName} ${userSurname}</div>
+            </div>
+        </div>
+    `;
+}
+
+function selectedUsersPlaceholderTemplate(userColor, firstLettersAvailableUser) {
+    return `
+        <div class="avatarContainer">
+            <div class="avatar" style="background-color: ${userColor};">
+                <div>${firstLettersAvailableUser}</div>
+            </div>
+        </div>
+    `;
+}
 
    
