@@ -249,7 +249,6 @@ function doNotOpenTask(event) {
 async function pushToPreviousCategory(category, taskId) {
     let currentTaskId = tasks.find(t => t.taskId == taskId);
     let currentTask = tasks.indexOf(currentTaskId);
-
     if(category == 'done') {
         tasks[currentTask]['statusCategory'] = 'awaitingFeedback';
         await saveTasks();
@@ -268,7 +267,6 @@ async function pushToPreviousCategory(category, taskId) {
 async function pushToNextCategory(category, taskId) {
     let currentTaskId = tasks.find(t => t.taskId == taskId);
     let currentTask = tasks.indexOf(currentTaskId);
-
     if(category == 'toDo') {
         tasks[currentTask]['statusCategory'] = 'inProgress';
         await saveTasks();
@@ -299,9 +297,8 @@ function openTask(currentTaskId) {
 async function deleteTask(currentTask) {
     tasks.splice(currentTask, 1);
     await saveTasks();
-    await init();
+    init();
     updateHTML();
-    //pushArrayToDo();
     document.getElementById('openTaskBackground').style.display = 'none';
 }
 
@@ -338,14 +335,14 @@ function renderAssignedUsers(currentTask) {
 
 function prioritySymbol(currentTask) {
     let currentPriority = tasks[currentTask]['priorityValue'];
-    let priority = document.getElementById('priority');
+    let priorityOpenTask = document.getElementById('priorityOpenTask');
 
     if (currentPriority == 'urgent') {
-        priority.innerHTML += `<img id="openTaskImgPriority" src="./img/urgent.svg">`;
+        priorityOpenTask.innerHTML += `<img id="openTaskImgPriority" src="../img/urgent.svg">`;
     } else if (currentPriority == 'medium') {
-        priority.innerHTML += `<img id="openTaskImgPriority" src="./img/medium.svg">`;
+        priorityOpenTask.innerHTML += `<img id="openTaskImgPriority" src="../img/medium.svg">`;
     } else if (currentPriority == 'low') {
-        priority.innerHTML += `<img id="openTaskImgPriority" src="./img/low.svg">`;
+        priorityOpenTask.innerHTML += `<img id="openTaskImgPriority" src="../img/low.svg">`;
     }
 }
 
@@ -446,7 +443,7 @@ function saveSelectedUsersEdit() {
 async function saveEditedTask(currentTask) {
     let editCategory = document.getElementById('editSelectCategory').value;
     tasks[currentTask]['category'] = editCategory;
-    tasks[currentTask]['categoryColor'] = addBackgroundColorCategory(editCategory);
+    //tasks[currentTask]['categoryColor'] = addBackgroundColorCategory(editCategory);
     tasks[currentTask]['title'] = document.getElementById('titleEdit').value;
     tasks[currentTask]['description'] = document.getElementById('descriptionEdit').value;
     tasks[currentTask]['dueDate'] = document.getElementById('editDueDate').value;

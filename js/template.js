@@ -180,7 +180,7 @@ function openTaskTemplate(currentTask) {
                     <div>Priority:</div>
                     <div>
                         <div>
-                            <button class="prioButton2" id="priority">
+                            <button class="prioButton2" id="priorityOpenTask">
                                 <span>${tasks[currentTask]['priorityValue']}</span>
                             </button>
                         </div>
