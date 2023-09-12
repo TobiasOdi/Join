@@ -502,12 +502,23 @@ function assignUserTemplate(availableUserId, userColor, firstLettersAvailableUse
 
 function selectedUsersPlaceholderTemplate(userColor, firstLettersAvailableUser) {
     return `
-        <div class="avatarContainer">
-            <div class="avatar" style="background-color: ${userColor};">
+        <div class="avatarContainer avatarContainerSelected">
+            <div class="avatar avatarSelectedIconPlaceholder" style="background-color: ${userColor};">
                 <div>${firstLettersAvailableUser}</div>
             </div>
         </div>
     `;
 }
+
+function selectedUsersPlaceholderTemplateOthers(remainingUsers) {
+    return `
+        <div class="avatarContainer avatarContainerSelected">
+            <div class="avatar avatarSelectedIconPlaceholder" style="background-color: black;">
+                <div style="background-color: white;">+${remainingUsers}</div>
+            </div>
+        </div>
+    `;
+}
+
 
    

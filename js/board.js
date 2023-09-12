@@ -13,7 +13,7 @@ let progress;
 
 /* ============================================================================ BOARD FUNCTIONS ======================================================================== */
 function updateHTML() {
-    if (tasks.length > 0) {
+    if(tasks.length > 0) {
         for (let index = 0; index < tasks.length; index++) {
             filterToDo();
             filterInProgress();
@@ -34,8 +34,9 @@ function updateHTML() {
             generateProgressbarHtml(i, taskId, progress, numerator, denominator);
         } */
         createBubbles();
+    } else {
+        checkForEmptyCategories();
     }
-    checkForEmptyCategories();
 }
 
 function filterToDo() {
@@ -297,7 +298,7 @@ function openTask(currentTaskId) {
 async function deleteTask(currentTask) {
     tasks.splice(currentTask, 1);
     await saveTasks();
-    init();
+    await init();
     updateHTML();
     document.getElementById('openTaskBackground').style.display = 'none';
 }

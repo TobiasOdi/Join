@@ -354,6 +354,17 @@ function selectedUsersEmpty() {
  * This function renders the user icons when the "selectedUsers" array contains users.
  */
 function selectedUsersAvailable() {
+    if(selectedUsers.length <= 10){
+        selectedUsersAvailableLessThenTen();
+    } else {
+        selectedUsersAvailableMoreThenTen();
+    }
+}
+
+/**
+ * This function renders the selected users in the placeholder div if less then 10 or 10 users are selected.
+ */
+function selectedUsersAvailableLessThenTen() {
     selectedUsersPlaceholder.innerHTML = "";
     for (let i = 0; i < selectedUsers.length; i++) {
         let userId = selectedUsers[i];
@@ -365,20 +376,36 @@ function selectedUsersAvailable() {
     }
 }
 
+/**
+ * This function renders the selected users in the placeholder div if more then 10 users are selected.
+ */
+function selectedUsersAvailableMoreThenTen() {
+    selectedUsersPlaceholder.innerHTML = "";
+    for (let i = 0; i < 9; i++) {
+        let userId = selectedUsers[i];
+        let existingUser = users.find(u => u.userid == userId);
+        let currentUser = users.indexOf(existingUser);
+        let userColor = users[currentUser]['userColor'];
+        getFirstLetterAvailableUser(currentUser)
+        selectedUsersPlaceholder.innerHTML += selectedUsersPlaceholderTemplate(userColor, firstLettersAvailableUser);
+    }
+    let remainingUsers = selectedUsers.length - 9;
+    selectedUsersPlaceholder.innerHTML += selectedUsersPlaceholderTemplateOthers(remainingUsers);
+}
+
 // ================================================ PRIORITY FUNCTIONS ==========================================================
 /**
  * This function sets the priorityValue and changes the appearance of the urgent button.
  */
 function selectUrgent() {
     select("urgent", ["medium", "low"], ["imgMedium", "imgLow"], ["urgent"], ["imgUrgent"]);
-    saveSelectedPriority();
 }
 
 /**
  * This function sets the priorityValue and changes the appearance of the urgentEdit button.
  */
 function selectUrgentEdit() {
-    select("urgentEdit", ["mediumEdit", "lowEdit"], ["imgMediumEdit", "imgLowEdit"], ["urgentEdit"], ["imgUrgentEdit"]);
+    select("urgent", ["mediumEdit", "lowEdit"], ["imgMediumEdit", "imgLowEdit"], ["urgentEdit"], ["imgUrgentEdit"]);
 }
 
 /**
@@ -386,14 +413,13 @@ function selectUrgentEdit() {
  */
 function selectMedium() {
     select("medium", ["urgent", "low"], ["imgUrgent", "imgLow"], ["medium"], ["imgMedium"]);
-    saveSelectedPriority();
 }
 
 /**
  * This function sets the priorityValue and changes the appearance of the mediumEdit button.
  */
 function selectMediumEdit() {
-    select("mediumEdit", ["urgentEdit", "lowEdit"], ["imgUrgentEdit", "imgLowEdit"], ["mediumEdit"], ["imgMediumEdit"]);
+    select("medium", ["urgentEdit", "lowEdit"], ["imgUrgentEdit", "imgLowEdit"], ["mediumEdit"], ["imgMediumEdit"]);
 }
 
 /**
@@ -401,14 +427,13 @@ function selectMediumEdit() {
  */
 function selectLow() {
     select("low", ["urgent", "medium"], ["imgUrgent", "imgMedium"], ["low"], ["imgLow"]);
-    saveSelectedPriority();
 }
 
 /**
  * This function sets the priorityValue and changes the appearance of the lowEdit button.
  */
 function selectLowEdit() {
-    select("lowEdit", ["urgentEdit", "mediumEdit"], ["imgUrgentEdit", "imgMediumEdit"], ["lowEdit"], ["imgLowEdit"]);
+    select("low", ["urgentEdit", "mediumEdit"], ["imgUrgentEdit", "imgMediumEdit"], ["lowEdit"], ["imgLowEdit"]);
 }
 
 /**
@@ -420,6 +445,8 @@ function selectLowEdit() {
  * @param {array} filtersToSelect - filters to select
  */
 function select(id, idsToDeselect, filtersToDeselect, idsToSelect, filtersToSelect) {
+    saveSelectedPriority(id);
+
     // Set background and color for IDs to deselect
     deselectPriorityButtons(idsToDeselect, filtersToDeselect);
 
@@ -478,12 +505,8 @@ function selectPriorityButtons(idsToSelect, filtersToSelect) {
 /**
  * This function sets the priorty value to the selected priority.
  */
-function saveSelectedPriority() {
-    Array.from(document.getElementsByClassName("prioButton")).forEach((button) => {
-        button.addEventListener('click', (event) => {
-            priority = event.target.id;
-        });
-    });
+function saveSelectedPriority(id) {
+    priority = id;
 }
 
 // ================================================ CATEGORY FUNCTIONS ==========================================================
