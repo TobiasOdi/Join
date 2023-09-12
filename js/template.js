@@ -423,7 +423,6 @@ function assignedUserEditTemplate(j, assignFirstLetters) {
 }
 
 /* ========================================= CREATE TASK TEMPLATES ========================================= */
-
 /**
  * This function returns the template for the category placeholder on the create task html.
  * @returns 
@@ -517,6 +516,153 @@ function selectedUsersPlaceholderTemplateOthers(remainingUsers) {
                 <div style="background-color: white;">+${remainingUsers}</div>
             </div>
         </div>
+    `;
+}
+
+/* ========================================= CONTACTS TEMPLATES ========================================= */
+
+function contactContainerTemplate(i, letter) {
+    return `
+        <div id='contactContainer${i}' class="contactContainer">
+            <div class="letter">
+                <div>${letter}</div>
+            </div>
+            <div class="contactsHline"></div>
+            <div id="sortedContacts${i}" class="sortedContacts">
+            </div>
+        </div>
+    `;
+}
+
+function sortedContactsTemplate(c, contactBgColor, firstLetters, contactListName, contactListSurname, contactEmail) {
+    return `
+        <div id="contactID${c}" class="contact" onclick="openContactInfo(${c})">
+            <div>
+                <div style="background-color:${contactBgColor};"class="contactIcon">
+                    <span>${firstLetters.toUpperCase()}</span>
+                </div>
+            </div>
+            <div>
+                <div class="contactName">
+                    <span>${contactListName}</span>
+                    <span>${contactListSurname}</span>
+                </div>
+                <a class="contactEmail" href="mailto:${contactEmail}">${contactEmail}</a> 
+            </div>
+        </div>
+    `;
+}
+
+function contactInfoTemplate(firstLetters, contactInfoName, contactInfoSurname, c, contactInfoEmail, contactInfoPhone, contactInfoBgColor) {
+    return `
+            <div class="contactDetails" id="contactDetails${c}">
+                <div>
+                    <div>
+                        <div id="contactIconBig${c}" class="contactIconBig" style="background-color: ${contactInfoBgColor};">
+                            <span>${firstLetters}</span>
+                        </div>
+                    </div>
+                    <div class="contactDetailsName">
+                        <div class="name">
+                            <div>
+                                <span>${contactInfoName}</span>
+                                <span>${contactInfoSurname}</span>
+                            </div>
+                        </div>
+                        <div onclick="initCreateTask(), displayPage('mainAddTaskContainerDisplay')" class="addTask">
+                            <img src="../img/plus.svg"><span>Add Task</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contactInformation">
+                    <div>
+                        <div class="contactInformationHeader">
+                            <div>
+                                <span>Contact Information</span>
+                            </div>
+                            <div class="editContact" onclick="editContact(${c})">
+                                <img src="../img/edit.svg">
+                                <span>Edit Contact</span>
+                            </div>
+                        </div>
+
+                        <div class="contactInformationMain">
+                            <div>
+                                <span>Email</span>
+                                <a href="mailto:${contactInfoEmail}">${contactInfoEmail}</a>
+                            </div>
+                            <div>
+                                <span>Phone</span>
+                                <a href="tel:${contactInfoPhone}">${contactInfoPhone}</a>
+                            </div>
+                        </div>
+
+                        <div class="deleteContact">
+                            <div onclick="deleteContact(${c})">
+                                <span>Delete contact</span>
+                                <img src="../img/delete.svg">
+                            </div>
+                        </div>
+        
+                    </div>
+                   
+                </div>
+            </div>
+
+        `;
+}
+
+/* function saveChangesButtonTemplate(i) {
+    return `
+        <button class="createContact" onclick="saveChanges(${i});return false">  
+            <span>Save</span>
+        </button>
+    `;
+} */
+
+function contactBigImgTemplate(i, firstLetters) {
+    return `
+        <div id="contactImgBg${i}" class="contactImgBg">
+            <span>${firstLetters}</span>
+        </div>
+    `;
+}
+
+function saveChangesFormTemplate(i) {
+    return `
+        <form name="saveChangesForm" onsubmit="saveChanges(${i});return false">
+            <div class="inputContainer">
+                <div class="inputFieldContainer">
+                    <input id="editContactName" class="inputFields" type="text" placeholder="Name" required/>
+                    <img src="./img/userIcon.svg" class="img" />
+                </div>
+            </div>
+            <div class="inputContainer">
+                <div class="inputFieldContainer">
+                    <input id="editContactSurname" class="inputFields" type="text" placeholder="Surname" required/>
+                    <img src="./img/userIcon.svg" class="img" />
+                </div>
+            </div>
+            <div class="inputContainer">
+                <div class="inputFieldContainer">
+                    <input id="editContactEmail" class="inputFields" type="email" placeholder="Email" required/>
+                    <img src="./img/letter.svg" class="img" />
+                </div>
+            </div>
+            <div class="inputContainer">
+                <div class="inputFieldContainer">
+                    <input id="editContactPhone" class="inputFields" type="number" placeholder="Phone"/>
+                    <img src="./img/phone.svg" class="img" />
+                </div>
+            </div>
+
+            <div class="buttons editButton" id="saveChangesButton">
+                <button class="createContact" type="submit">  
+                    <span>Save</span>
+                </button>
+            </div>
+        </form>
     `;
 }
 

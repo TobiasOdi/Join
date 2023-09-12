@@ -6,6 +6,10 @@
   border: 2px solid red !important;
 }
 
+.greenBorder {
+  border: 2px solid green !important;
+}
+
 input,
 select,
 .selectWrapper {

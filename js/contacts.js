@@ -18,77 +18,71 @@ let editContactPopUp = document.getElementById('editContactBackground');
 let bgColor;
 let firstLetters;
 
+// ================================================ CONTACT LIST ==========================================================
+/**
+ * This function renders the letters for the categorization of the contacts to the contact list.
+ */
 function renderLetters() {
     let contactList = document.getElementById('contactList');
     contactList.innerHTML = '';
-
     for (let i = 0; i < letters.length; i++) {
         let letter = letters[i];
-
-        contactList.innerHTML += `
-                <div id='contactContainer${i}' class="contactContainer">
-                    <div class="letter">
-                        <div>${letter}</div>
-                    </div>
-                    <div class="contactsHline"></div>
-                    <div id="sortedContacts${i}" class="sortedContacts">
-                    </div>
-                </div>
-            `;
+        contactList.innerHTML += contactContainerTemplate(i, letter);
         renderContacts(i, letter);
         checkForEmptyLetters(i);
     }
 }
 
+/**
+ * This function renders the contacts to the correct letter category of the contact list.
+ * @param {string} i - index of the current letter
+ * @param {string} letter  - current letter
+ */
 function renderContacts(i, letter) {
     let sortedContacts = document.getElementById('sortedContacts' + i);
     sortedContacts.innerHTML = '';
 
-    contactsSorted = contacts.sort((a, b) => {
-        if (a.name < b.name) {
+    contactsSorted = contacts.sort((a, b) => {if (a.name < b.name) {
             return -1;
         }
     });
+    sortContacts(letter, sortedContacts);
+}
 
+/**
+ * This function sorts the contacts depending on the starting letter.
+ * @param {*} letter 
+ */
+function sortContacts(letter, sortedContacts) {
     for (let c = 0; c < contactsSorted.length; c++) {
         let contactListName = contacts[c]['name'];
         let contactListSurname = contacts[c]['surname'];
         let contactEmail = contacts[c]['email'];
         let contactBgColor = contacts[c]['contactColor'];
-
         randomBackground();
         nameGetFirstLetter(c);
-
         if (firstLetters.charAt(0).toUpperCase() == letter) {
-            sortedContacts.innerHTML += `
-                    <div id="contactID${c}" class="contact" onclick="openContactInfo(${c})">
-                        <div>
-                            <div style="background-color:${contactBgColor};"class="contactIcon">
-                                <span>${firstLetters.toUpperCase()}</span>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="contactName">
-                                <span>${contactListName}</span>
-                                <span>${contactListSurname}</span>
-                            </div>
-                            <a class="contactEmail" href="mailto:${contactEmail}">${contactEmail}</a> 
-                        </div>
-                    </div>
-                    `;
+            sortedContacts.innerHTML += sortedContactsTemplate(c, contactBgColor, firstLetters, contactListName, contactListSurname, contactEmail);
         }
     }
 }
 
+/**
+ * This function checks if letter cegory is empty end hindes it. 
+ * @param {index} i - index of the letter
+ */
 function checkForEmptyLetters(i) {
     let contactContainer = document.getElementById('contactContainer' + i);
     let emptyLetters = document.getElementById('sortedContacts' + i);
-
     if (emptyLetters.innerHTML == '') {
         contactContainer.style.display = 'none';
     }
 }
 
+/**
+ * This function returns the first letter form the name and surname of the contact.
+ * @param {index} c - index of the current contact of the "contactsSorted" array.
+ */
 function nameGetFirstLetter(c) {
     let x = contacts[c]['name'];
     x = x.split(' ').map(word => word.charAt(0)).join('');
@@ -97,10 +91,17 @@ function nameGetFirstLetter(c) {
     firstLetters = x.toUpperCase() + y.toUpperCase();
 }
 
+// ================================================ ADD NEW CONTACT ==========================================================
+/**
+ * This function displays the add contacts overlay.
+ */
 function newContact() {
     document.getElementById('addContactBackground').style.display = 'flex';
 }
 
+/**
+ * This function closes the add contacts overlay and resets the input values.
+ */
 function closePopup() {
     document.getElementById('addContactBackground').style.display = 'none';
     document.getElementById('editContactBackground').style.display = 'none';
@@ -110,42 +111,45 @@ function closePopup() {
     document.getElementById('contactPhone').value = '';
 }
 
-function canclePopup() {
+/* function canclePopup() {
     document.getElementById('addContactBackground').style.display = 'none';
     document.getElementById('editContactBackground').style.display = 'none';
     document.getElementById('contactName').value = '';
     document.getElementById('contactSurname').value = '';
     document.getElementById('contactEmail').value = '';
     document.getElementById('contactPhone').value = '';
-}
+} */
 
+/**
+ * This function prevents the a function from a parent element is beeing executed when clicked on a child element.
+ * @param {*} event 
+ */
 function doNotClose(event) {
     event.stopPropagation();
 }
 
-function createContact() {
-    if (document.getElementById('contactName').value == '' || document.getElementById('contactEmail').value == '') {
-        displaySnackbar('inputRequired');
-    } else {
-        randomBackground();
-        let newContact = {name: document.getElementById('contactName').value, surname: document.getElementById('contactSurname').value, email: document.getElementById('contactEmail').value, phone: document.getElementById('contactPhone').value, contactColor: bgColor};
-        if (newContact.email.search('@') > -1) {
-            contacts.push(newContact);
-            saveContacts();
-            document.getElementById('contactName').value = '';
-            document.getElementById('contactSurname').value = '';
-            document.getElementById('contactEmail').value = '';
-            document.getElementById('contactPhone').value = '';
-            renderLetters();
-            displaySnackbar('contactCreated');
-            document.getElementById('addContactBackground').style.display = 'none';
-        }
-        else {
-            displaySnackbar('incorrectEMail');
-        }
-    }
+/**
+ * This function runs the formvalidation and saves the new contact to the "contacts" array on the ftp server.
+ */
+async function createContact() {
+    randomBackground();
+    let contactPhone;
+    checkForPhoneNumber(contactPhone);
+    let newContact = {name: document.getElementById('contactName').value, surname: document.getElementById('contactSurname').value, email: document.getElementById('contactEmail').value, phone: contactPhone, contactColor: bgColor};
+    contacts.push(newContact);
+    await saveContacts();
+    document.getElementById('contactName').value = '';
+    document.getElementById('contactSurname').value = '';
+    document.getElementById('contactEmail').value = '';
+    document.getElementById('contactPhone').value = '';
+    renderLetters();
+    displaySnackbar('contactCreated');
+    document.getElementById('addContactBackground').style.display = 'none';
 }
 
+/**
+ * This function generates a random color.
+ */
 function randomBackground() {
     let x = Math.floor(Math.random() * 256)
     let y = Math.floor(Math.random() * 256)
@@ -153,29 +157,39 @@ function randomBackground() {
     bgColor = `rgb(${x}, ${y}, ${z})`;
 }
 
+/**
+ * This function saves the contact data on the ftp server.
+ */
 async function saveContacts() {
     let contactsAsString = JSON.stringify(contacts);
     await backend.setItem('contacts', contactsAsString);
 }
 
+// ================================================ OPEN CONTACTS ==========================================================
+/**
+ * This function displays all the contact info.
+ * @param {index} c - index of the current contact
+ */
 function openContactInfo(c) {
     activeContact(c);
-
     let contactInformation = document.getElementById('contactsContent');
     contactInformation.innerHTML = '';
-
     let contactInfoName = contacts[c]['name'];
     let contactInfoSurname = contacts[c]['surname'];
     let contactInfoEmail = contacts[c]['email'];
     let contactInfoPhone = contacts[c]['phone'];
     let contactInfoBgColor = contacts[c]['contactColor'];
-
     nameGetFirstLetter(c);
-
     contactInformation.innerHTML += contactInfoTemplate(firstLetters, contactInfoName, contactInfoSurname, c, contactInfoEmail, contactInfoPhone, contactInfoBgColor);
     document.getElementById('contactIconBig' + c).style.backgroundColor = contactInfoBgColor;
     document.getElementById('contactDetails' + c).style.animation = 'flying 225ms ease-in-out';
+    checkWindowWidth();
+}
 
+/**
+ * This function adds css classes depending on the width of the window.
+ */
+function checkWindowWidth() {
     if (window.innerWidth < 950) {
         document.getElementById('contactsBar').classList.add('d-none');
         document.getElementById('contactsContainer').classList.add('contactsContainerMobile');
@@ -183,10 +197,13 @@ function openContactInfo(c) {
     }
 }
 
+/**
+ * This function highlights the acitve contact.
+ * @param {index} c - index of the current contact
+ */
 function activeContact(c) {
     let currentElement = document.getElementById('contactID' + c);
     let allElements = document.querySelectorAll('.contact');
-
     allElements.forEach((element) => {
         element.style.backgroundColor = '#F5F5F5';
         element.style.color = 'black';
@@ -195,137 +212,99 @@ function activeContact(c) {
     currentElement.style.color = 'white';
 }
 
-function contactInfoTemplate(firstLetters, contactInfoName, contactInfoSurname, c, contactInfoEmail, contactInfoPhone, contactInfoBgColor) {
-    return `
-            <div class="contactDetails" id="contactDetails${c}">
-                <div>
-                    <div>
-                        <div id="contactIconBig${c}" class="contactIconBig" style="background-color: ${contactInfoBgColor};">
-                            <span>${firstLetters}</span>
-                        </div>
-                    </div>
-                    <div class="contactDetailsName">
-                        <div class="name">
-                            <div>
-                                <span>${contactInfoName}</span>
-                                <span>${contactInfoSurname}</span>
-                            </div>
-                        </div>
-                        <div onclick="initCreateTask(), displayPage('mainAddTaskContainerDisplay')" class="addTask">
-                            <img src="../img/plus.svg"><span>Add Task</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="contactInformation">
-                    <div>
-                        <div class="contactInformationHeader">
-                            <div>
-                                <span>Contact Information</span>
-                            </div>
-                            <div class="editContact" onclick="editContact(${c})">
-                                <img src="../img/edit.svg">
-                                <span>Edit Contact</span>
-                            </div>
-                        </div>
-
-                        <div class="contactInformationMain">
-                            <div>
-                                <span>Email</span>
-                                <a href="mailto:${contactInfoEmail}">${contactInfoEmail}</a>
-                            </div>
-                            <div>
-                                <span>Phone</span>
-                                <a href="tel:${contactInfoPhone}">${contactInfoPhone}</a>
-                            </div>
-                        </div>
-
-                        <div class="deleteContact">
-                            <div onclick="deleteContact(${c})">
-                                <span>Delete contact</span>
-                                <img src="../img/delete.svg">
-                            </div>
-                        </div>
-        
-                    </div>
-
-
-                    
-                </div>
-            </div>
-
-        `;
+/**
+ * This function lets you go back to the contactlist.
+ */
+function backToContactsList() {
+    document.getElementById('contactsBar').classList.remove('d-none');
+    document.getElementById('contactsContainer').classList.remove('contactsContainerMobile');
+    document.getElementById('newContactButton').classList.remove('d-none');
 }
 
-// function addTaskViaContact() {
-//     window.location.href = 'addTask.html';
-// }
-
+// ================================================ EDIT CONTACTS ==========================================================
+/**
+ * This function retrieves all the contact date of the current contact and displays them via the edit contacts overlay.
+ * @param {index} i - index of the current contact
+ */
 function editContact(i) {
+    renderSaveChangesForm(i);
+    getCurrentContactData(i);
+    let contactInfoBgColor = contacts[i]['contactColor'];
+    nameGetFirstLetter(i);
+    document.getElementById('contactImg').innerHTML = contactBigImgTemplate(i, firstLetters);
+    document.getElementById('contactImgBg' + i).style.backgroundColor = contactInfoBgColor;
+}
+
+/**
+ * This function retrievs the contact data.
+ * @param {index} i - index of the current contact.
+ */
+function getCurrentContactData(i) {
     document.getElementById('editContactBackground').style.display = 'flex';
     document.getElementById('editContactName').value = contacts[i]['name'];
     document.getElementById('editContactSurname').value = contacts[i]['surname'];
     document.getElementById('editContactEmail').value = contacts[i]['email'];
     document.getElementById('editContactPhone').value = contacts[i]['phone'];
-
-    let contactInfoBgColor = contacts[i]['contactColor'];
-    let saveChangesButton = document.getElementById('saveChangesButton');
-
-    saveChangesButton.innerHTML = `
-                <button class="createContact" onclick="saveChanges(${i})">  
-                    <span>Save</span>
-                </button>
-                `;
-
-    nameGetFirstLetter(i);
-
-    document.getElementById('contactImg').innerHTML = `
-            <div id="contactImgBg${i}" class="contactImgBg">
-                <span>${firstLetters}</span>
-            </div>
-            `;
-    document.getElementById('contactImgBg' + i).style.backgroundColor = contactInfoBgColor;
 }
 
-function saveChanges(i) {
-    if (document.getElementById('editContactName').value == '' || document.getElementById('editContactSurname').value == '' || document.getElementById('editContactEmail').value == '') {
-        displaySnackbar('inputRequired');
-    } else {
-        if (document.getElementById('editContactEmail').value.search('@') > -1) {
+function renderSaveChangesForm(i) {
+    let saveChangesFormContainer = document.getElementById('saveChangesFormContainer');
+    saveChangesFormContainer.innerHTML = "";
+    saveChangesFormContainer.innerHTML += saveChangesFormTemplate(i);
+}
 
-            contacts[i]['name'] = document.getElementById('editContactName').value;
-            contacts[i]['surname'] = document.getElementById('editContactSurname').value;
-            contacts[i]['email'] = document.getElementById('editContactEmail').value;
-            contacts[i]['phone'] = document.getElementById('editContactPhone').value;
-
-            if(document.getElementById('editContactPhone').value == "") {
-                contacts[i]['phone'] = '-';
-            } else {
-                contacts[i]['phone'] = document.getElementById('editContactPhone').value;
-            }
-        
-            saveContacts();
-            renderLetters();
-            displaySnackbar('contactChangesSaved');
-            document.getElementById('editContactBackground').style.display = 'none';
-        } else {
-            displaySnackbar('incorrectEMail');
-        }
-    }
+/**
+ * This function saves the changed contact data.
+ * @param {index} i - index of the current contact
+ */
+async function saveChanges(i) {
+    contacts[i]['name'] = document.getElementById('editContactName').value;
+    contacts[i]['surname'] = document.getElementById('editContactSurname').value;
+    contacts[i]['email'] = document.getElementById('editContactEmail').value;
+    contacts[i]['phone'] = document.getElementById('editContactPhone').value;
+    checkForPhoneNumberEdit(i);
+    await saveContacts();
+    renderLetters();
+    displaySnackbar('contactChangesSaved');
+    document.getElementById('editContactBackground').style.display = 'none';
     openContactInfo(i);
 }
 
+/**
+ * This function checks if the phone number contains a value and adds a "-" if empty.
+ * @param {index} i - index of the current contact 
+ */
+function checkForPhoneNumber(contactPhone) {
+    let contactPhoneInput = document.getElementById('contactPhone');
+    if(contactPhoneInput.value == "") {
+        contactPhone = '-';
+    } else {
+        contactPhone = contactPhoneInput.value;
+    }
+}
+
+/**
+ * This function checks if the phone number contains a value and adds a "-" if empty.
+ * @param {index} i - index of the current contact 
+ */
+function checkForPhoneNumberEdit(i) {
+    let editContactPhoneInput = document.getElementById('editContactPhone');
+    if(editContactPhoneInput.value == "") {
+        contacts[i]['phone'] = '-';
+    } else {
+        contacts[i]['phone'] = editContactPhoneInput.value;
+    }
+}
+
+/**
+ * This function deletes the contact.
+ * @param {index} i - index of the current contact
+ */
 function deleteContact(i) {
     contacts.splice(i, 1);
     saveContacts();
     document.getElementById('contactsContent').innerHTML = '';
     renderLetters();
-}
-
-function backToContactsList() {
-    document.getElementById('contactsBar').classList.remove('d-none');
-    document.getElementById('contactsContainer').classList.remove('contactsContainerMobile');
-    document.getElementById('newContactButton').classList.remove('d-none');
 }
 
 

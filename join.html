@@ -109,26 +109,26 @@
                 </div>
                 <div class="contactInfo">
                     <div>
-                        <div onclick="canclePopup()">
+                        <div onclick="closePopup()">
                             <img src="./img/close.svg">
                         </div>
                     </div>
-                    <form>
+                    <form name="addContactForm" onsubmit="createContact();return false">
                         <div class="inputContainer">
                             <div class="inputFieldContainer">
-                                <input id="contactName" class="inputFields" type="text" placeholder="Name"/>
+                                <input id="contactName" class="inputFields" type="text" placeholder="Name" required/>
                                 <img src="./img/userIcon.svg" class="img" />
                             </div>
                         </div>
                         <div class="inputContainer">
                             <div class="inputFieldContainer">
-                                <input id="contactSurname" class="inputFields" type="text" placeholder="Surname"/>
+                                <input id="contactSurname" class="inputFields" type="text" placeholder="Surname" required/>
                                 <img src="./img/userIcon.svg" class="img" />
                             </div>
                         </div>
                         <div class="inputContainer">
                             <div class="inputFieldContainer">
-                                <input id="contactEmail" class="inputFields" type="email" placeholder="Email"/>
+                                <input id="contactEmail" class="inputFields" type="email" placeholder="Email" required/>
                                 <img src="./img/letter.svg" class="img" />
                             </div>
                         </div>
@@ -138,18 +138,20 @@
                                 <img src="./img/phone.svg" class="img" />
                             </div>
                         </div>
+
+                        <div class="buttons">
+                            <button type="button" class="cancleButton" onclick="canclePopup()">
+                                <span>Cancle</span>
+                                <img src="./img/cancel.svg">
+                            </button>
+                            <button type="submit" class="createContact">
+                                <span>Create contact</span>
+                                <img src="./img/tick.svg">
+                            </button>
+                        </div>
+    
                     </form>
 
-                    <div class="buttons">
-                        <button class="cancleButton" onclick="canclePopup()">
-                            <span>Cancle</span>
-                            <img src="./img/cancel.svg">
-                        </button>
-                        <button class="createContact" onclick="createContact()">
-                            <span>Create contact</span>
-                            <img src="./img/tick.svg">
-                        </button>
-                    </div>
 
                 </div>
             </div>
@@ -171,28 +173,33 @@
                 <div id="contactImg" class="contactImg">
 
                 </div>
-                <div class="contactInfo">
+                <div class="contactInfo" id="contactInfo">
                     <div>
                         <div onclick="canclePopup()">
                             <img src="./img/close.svg">
                         </div>
                     </div>
-                    <form>
+
+                    <div id="saveChangesFormContainer">
+
+                    </div>
+                    <!-- Render form for editing -->
+<!--                <form name="saveChangesForm" onclick="saveChanges(${i});return false">
                         <div class="inputContainer">
                             <div class="inputFieldContainer">
-                                <input id="editContactName" class="inputFields" type="text" placeholder="Name"/>
+                                <input id="editContactName" class="inputFields" type="text" placeholder="Name" required/>
                                 <img src="./img/userIcon.svg" class="img" />
                             </div>
                         </div>
                         <div class="inputContainer">
                             <div class="inputFieldContainer">
-                                <input id="editContactSurname" class="inputFields" type="text" placeholder="Surname"/>
+                                <input id="editContactSurname" class="inputFields" type="text" placeholder="Surname" required/>
                                 <img src="./img/userIcon.svg" class="img" />
                             </div>
                         </div>
                         <div class="inputContainer">
                             <div class="inputFieldContainer">
-                                <input id="editContactEmail" class="inputFields" type="email" placeholder="Email"/>
+                                <input id="editContactEmail" class="inputFields" type="email" placeholder="Email" required/>
                                 <img src="./img/letter.svg" class="img" />
                             </div>
                         </div>
@@ -202,12 +209,14 @@
                                 <img src="./img/phone.svg" class="img" />
                             </div>
                         </div>
+
+                        <div class="buttons editButton" id="saveChangesButton">
+                            <button class="createContact" type="submit">  
+                                <span>Save</span>
+                            </button>
+                        </div>
                     </form>
-
-                    <div class="buttons editButton" id="saveChangesButton">
-                        
-                    </div>
-
+ -->
                 </div>
             </div>
         </div>

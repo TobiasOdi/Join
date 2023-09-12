@@ -34,9 +34,8 @@ function updateHTML() {
             generateProgressbarHtml(i, taskId, progress, numerator, denominator);
         } */
         createBubbles();
-    } else {
-        checkForEmptyCategories();
-    }
+    }     
+    checkForEmptyCategories();
 }
 
 function filterToDo() {
