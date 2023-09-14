@@ -148,8 +148,6 @@ function progressbarTasksTemplate(progress, numerator, denominator) {
     <div class="progressInNumbers">${numerator}/${denominator} Subtasks</div>`;
 }
 
-
-
 /* ========================================= OPEN TASK TEMPLATE ========================================= */
 /**
  * This function return the template for an opened task.
@@ -457,6 +455,7 @@ function defaultCategoryTemplate(categoryName, categoryColor){
  * This function returns the template for the new categories.
  * @param {string} categoryName - name of the category
  * @param {string} categoryColor - color of the category
+ * @param {index} i - index of the category
  * @returns 
  */
 function newCategoryTemplate(categoryName, categoryColor, i){
@@ -486,6 +485,15 @@ function assignToPlaceholderTemplate() {
        `;
 }
 
+/**
+ * This function returns the template for the available users.
+ * @param {number} availableUserId - id the of the user
+ * @param {string} userColor - color of the user
+ * @param {string} firstLettersAvailableUser - first letter of the name and surname
+ * @param {string} userName - name of the user 
+ * @param {string} userSurname  - surname of the user
+ * @returns 
+ */
 function assignUserTemplate(availableUserId, userColor, firstLettersAvailableUser, userName, userSurname) {
     return `
         <div id="${availableUserId}" class="avatarContainer" onclick="selectUser(${availableUserId}), doNotAdd(event)">
@@ -499,6 +507,12 @@ function assignUserTemplate(availableUserId, userColor, firstLettersAvailableUse
     `;
 }
 
+/**
+ * This function returns the template for the selected users in the placeholder container.
+ * @param {string} userColor - color of the user
+ * @param {string} firstLettersAvailableUser  - first letter of the name and surname
+ * @returns 
+ */
 function selectedUsersPlaceholderTemplate(userColor, firstLettersAvailableUser) {
     return `
         <div class="avatarContainer avatarContainerSelected">
@@ -509,6 +523,11 @@ function selectedUsersPlaceholderTemplate(userColor, firstLettersAvailableUser) 
     `;
 }
 
+/**
+ * This function returns the template of the bubble for the users that are not beeing displayed.
+ * @param {number} remainingUsers - number of the remaining users that are not displayed
+ * @returns 
+ */
 function selectedUsersPlaceholderTemplateOthers(remainingUsers) {
     return `
         <div class="avatarContainer avatarContainerSelected">
@@ -520,7 +539,12 @@ function selectedUsersPlaceholderTemplateOthers(remainingUsers) {
 }
 
 /* ========================================= CONTACTS TEMPLATES ========================================= */
-
+/**
+ * This function returns the template of a contact container in the contact list.
+ * @param {index} i - index of the contact
+ * @param {string} letter - first letter of the name and surname of the contact
+ * @returns 
+ */
 function contactContainerTemplate(i, letter) {
     return `
         <div id='contactContainer${i}' class="contactContainer">
@@ -534,6 +558,16 @@ function contactContainerTemplate(i, letter) {
     `;
 }
 
+/**
+ * This function returns the template of a contact in the contact list.
+ * @param {index} c - index of the contact
+ * @param {string} contactBgColor - color of the contact
+ * @param {string} firstLetters - first letter of the name and surname of the contact
+ * @param {string} contactListName - name of the contact
+ * @param {string} contactListSurname - surname of the contact
+ * @param {string} contactEmail - email address of the contact
+ * @returns 
+ */
 function sortedContactsTemplate(c, contactBgColor, firstLetters, contactListName, contactListSurname, contactEmail) {
     return `
         <div id="contactID${c}" class="contact" onclick="openContactInfo(${c})">
@@ -553,6 +587,17 @@ function sortedContactsTemplate(c, contactBgColor, firstLetters, contactListName
     `;
 }
 
+/**
+ * This function returns the template of the contact information of a selected contact.
+ * @param {string} firstLetters - first letter of the name and surname of the contact
+ * @param {string} contactInfoName - name of the contact
+ * @param {string} contactInfoSurname surname of the contact
+ * @param {index} c - index of the contact
+ * @param {string} contactInfoEmail - email address of the contact
+ * @param {number} contactInfoPhone - phone number of the contact
+ * @param {string} contactInfoBgColor - color of the contact
+ * @returns 
+ */
 function contactInfoTemplate(firstLetters, contactInfoName, contactInfoSurname, c, contactInfoEmail, contactInfoPhone, contactInfoBgColor) {
     return `
             <div class="contactDetails" id="contactDetails${c}">
@@ -621,6 +666,12 @@ function contactInfoTemplate(firstLetters, contactInfoName, contactInfoSurname, 
     `;
 } */
 
+/**
+ * This function returns the template of the big contact icon of the contact information. 
+ * @param {index} i - index of the contact
+ * @param {string} firstLetters - first letter of the name and surname of the contact
+ * @returns 
+ */
 function contactBigImgTemplate(i, firstLetters) {
     return `
         <div id="contactImgBg${i}" class="contactImgBg">
@@ -629,6 +680,11 @@ function contactBigImgTemplate(i, firstLetters) {
     `;
 }
 
+/**
+ * This function returns the template for the edit contact form.
+ * @param {index} i - index of the contact
+ * @returns 
+ */
 function saveChangesFormTemplate(i) {
     return `
         <form name="saveChangesForm" onsubmit="saveChanges(${i});return false">

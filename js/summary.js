@@ -1,4 +1,7 @@
 /* =============================== SUMMARY FUNCTIONS =================================== */
+/**
+ * This function runs all the counter functions for the summary.
+ */
 function counters() {
     taskCounter();
     inProgressCounter();
@@ -11,6 +14,9 @@ function counters() {
     displayUserName();
 }
 
+/**
+ * This function counts how many task there are.
+ */
 function taskCounter() {
     let taskCounter = tasks.length;
     document.getElementById("taskCounter").innerHTML = `
@@ -18,30 +24,9 @@ function taskCounter() {
     `;
 }
 
-function awaitingFeedbackCounter() {
-    let awaitingFeedbackCounter = tasks.filter(t => t["statusCategory"] == "awaitingFeedback");
-    awaitingFeedbackCounter = awaitingFeedbackCounter.length;
-    document.getElementById("awaitingFeedbackCounter").innerHTML = `
-    ${awaitingFeedbackCounter}
-    `;
-}
-
-function inProgressCounter() {
-    let inProgressCounter = tasks.filter(t => t["statusCategory"] == "inProgress");
-    inProgressCounter = inProgressCounter.length;
-    document.getElementById("inProgressCounter").innerHTML = `
-    ${inProgressCounter}
-    `;
-}
-
-function urgentCounter() {
-    let urgentCounter = tasks.filter(t => t["priorityValue"] == "urgent");
-    urgentCounter = urgentCounter.length;
-    document.getElementById("urgentCounter").innerHTML = `
-    ${urgentCounter}
-    `;
-}
-
+/**
+ * This functions counts how many tasks are in the category "toDo".
+ */
 function todoCounter() {
     let toDoCounter = tasks.filter(t => t["statusCategory"] == "toDo");
     toDoCounter = toDoCounter.length;
@@ -50,6 +35,31 @@ function todoCounter() {
     `;
 }
 
+/**
+ * This functions counts how many tasks are in the category "inProgress".
+ */
+function inProgressCounter() {
+    let inProgressCounter = tasks.filter(t => t["statusCategory"] == "inProgress");
+    inProgressCounter = inProgressCounter.length;
+    document.getElementById("inProgressCounter").innerHTML = `
+    ${inProgressCounter}
+    `;
+}
+
+/**
+ * This functions counts how many tasks are in the category "awaitingFeedback".
+ */
+function awaitingFeedbackCounter() {
+    let awaitingFeedbackCounter = tasks.filter(t => t["statusCategory"] == "awaitingFeedback");
+    awaitingFeedbackCounter = awaitingFeedbackCounter.length;
+    document.getElementById("awaitingFeedbackCounter").innerHTML = `
+    ${awaitingFeedbackCounter}
+    `;
+}
+
+/**
+ * This functions counts how many tasks are in the category "done".
+ */
 function doneCounter() {
     let doneCounter = tasks.filter(t => t["statusCategory"] == "done");
     doneCounter = doneCounter.length;
@@ -58,6 +68,21 @@ function doneCounter() {
     `;
 }
 
+/**
+ * This functions counts how many tasks are urgent.
+ */
+function urgentCounter() {
+    let urgentCounter = tasks.filter(t => t["priorityValue"] == "urgent");
+    urgentCounter = urgentCounter.length;
+    document.getElementById("urgentCounter").innerHTML = `
+    ${urgentCounter}
+    `;
+}
+
+/**
+ * This function returns the most urgent deadline.
+ * @returns 
+ */
 function deadlineDate() {
     let sortedDueDate = tasks
         .filter((t) => t.dueDate)
@@ -75,6 +100,9 @@ function deadlineDate() {
     document.getElementById("deadlineDate").innerHTML = closestDateString;
 }
 
+/**
+ * This function displays the greeting depending on the current time.
+ */
 function greeting() {
     let currentdate = new Date();
     let datetime = currentdate.getHours();
@@ -87,6 +115,9 @@ function greeting() {
     `;
 }
 
+/**
+ * This function displays the user name of the logen in user.
+ */
 function displayUserName() {
     let userName = localStorage.getItem("userName");
     let abbreviatedName = abbreviateName(userName, 10);
@@ -101,6 +132,12 @@ function displayUserName() {
     }
 }
 
+/**
+ * This function cuts the displayed name of the user if it is too long.
+ * @param {string} name - name of the user
+ * @param {number} maxLength - number of the allowed characters
+ * @returns 
+ */
 function abbreviateName(name, maxLength) {
     if (name.length <= maxLength) {
         return name;

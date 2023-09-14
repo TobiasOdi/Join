@@ -189,9 +189,9 @@ function bubblesMoreThanThree(j, bubbleTaskId) {
 }
 
 /**
- * This function 
- * @param {*} assignedUsers - 
- * @param {*} i - 
+ * This function returns the first letter of the name and surname.
+ * @param {array} assignedUsers - array of the assigned users ot the current task
+ * @param {index} i - index
  * @returns 
  */
 function getFirstLetter(assignedUsers, i) {
@@ -206,6 +206,12 @@ function getFirstLetter(assignedUsers, i) {
     return assignFirstLetters;
 }
 
+/**
+ * This function returns the color of the user.
+ * @param {array} assignedUsers - array of the assigned users ot the current task
+ * @param {index} i - index
+ * @returns 
+ */
 function getUserColor(assignedUsers, i) {
     let assignedUser = assignedUsers[i];
     let existingUser = users.find(u => u.userid == parseInt(assignedUser));
@@ -214,6 +220,11 @@ function getUserColor(assignedUsers, i) {
     return assignColor;
 }
 
+/**
+ * This function renders the bubble of the remaining count of the users that are not beeing rendered.
+ * @param {index} j - index of the current task
+ * @param {number} bubbleTaskId - id of the bubble
+ */
 function getRemainingCount(j, bubbleTaskId) {
     let remainingCount = tasks[j]["assignTo"].length - 2;
     document.getElementById(`userBubble${[bubbleTaskId]}`).innerHTML += `
@@ -223,6 +234,10 @@ function getRemainingCount(j, bubbleTaskId) {
     userBubbleOne.style.backgroundColor = "black";
 }
 
+/**
+ * This function generates and returns a random color.
+ * @returns 
+ */
 function generateRandomColor() {
     let r = Math.floor(Math.random() * 256);
     let g = Math.floor(Math.random() * 256);
@@ -230,6 +245,9 @@ function generateRandomColor() {
     return `rgb(${r}, ${g}, ${b})`;
 }
 
+/**
+ * This function checks if a category is empty and renders a placeholder.
+ */
 function checkForEmptyCategories() {
     let toDoCategory = document.getElementById('toDo');
     let inProgressCategory = document.getElementById('inProgress');
@@ -272,70 +290,100 @@ function checkForEmptyCategories() {
 /* ============================================================================ DRAG & DROP ======================================================================== */
 
 //Source: www.w3schools.com/html/html5_draganddrop.asp
+/**
+ * This function allows you to drag an element.
+ * @param {number} id - id of the task
+ */
 function startDragging(id) {
     currentDraggedElement = tasks.findIndex(obj => obj.taskId === id);
 }
 
+/**
+ * This function changes the category to the 
+ * @param {string} statusCategory - new category
+ */
 function moveTo(statusCategory) {
     tasks[currentDraggedElement]["statusCategory"] = statusCategory;
     saveTasks();
     updateHTML();
 }
 
+/**
+ * This function highlights the container if element is hovering over.
+ * @param {number} id - id of the current task 
+ */
 function highlight(id) {
     if(document.getElementById(id) !== id)
     document.getElementById(id).classList.add('dragAreahighlight');
 }
 
+/**
+ * This function removes the highlight of the container if element is dragged away or placed.
+ * @param {*} id - id of the current task
+ */
 function removeHighlight(id) {
     document.getElementById(id).classList.remove('dragAreahighlight');
 }
 
+/**
+ * This function allows you to drop an element into a container.
+ * @param {*} ev 
+ */
 function allowDrop(ev) {
     ev.preventDefault();
 }
 
+/**
+ * This function prevents an a function of a parent elemtn beeing executed when clicking on a child element.
+ * @param {*} event 
+ */
 function doNotOpenTask(event) {
     event.stopPropagation();
 }
 
 /* ======================================================================= TASK FUNCTIONS ================================================================================= */
+/**
+ * This function pushes the task to the previous category.
+ * @param {string} category - current category of the task
+ * @param {number} taskId - id of the task
+ */
 async function pushToPreviousCategory(category, taskId) {
     let currentTaskId = tasks.find(t => t.taskId == taskId);
     let currentTask = tasks.indexOf(currentTaskId);
     if(category == 'done') {
         tasks[currentTask]['statusCategory'] = 'awaitingFeedback';
-        await saveTasks();
-        updateHTML();
     } else if(category == 'awaitingFeedback') {
         tasks[currentTask]['statusCategory'] = 'inProgress'; 
-        await saveTasks();
-        updateHTML();
     } else if(category == 'inProgress') {
         tasks[currentTask]['statusCategory'] = 'toDo';
-        await saveTasks();
-        updateHTML();
     } 
+    await saveTasks();
+    updateHTML();
 }
 
+/**
+ * This function pushes the task to the next category.
+ * @param {*} category - current category of the task
+ * @param {*} taskId - id of the task
+ */
 async function pushToNextCategory(category, taskId) {
     let currentTaskId = tasks.find(t => t.taskId == taskId);
     let currentTask = tasks.indexOf(currentTaskId);
     if(category == 'toDo') {
         tasks[currentTask]['statusCategory'] = 'inProgress';
-        await saveTasks();
-        updateHTML();
     } else if(category == 'inProgress') {
         tasks[currentTask]['statusCategory'] = 'awaitingFeedback'; 
-        await saveTasks();
-        updateHTML();
     } else if(category == 'awaitingFeedback') {
         tasks[currentTask]['statusCategory'] = 'done';
-        await saveTasks();
-        updateHTML();
     }
+    await saveTasks();
+    updateHTML();
 }
 
+/**
+ * This function opens a task and displays the task information.
+ * @param {number} currentTaskId - id of the task
+ */
 function openTask(currentTaskId) {
     document.getElementById('openTaskBackground').style.display = 'flex';
     let existingTask = tasks.find(u => u.taskId == currentTaskId)
@@ -348,6 +396,10 @@ function openTask(currentTaskId) {
     prioritySymbol(currentTask);
 }
 
+/**
+ * This function deletes the current task.
+ * @param {index} currentTask - index of the current task
+ */
 async function deleteTask(currentTask) {
     tasks.splice(currentTask, 1);
     await saveTasks();
@@ -356,12 +408,15 @@ async function deleteTask(currentTask) {
     document.getElementById('openTaskBackground').style.display = 'none';
 }
 
+/**
+ * This function renders the subtasks of the current task.
+ * @param {index} currentTask - index of the current task
+ */
 function renderSubtasks(currentTask){
     let userSubtasks = tasks[currentTask]['subtasks'];
     for (let j = 0; j < userSubtasks.length; j++) {
         let subtask = userSubtasks[j]['subtaskName'];
         let subtaskStatus = userSubtasks[j]['status'];
-
         if(subtaskStatus == 'undone') {
             document.getElementById('subtaskContainer').innerHTML += renderSubtasksUndoneTemplate(subtask);
         } else {
@@ -370,23 +425,28 @@ function renderSubtasks(currentTask){
     }
 }
 
+/**
+ * This function renders the users of the current task.
+ * @param {index} currentTask - index of the current task
+ */
 function renderAssignedUsers(currentTask) {
     let assignedUsers = tasks[currentTask]['assignTo'];
-
     for (let i = 0; i < assignedUsers.length; i++) {
         let assignedUser = assignedUsers[i];
         let existingAssignUser = users.find(u => u.userid == assignedUser)
         let currentAssignUser = users.indexOf(existingAssignUser);
-
         let assignName = users[currentAssignUser]['name'];
         let assignSurname = users[currentAssignUser]['surname'];
         let assignFirstLetters = assignName.charAt(0) + assignSurname.charAt(0);
         let assignColor = users[currentAssignUser]['userColor'];
-
         document.getElementById('assignedToContainer').innerHTML += renderAssignedUserTemplate(assignColor, assignFirstLetters, assignName, assignSurname);
     }
 }
 
+/**
+ * This function renders the priority of the current task.
+ * @param {index} currentTask - index of the current task
+ */
 function prioritySymbol(currentTask) {
     let currentPriority = tasks[currentTask]['priorityValue'];
     let priorityOpenTask = document.getElementById('priorityOpenTask');
@@ -400,6 +460,10 @@ function prioritySymbol(currentTask) {
     }
 }
 
+/**
+ * This function retrieves the task data and lets you edit tehm.
+ * @param {index} currentTask - index of the current task
+ */
 function editTask(currentTask) {
     document.getElementById('openTaskContainer').innerHTML = editOpenTaskTemplate(currentTask);
 
@@ -420,6 +484,10 @@ function editTask(currentTask) {
     renderAssignedUsersEdit(currentTask);
 }
 
+/**
+ * This function renders the priority buttons to set the priority.
+ * @param {index} currentTask - index of the current task
+ */
 function renderUrgency(currentTask) {
     if (tasks[currentTask]['priorityValue'] == 'urgent') {
         selectUrgentEdit();
@@ -428,10 +496,13 @@ function renderUrgency(currentTask) {
     } else if (tasks[currentTask]['priorityValue'] == 'low') {
         selectLowEdit();
     }
-
     priorityValueEdit = tasks[currentTask]['priorityValue'];
 }
 
+/**
+ * This function renders the subtasks and lets you mark them as done.
+ * @param {index} currentTask - index of the current task
+ */
 function renderSubtasksEdit(currentTask){
     let userSubtasks = tasks[currentTask]['subtasks'];
     for (let j = 0; j < userSubtasks.length; j++) {
@@ -447,20 +518,27 @@ function renderSubtasksEdit(currentTask){
     }
 };
 
+/**
+ * This function saves a completed subtask and.
+ * @param {index} subtaskIndex - index of the current subtask
+ * @param {index} currentTask - index of the current task
+ */
 async function saveCompletedTasks(subtaskIndex, currentTask) {
     let currentSubtask = document.getElementById('subtask' + subtaskIndex);
     if(!currentSubtask.checked == true) {
         tasks[currentTask]['subtasks'][subtaskIndex]['status'] = 'undone';
     } 
-
     if(currentSubtask.checked == true) {
         tasks[currentTask]['subtasks'][subtaskIndex]['status'] = 'done';
     } 
 };
 
+/**
+ * This function renders the users of the current task to select more or deselect them.
+ * @param {index} currentTask - index of the current task
+ */
 function renderAssignedUsersEdit(currentTask) {
     let assignedUsers = tasks[currentTask]['assignTo'];
-
     for (let j = 0; j < users.length; j++) {
         let userid = users[j]['userid'];
         let assignName = users[j]['name'];
@@ -475,6 +553,9 @@ function renderAssignedUsersEdit(currentTask) {
     }
 }
 
+/**
+ * This function saves the selected users.
+ */
 function saveSelectedUsersEdit() {
     document.querySelectorAll('input[type="checkbox"]').forEach((checkbox) => {
         checkbox.addEventListener('change', (event) => {
@@ -494,6 +575,10 @@ function saveSelectedUsersEdit() {
     });
 }
 
+/**
+ * This function saves the data of the changed task on the ftp server.
+ * @param {index} currentTask - index of the current task
+ */
 async function saveEditedTask(currentTask) {
     let editCategory = document.getElementById('editSelectCategory').value;
     tasks[currentTask]['category'] = editCategory;
@@ -509,16 +594,28 @@ async function saveEditedTask(currentTask) {
     document.getElementById('openTaskBackground').style.display = 'none';
 }
 
+/**
+ * This function saves the chosen priority.
+ * @param {string} priority - priority of the task
+ * @param {index} currentTask - index of the current task
+ */
 function savePriorityValueEdit(priority, currentTask) {
     priorityValueEdit = priority;
 }
 
+/**
+ * This function closes the task.
+ * @param {string} priority - priority of the task
+ * @param {index} currentTask - index of the current task
+ */
 function closeTask(priority, currentTask) {
     savePriorityValueEdit(priority, currentTask);
     document.getElementById('openTaskBackground').style.display = 'none';
 }
 
-
+/**
+ * This function renders the tasks that containt the searched values.
+ */
 function searchFunction() {
     let originalToDos = tasks;
     let input = document.getElementById('searchValue');
