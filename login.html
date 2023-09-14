@@ -40,8 +40,8 @@
       <div class="signUpContainer">
         <div class="signUpField">
           <div>Not a Join user?</div>
-          <button class="buttonDark">
-            <a href="./templates/signup.html">Sign Up</a>
+          <button class="buttonDark" onclick="goToSignup()">
+            <a>Sign Up</a>
           </button>
         </div>
       </div>  
@@ -59,16 +59,18 @@
       </div>
       <!-- =================================== -->
 
-      <!-- == Privacy Policy - w3-include-html ==-->
+<!--
+      ===== Privacy Policy - w3-include-html =====
       <div class="arrowBackLegalNotice" id="arrowBackPrivacyPolicy1" onclick="back('mainPrivacyPolicyContainerDisplay','1', 'arrowBackPrivacyPolicy')">
         <img src="./img/arrowLeft.svg">
       </div> 
       <div class="mainLegalNoticeContainerDisplay" id="mainPrivacyPolicyContainerDisplay1">
         <div w3-include-html="./templates/privacyPolicy.html"></div>
       </div>
-      <!-- =================================== -->
+      ============================================= 
+-->
 
-      <div class="loginScreen" id="loginScreen1">
+<div class="loginScreen" id="loginScreen1">
 
         <div class="loginHeading">
           <h1>Log in</h1>
@@ -112,8 +114,8 @@
     </div>
 
     <div class="policies" id="policies1">
-      <div onclick="displayPageLogin('mainPrivacyPolicyContainerDisplay', '1','arrowBackPrivacyPolicy')">Privacy Policy</div>
-      <div onclick="displayPageLogin('mainLegalNoticeContainerDisplay', '1', 'arrowBackLegalNotice')">Legal notice</div>
+<!--       <div onclick="displayPageLogin('mainPrivacyPolicyContainerDisplay', '1','arrowBackPrivacyPolicy')">Privacy Policy</div>
+ -->      <div onclick="displayPageLogin('mainLegalNoticeContainerDisplay', '1', 'arrowBackLegalNotice')">Legal notice</div>
     </div>
 
   </div>

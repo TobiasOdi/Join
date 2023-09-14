@@ -36,14 +36,6 @@ function updateHTML() {
             calculateProgressbar(index, subtasksProgress, numerator, denominator);
             generateProgressbarHtml(index, taskId, progress, numerator, denominator);
         }
-
-        /* for (let i = 0; i < tasks.length; i++) {
-            let taskId = tasks[i]['taskId'];
-            let subtasksProgress;
-
-            calculateProgressbar(i, subtasksProgress, numerator, denominator);
-            generateProgressbarHtml(i, taskId, progress, numerator, denominator);
-        } */
         createBubbles();
     }     
     checkForEmptyCategories();
@@ -391,37 +383,25 @@ function openTask(currentTaskId) {
     let openTaskContainer = document.getElementById('openTaskContainer');
     openTaskContainer.innerHTML = '';
     openTaskContainer.innerHTML = openTaskTemplate(currentTask);
-    renderSubtasks(currentTask);
-    renderAssignedUsers(currentTask);
     prioritySymbol(currentTask);
+    renderAssignedUsers(currentTask);
+    renderSubtasks(currentTask);
 }
 
 /**
- * This function deletes the current task.
+ * This function renders the priority of the current task.
  * @param {index} currentTask - index of the current task
  */
-async function deleteTask(currentTask) {
-    tasks.splice(currentTask, 1);
-    await saveTasks();
-    await init();
-    updateHTML();
-    document.getElementById('openTaskBackground').style.display = 'none';
-}
+function prioritySymbol(currentTask) {
+    let currentPriority = tasks[currentTask]['priorityValue'];
+    let priorityOpenTask = document.getElementById('priorityOpenTask');
 
-/**
- * This function renders the subtasks of the current task.
- * @param {index} currentTask - index of the current task
- */
-function renderSubtasks(currentTask){
-    let userSubtasks = tasks[currentTask]['subtasks'];
-    for (let j = 0; j < userSubtasks.length; j++) {
-        let subtask = userSubtasks[j]['subtaskName'];
-        let subtaskStatus = userSubtasks[j]['status'];
-        if(subtaskStatus == 'undone') {
-            document.getElementById('subtaskContainer').innerHTML += renderSubtasksUndoneTemplate(subtask);
-        } else {
-            document.getElementById('subtaskContainer').innerHTML += renderSubtasksTemplate(subtask);
-        }
+    if (currentPriority == 'urgent') {
+        priorityOpenTask.innerHTML += `<img id="openTaskImgPriority" src="../img/urgent.svg">`;
+    } else if (currentPriority == 'medium') {
+        priorityOpenTask.innerHTML += `<img id="openTaskImgPriority" src="../img/medium.svg">`;
+    } else if (currentPriority == 'low') {
+        priorityOpenTask.innerHTML += `<img id="openTaskImgPriority" src="../img/low.svg">`;
     }
 }
 
@@ -444,20 +424,32 @@ function renderAssignedUsers(currentTask) {
 }
 
 /**
- * This function renders the priority of the current task.
+ * This function renders the subtasks of the current task.
  * @param {index} currentTask - index of the current task
  */
-function prioritySymbol(currentTask) {
-    let currentPriority = tasks[currentTask]['priorityValue'];
-    let priorityOpenTask = document.getElementById('priorityOpenTask');
-
-    if (currentPriority == 'urgent') {
-        priorityOpenTask.innerHTML += `<img id="openTaskImgPriority" src="../img/urgent.svg">`;
-    } else if (currentPriority == 'medium') {
-        priorityOpenTask.innerHTML += `<img id="openTaskImgPriority" src="../img/medium.svg">`;
-    } else if (currentPriority == 'low') {
-        priorityOpenTask.innerHTML += `<img id="openTaskImgPriority" src="../img/low.svg">`;
+function renderSubtasks(currentTask){
+    let userSubtasks = tasks[currentTask]['subtasks'];
+    for (let j = 0; j < userSubtasks.length; j++) {
+        let subtask = userSubtasks[j]['subtaskName'];
+        let subtaskStatus = userSubtasks[j]['status'];
+        if(subtaskStatus == 'undone') {
+            document.getElementById('subtaskContainer').innerHTML += renderSubtasksUndoneTemplate(subtask);
+        } else {
+            document.getElementById('subtaskContainer').innerHTML += renderSubtasksTemplate(subtask);
+        }
     }
+}
+
+/**
+ * This function deletes the current task.
+ * @param {index} currentTask - index of the current task
+ */
+async function deleteTask(currentTask) {
+    tasks.splice(currentTask, 1);
+    await saveTasks();
+    await init();
+    updateHTML();
+    document.getElementById('openTaskBackground').style.display = 'none';
 }
 
 /**

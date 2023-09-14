@@ -198,6 +198,13 @@ window.addEventListener('keydown', (event) => {
 });
 
 /**
+ * This function navigates you to the sign up screen.
+ */
+function goToSignup() {
+    window.location.href = './templates/signup.html';
+}
+
+/**
  * This function logs you into an existing user account.
  */
 function login() {
