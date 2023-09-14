@@ -64,6 +64,7 @@ async function init() {
     tasks = JSON.parse(backend.getItem('tasks')) || [];
     contacts = JSON.parse(backend.getItem('contacts')) || [];
     categories = JSON.parse(backend.getItem('categories')) || [];
+    activeTab('summary');
     setInterval(setUserColor, 200);
 }
 
@@ -389,16 +390,14 @@ function displaySnackbar(popupId) {
 /**
  * This funciton displays the active tab on the side nav bar.
  */
-function activeTab() {
-    let currentElement = document.getElementById('contactID' + c);
-    let allElements = document.querySelectorAll('.contact');
+function activeTab(tab) {
+    let currentElement = document.getElementById(tab + "Tab");
+    let allTabs = document.querySelectorAll('.tab');
 
-    allElements.forEach((element) => {
-        element.style.backgroundColor = '#F5F5F5';
-        element.style.color = 'black';
+    allTabs.forEach((element) => {
+        element.style.backgroundColor = '#2a3647';
     })
-    currentElement.style.backgroundColor = '#2A3647';
-    currentElement.style.color = 'white';
+    currentElement.style.backgroundColor = '#091931';
 }
 
 

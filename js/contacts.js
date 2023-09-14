@@ -6,6 +6,8 @@ let contactName = document.getElementById('contactName');
 let contactSurname = document.getElementById('contactSurname');
 let contactEmail = document.getElementById('contactEmail');
 let contactPhone = document.getElementById('contactPhone');
+let contactPhoneValue;
+
 
 let editName = document.getElementById('editContactName');
 let editSurname = document.getElementById('editContactSurname');
@@ -132,9 +134,8 @@ function doNotClose(event) {
  */
 async function createContact() {
     randomBackground();
-    let contactPhone;
-    checkForPhoneNumber(contactPhone);
-    let newContact = {name: document.getElementById('contactName').value, surname: document.getElementById('contactSurname').value, email: document.getElementById('contactEmail').value, phone: contactPhone, contactColor: bgColor};
+    checkForPhoneNumber();
+    let newContact = {name: document.getElementById('contactName').value, surname: document.getElementById('contactSurname').value, email: document.getElementById('contactEmail').value, phone: contactPhoneValue, contactColor: bgColor};
     contacts.push(newContact);
     await saveContacts();
     document.getElementById('contactName').value = '';
@@ -273,12 +274,11 @@ async function saveChanges(i) {
  * This function checks if the phone number contains a value and adds a "-" if empty.
  * @param {index} i - index of the current contact 
  */
-function checkForPhoneNumber(contactPhone) {
-    let contactPhoneInput = document.getElementById('contactPhone');
-    if(contactPhoneInput.value == "") {
-        contactPhone = '-';
+function checkForPhoneNumber() {
+    if(document.getElementById('contactPhone').value == "") {
+        contactPhoneValue = '-';
     } else {
-        contactPhone = contactPhoneInput.value;
+        contactPhoneValue = document.getElementById('contactPhone').value;
     }
 }
 
