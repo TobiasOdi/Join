@@ -1,3 +1,4 @@
+/* ================================================== MAIN CONTAINER / CONTACT LIST ============================================== */
 .contactsMainContainer {
   display: flex;
   width: 100%;
@@ -128,8 +129,7 @@
   width: 100%;
 }
 
-/* =================================== CHECK ================================== */
-
+/* ================================================== INDIVIDUAL CONTACT IN CONTACT LIST ============================================== */
 .contact {
   display: flex;
   justify-content: flex-start;
@@ -191,6 +191,7 @@
   text-decoration: none;
 }
 
+/* ================================================== CONTACT INFORMATION ============================================== */
 .contactsContainer {
   display: flex;
   flex-direction: column;
@@ -452,7 +453,7 @@
   color: red;
 }
 
-/* ================= New Contact Button ============== */
+/* ================================================== CREATE NEW CONTACT BUTTON ============================================== */
 .newContactButton {
   position: absolute;
   right: 32px;
@@ -475,7 +476,7 @@
   font-size: 21px;
 }
 
-/* ================= Add Contact Popup ============== */
+/* ================================================== CREATE NEW CONTACT SCREEN ============================================== */
 .addContactBackground {
   position: absolute;
   top: 0;
@@ -715,8 +716,7 @@
   border-radius: 30px;
 }
 
-
-/* ================================== CLASSES ADD/REMOVE =======================================*/
+/* ===================================================== CLASSES ADD/REMOV =========================================================*/
 .addContactLeftSide {
   padding: 30px;
 }
@@ -726,7 +726,7 @@
 }
 
 
-/* ================================== RESPONSIVENESS =======================================*/
+/* ===================================================== RESPONSIVENESS =========================================================*/
 @media (max-width: 1235px) {
   .contactsContentHeader > div {
     margin-right: 20px;
@@ -1095,7 +1095,7 @@
 }
 }
 
-/* ====================== CLASSES ADD/REMOVE ======================== */
+/* ===================================================== CLASSES ADD/REMOV =========================================================*/
 .d-none {
   display: none;
 }
@@ -1110,14 +1110,9 @@
   z-index: 1;
 }
 
-
-
 .addContactLeftSide h1 {
   font-size: 35px;
 }
-
-
-
 
 /* .contactsContainer {
     height: calc(100vh - 89px);

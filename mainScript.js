@@ -11,6 +11,9 @@ let lightorange = "#FFA800";
 let green = "#7AE229";  
 
 /* ======================================================= INCLUDE HTML ========================================================== */
+/**
+ * This function adds the html template to the correct container.
+ */
 async function includeHTMLLogin() {
     let includeElements = document.querySelectorAll('[w3-include-html]');
     for (let i = 0; i < includeElements.length; i++) {
@@ -25,6 +28,9 @@ async function includeHTMLLogin() {
     }
 }
 
+/**
+ * This function adds the html template to the correct container.
+ */
 //Source: https://developer-akademie.teachable.com/courses/902235/lectures/31232815
 async function includeHTML() {
     let includeElements = document.querySelectorAll('[w3-include-html]');

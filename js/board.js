@@ -11,7 +11,18 @@ let numerator;
 let denominator;
 let progress;
 
+/* ============================================================================ INIT BOARD ======================================================================== */
+/**
+ * This function runs the function to render the tasks.
+ */
+function initBoard() {
+    updateHTML();
+}
+
 /* ============================================================================ BOARD FUNCTIONS ======================================================================== */
+/**
+ * This function renders the tasks to the correct category.
+ */
 function updateHTML() {
     if(tasks.length > 0) {
         for (let index = 0; index < tasks.length; index++) {
@@ -38,6 +49,9 @@ function updateHTML() {
     checkForEmptyCategories();
 }
 
+/**
+ * This function filters all the tasks that have the category "toDo".
+ */
 function filterToDo() {
     let toDo = tasks.filter(t => t["statusCategory"] == "toDo");
     document.getElementById("toDo").innerHTML = ``;
@@ -47,6 +61,9 @@ function filterToDo() {
     }
 }
 
+/**
+ * This function filters all the tasks that have the category "inProgress".
+ */
 function filterInProgress() {
     let inProgress = tasks.filter(t => t["statusCategory"] == "inProgress");
     document.getElementById("inProgress").innerHTML = ``;
@@ -56,6 +73,9 @@ function filterInProgress() {
     }
 }
 
+/**
+ * This function filters all the tasks that have the category "awaitingFeedback".
+ */
 function filterAwaitingFeedback() {
     let awaitingFeedback = tasks.filter(t => t["statusCategory"] == "awaitingFeedback");
     document.getElementById("awaitingFeedback").innerHTML = ``;
@@ -65,6 +85,9 @@ function filterAwaitingFeedback() {
     }
 }
 
+/**
+ * This function filters all the tasks that have the category "done".
+ */
 function filterDone() {
     let done = tasks.filter(t => t["statusCategory"] == "done");
     document.getElementById("done").innerHTML = ``;
@@ -74,6 +97,10 @@ function filterDone() {
     }
 }
 
+/**
+ * This function calculates the values for the progressbar of the subtasks.
+ * @param {index} i - index of the current task
+ */
 function calculateProgressbar(i) {
     subtasksProgress = tasks[i]['subtasks'];
     numerator = 0;
@@ -90,6 +117,14 @@ function calculateProgressbar(i) {
     progress = progress * 100;
 }
 
+/**
+ * This function calculates renders the progressbar of the subtasks.
+ * @param {index} i - index of the current task
+ * @param {number} taskId - id of the current task
+ * @param {%} progress - percentage of the done subtasks
+ * @param {number} numerator - value "0"
+ * @param {number} denominator - length of the subtask array of the current task
+ */
 function generateProgressbarHtml(i, taskId, progress, numerator, denominator) {
     if(tasks[i]['subtasks'].length == 0) {
 
@@ -100,6 +135,9 @@ function generateProgressbarHtml(i, taskId, progress, numerator, denominator) {
     }
 }
 
+/**
+ * This function renders the assigend users.
+ */
 function createBubbles() {
     for (let j = 0; j < tasks.length; j++) {
         let bubbleTaskId = tasks[j]["taskId"];
@@ -114,6 +152,11 @@ function createBubbles() {
     }
 }
 
+/**
+ * This function renders the assigend users if there are three or less.
+ * @param {index} j - index of the current task
+ * @param {number} bubbleTaskId - id of the bubble
+ */
 function bubblesLessThanThree(j, bubbleTaskId) {
     for (let i = 0; i < tasks[j]["assignTo"].length; i++) {
         let assignedUsers = tasks[j]['assignTo'];
@@ -127,6 +170,11 @@ function bubblesLessThanThree(j, bubbleTaskId) {
     }
 }
 
+/**
+ * This function renders the assigend users if there are more then three.
+ * @param {*} j - index of the current task
+ * @param {*} bubbleTaskId - id of the bubble
+ */
 function bubblesMoreThanThree(j, bubbleTaskId) {
     for (let i = 0; i < 2; i++) {
         let assignedUsers = tasks[j]['assignTo'];
@@ -140,6 +188,12 @@ function bubblesMoreThanThree(j, bubbleTaskId) {
     }
 }
 
+/**
+ * This function 
+ * @param {*} assignedUsers - 
+ * @param {*} i - 
+ * @returns 
+ */
 function getFirstLetter(assignedUsers, i) {
     let assignedUser = assignedUsers[i];
     let existingUser = users.find(u => u.userid == parseInt(assignedUser));

@@ -18,6 +18,14 @@ let editContactPopUp = document.getElementById('editContactBackground');
 let bgColor;
 let firstLetters;
 
+// ================================================ INIT CONTACTS ==========================================================
+/**
+ * This fuction runs the function to render the contacts.
+ */
+function initContacts() {
+    renderLetters();
+}
+
 // ================================================ CONTACT LIST ==========================================================
 /**
  * This function renders the letters for the categorization of the contacts to the contact list.
@@ -110,15 +118,6 @@ function closePopup() {
     document.getElementById('contactEmail').value = '';
     document.getElementById('contactPhone').value = '';
 }
-
-/* function canclePopup() {
-    document.getElementById('addContactBackground').style.display = 'none';
-    document.getElementById('editContactBackground').style.display = 'none';
-    document.getElementById('contactName').value = '';
-    document.getElementById('contactSurname').value = '';
-    document.getElementById('contactEmail').value = '';
-    document.getElementById('contactPhone').value = '';
-} */
 
 /**
  * This function prevents the a function from a parent element is beeing executed when clicked on a child element.
