@@ -225,12 +225,9 @@ function editOpenTaskTemplate(currentTask) {
         <div id="openTask${currentTask}" class="openTask">
             <div class="openTaskTop">
                 <div class="selectCategoryContainer" style="background-color: ${tasks[currentTask]['categoryColor']};">
-                    <select class="selectCategory" name="category" id="editSelectCategory">
-                        <option value="Marketing" style="background-color: #0038ff;">Marketing</option>
-                        <option value="Media" style="background-color: #ffc702;">Media</option>
-                        <option value="Backoffice" style="background-color: #1FD7C1;">Backoffice</option>
-                        <option value="Design" style="background-color: #ff7a00;">Design</option>
-                        <option value="Sales" style="background-color: #fc71ff;">Sales</option>
+                    <select id="editSelectCategory" class="selectCategory" name="category">
+
+
                     </select>
                     <img class="selectArrow" src="./img/arrowDown.png">
                 </div>
@@ -299,6 +296,15 @@ function editOpenTaskTemplate(currentTask) {
         </div>
     `;
 }
+/* Select Options */
+/* 
+    <option value="Marketing" style="background-color: #0038ff;">Marketing</option>
+    <option value="Media" style="background-color: #ffc702;">Media</option>
+    <option value="Backoffice" style="background-color: #1FD7C1;">Backoffice</option>
+    <option value="Design" style="background-color: #ff7a00;">Design</option>
+    <option value="Sales" style="background-color: #fc71ff;">Sales</option>
+
+*/
 
 /* ========================================= OPEN TASK - SUBTASKS TEMPLATE ========================================= */
 /**
@@ -329,6 +335,14 @@ function renderSubtasksTemplate(subtask) {
         </div>
     `;
 }
+/* ========================================= EDIT TASK - CATEGORY TEMPLATE ========================================= */
+function editCategoryTemplate(categoryName, categoryColor) {
+    return `
+        <option value="${categoryName}" style="background-color: ${categoryColor};">${categoryName}</option>
+    `;
+}
+
+
 
 /* ========================================= EDIT TASK - SUBTASKS TEMPLATE ========================================= */
 /**

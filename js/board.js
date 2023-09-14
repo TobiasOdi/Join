@@ -30,7 +30,6 @@ function updateHTML() {
             filterInProgress();
             filterAwaitingFeedback();
             filterDone();
-
             let taskId = tasks[index]['taskId'];
             let subtasksProgress;
             calculateProgressbar(index, subtasksProgress, numerator, denominator);
@@ -97,10 +96,8 @@ function calculateProgressbar(i) {
     subtasksProgress = tasks[i]['subtasks'];
     numerator = 0;
     denominator = tasks[i]['subtasks'].length;
-
     for (let j = 0; j < subtasksProgress.length; j++) {
         let subtask = tasks[i]['subtasks'][j]['status'];
-
         if(!subtask.includes('undone')) {
             numerator++;
         }
@@ -119,7 +116,6 @@ function calculateProgressbar(i) {
  */
 function generateProgressbarHtml(i, taskId, progress, numerator, denominator) {
     if(tasks[i]['subtasks'].length == 0) {
-
     } else if(tasks[i]['subtasks'].length === 1) {
         document.getElementById(`boardContainerProgress(${taskId})`).innerHTML = progressbarTaskTemplate(progress, numerator, denominator);
     } else {
@@ -133,7 +129,6 @@ function generateProgressbarHtml(i, taskId, progress, numerator, denominator) {
 function createBubbles() {
     for (let j = 0; j < tasks.length; j++) {
         let bubbleTaskId = tasks[j]["taskId"];
-
         if (tasks[j]["assignTo"].length <= 3) {
             bubblesLessThanThree(j, bubbleTaskId);
 
@@ -153,10 +148,8 @@ function bubblesLessThanThree(j, bubbleTaskId) {
     for (let i = 0; i < tasks[j]["assignTo"].length; i++) {
         let assignedUsers = tasks[j]['assignTo'];
         let name = getFirstLetter(assignedUsers, i);
-
         document.getElementById(`userBubble${[bubbleTaskId]}`).innerHTML += `
             <div class="userBubbleOne" id="userBubbleOne${[j]}${[i]}">${name}</div>`;
-
         let userBubble = document.getElementById(`userBubbleOne${[j]}${[i]}`);
         userBubble.style.backgroundColor = getUserColor(assignedUsers, i);
     }
@@ -171,10 +164,8 @@ function bubblesMoreThanThree(j, bubbleTaskId) {
     for (let i = 0; i < 2; i++) {
         let assignedUsers = tasks[j]['assignTo'];
         let name = getFirstLetter(assignedUsers, i);
-
         document.getElementById(`userBubble${[bubbleTaskId]}`).innerHTML += `
             <div class="userBubbleOne" id="userBubbleOne${[j]}${[i]}">${name}</div>`;
-
         let userBubble = document.getElementById(`userBubbleOne${[j]}${[i]}`);
         userBubble.style.backgroundColor = getUserColor(assignedUsers, i);
     }
@@ -238,49 +229,35 @@ function generateRandomColor() {
 }
 
 /**
- * This function checks if a category is empty and renders a placeholder.
+ * This function renders a placeholder if a category has no tasks.
  */
 function checkForEmptyCategories() {
     let toDoCategory = document.getElementById('toDo');
     let inProgressCategory = document.getElementById('inProgress');
     let awaitingFeedbackCategory = document.getElementById('awaitingFeedback');
     let doneCategory = document.getElementById('done');
+    checkForEmptyCategory(toDoCategory, 'to do');
+    checkForEmptyCategory(inProgressCategory, 'in progress');
+    checkForEmptyCategory(awaitingFeedbackCategory, 'awaiting feedback');
+    checkForEmptyCategory(doneCategory, 'done');
+}
 
-    if(toDoCategory.innerHTML == ""){
-        toDoCategory.innerHTML += `
+/**
+ * This function checks if a category is empty and renders the placeholder.
+ * @param {string} category - task category
+ * @param {string} categoryText - task category text for the placeholder text
+ */
+function checkForEmptyCategory(category, categoryText) {
+    if(category.innerHTML == ""){
+        category.innerHTML += `
             <div class="emptyCategory">
-                <div class="emptyCategoryText">No tasks to do</div>
-            </div>
-        `;
-    } 
-
-    if(inProgressCategory.innerHTML == ""){
-        inProgressCategory.innerHTML += `
-            <div class="emptyCategory">
-                <div class="emptyCategoryText">No tasks in progress</div>
-            </div>
-        `;
-    } 
-    
-    if(awaitingFeedbackCategory.innerHTML == ""){
-        awaitingFeedbackCategory.innerHTML += `
-            <div class="emptyCategory">
-                <div class="emptyCategoryText">No tasks awaiting feedback</div>
-            </div>
-        `;
-    } 
-
-    if(doneCategory.innerHTML == ""){
-        doneCategory.innerHTML += `
-            <div class="emptyCategory">
-                <div class="emptyCategoryText">No tasks done</div>
+                <div class="emptyCategoryText">No tasks ${categoryText}</div>
             </div>
         `;
     } 
 }
 
 /* ============================================================================ DRAG & DROP ======================================================================== */
-
 //Source: www.w3schools.com/html/html5_draganddrop.asp
 /**
  * This function allows you to drag an element.
@@ -333,7 +310,7 @@ function doNotOpenTask(event) {
     event.stopPropagation();
 }
 
-/* ======================================================================= TASK FUNCTIONS ================================================================================= */
+/* ======================================================================= BOARD TASK FUNCTIONS ================================================================================= */
 /**
  * This function pushes the task to the previous category.
  * @param {string} category - current category of the task
@@ -372,6 +349,7 @@ async function pushToNextCategory(category, taskId) {
     updateHTML();
 }
 
+/* ======================================================================= OPEN TASK ================================================================================= */
 /**
  * This function opens a task and displays the task information.
  * @param {number} currentTaskId - id of the task
@@ -395,7 +373,6 @@ function openTask(currentTaskId) {
 function prioritySymbol(currentTask) {
     let currentPriority = tasks[currentTask]['priorityValue'];
     let priorityOpenTask = document.getElementById('priorityOpenTask');
-
     if (currentPriority == 'urgent') {
         priorityOpenTask.innerHTML += `<img id="openTaskImgPriority" src="../img/urgent.svg">`;
     } else if (currentPriority == 'medium') {
@@ -452,6 +429,7 @@ async function deleteTask(currentTask) {
     document.getElementById('openTaskBackground').style.display = 'none';
 }
 
+/* ======================================================================= EDIT TASK ================================================================================= */
 /**
  * This function retrieves the task data and lets you edit tehm.
  * @param {index} currentTask - index of the current task
@@ -471,6 +449,7 @@ function editTask(currentTask) {
         let assignedUser = assignedUsersToCurrentTask[i];
         usersTaskEdit.push(assignedUser);
     }
+    renderEditCategories();
     renderUrgency(currentTask);
     renderSubtasksEdit(currentTask);
     renderAssignedUsersEdit(currentTask);
@@ -490,6 +469,44 @@ function renderUrgency(currentTask) {
     }
     priorityValueEdit = tasks[currentTask]['priorityValue'];
 }
+
+/**
+ * This function renders the alle the categories from the "categories" array.
+ */
+function renderEditCategories() {
+    let editSelectCategory = document.getElementById('editSelectCategory');
+    editSelectCategory.innerHTML = "";
+    for (let i = 0; i < categories.length; i++) {
+        let categoryName = categories[i]['categoryName'];
+        let categoryColor = categories[i]['color'];
+        editSelectCategory.innerHTML += editCategoryTemplate(categoryName, categoryColor);
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /**
  * This function renders the subtasks and lets you mark them as done.
