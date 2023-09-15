@@ -5,8 +5,8 @@ let allUsers = [];
 let currentDraggedElement;
 let subtasks = [];
 let priorityValueEdit;
-let usersTaskEdit = [];
 let startWithLetter = [];
+let selectedUsersEdit = [];
 let numerator;
 let denominator;
 let progress;
@@ -361,7 +361,7 @@ function openTask(currentTaskId) {
     let openTaskContainer = document.getElementById('openTaskContainer');
     openTaskContainer.innerHTML = '';
     openTaskContainer.innerHTML = openTaskTemplate(currentTask);
-    prioritySymbol(currentTask);
+    renderprioritySymbol(currentTask);
     renderAssignedUsers(currentTask);
     renderSubtasks(currentTask);
 }
@@ -370,7 +370,7 @@ function openTask(currentTaskId) {
  * This function renders the priority of the current task.
  * @param {index} currentTask - index of the current task
  */
-function prioritySymbol(currentTask) {
+function renderprioritySymbol(currentTask) {
     let currentPriority = tasks[currentTask]['priorityValue'];
     let priorityOpenTask = document.getElementById('priorityOpenTask');
     if (currentPriority == 'urgent') {
@@ -436,23 +436,29 @@ async function deleteTask(currentTask) {
  */
 function editTask(currentTask) {
     document.getElementById('openTaskContainer').innerHTML = editOpenTaskTemplate(currentTask);
-
+    let selectCategoryContainer = document.getElementById('selectCategoryContainer');
+    selectCategoryContainer.style.backgroundColor = tasks[currentTask]['categoryColor'];
     let titleEdit = document.getElementById('titleEdit');
     titleEdit.value = tasks[currentTask]['title'];
     let descriptionEdit = document.getElementById('descriptionEdit');
     descriptionEdit.value = tasks[currentTask]['description'];
     document.getElementById('editSelectCategory').value = tasks[currentTask]['category'];
-
-    usersTaskEdit = [];
-    let assignedUsersToCurrentTask = tasks[currentTask]['assignTo'];
-    for (let i = 0; i < assignedUsersToCurrentTask.length; i++) {
-        let assignedUser = assignedUsersToCurrentTask[i];
-        usersTaskEdit.push(assignedUser);
-    }
     renderEditCategories();
     renderUrgency(currentTask);
     renderSubtasksEdit(currentTask);
     renderAssignedUsersEdit(currentTask);
+}
+
+/**
+ * This function renders the alle the categories from the "categories" array.
+ */
+function renderEditCategories() {
+    document.getElementById('editSelectCategory').innerHTML = "";
+    for (let i = 0; i < categories.length; i++) {
+        let categoryName = categories[i]['categoryName'];
+        let categoryColor = categories[i]['color'];
+        document.getElementById('editSelectCategory').innerHTML += editCategoryTemplate(categoryName, categoryColor);
+    }
 }
 
 /**
@@ -471,42 +477,16 @@ function renderUrgency(currentTask) {
 }
 
 /**
- * This function renders the alle the categories from the "categories" array.
+ * This function checks if a value form the dropdown is beeing selected and sets the background color.
  */
-function renderEditCategories() {
-    let editSelectCategory = document.getElementById('editSelectCategory');
-    editSelectCategory.innerHTML = "";
-    for (let i = 0; i < categories.length; i++) {
-        let categoryName = categories[i]['categoryName'];
-        let categoryColor = categories[i]['color'];
-        editSelectCategory.innerHTML += editCategoryTemplate(categoryName, categoryColor);
-    }
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+document.querySelector('#editSelectCategory')?.addEventListener("change", function() {
+    let chosenCategory = document.getElementById('editSelectCategory').value;
+    let existingCategory = categories.find(c => c.categoryName == chosenCategory);
+    let currentCategory = categories.indexOf(existingCategory);
+    let currentCategoryColor = categories[currentCategory]['color'];
+    let selectCategoryContainer = document.getElementById('selectCategoryContainer');
+    selectCategoryContainer.style.backgroundColor = currentCategoryColor;
+});
 
 /**
  * This function renders the subtasks and lets you mark them as done.
@@ -515,7 +495,6 @@ function renderEditCategories() {
 function renderSubtasksEdit(currentTask){
     let userSubtasks = tasks[currentTask]['subtasks'];
     for (let j = 0; j < userSubtasks.length; j++) {
-
         let subtaskIndex = j;
         let subtask = userSubtasks[j]['subtaskName'];
         let subtaskStatus = userSubtasks[j]['status'];
@@ -527,12 +506,84 @@ function renderSubtasksEdit(currentTask){
     }
 };
 
+
+//=====================================================================================================================================================================
+/**
+ * This function renders the users of the current task to select more or deselect them.
+ * @param {index} currentTask - index of the current task
+ */
+function renderAssignedUsersEdit(currentTask) {
+    selectedUsersEdit = [];
+    let assignedUsersToCurrentTask = tasks[currentTask]['assignTo'];
+    for (let i = 0; i < assignedUsersToCurrentTask.length; i++) {
+        let assignedUser = assignedUsersToCurrentTask[i];
+        selectedUsersEdit.push(assignedUser);
+    }
+    for (let i = 0; i < users.length; i++) {
+        let userid = users[i]['userid'];
+        let assignName = users[i]['name'];
+        let assignSurname = users[i]['surname'];
+        //let assignColor = users[i]['userColor'];
+        let assignFirstLetters = assignName.charAt(0) + assignSurname.charAt(0);
+        if (assignedUsersToCurrentTask.includes(userid.toString())) {
+            document.getElementById('assignedToContainerEdit').innerHTML += selectedAssignedUsersEditTemplate(userid, i, assignFirstLetters);
+        } else {
+            document.getElementById('assignedToContainerEdit').innerHTML += notSelectedAssignedUsersEditTemplate(userid, i, assignFirstLetters);
+        }
+    }
+}
+
+/* ========= NEU ================ */
+
+/**
+ * This function selects a user. Adds classes to the div's and pushes the user id to the "selectedUsersEdit" array.
+ * @param {number} availableUserId - id of the user
+ */
+function saveSelectedUsersEdit(availableUserId) {
+    let user = document.getElementById(availableUserId);
+    let userIcon = document.getElementById('icon' + availableUserId);
+    user.classList.toggle('avatarSelected');
+    userIcon.classList.toggle('avatarSelectedIcon');
+    if(selectedUsersEdit.includes(availableUserId)){
+        selectedUsersEdit = selectedUsersEdit.filter(a => a != availableUserId);
+        checkForSelectedUsers();
+    } else {
+        selectedUsersEdit.push(availableUserId);
+        checkForSelectedUsers();
+    }
+}
+/* ========= ALT ================ */
+/**
+ * This function saves the selected users.
+ */
+/* function saveSelectedUsersEdit(availableUserId) {
+    document.querySelectorAll('input[type="checkbox"]').forEach((checkbox) => {
+        checkbox.addEventListener('change', (event) => {
+            const selectedValue = event.target.value;
+            if (event.target.checked) {
+                if (!selectedUsersEdit.includes(selectedValue)) { // Check for duplicates
+                    selectedUsersEdit.push(selectedValue);
+                }
+            } else {
+                const index = selectedUsersEdit.indexOf(selectedValue);
+                if (index > -1) {
+                    selectedUsersEdit.splice(index, 1);
+                }
+            }
+            //console.log(selectedUsersEdit); // Print the selected values to the console
+        });
+    });
+}
+ */
+
+//=====================================================================================================================================================================
+
 /**
  * This function saves a completed subtask and.
  * @param {index} subtaskIndex - index of the current subtask
  * @param {index} currentTask - index of the current task
  */
-async function saveCompletedTasks(subtaskIndex, currentTask) {
+async function saveCompletedSubtasks(subtaskIndex, currentTask) {
     let currentSubtask = document.getElementById('subtask' + subtaskIndex);
     if(!currentSubtask.checked == true) {
         tasks[currentTask]['subtasks'][subtaskIndex]['status'] = 'undone';
@@ -542,47 +593,9 @@ async function saveCompletedTasks(subtaskIndex, currentTask) {
     } 
 };
 
-/**
- * This function renders the users of the current task to select more or deselect them.
- * @param {index} currentTask - index of the current task
- */
-function renderAssignedUsersEdit(currentTask) {
-    let assignedUsers = tasks[currentTask]['assignTo'];
-    for (let j = 0; j < users.length; j++) {
-        let userid = users[j]['userid'];
-        let assignName = users[j]['name'];
-        let assignSurname = users[j]['surname'];
-        let assignFirstLetters = assignName.charAt(0) + assignSurname.charAt(0);
 
-        if (assignedUsers.includes(userid.toString())) {
-            document.getElementById('assignedToContainerEdit').innerHTML += assignedUserEditCheckedTemplate(j, assignFirstLetters);
-        } else {
-            document.getElementById('assignedToContainerEdit').innerHTML += assignedUserEditTemplate(j, assignFirstLetters);
-        }
-    }
-}
 
-/**
- * This function saves the selected users.
- */
-function saveSelectedUsersEdit() {
-    document.querySelectorAll('input[type="checkbox"]').forEach((checkbox) => {
-        checkbox.addEventListener('change', (event) => {
-            const selectedValue = event.target.value;
-            if (event.target.checked) {
-                if (!usersTaskEdit.includes(selectedValue)) { // Check for duplicates
-                    usersTaskEdit.push(selectedValue);
-                }
-            } else {
-                const index = usersTaskEdit.indexOf(selectedValue);
-                if (index > -1) {
-                    usersTaskEdit.splice(index, 1);
-                }
-            }
-            //console.log(usersTaskEdit); // Print the selected values to the console
-        });
-    });
-}
+
 
 /**
  * This function saves the data of the changed task on the ftp server.
@@ -596,10 +609,10 @@ async function saveEditedTask(currentTask) {
     tasks[currentTask]['description'] = document.getElementById('descriptionEdit').value;
     tasks[currentTask]['dueDate'] = document.getElementById('editDueDate').value;
     tasks[currentTask]['priorityValue'] = priorityValueEdit;
-    tasks[currentTask]['assignTo'] = usersTaskEdit;
+    tasks[currentTask]['assignTo'] = selectedUsersEdit;
     await saveTasks();
     updateHTML();
-    usersTaskEdit = [];
+    selectedUsersEdit = [];
     document.getElementById('openTaskBackground').style.display = 'none';
 }
 
@@ -622,6 +635,20 @@ function closeTask(priority, currentTask) {
     document.getElementById('openTaskBackground').style.display = 'none';
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ======================================================================= SEARCH FUNCTION ================================================================================= */
 /**
  * This function renders the tasks that containt the searched values.
  */

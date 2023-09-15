@@ -224,7 +224,7 @@ function editOpenTaskTemplate(currentTask) {
     return `
         <div id="openTask${currentTask}" class="openTask">
             <div class="openTaskTop">
-                <div class="selectCategoryContainer" style="background-color: ${tasks[currentTask]['categoryColor']};">
+                <div id="selectCategoryContainer" class="selectCategoryContainer">
                     <select id="editSelectCategory" class="selectCategory" name="category">
 
 
@@ -342,8 +342,6 @@ function editCategoryTemplate(categoryName, categoryColor) {
     `;
 }
 
-
-
 /* ========================================= EDIT TASK - SUBTASKS TEMPLATE ========================================= */
 /**
  * This function returns the template of a undone subtask within an editable opened task.
@@ -354,7 +352,7 @@ function editCategoryTemplate(categoryName, categoryColor) {
  */
 function subtasksEditUndoneTemplate(subtaskIndex, currentTask, subtask) {
     return `
-        <div class="openSubtask" onclick="saveCompletedTasks(${subtaskIndex}, ${currentTask})">
+        <div class="openSubtask" onclick="saveCompletedSubtasks(${subtaskIndex}, ${currentTask})">
             <input id="subtask${subtaskIndex}" type="checkbox" value="${subtaskIndex}" checked>
             <div>${subtask}</div>
         </div>
@@ -370,7 +368,7 @@ function subtasksEditUndoneTemplate(subtaskIndex, currentTask, subtask) {
  */
 function subtasksEditTemplate(subtaskIndex, currentTask, subtask) {
     return `
-        <div class="openSubtask" onclick="saveCompletedTasks(${subtaskIndex}, ${currentTask})">
+        <div class="openSubtask" onclick="saveCompletedSubtasks(${subtaskIndex}, ${currentTask})">
             <input id="subtask${subtaskIndex}" type="checkbox" value="${subtaskIndex}">
             <div>${subtask}</div>
         </div>
@@ -400,36 +398,40 @@ function renderAssignedUserTemplate(assignColor, assignFirstLetters, assignName,
 /* ========================================= EDIT TASK - ASSIGNED USERS TEMPLATE ========================================= */
 /**
  * This function returns the template for the selected user that are assigned to the current opened edited task.
+ * @param {number} userid - id of the current task
  * @param {string} j - index of the current user
  * @param {string} assignFirstLetters - first letters of the assigned user
  * @returns 
  */
-function assignedUserEditCheckedTemplate(j, assignFirstLetters) {
+function selectedAssignedUsersEditTemplate(userid, i, assignFirstLetters) {
     return `
-        <div class="openTaskAssignedPerson" onclick="saveSelectedUsersEdit()">
-            <input type="checkbox" value="${users[j]['userid']}" checked>
-            <div style="background-color: ${users[j]['userColor']};">
-                <span>${assignFirstLetters}</span>
+        <div id="${userid}" class="avatarContainer avatarSelected" onclick="saveSelectedUsersEdit(${userid})">
+            <div id="icon${userid}" class="avatar avatarSelectedIcon" style="background-color: ${users[i]['userColor']};">
+                <div>${assignFirstLetters}</div>
             </div>
-            <div>${users[j]['name']} ${users[j]['surname']}</div>
+            <div class="nameText">
+                <div>${users[i]['name']} ${users[i]['surname']}</div>
+            </div>
         </div>
-    `;
+`;
 }
 
 /**
  * This function returns the template for the available/deselected user in the opened edited task.
+ * @param {number} userid - id of the current task
  * @param {string} j - index of the current user
  * @param {string} assignFirstLetters - first letters of the assigned user
  * @returns 
  */
-function assignedUserEditTemplate(j, assignFirstLetters) {
+function notSelectedAssignedUsersEditTemplate(userid, i, assignFirstLetters) {
     return `
-        <div class="openTaskAssignedPerson" onclick="saveSelectedUsersEdit()">
-            <input type="checkbox" value="${users[j]['userid']}">
-            <div style="background-color: ${users[j]['userColor']};">
-                <span>${assignFirstLetters}</span>
+        <div id="${userid}" class="avatarContainer" onclick="saveSelectedUsersEdit(${userid})">
+            <div id="icon${userid}" class="avatar" style="background-color: ${users[i]['userColor']};">
+                <div>${assignFirstLetters}</div>
             </div>
-            <div>${users[j]['name']} ${users[j]['surname']}</div>
+            <div class="nameText">
+                <div>${users[i]['name']} ${users[i]['surname']}</div>
+            </div>
         </div>
     `;
 }

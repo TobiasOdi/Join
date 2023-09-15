@@ -823,10 +823,6 @@
   opacity: 0;
 }
 
-.openTaskAssignedPerson span {
-  color: white;
-}
-
 .openTaskButtonContainer {
   position: absolute;
   right: 40px;
