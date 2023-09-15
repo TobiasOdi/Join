@@ -406,13 +406,19 @@ function renderAssignedUsers(currentTask) {
  */
 function renderSubtasks(currentTask){
     let userSubtasks = tasks[currentTask]['subtasks'];
-    for (let j = 0; j < userSubtasks.length; j++) {
-        let subtask = userSubtasks[j]['subtaskName'];
-        let subtaskStatus = userSubtasks[j]['status'];
-        if(subtaskStatus == 'undone') {
-            document.getElementById('subtaskContainer').innerHTML += renderSubtasksUndoneTemplate(subtask);
-        } else {
-            document.getElementById('subtaskContainer').innerHTML += renderSubtasksTemplate(subtask);
+    if(userSubtasks == "") {
+        document.getElementById('subtaskContainer').innerHTML += `
+            <div>No subtasks</div>
+        `;
+    } else {
+        for (let j = 0; j < userSubtasks.length; j++) {
+            let subtask = userSubtasks[j]['subtaskName'];
+            let subtaskStatus = userSubtasks[j]['status'];
+            if(subtaskStatus == 'undone') {
+                document.getElementById('subtaskContainer').innerHTML += renderSubtasksUndoneTemplate(subtask);
+            } else {
+                document.getElementById('subtaskContainer').innerHTML += renderSubtasksTemplate(subtask);
+            }
         }
     }
 }
@@ -442,8 +448,8 @@ function editTask(currentTask) {
     titleEdit.value = tasks[currentTask]['title'];
     let descriptionEdit = document.getElementById('descriptionEdit');
     descriptionEdit.value = tasks[currentTask]['description'];
-    document.getElementById('editSelectCategory').value = tasks[currentTask]['category'];
     renderEditCategories();
+    document.getElementById('editSelectCategory').value = tasks[currentTask]['category'];
     renderUrgency(currentTask);
     renderSubtasksEdit(currentTask);
     renderAssignedUsersEdit(currentTask);
@@ -494,20 +500,18 @@ document.querySelector('#editSelectCategory')?.addEventListener("change", functi
  */
 function renderSubtasksEdit(currentTask){
     let userSubtasks = tasks[currentTask]['subtasks'];
-    for (let j = 0; j < userSubtasks.length; j++) {
-        let subtaskIndex = j;
-        let subtask = userSubtasks[j]['subtaskName'];
-        let subtaskStatus = userSubtasks[j]['status'];
-        if (!subtaskStatus.includes('undone')) {
-            document.getElementById('subtaskContainerEdit').innerHTML += subtasksEditUndoneTemplate(subtaskIndex, currentTask, subtask);
-        } else {
-            document.getElementById('subtaskContainerEdit').innerHTML += subtasksEditTemplate(subtaskIndex, currentTask, subtask);
+        for (let j = 0; j < userSubtasks.length; j++) {
+            let subtaskIndex = j;
+            let subtask = userSubtasks[j]['subtaskName'];
+            let subtaskStatus = userSubtasks[j]['status'];
+            if (!subtaskStatus.includes('undone')) {
+                document.getElementById('subtaskContainerEdit').innerHTML += subtasksEditUndoneTemplate(subtaskIndex, currentTask, subtask);
+            } else {
+                document.getElementById('subtaskContainerEdit').innerHTML += subtasksEditTemplate(subtaskIndex, currentTask, subtask);
+            }
         }
-    }
 };
 
-
-//=====================================================================================================================================================================
 /**
  * This function renders the users of the current task to select more or deselect them.
  * @param {index} currentTask - index of the current task
@@ -525,7 +529,7 @@ function renderAssignedUsersEdit(currentTask) {
         let assignSurname = users[i]['surname'];
         //let assignColor = users[i]['userColor'];
         let assignFirstLetters = assignName.charAt(0) + assignSurname.charAt(0);
-        if (assignedUsersToCurrentTask.includes(userid.toString())) {
+        if (assignedUsersToCurrentTask.includes(userid)) {
             document.getElementById('assignedToContainerEdit').innerHTML += selectedAssignedUsersEditTemplate(userid, i, assignFirstLetters);
         } else {
             document.getElementById('assignedToContainerEdit').innerHTML += notSelectedAssignedUsersEditTemplate(userid, i, assignFirstLetters);
@@ -533,50 +537,21 @@ function renderAssignedUsersEdit(currentTask) {
     }
 }
 
-/* ========= NEU ================ */
-
 /**
  * This function selects a user. Adds classes to the div's and pushes the user id to the "selectedUsersEdit" array.
  * @param {number} availableUserId - id of the user
  */
 function saveSelectedUsersEdit(availableUserId) {
-    let user = document.getElementById(availableUserId);
-    let userIcon = document.getElementById('icon' + availableUserId);
+    let user = document.getElementById('edit' + availableUserId);
+    let userIcon = document.getElementById('editIcon' + availableUserId);
     user.classList.toggle('avatarSelected');
     userIcon.classList.toggle('avatarSelectedIcon');
     if(selectedUsersEdit.includes(availableUserId)){
         selectedUsersEdit = selectedUsersEdit.filter(a => a != availableUserId);
-        checkForSelectedUsers();
     } else {
         selectedUsersEdit.push(availableUserId);
-        checkForSelectedUsers();
     }
 }
-/* ========= ALT ================ */
-/**
- * This function saves the selected users.
- */
-/* function saveSelectedUsersEdit(availableUserId) {
-    document.querySelectorAll('input[type="checkbox"]').forEach((checkbox) => {
-        checkbox.addEventListener('change', (event) => {
-            const selectedValue = event.target.value;
-            if (event.target.checked) {
-                if (!selectedUsersEdit.includes(selectedValue)) { // Check for duplicates
-                    selectedUsersEdit.push(selectedValue);
-                }
-            } else {
-                const index = selectedUsersEdit.indexOf(selectedValue);
-                if (index > -1) {
-                    selectedUsersEdit.splice(index, 1);
-                }
-            }
-            //console.log(selectedUsersEdit); // Print the selected values to the console
-        });
-    });
-}
- */
-
-//=====================================================================================================================================================================
 
 /**
  * This function saves a completed subtask and.
@@ -593,10 +568,6 @@ async function saveCompletedSubtasks(subtaskIndex, currentTask) {
     } 
 };
 
-
-
-
-
 /**
  * This function saves the data of the changed task on the ftp server.
  * @param {index} currentTask - index of the current task
@@ -604,7 +575,7 @@ async function saveCompletedSubtasks(subtaskIndex, currentTask) {
 async function saveEditedTask(currentTask) {
     let editCategory = document.getElementById('editSelectCategory').value;
     tasks[currentTask]['category'] = editCategory;
-    //tasks[currentTask]['categoryColor'] = addBackgroundColorCategory(editCategory);
+    tasks[currentTask]['categoryColor'] = addBackgroundColorCategory(editCategory);
     tasks[currentTask]['title'] = document.getElementById('titleEdit').value;
     tasks[currentTask]['description'] = document.getElementById('descriptionEdit').value;
     tasks[currentTask]['dueDate'] = document.getElementById('editDueDate').value;
@@ -614,6 +585,13 @@ async function saveEditedTask(currentTask) {
     updateHTML();
     selectedUsersEdit = [];
     document.getElementById('openTaskBackground').style.display = 'none';
+}
+
+function addBackgroundColorCategory(editCategory) {
+    let existingCategory = categories.find(c => c.categoryName == editCategory);
+    let currentCategory = categories.indexOf(existingCategory);
+    let currentCategoryColor = categories[currentCategory]['color'];
+    return currentCategoryColor;
 }
 
 /**

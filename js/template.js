@@ -405,8 +405,8 @@ function renderAssignedUserTemplate(assignColor, assignFirstLetters, assignName,
  */
 function selectedAssignedUsersEditTemplate(userid, i, assignFirstLetters) {
     return `
-        <div id="${userid}" class="avatarContainer avatarSelected" onclick="saveSelectedUsersEdit(${userid})">
-            <div id="icon${userid}" class="avatar avatarSelectedIcon" style="background-color: ${users[i]['userColor']};">
+        <div id="edit${userid}" class="avatarContainer avatarSelected" onclick="saveSelectedUsersEdit(${userid})">
+            <div id="editIcon${userid}" class="avatar avatarSelectedIcon" style="background-color: ${users[i]['userColor']};">
                 <div>${assignFirstLetters}</div>
             </div>
             <div class="nameText">
@@ -425,8 +425,8 @@ function selectedAssignedUsersEditTemplate(userid, i, assignFirstLetters) {
  */
 function notSelectedAssignedUsersEditTemplate(userid, i, assignFirstLetters) {
     return `
-        <div id="${userid}" class="avatarContainer" onclick="saveSelectedUsersEdit(${userid})">
-            <div id="icon${userid}" class="avatar" style="background-color: ${users[i]['userColor']};">
+        <div id="edit${userid}" class="avatarContainer" onclick="saveSelectedUsersEdit(${userid})">
+            <div id="editIcon${userid}" class="avatar" style="background-color: ${users[i]['userColor']};">
                 <div>${assignFirstLetters}</div>
             </div>
             <div class="nameText">
