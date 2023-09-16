@@ -31,55 +31,6 @@
   padding-right: 0.5rem;
 }
 
-/* ================================ SCROLLBAR ====================================== */
-.contactList::-webkit-scrollbar,
-.contactDetails::-webkit-scrollbar {
-  width: 10px;
-  scrollbar-gutter: stable;
-}
-
-/* .contactList::-webkit-scrollbar-track {
-    background-color: white;
-} */
-
-.contactList::-webkit-scrollbar-thumb,
-.contactDetails::-webkit-scrollbar-thumb {
-  background-color: #a8a8a8;
-  border: 2px solid white;
-  border-radius: 6px;
-}
-
-.contactList::-webkit-scrollbar-button {
-  color: #a8a8a8;
-}
-
-.contactList::-webkit-scrollbar-button {
-  display: block;
-  background-repeat: no-repeat;
-  background-size: 50%;
-  background-position: center;
-}
-
-.contactList::-webkit-scrollbar-button:vertical:start:increment {
-  background-image: url(../img/upArrow.svg);
-  background-size: 10px 4px;
-}
-
-.contactList::-webkit-scrollbar-button:vertical:start:decrement {
-  display: none;
-}
-
-.contactList::-webkit-scrollbar-button:vertical:end:increment {
-  display: none;
-}
-
-.contactList::-webkit-scrollbar-button:vertical:end:decrement  {
-  background-image: url(../img/downArrow.svg);
-  background-size: 10px 4px;
-}
-
-/* ================================================================================== */
-
 .contactsBar > div > div:first-of-type {
   width: 100%;
 }
@@ -424,9 +375,9 @@
 }
 
 .deleteContact {
-  display: flex !important;
-  justify-content: flex-end !important;
-  align-items: flex-start !important;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
 }
 
 .deleteContact > div {
@@ -712,7 +663,7 @@
 .main-container-contacts {
   background-color: white;
   padding: 2rem;
-  padding-left: 2rem !important;
+  padding-left: 2rem;
   border-radius: 30px;
 }
 
@@ -1101,7 +1052,7 @@
 }
 
 .activeContact {
-  background-color: #2a3647 !important;
+  background-color: #2a3647;
 }
 
 .contactsContainerMobile {

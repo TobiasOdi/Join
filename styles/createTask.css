@@ -1,13 +1,9 @@
 .d-none {
-  display: none !important;
+  display: none;
 }
 
 .redBorder {
-  border: 2px solid red !important;
-}
-
-.greenBorder {
-  border: 2px solid green !important;
+  border: 2px solid red;
 }
 
 input,
@@ -89,54 +85,6 @@ span {
   margin-top: 1rem;
   margin-bottom: 1rem;
 }
-
-/* ================================ SCROLLBAR ====================================== */
-
-.addTaskMainSubContainer::-webkit-scrollbar {
-  width: 10px;
-  scrollbar-gutter: stable;
-}
-
-/* .contactList::-webkit-scrollbar-track {
-  background-color: white;
-} */
-
-.addTaskMainSubContainer::-webkit-scrollbar-thumb {
-  background-color: #a8a8a8;
-  border: 2px solid white;
-  border-radius: 6px;
-}
-
-.addTaskMainSubContainer::-webkit-scrollbar-button {
-  color: #a8a8a8;
-}
-
-.addTaskMainSubContainer::-webkit-scrollbar-button {
-  display: block;
-  background-repeat: no-repeat;
-  background-size: 50%;
-  background-position: center;
-}
-
-.addTaskMainSubContainer::-webkit-scrollbar-button:vertical:start:increment {
-  background-image: url(../img/upArrow.svg);
-  background-size: 10px 4px;
-}
-
-.addTaskMainSubContainer::-webkit-scrollbar-button:vertical:start:decrement {
-  display: none;
-}
-
-.addTaskMainSubContainer::-webkit-scrollbar-button:vertical:end:increment {
-  display: none;
-}
-
-.addTaskMainSubContainer::-webkit-scrollbar-button:vertical:end:decrement {
-  background-image: url(../img/downArrow.svg);
-  background-size: 10px 4px;
-}
-
-/* ================================================================================== */
 
 .createTaskForm {
   display: flex;
@@ -374,7 +322,7 @@ span {
 }
 
 .subtaskInput {
-  border: 0px !important;
+  border: 0px;
   outline: none;
   width: 80%;
 }

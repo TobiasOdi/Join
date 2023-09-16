@@ -88,7 +88,7 @@
 }
 
 .signUpScreen > form {
-  gap: 15px !important;
+  gap: 15px;
 }
 
 .loginScreenPw {
@@ -417,7 +417,7 @@
 
   .startScreen,
   .startSignUpScreen {
-    margin-left: 25px !important;
+    margin-left: 25px;
   }
 
   .arrowBack {
@@ -532,13 +532,13 @@
   }
 
  .logo {
-    height: 75px !important;
+    height: 75px;
     width: auto;
   }
 
   .startScreen,
   .startSignUpScreen {
-    margin-left: 15px !important;
+    margin-left: 15px;
   }
 
   .startSignUpScreen{

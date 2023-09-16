@@ -108,7 +108,7 @@
 }
 
 .img {
-  right: 22px !important;
+  right: 22px;
 }
 
 .inputFieldContainer .inputFieldVerticalLine {
@@ -177,49 +177,6 @@
   overflow: auto;
 }
 
-/* ================================ SCROLLBAR ====================================== */
-.placeholderBoardBottom::-webkit-scrollbar {
-  width: 10px;
-  scrollbar-gutter: stable;
-}
-
-.placeholderBoardBottom::-webkit-scrollbar-thumb {
-  background-color: #a8a8a8;
-  border: 2px solid white;
-  border-radius: 6px;
-}
-
-.placeholderBoardBottom::-webkit-scrollbar-button {
-  color: #a8a8a8;
-}
-
-.placeholderBoardBottom::-webkit-scrollbar-button {
-  display: block;
-  background-repeat: no-repeat;
-  background-size: 50%;
-  background-position: center;
-}
-
-.placeholderBoardBottom::-webkit-scrollbar-button:vertical:start:increment {
-  background-image: url(../img/upArrow.svg);
-  background-size: 10px 4px;
-}
-
-.placeholderBoardBottom::-webkit-scrollbar-button:vertical:start:decrement {
-  display: none;
-}
-
-.placeholderBoardBottom::-webkit-scrollbar-button:vertical:end:increment {
-  display: none;
-}
-
-.placeholderBoardBottom::-webkit-scrollbar-button:vertical:end:decrement {
-  background-image: url(../img/downArrow.svg);
-  background-size: 10px 4px;
-}
-
-/* ================================================================================== */
-
 .boardTask {
   display: flex;
   justify-content: space-between;
@@ -237,7 +194,7 @@
 
 .boardTask img {
   width: 24px;
-  height: 24px !important;
+  height: 24px;
   color: #2a3647;
 }
 
@@ -508,7 +465,7 @@
   width: 150px;
   height: 40px;
   border-radius: 8px;
-  padding: 0 !important;
+  padding: 0;
 }
 
 .selectCategory {
@@ -518,7 +475,7 @@
   background: transparent;
   border: none;
   color: white;
-  padding: 5px !important;
+  padding: 5px;
   z-index: 2;
 }
 
@@ -666,7 +623,7 @@
   align-items: center;
   padding: 10px 10px;
   gap: 10px;
-  border: 1px solid #d1d1d1 !important;
+  border: 1px solid #d1d1d1;
   border-radius: 10px;
   font-size: 21px;
   font-weight: 400;
@@ -739,64 +696,6 @@
   overflow: auto;
 }
 
-/* =============================================================== SCROLLBAR =================================================================== */
-.assignedToContainer::-webkit-scrollbar,
-.boardSubtaskContainer::-webkit-scrollbar,
-.openTaskMain::-webkit-scrollbar {
-  width: 10px;
-  scrollbar-gutter: stable;
-}
-
-/* .contactList::-webkit-scrollbar-track {
-  background-color: white;
-} */
-
-.assignedToContainer::-webkit-scrollbar-thumb,
-.boardSubtaskContainer::-webkit-scrollbar-thumb,
-.openTaskMain::-webkit-scrollbar-thumb {
-  background-color: #a8a8a8;
-  border: 2px solid white;
-  border-radius: 6px;
-}
-
-.assignedToContainer::-webkit-scrollbar-button,
-.boardSubtaskContainer::-webkit-scrollbar-button,
-.openTaskMain::-webkit-scrollbar-button {
-  color: #a8a8a8;
-}
-
-.assignedToContainer::-webkit-scrollbar-button,
-.boardSubtaskContainer::-webkit-scrollbar-button,
-.openTaskMain::-webkit-scrollbar-button {
-  display: block;
-  background-repeat: no-repeat;
-  background-size: 50%;
-  background-position: center;
-}
-
-/* .assignedToContainer::-webkit-scrollbar-button:vertical:start:increment {
-  background-image: url(../img/upArrow.svg);
-  background-size: 10px 4px;  
-} */
-
-.assignedToContainer::-webkit-scrollbar-button:vertical:start:decrement,
-.boardSubtaskContainer::-webkit-scrollbar-button:vertical:start:decrement,
-.openTaskMain::-webkit-scrollbar-button:vertical:start:decrement {
-  display: none;
-}
-
-.assignedToContainer::-webkit-scrollbar-button:vertical:end:increment,
-.boardSubtaskContainer::-webkit-scrollbar-button:vertical:end:increment,
-.openTaskMain::-webkit-scrollbar-button:vertical:end:increment {
-  display: none;
-}
-
-/* .assignedToContainer::-webkit-scrollbar-button:vertical:end:decrement {
-  background-image: url(../img/downArrow.svg);   
-  background-size: 10px 4px;  
-} */
-/* =========================================================================== */
-
 .openTaskAssignedPerson,
 .openSubtask {
   display: flex;
@@ -831,11 +730,11 @@
 }
 
 .coverCheckbox {
-  position: absolute !important;
-  top: -2px !important;
-  left: -2px !important;
-  height: 100% !important;
-  width: 100% !important;
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  height: 100%;
+  width: 100%;
   opacity: 0;
 }
 
@@ -937,7 +836,7 @@
   }
 
   .img {
-    right: 16px !important;
+    right: 16px;
   }
 
   .boardParts {
@@ -1063,10 +962,10 @@
   }
 
   .prioButtonsEdit {
-    gap: 5px !important;
+    gap: 5px;
   }
   .prioButtonEdit {
-    width: 40px !important;
+    width: 40px;
   }
   .prioButtonEdit > div:first-of-type{
     display: none;
