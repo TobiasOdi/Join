@@ -66,8 +66,7 @@
 @media(max-width: 720px) {
     .innerHelpContainer, .innerLegalNoticeContainer {
         padding: 1rem 1rem 1rem 1rem;  
-        height: calc(100vh - 163px);
-
+        height: calc(100vh - 203px);
     }
     .helpContainer {
         padding-left: 1rem;

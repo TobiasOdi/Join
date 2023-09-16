@@ -78,41 +78,17 @@
   box-shadow: 0px 0px 14px 3px rgba(0, 0, 0, 0.04);
 }
 
-.signUpScreen {
-  height: 540px;
-  padding-bottom: 10px;
-} 
-
-.signUpScreen h1 {
-  margin-top: 20px;
-}
-
-.signUpScreen > form {
-  gap: 15px;
+.loginScreen > form {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 30px;
 }
 
 .loginScreenPw {
   width: 650px;
   height: 370px;
-}
-
-.arrowBack {
-  position: absolute;
-  top: 24px;
-  left: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-}
-
-.arrowBackLegalNotice {
-  display: none;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  padding-left: 2rem;
-  padding-bottom: 1rem;
 }
 
 .loginHeading {
@@ -142,12 +118,36 @@
   width: 110px;
 }
 
-.loginScreen > form {
+.signUpScreen {
+  height: 540px;
+  padding-bottom: 10px;
+} 
+
+.signUpScreen h1 {
+  margin-top: 20px;
+}
+
+.signUpScreen > form {
+  gap: 15px;
+}
+
+.arrowBack {
+  position: absolute;
+  top: 24px;
+  left: 20px;
   display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
-  gap: 30px;
+  cursor: pointer;
+}
+
+.arrowBackLegalNotice {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  padding-left: 2rem;
+  padding-bottom: 1rem;
 }
 
 .selectColor {
@@ -382,9 +382,6 @@
 }
 
 @media (max-width: 780px) {
-    .loginScreen, .contentContainer {
-        width: 100%;
-    }
     .loginHeading > h1 {
         font-size: 2.5rem;
     }
@@ -399,11 +396,14 @@
     padding-right: 50px;
   }
 
+  .contentContainer .innerLegalNoticeContainerLogin {
+    padding: 0;
+  }
+
   .loginHeading:before {
     bottom: -16px;
   }
 }
-
 
 @media (max-width: 600px) {
   .loginScreen {
@@ -439,13 +439,19 @@
   }
 
   .signUpContainer {
+    position: absolute;
+    bottom: 70px;
+    left: 0;
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    position: absolute;
-    bottom: 25px;
   }
+
+  .signUpField {
+    position: unset;
+  }
+
   .signInField {
     display: flex;
     justify-content: center;
@@ -527,10 +533,10 @@
     padding-top: 0;
   }
 
-  .loginScreen {
+/*   .loginScreen {
     height: 450px;
   }
-
+ */
  .logo {
     height: 75px;
     width: auto;
@@ -558,10 +564,14 @@
     padding-right: 10px;
     gap: 10px;
   }
+
+  .loginScreen > form {
+    gap: 15px;
+  }
  
-   .rememberOrForgetFields {
-    gap: 10;
-    width: 90%;
+  .rememberOrForgetFields {
+    gap: 0px;
+    flex-direction: column;
     justify-content: space-between;
   }
 
@@ -571,15 +581,17 @@
 
   .loginButtons {
     display: flex;
+    flex-direction: column;
     width: 100%;
     position: relative;
     gap: 10px;
  }
 
-  .loginButtons > button {
+  .loginButtons > .buttonDark,
+  .loginButtons > button:last-of-type {
     margin: 0;
     font-size: 17px;
-    width: 130px;
+    width: 150px;
     height: 40px;
  }
 
@@ -593,11 +605,6 @@
     height: 25px;
   }
 
-  .signUpContainer {
-    padding-left: 15px;
-    padding-right: 15px;
-  }
-
   .signInField {
     gap: 20px;
   }
@@ -608,6 +615,10 @@
 
   .signInField > button {
     scale: 0.9;
+  }
+
+  .selectColor {
+    font-size: 16px;
   }
 }
 
@@ -628,16 +639,36 @@
     flex-direction: column;
     justify-content: flex-start;
   }
-}
 
-@media (max-width: 300px) {
-  .rememberOrForgetFields {
-    margin-left: 10px;
+  .loginButtons > .buttonDark,
+  .loginButtons > button:last-of-type {
+    width: 120px;
+    height: 35px;
+ }
+
+  .buttonDarkText,
+  .buttonLightText {
+    font-size: 15px;
   }
 
-  .signInField {
-    gap: 0;
+  .signUpField > div:first-of-type {
+    font-size: 16px;
+    width: auto;
+  }
+
+  .signUpField > button {
+    width: 80px;
+    height: 35px;
+  }
+
+  .signUpField > button > a {
+    font-size: 14px;
+  }
+
+  .selectColor {
+    font-size: 13px;
   }
 }
+
 
 

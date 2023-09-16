@@ -30,11 +30,11 @@ input:invalid {
   padding: 0px;
 }
 
-select {
+/* select {
   appearance: none;
   background: url(/img/arrow.svg) 96% / 3% no-repeat white;
   cursor: pointer;
-}
+} */
 
 textarea {
   min-height: 119px;
@@ -47,16 +47,17 @@ textarea {
   font-weight: 400;
 }
 
-select::-ms-expand {
+/* select::-ms-expand {
   display: none;
-  /* Standardpfeil im IE 10 und 11 entfernen */
+   Standardpfeil im IE 10 und 11 entfernen 
 }
 
-/* .addTaskMainContainer button {
+ .addTaskMainContainer button {
   border: none;
 } */
 
-span {
+.selectionContainer > span,
+.featuresContainer > span {
   font-weight: 400;
   font-size: 21px;
 }

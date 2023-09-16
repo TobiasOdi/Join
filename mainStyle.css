@@ -40,6 +40,7 @@ a {
   font-weight: 700;
   font-size: 21px;
   color: white;
+  text-align: center;
 }
 
 .buttonLight {
@@ -59,6 +60,7 @@ a {
   font-weight: 700;
   font-size: 21px;
   color: #2a3647;
+  text-align: center;
 }
 
 .inputContainer{
@@ -289,8 +291,8 @@ a {
   display: none;
   justify-content: center;
   align-items: center;
-  width: 120px;
-  height: 45px;
+  width: 80px;
+  height: 35px;
   border-radius: 10px 0 10px 10px;
   padding: 15px;
   background-color: rgba(42, 54, 71, 1);
@@ -300,6 +302,7 @@ a {
 .logoutButton > span {
   color: white;
   font-weight: bold;
+  font-size: 16px;
 }
 
 .topNavBarRightImgPicture:hover {
@@ -504,7 +507,7 @@ a {
   background-position: center;
 }
 
-.placeholderBoardBottom::-webkit-scrollbar-button:vertical:start:increment,
+/* .placeholderBoardBottom::-webkit-scrollbar-button:vertical:start:increment,
 .assignedToContainer::-webkit-scrollbar-button:vertical:start:increment,
 .contactList::-webkit-scrollbar-button:vertical:start:increment,
 .addTaskMainSubContainer::-webkit-scrollbar-button:vertical:start:increment,
@@ -513,7 +516,7 @@ a {
 .summaryLeftContainer::-webkit-scrollbar-button:vertical:start:increment {
   background-image: url(../img/upArrow.svg);
   background-size: 10px 4px;
-}
+} */
 
 .placeholderBoardBottom::-webkit-scrollbar-button:vertical:start:decrement,
 .assignedToContainer::-webkit-scrollbar-button:vertical:start:decrement,
@@ -539,7 +542,7 @@ a {
   display: none;
 }
 
-.placeholderBoardBottom::-webkit-scrollbar-button:vertical:end:decrement,
+/* .placeholderBoardBottom::-webkit-scrollbar-button:vertical:end:decrement,
 .assignedToContainer::-webkit-scrollbar-button:vertical:end:decremen,
 .contactList::-webkit-scrollbar-button:vertical:end:decrement,
 .addTaskMainSubContainer::-webkit-scrollbar-button:vertical:end:decrement,
@@ -548,7 +551,7 @@ a {
 .summaryLeftContainer::-webkit-scrollbar-button:vertical:end:decrement {
   background-image: url(../img/downArrow.svg);
   background-size: 10px 4px;
-}
+} */
 
 /* ================================================================ RESPONSIVENESS ====================================================== */
 @media (max-width: 950px) {
@@ -648,8 +651,7 @@ a {
     gap: 10px;
     width: 327px;
     height: 41px;
-      width: 100%;
-  }
+}
   
   ::placeholder {
     width: 100%;
@@ -672,7 +674,7 @@ a {
     margin-right: 10px;
   }  
 
-  .inputFields, .inputContainer, .inputFieldContainer   {
+  .inputFields, .inputContainer   {
     width: 100%;
   }
 
@@ -682,6 +684,24 @@ a {
 
   ::placeholder {
     font-size: 16px;
+  }
+
+  .privacyPolicyContainer > div,
+  .privacyPolicyContainer > div > div {
+    font-size: 12px;
+  }
+  .privacyPolicyContainer > input {
+    width: 14px;
+    height: 14px;
+  }
+
+  .buttonDark {
+    width: 90px;
+    height: 45px;
+  }
+
+  .buttonDarkText {
+    font-size: 17px;
   }
 }
 
