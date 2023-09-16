@@ -687,6 +687,22 @@
   gap: 15px;
 }
 
+.openTaskSubtaskEdit > div {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.openTaskSubtaskEdit > div > input {
+  width: 70px;
+  height: 30px;
+}
+
+.openTaskSubtaskEdit > div > button {
+  width: 50px;
+  height: 30px;
+}
+
 .boardSubtaskContainer {
   width: 100%;
   display: flex;

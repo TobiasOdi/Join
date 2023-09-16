@@ -214,7 +214,7 @@ function openTaskTemplate(currentTask) {
      `;
 }
 
-/* ========================================= EDIT OPEN TASK TEMPLATE ========================================= */
+/* ========================================= EDIT TASK TEMPLATE ========================================= */
 /**
  * This function returns the template of an opened task that can be edited.
  * @param {number} currentTask - index of the current task
@@ -269,8 +269,12 @@ function editOpenTaskTemplate(currentTask) {
                     </div>
                 </div>
 
-                <div class="openTaskSubtask">
-                    <div>Subtasks:</div>
+                <div class="openTaskSubtask openTaskSubtaskEdit">
+                    <div>
+                        <div>Subtasks:</div>
+                        <input id="addSubtaskEdit" type="text">
+                        <button onclick="addSubtaskEdit(${currentTask})">Add</button>
+                    </div>
                     <div id="subtaskContainerEdit" class="boardSubtaskContainer">
 
                     </div>                
@@ -350,11 +354,12 @@ function editCategoryTemplate(categoryName, categoryColor) {
  * @param {string} subtask - name of the current subtask
  * @returns 
  */
-function subtasksEditUndoneTemplate(subtaskIndex, currentTask, subtask) {
+function subtasksEditUndoneTemplate(subtaskIndex, currentTask, subtask, j) {
     return `
         <div class="openSubtask" onclick="saveCompletedSubtasks(${subtaskIndex}, ${currentTask})">
             <input id="subtask${subtaskIndex}" type="checkbox" value="${subtaskIndex}" checked>
             <div>${subtask}</div>
+            <img onclick="deleteSubtaskEdit(${j})">
         </div>
     `;
 }
@@ -366,11 +371,12 @@ function subtasksEditUndoneTemplate(subtaskIndex, currentTask, subtask) {
  * @param {string} subtask - name of the current subtask
  * @returns 
  */
-function subtasksEditTemplate(subtaskIndex, currentTask, subtask) {
+function subtasksEditTemplate(subtaskIndex, currentTask, subtask, j) {
     return `
         <div class="openSubtask" onclick="saveCompletedSubtasks(${subtaskIndex}, ${currentTask})">
             <input id="subtask${subtaskIndex}" type="checkbox" value="${subtaskIndex}">
             <div>${subtask}</div>
+            <img onclick="deleteSubtaskEdit(${j})">
         </div>
     `;
 }

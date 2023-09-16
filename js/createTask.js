@@ -15,6 +15,7 @@ let statusCategory;
 let editedTaskPriority = [];
 let firstLettersAvailableUser;
 let prevPriorityElement = null; // keep track of previously clicked button
+let subtasks = [];
 let taskData;
 
 // ================================================ MAIN SITE FUNCTIONS ==========================================================

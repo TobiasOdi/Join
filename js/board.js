@@ -3,7 +3,6 @@ let allTasks = [];
 let userChar = [];
 let allUsers = [];
 let currentDraggedElement;
-let subtasks = [];
 let priorityValueEdit;
 let startWithLetter = [];
 let selectedUsersEdit = [];
@@ -499,19 +498,53 @@ document.querySelector('#editSelectCategory')?.addEventListener("change", functi
  * @param {index} currentTask - index of the current task
  */
 function renderSubtasksEdit(currentTask){
+    document.getElementById('subtaskContainerEdit').innerHTML = "";
     let userSubtasks = tasks[currentTask]['subtasks'];
-        for (let j = 0; j < userSubtasks.length; j++) {
-            let subtaskIndex = j;
-            let subtask = userSubtasks[j]['subtaskName'];
-            let subtaskStatus = userSubtasks[j]['status'];
-            if (!subtaskStatus.includes('undone')) {
-                document.getElementById('subtaskContainerEdit').innerHTML += subtasksEditUndoneTemplate(subtaskIndex, currentTask, subtask);
-            } else {
-                document.getElementById('subtaskContainerEdit').innerHTML += subtasksEditTemplate(subtaskIndex, currentTask, subtask);
-            }
-        }
+    subtasks = userSubtasks;
+    if(userSubtasks == "") {
+        document.getElementById('subtaskContainerEdit').innerHTML += `
+            <div>No subtasks</div>
+        `;
+    } else {
+        renderAllSubtasks(currentTask);
+    }
 };
 
+function renderAllSubtasks(currentTask) {
+    for (let j = 0; j < userSubtasks.length; j++) {
+        let subtaskIndex = j;
+        let subtask = userSubtasks[j]['subtaskName'];
+        let subtaskStatus = userSubtasks[j]['status'];
+        if (!subtaskStatus.includes('undone')) {
+            document.getElementById('subtaskContainerEdit').innerHTML += subtasksEditUndoneTemplate(subtaskIndex, currentTask, subtask, j);
+        } else {
+            document.getElementById('subtaskContainerEdit').innerHTML += subtasksEditTemplate(subtaskIndex, currentTask, subtask, j);
+        }
+    }
+}
+
+/**
+ * This function adds a subtask to the the subtask array.
+ */
+async function addSubtaskEdit(currentTask) {
+    let subtaskEdit = document.getElementById('addSubtaskEdit');
+    if (subtaskEdit !== '') {
+        subtasks.push({'subtaskName': subtaskEdit.value, 'status': 'undone'});
+        document.getElementById('addSubtaskEdit').value = '';
+        renderSubtasksEdit(currentTask);
+        displaySnackbar('newSubtaskAdded');
+    } else {
+        displaySnackbar('missingInput');
+    }
+}
+
+/**
+ * This function deletes the subtask.
+ */
+function deleteSubtaskEdit(j) {
+    subtasks.splice(j, 1);
+    renderSubtasksEdit();
+}
 /**
  * This function renders the users of the current task to select more or deselect them.
  * @param {index} currentTask - index of the current task
@@ -613,19 +646,6 @@ function closeTask(priority, currentTask) {
     document.getElementById('openTaskBackground').style.display = 'none';
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* ======================================================================= SEARCH FUNCTION ================================================================================= */
 /**
  * This function renders the tasks that containt the searched values.
@@ -675,3 +695,30 @@ function searchFunction() {
     });
 }
 
+
+/* function searchFunction() {
+    let searchValue = document.getElementById('searchValue').value;
+
+    if(searchValue == "") {
+    } else {
+        let searchArray = tasks.filter(task => task['description'].toLowerCase().includes(selectedValue) || task['title'].toLowerCase().includes(selectedValue) || task['category'].toLowerCase().includes(selectedValue));
+        updateHTML(searchArray);
+ */    
+/*         if(searchArray.length > 0) {
+            for (let index = 0; index < searchArray.length; index++) {
+                filterToDo();
+                filterInProgress();
+                filterAwaitingFeedback();
+                filterDone();
+                let taskId = tasks[index]['taskId'];
+                let subtasksProgress;
+                calculateProgressbar(index, subtasksProgress, numerator, denominator);
+                generateProgressbarHtml(index, taskId, progress, numerator, denominator);
+            }
+            createBubbles();
+        }     
+        checkForEmptyCategories();
+ */ 
+//   }
+//}
+ 
