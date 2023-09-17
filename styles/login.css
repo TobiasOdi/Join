@@ -70,11 +70,11 @@
   justify-content: center;
   align-items: center;
   gap: 1rem;
-  padding: 1rem;
+  padding: 2rem 1rem 2rem 1rem;
   background-color: white;
   width: 580px;
+  height: auto;
   border-radius: 30px;
-  height: 445px;
   box-shadow: 0px 0px 14px 3px rgba(0, 0, 0, 0.04);
 }
 
@@ -84,11 +84,6 @@
   justify-content: flex-start;
   align-items: center;
   gap: 30px;
-}
-
-.loginScreenPw {
-  width: 650px;
-  height: 370px;
 }
 
 .loginHeading {
@@ -105,6 +100,7 @@
   font-size: 3rem;
   margin-top: 1rem;
   margin-bottom: 1rem;
+  line-height: 100%;
 }
 
 .loginHeading2 {
@@ -119,8 +115,9 @@
 }
 
 .signUpScreen {
-  height: 540px;
-  padding-bottom: 10px;
+/*   height: 540px;
+ */
+padding: 1rem;
 } 
 
 .signUpScreen h1 {
@@ -128,7 +125,7 @@
 }
 
 .signUpScreen > form {
-  gap: 15px;
+  gap: 5px;
 }
 
 .arrowBack {
@@ -263,10 +260,10 @@
   width: 237px;
 }
 
- .arrowBack {
+.arrowBack {
   position: absolute;
-  top: 24px;
-  left: 40px;
+  top: 10px;
+  left: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -399,9 +396,9 @@
   .contentContainer .innerLegalNoticeContainerLogin {
     padding: 0;
   }
-
-  .loginHeading:before {
-    bottom: -16px;
+  
+  .arrowBackLegalNotice {
+    padding-left: 0;
   }
 }
 
@@ -419,23 +416,17 @@
   .startSignUpScreen {
     margin-left: 25px;
   }
-
-  .arrowBack {
-    top: 16px;
-    left: 16px;
-  } 
   
   .loginScreen {
-    height: 420px;
-    justify-content: flex-start;
-  }
-
-  .signUpScreen {
-    height: 500px;
+   justify-content: flex-start;
   }
 
   .signUpScreen > form {
     width: 100%;
+  }
+
+  .loginScreenPw {
+    padding-top: 2rem;
   }
 
   .signUpContainer {
@@ -487,19 +478,10 @@
     color: #29abe2;
   }
 
-  .loginHeading {
-    font-size: 45px;
-  }
-
-  .loginHeading:before {
-    bottom: -11px;
-  }
   .contentContainer {
-/*     top: -150px;
- */    padding-left: 25px;
+    padding-left: 25px;
     padding-right: 25px;
-/*     padding-top: 20px;
- */   }
+  }
 }
 
 @media (max-width: 480px) {
@@ -533,10 +515,6 @@
     padding-top: 0;
   }
 
-/*   .loginScreen {
-    height: 450px;
-  }
- */
  .logo {
     height: 75px;
     width: auto;
@@ -568,7 +546,11 @@
   .loginScreen > form {
     gap: 15px;
   }
- 
+
+  .signUpScreen > form {
+    gap: 5px;
+  }
+
   .rememberOrForgetFields {
     gap: 0px;
     flex-direction: column;
@@ -620,6 +602,10 @@
   .selectColor {
     font-size: 16px;
   }
+
+  #forgotPwForm > button {
+    width: auto;
+  }
 }
 
 @media (max-width: 380px) {
@@ -667,6 +653,23 @@
 
   .selectColor {
     font-size: 13px;
+  }
+
+  
+  .privacyPolicyContainer {
+    gap: 5px;
+  }
+
+  .privacyPolicyContainer > div:last-of-type > div:first-of-type,
+  .privacyPolicyContainer > div:last-of-type > div:last-of-type {
+    font-size: 10px;
+  }
+
+  #forgotPwForm > button {
+    height: 35px;
+  }
+  #forgotPwForm > button > div {
+    font-size: 12px;
   }
 }
 

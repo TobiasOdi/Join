@@ -273,6 +273,8 @@
 @media (max-width: 720px){
   .summaryMainContainer {
     justify-content: center;
+    height: 100%;
+
   }
   
   .summaryHeadline {
@@ -286,10 +288,10 @@
   }
 
   .summaryMainContainer {
-    height: calc(100vh - 163px);
+    height: calc(100vh - 154px );
     align-items: flex-start;
     padding-top: 0;
-    padding-bottom: 1rem;
+    padding: 1rem;
     padding-right: 0;
     overflow-y: hidden;
   }
@@ -297,8 +299,6 @@
   .summaryLeftContainer {
     width: 100%;
     height: 100%;
-    padding-top: 1.5rem;
-    padding-right: 0.5rem;
     overflow: auto;
   }
 
@@ -356,6 +356,13 @@
     width: 50px;
   }
 
+  .middleCardDeadlineDate {
+    font-size: 18px;
+  }
+
+  .middleCardDeadlineText {
+    font-size: 14px;
+  }
   .allBottomCards {
     flex-direction: column;
     width: 100%;
@@ -372,11 +379,20 @@
     height: 50px;
     width: 50px;
   }
-
   }
 
   @media (max-width: 480px){
   .middleCard {
     gap: 10px;
   }
+  }
+
+  @media (max-width: 320px) {
+    .middleCardDeadlineDate {
+      font-size: 16px;
+    }
+  
+    .middleCardDeadlineText {
+      font-size: 12px;
+    }
   }

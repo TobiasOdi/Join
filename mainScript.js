@@ -402,9 +402,10 @@ function activeTab(tab) {
     let allTabs = document.querySelectorAll('.tab');
 
     allTabs.forEach((element) => {
-        element.style.backgroundColor = '#2a3647';
+        element.classList.remove('activeTab');
     })
-    currentElement.style.backgroundColor = '#091931';
+
+    currentElement.classList.add('activeTab');
 }
 
 

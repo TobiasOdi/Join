@@ -4,16 +4,15 @@
   box-sizing: border-box;
 }
 
-body,
-head {
+body {
   margin: 0;
   border: 0;
   padding: 0;
   background-color: #f6f7f8;
   font-size: 16px;
   font-style: normal;
-  line-height: 120%;
-}
+/*   line-height: 120%;
+ */}
 
 a {
   color: inherit;
@@ -34,8 +33,6 @@ a {
 }
 
 .buttonDarkText {
-  width: 100%;
-  height: 25px;
   font-family: "Inter";
   font-weight: 700;
   font-size: 21px;
@@ -54,8 +51,6 @@ a {
 }
 
 .buttonLightText {
-  width: 100%;
-  height: 25px;
   font-family: "Inter";
   font-weight: 700;
   font-size: 21px;
@@ -180,15 +175,29 @@ a {
   display: flex;
 }
 
-.sideNavBar {
-  position: relative;
-  height: 100%;
-  width: 232px;
-  background-color: #2a3647;
+.placeholderLeft {
+  height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
+  align-items: flex-start;
+  justify-content: center;
+  background-color: #2a3647;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+.placeholderLeft > div:last-of-type {
+  width: 100%;
+  height: 100%;
+}
+
+.sideNavBar {
+  height: 100%;
+  width: 232px;
+  display: flex;
+  flex-direction: column;
   align-items: center;
+  justify-content: flex-start;
   z-index: 2;
 }
 
@@ -196,10 +205,11 @@ a {
   color: white;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
+  align-items: center;
+  justify-content: flex-start;
   height: 100%;
   width: 100%;
+  padding-top: 2rem;
 }
 
 .sideNavBarList > div {
@@ -208,11 +218,11 @@ a {
   justify-content: center;
   align-items: center;
   height: 50px;
-  cursor: pointer;
 }
 
 .sideNavBarList > div:hover {
-  background-color: #091931;
+  background-color: rgb(9, 25, 49);
+  cursor: pointer;
 }
 
 .sideNavBarTask {
@@ -226,10 +236,17 @@ a {
   color: white;
 }
 
-.sideNavBarLegalNotice {
-  position: absolute;
-  bottom: 30px;
-  margin: 50px 0px 25px 0px;
+#legalNoticeTab {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+  cursor: pointer;
+}
+
+#legalNoticeTab:hover {
+  background-color: rgb(9, 25, 49);
 }
 
 .placeholderRight {
@@ -313,19 +330,20 @@ a {
   height: 100%;
 }
 
-/* .placeholderLeft {
-  position: relative;
-  left: 0px;
-  height: calc(100% - 89px);
-} */
+.placeholderBottom > div,
+.placeholderBottom > div > div {
+  width: 100%;
+  height: 100%;
+}
 
-/* Logo TopLeftCorner */
 .sideNavBarLogo {
-  position: absolute;
-  top: 66px;
-  left: 66px;
+  width: 100%;
+  height: 200px;
   z-index: 3;
   cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .whiteLogo {
@@ -335,7 +353,6 @@ a {
 }
 
 .blackLogo {
-  position: relative;
   display: none;
 }
 
@@ -348,6 +365,11 @@ a {
 .legalnotice {
   margin-top: 100px;
   margin-bottom: 25px;
+}
+
+/* ================================================================ CLASSES ADD/REMOVE ====================================================== */
+.activeTab {
+  background-color: rgb(9, 25, 49);
 }
 
 
@@ -577,11 +599,32 @@ a {
 
   .placeholderTop {
     width: 100%;
-    justify-content: flex-end;
+    justify-content: space-between;
+ 
   }
 
   .mainContainer {
     flex-direction: column-reverse;
+  }
+
+  .placeholderLeft {
+    height: 65px; 
+    padding: 0;
+  }
+
+  .sideNavBar {
+    height: 100%;
+    width: 100%;
+    display: flex;
+  }
+
+  .sideNavBarList {
+    padding: 0;
+  }
+
+
+  .sideNavBarLogo {
+    display: none;
   }
 
   .placeholderRight {
@@ -589,17 +632,14 @@ a {
     top: 0;
     left: 0;
     width: 100%;
-    height: calc(100vh - 80px);
+    height: calc(100vh - 65px);
     display: flex;
     flex-direction: column;
   }
   .placeholderBottom {
-    height: calc(100vh - 169px);
+    height: 100%;
   }
-  .sideNavBarLogo {
-    top: 20px;
-    left: 25px;
-  }
+
   .whiteLogo {
     display: none;
   }
@@ -609,24 +649,21 @@ a {
     width: 32px;
     height: 39px;
   }
-  .sideNavBar {
-    height: 100%;
-    width: 100%;
-    display: flex;
-  }
+
   .sideNavBarList {
+    height: 100%;
     display: flex;
     align-items: center;
     justify-content: space-around;
     flex-direction: row;
-    padding: 12px;
+  }
+
+  .sideNavBarList >.tab {
+    height: 100%;
   }
 
   .sideNavBarTask {
-    /* display: flex; */
     flex-direction: column;
-    /* justify-content: center;
-    align-items: center; */
     gap: 10px;
     width: auto;
   }
@@ -662,6 +699,12 @@ a {
 }
 
 @media (max-width: 480px) {
+  .topNavBarRightImgExclamationmark,
+  .topNavBarRightImgQuestionmark {
+    height: 28px;
+    width: 28px;
+  }
+
   .inputContainer {
     padding-left: 2rem;
     padding-right: 2rem;
@@ -710,11 +753,15 @@ a {
     padding-left: 0.5rem;
     padding-right: 0.5rem;
    }
-}
 
-@media (max-width: 320px) {
-  .sideNavBarTask span {
+   .sideNavBarTask span {
     display: none;
+  }
+
+  .topNavBarRightImgExclamationmark,
+  .topNavBarRightImgQuestionmark {
+    height: 25px;
+    width: 25px;
   }
 }
 

@@ -6,9 +6,8 @@
   border: 2px solid red;
 }
 
-input,
-select,
-.selectWrapper {
+/* input,
+ */.selectWrapper {
   border: 1px solid #d1d1d1;
   border-radius: 10px;
   font-size: 21px;

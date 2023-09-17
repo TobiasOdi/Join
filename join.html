@@ -36,14 +36,19 @@
 
 <body onload="init()">
     <div class="mainContainer">
-        <!-- LogoTopLeftCorner -->
-        <div class="sideNavBarLogo" onclick="displayPage('mainSummaryContainerDisplay'), activeTab('summary')">
-            <img id="startScreenLogo" src="img/whitelogo.svg" class="whiteLogo" />
-            <img src="img/blacklogo.svg" class="blackLogo" />
-        </div>
 
         <!-- Sidebar -->
-        <div w3-include-html="templates\sideNavBar.html"></div>
+        <div class="placeholderLeft">
+            <!-- LogoTopLeftCorner -->
+            <div class="sideNavBarLogo" onclick="displayPage('mainSummaryContainerDisplay'), activeTab('summary')">
+                <img id="startScreenLogo" src="img/whitelogo.svg" class="whiteLogo" />
+            </div>
+
+            <div w3-include-html="templates\sideNavBar.html">
+                
+            </div>
+
+        </div>
 
         <div class="placeholderRight">
 
@@ -51,7 +56,6 @@
             <div w3-include-html="templates\topBar.html"></div>
 
             <div class="placeholderBottom">
-
                 <!-- Board -->
                 <div class="mainBoardContainerDisplay" id="mainBoardContainerDisplay">
                     <div w3-include-html="templates\board.html"></div>
