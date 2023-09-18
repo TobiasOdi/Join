@@ -2,7 +2,7 @@
 .contactsMainContainer {
   display: flex;
   width: 100%;
-  height: calc(100vh - 89px);
+  height: calc(100vh - 154px);
 }
 
 .contactsBar {

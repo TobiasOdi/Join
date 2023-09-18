@@ -617,6 +617,21 @@ padding: 1rem;
  .loginHeading > h1 {
     font-size: 2.2rem;
  }
+
+ .signUpField > div:first-of-type {
+  font-size: 16px;
+  width: auto;
+}
+
+.signUpField > button {
+  width: 80px;
+  height: 35px;
+}
+
+.signUpField > button > a {
+  font-size: 14px;
+}
+
 }
 
 @media (max-width: 320px) {
@@ -637,25 +652,10 @@ padding: 1rem;
     font-size: 15px;
   }
 
-  .signUpField > div:first-of-type {
-    font-size: 16px;
-    width: auto;
-  }
-
-  .signUpField > button {
-    width: 80px;
-    height: 35px;
-  }
-
-  .signUpField > button > a {
-    font-size: 14px;
-  }
-
   .selectColor {
     font-size: 13px;
   }
 
-  
   .privacyPolicyContainer {
     gap: 5px;
   }
@@ -670,6 +670,11 @@ padding: 1rem;
   }
   #forgotPwForm > button > div {
     font-size: 12px;
+  }
+
+  .signUpField {
+    height: auto;
+    flex-direction: column;
   }
 }
 

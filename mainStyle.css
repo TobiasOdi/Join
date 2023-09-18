@@ -107,7 +107,7 @@ a {
 }
 
 .inputFields{
-  padding: 12px 21px;
+  padding: 10px 10px;
   gap: 10px;
   width: 422px;
   height: 48px;
@@ -126,6 +126,15 @@ a {
   font-size: 21px;
   line-height: 120%;
   color: #d1d1d1;
+}
+
+.inputFieldContainer .inputFieldVerticalLine {
+  position: absolute;
+  top: 20%;
+  right: 3.15rem;
+  width: 0px;
+  height: 31px;
+  border: 1px solid #d1d1d1;
 }
 
 /* ================================================================ SIDEBAR / TOPBAR / MAIN CONTAINER ====================================================== */
@@ -209,7 +218,7 @@ a {
   justify-content: flex-start;
   height: 100%;
   width: 100%;
-  padding-top: 2rem;
+  padding-top: 4rem;
 }
 
 .sideNavBarList > div {
@@ -684,7 +693,6 @@ a {
 
 @media (max-width: 600px) {
   .inputFields {
-    padding: 13px 21px;
     gap: 10px;
     width: 327px;
     height: 41px;

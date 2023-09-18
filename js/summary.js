@@ -12,6 +12,7 @@ function counters() {
     doneCounter();
     greeting();
     displayUserName();
+    activeTab('summary');
 }
 
 /**

@@ -359,7 +359,7 @@ function subtasksEditUndoneTemplate(subtaskIndex, currentTask, subtask, j) {
         <div class="openSubtask" onclick="saveCompletedSubtasks(${subtaskIndex}, ${currentTask})">
             <input id="subtask${subtaskIndex}" type="checkbox" value="${subtaskIndex}" checked>
             <div>${subtask}</div>
-            <img onclick="deleteSubtaskEdit(${j})">
+            <img src="./img/delete.svg" onclick="deleteSubtaskEdit(${j})">
         </div>
     `;
 }
@@ -376,7 +376,7 @@ function subtasksEditTemplate(subtaskIndex, currentTask, subtask, j) {
         <div class="openSubtask" onclick="saveCompletedSubtasks(${subtaskIndex}, ${currentTask})">
             <input id="subtask${subtaskIndex}" type="checkbox" value="${subtaskIndex}">
             <div>${subtask}</div>
-            <img onclick="deleteSubtaskEdit(${j})">
+            <img src="./img/delete.svg" onclick="deleteSubtaskEdit(${j})">
         </div>
     `;
 }

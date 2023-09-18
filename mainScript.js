@@ -64,7 +64,6 @@ async function init() {
     tasks = JSON.parse(backend.getItem('tasks')) || [];
     contacts = JSON.parse(backend.getItem('contacts')) || [];
     categories = JSON.parse(backend.getItem('categories')) || [];
-    activeTab('summary');
     setInterval(setUserColor, 200);
 }
 
@@ -404,7 +403,6 @@ function activeTab(tab) {
     allTabs.forEach((element) => {
         element.classList.remove('activeTab');
     })
-
     currentElement.classList.add('activeTab');
 }
 

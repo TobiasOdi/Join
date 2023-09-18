@@ -128,9 +128,8 @@ function generateProgressbarHtml(i, taskId, progress, numerator, denominator) {
 function createBubbles() {
     for (let j = 0; j < tasks.length; j++) {
         let bubbleTaskId = tasks[j]["taskId"];
-        if (tasks[j]["assignTo"].length <= 3) {
+        if(tasks[j]["assignTo"].length <= 3) {
             bubblesLessThanThree(j, bubbleTaskId);
-
         } else if (tasks[j]["assignTo"].length > 3) {
             bubblesMoreThanThree(j, bubbleTaskId);
             getRemainingCount(j, bubbleTaskId);
@@ -506,11 +505,11 @@ function renderSubtasksEdit(currentTask){
             <div>No subtasks</div>
         `;
     } else {
-        renderAllSubtasks(currentTask);
+        renderAllSubtasks(currentTask, userSubtasks);
     }
 };
 
-function renderAllSubtasks(currentTask) {
+function renderAllSubtasks(currentTask, userSubtasks) {
     for (let j = 0; j < userSubtasks.length; j++) {
         let subtaskIndex = j;
         let subtask = userSubtasks[j]['subtaskName'];
@@ -651,16 +650,21 @@ function closeTask(priority, currentTask) {
  * This function renders the tasks that containt the searched values.
  */
 function searchFunction() {
+    let emptyCategory = document.getElementsByClassName("emptyCategory");
     let originalToDos = tasks;
     let input = document.getElementById('searchValue');
+    inputValueEvent(input, originalToDos, emptyCategory);
+    keydownEvent(input);
+}
 
+function inputValueEvent(input, originalToDos, emptyCategory) {
     input.addEventListener('input', debounce(function (event) {
         let selectedValue = event.target.value.toLowerCase().trim();
-
         let newArray;
         if (selectedValue === '') {
             newArray = [...originalToDos];
             tasks = originalToDos;
+            hideEmptyCategoryPlaceholder(emptyCategory);
         } else {
             newArray = tasks.filter(item => {
                 if (item.description.toLowerCase().includes(selectedValue) || item.title.toLowerCase().includes(selectedValue) || item.category.toLowerCase().includes(selectedValue)) {
@@ -674,20 +678,33 @@ function searchFunction() {
                     }
                 });
             }
+            hideEmptyCategoryPlaceholder(emptyCategory);
         }
         tasks = newArray;
         updateHTML();
-        if (tasks.length > 0) {
-            Array.from(document.getElementsByClassName("boardContainer")).forEach((card) => {
-                card.style.display = "block";
-            });
-        } else {
-            Array.from(document.getElementsByClassName("boardContainer")).forEach((card) => {
-                card.style.display = "none";
-            });
-        }
+        hideShowTasks();
     }, 200));
+}
 
+function hideEmptyCategoryPlaceholder(emptyCategory) {
+    for(var i = 0; i < emptyCategory.length; i++){
+        emptyCategory[i].style.display = "none";
+    }
+}
+
+function hideShowTasks() {
+    if (tasks.length > 0) {
+        Array.from(document.getElementsByClassName("boardContainer")).forEach((card) => {
+            card.style.display = "block";
+        });
+    } else {
+        Array.from(document.getElementsByClassName("boardContainer")).forEach((card) => {
+            card.style.display = "none";
+        });
+    }
+}
+
+function keydownEvent(input) {
     input.addEventListener('keydown', function (event) {
         if (event.key === 'Backspace' || event.key === 'Delete') {
             input.dispatchEvent(new Event('input'));
@@ -695,30 +712,4 @@ function searchFunction() {
     });
 }
 
-
-/* function searchFunction() {
-    let searchValue = document.getElementById('searchValue').value;
-
-    if(searchValue == "") {
-    } else {
-        let searchArray = tasks.filter(task => task['description'].toLowerCase().includes(selectedValue) || task['title'].toLowerCase().includes(selectedValue) || task['category'].toLowerCase().includes(selectedValue));
-        updateHTML(searchArray);
- */    
-/*         if(searchArray.length > 0) {
-            for (let index = 0; index < searchArray.length; index++) {
-                filterToDo();
-                filterInProgress();
-                filterAwaitingFeedback();
-                filterDone();
-                let taskId = tasks[index]['taskId'];
-                let subtasksProgress;
-                calculateProgressbar(index, subtasksProgress, numerator, denominator);
-                generateProgressbarHtml(index, taskId, progress, numerator, denominator);
-            }
-            createBubbles();
-        }     
-        checkForEmptyCategories();
- */ 
-//   }
-//}
  
