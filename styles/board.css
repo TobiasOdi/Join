@@ -39,7 +39,15 @@
 
 .placeholderBoardTopRight .inputContainer {
   width: 300px;
+  height: 45px;
 }
+
+.placeholderBoardTopRight .inputFields {
+  height: 45px;
+}
+
+
+
 
 /* .findTaskInputField {
   display: flex;
@@ -401,6 +409,7 @@
   align-items: center;
   padding: 15px;
   z-index: 10;
+  overflow: hidden;
 }
 
 .openTaskContainer {
@@ -408,6 +417,9 @@
   width: 500px;
   height: 100%;
   border-radius: 30px;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  overflow: auto;
 }
 
 .openTask {
@@ -420,7 +432,6 @@
   padding: 2rem;
   gap: 20px;
   border-radius: 30px;
-  overflow: hidden;
 }
 
 .openTaskTop {
@@ -826,6 +837,7 @@
 }
 
 /* =============================================================== RESPONSIVENESS =================================================================== */
+/* ================================ WIDTH =============================== */
 @media (max-width: 880px) {
   .placeholderBoardTop {
     flex-direction: column;
@@ -858,7 +870,7 @@
 
 @media (max-width: 720px) {
   .placeholderBoard {
-    height: calc(100vh - 163px);
+    height: calc(100vh - 154px);
     padding-left: 0;
     padding-right: 0;
   }
@@ -877,7 +889,7 @@
   .openTaskBackground {
     padding: 0;
     top: 89px;
-    height: calc(100vh - 163px);
+    height: calc(100vh - 154px);
   }
 
   .openTaskContainer {
@@ -1017,4 +1029,13 @@
   .openTaskHeader > div > div:first-of-type {
     width: 120px;
   }
+}
+
+/* ================================ HEIGHT =============================== */
+@media (max-height: 690px) {
+  .openTaskSubtask {
+    min-height: 90px;
+  }
+
+
 }
