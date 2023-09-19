@@ -138,6 +138,7 @@
 /* =============================================================== TASK CATEGORIES =================================================================== */
 .boardParts {
   width: 23%;
+  min-width: 220px;
   display: flex;
   flex-direction: column;
   gap: 24px;
@@ -858,7 +859,7 @@
 @media (max-width: 720px) {
   .placeholderBoard {
     height: calc(100vh - 163px);
-    padding-left: 1rem;
+    padding-left: 0;
     padding-right: 0;
   }
   .placeholderBoardTopLeft > h1 {

@@ -354,12 +354,12 @@ function editCategoryTemplate(categoryName, categoryColor) {
  * @param {string} subtask - name of the current subtask
  * @returns 
  */
-function subtasksEditUndoneTemplate(subtaskIndex, currentTask, subtask, j) {
+function subtasksEditUndoneTemplate(j, currentTask, subtask) {
     return `
-        <div class="openSubtask" onclick="saveCompletedSubtasks(${subtaskIndex}, ${currentTask})">
-            <input id="subtask${subtaskIndex}" type="checkbox" value="${subtaskIndex}" checked>
+        <div class="openSubtask" onclick="saveCompletedSubtasks(${j}, ${currentTask})">
+            <input id="subtask${j}" type="checkbox" value="${j}" checked>
             <div>${subtask}</div>
-            <img src="./img/delete.svg" onclick="deleteSubtaskEdit(${j})">
+            <img src="./img/delete.svg" onclick="deleteSubtaskEdit(${j}), doNotOpenTask(event)">
         </div>
     `;
 }
@@ -371,12 +371,12 @@ function subtasksEditUndoneTemplate(subtaskIndex, currentTask, subtask, j) {
  * @param {string} subtask - name of the current subtask
  * @returns 
  */
-function subtasksEditTemplate(subtaskIndex, currentTask, subtask, j) {
+function subtasksEditTemplate(j, currentTask, subtask) {
     return `
-        <div class="openSubtask" onclick="saveCompletedSubtasks(${subtaskIndex}, ${currentTask})">
-            <input id="subtask${subtaskIndex}" type="checkbox" value="${subtaskIndex}">
+        <div class="openSubtask" onclick="saveCompletedSubtasks(${j}, ${currentTask})">
+            <input id="subtask${j}" type="checkbox" value="${j}">
             <div>${subtask}</div>
-            <img src="./img/delete.svg" onclick="deleteSubtaskEdit(${j})">
+            <img src="./img/delete.svg" onclick="deleteSubtaskEdit(${j}), doNotOpenTask(event)">
         </div>
     `;
 }
