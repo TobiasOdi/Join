@@ -475,6 +475,7 @@
   color: white;
   padding: 5px;
   z-index: 2;
+  outline: none;
 }
 
 .selectArrow {

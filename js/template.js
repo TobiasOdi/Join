@@ -215,6 +215,8 @@ function openTaskTemplate(currentTask) {
 }
 
 /* ========================================= EDIT TASK TEMPLATE ========================================= */
+/* <img class="selectArrow" src="./img/arrowDown.png">  */
+
 /**
  * This function returns the template of an opened task that can be edited.
  * @param {number} currentTask - index of the current task
@@ -229,7 +231,6 @@ function editOpenTaskTemplate(currentTask) {
 
 
                     </select>
-                    <img class="selectArrow" src="./img/arrowDown.png">
                 </div>
 
                 <div onclick="closeTask()">

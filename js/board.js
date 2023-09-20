@@ -10,6 +10,7 @@ let numerator;
 let denominator;
 let progress;
 let subtasksEdit = [];
+let editSelectCategory = document.getElementById('editSelectCategory');
 
 /* ============================================================================ INIT BOARD ======================================================================== */
 /**
@@ -453,6 +454,7 @@ function editTask(currentTask) {
     renderUrgency(currentTask);
     renderSubtasksEdit(currentTask);
     renderAssignedUsersEdit(currentTask);
+    changeCategoryColor();
 }
 
 /**
@@ -485,14 +487,14 @@ function renderUrgency(currentTask) {
 /**
  * This function checks if a value form the dropdown is beeing selected and sets the background color.
  */
-document.querySelector('#editSelectCategory')?.addEventListener("change", function() {
-    let chosenCategory = document.getElementById('editSelectCategory').value;
-    let existingCategory = categories.find(c => c.categoryName == chosenCategory);
-    let currentCategory = categories.indexOf(existingCategory);
-    let currentCategoryColor = categories[currentCategory]['color'];
-    let selectCategoryContainer = document.getElementById('selectCategoryContainer');
-    selectCategoryContainer.style.backgroundColor = currentCategoryColor;
-});
+function changeCategoryColor() {
+    document.getElementById('editSelectCategory').addEventListener("click", function() {
+        let existingCategory = categories.find(c => c.categoryName == document.getElementById('editSelectCategory').value);
+        let currentCategory = categories.indexOf(existingCategory);
+        let currentCategoryColor = categories[currentCategory]['color'];
+        document.getElementById('selectCategoryContainer').style.backgroundColor = currentCategoryColor;
+    });
+}
 
 /**
  * This function renders the subtasks and lets you mark them as done.
