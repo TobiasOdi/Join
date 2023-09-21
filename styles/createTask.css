@@ -68,8 +68,7 @@ textarea {
 
 .addTaskMainSubContainer h1 {
   font-size: 61px;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
+  margin: 0;
 }
 
 .createTaskForm {
@@ -125,6 +124,9 @@ textarea {
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  gap: 5px;
+  min-width: 40px;
+  width: auto;
 }
 
 .sectorTopSelectedUsers {
@@ -181,7 +183,7 @@ textarea {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: 0px 20px 7px 20px;
+  padding: 5px 20px 7px 20px;
   height: 200px;
   gap: 5px;
   overflow-y: scroll;
@@ -214,6 +216,11 @@ textarea {
   height: 40px;
   border-radius: 50%;
   border: 4px solid transparent;
+}
+
+.avatar > div {
+  color: white;
+  font-size: 16px;
 }
 
 .nameText {
@@ -441,6 +448,10 @@ textarea {
 
   .subtaskContainer > input{
     width: 100%;
+  }
+
+  .addTaskMainContainer {
+    padding-right: 0;
   }
 }
 

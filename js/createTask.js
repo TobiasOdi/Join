@@ -347,7 +347,7 @@ function checkForSelectedUsers() {
 function selectedUsersEmpty() {
     selectedUsersPlaceholder.innerHTML = "";
     selectedUsersPlaceholder.innerHTML += `
-        <p id="assignedToHeader">Select contacts to assign</p>
+        <div id="assignedToHeader" class="assignedToHeader">Select contacts to assign</div>
     `;
 }
 

@@ -2,7 +2,7 @@
 .contactsMainContainer {
   display: flex;
   width: 100%;
-  height: calc(100vh - 154px);
+  height: calc(100vh - 89px);
 }
 
 .contactsBar {
@@ -187,6 +187,7 @@
   font-size: 61px;
   font-weight: bold;
   columns: rgba(0, 0, 0, 1);
+  margin: 0;
 }
 
 .contactsVline {
@@ -246,8 +247,8 @@
 }
 
 .contactIconBig {
-  width: 120px;
-  height: 120px;
+  width: 100px;
+  height: 100px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -541,12 +542,13 @@
   cursor: pointer;
 }
 
-.contactInfo > form {
+.contactInfo > form,
+.contactInfo > div > form {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
-  gap: 40px;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 20px;
   width: 100%;
   height: 100%;
 }
@@ -753,7 +755,7 @@
 @media (max-width: 950px) {
   .contactsBar {
     width: 100%;
-    padding-top: 100px;
+    padding-top: 1rem;
   }
 
   .contactsContainer {
@@ -763,8 +765,8 @@
   }
 
   .newContactButton {
-    top: 130px;
-    right: 15px;
+    top: 110px;
+    right: 35px;
   }
 
   .contactsContentHeader {
@@ -855,12 +857,15 @@
 }
 
 @media (max-width: 720px) {
+  .contactsMainContainer {
+    height: calc(100vh - 154px);
+  }
   .contactsBar {
-    height: calc(100vh - 169px);
+    height: calc(100vh - 154px);
   }
 
   .contactsContainer {
-    height: calc(100vh - 169px);
+    height: calc(100vh - 154px);
   }
 
   .newContactButton {

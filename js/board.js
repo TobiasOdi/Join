@@ -10,7 +10,6 @@ let numerator;
 let denominator;
 let progress;
 let subtasksEdit = [];
-let editSelectCategory = document.getElementById('editSelectCategory');
 
 /* ============================================================================ INIT BOARD ======================================================================== */
 /**
@@ -182,10 +181,8 @@ function getFirstLetter(assignedUsers, i) {
     let existingUser = users.find(u => u.userid == parseInt(assignedUser));
     let correctUser = users.indexOf(existingUser);
     let assignName = users[correctUser]['name'];
-    assignName.toUpperCase();
     let assignSurname = users[correctUser]['surname'];
-    assignSurname.toUpperCase();
-    let assignFirstLetters = assignName.charAt(0) + assignSurname.charAt(0);
+    let assignFirstLetters = assignName.charAt(0).toUpperCase() + assignSurname.charAt(0).toUpperCase();
     return assignFirstLetters;
 }
 
@@ -563,7 +560,7 @@ function renderAssignedUsersEdit(currentTask) {
         let assignName = users[i]['name'];
         let assignSurname = users[i]['surname'];
         //let assignColor = users[i]['userColor'];
-        let assignFirstLetters = assignName.charAt(0) + assignSurname.charAt(0);
+        let assignFirstLetters = assignName.charAt(0).toUpperCase() + assignSurname.charAt(0).toUpperCase();
         if (assignedUsersToCurrentTask.includes(userid)) {
             document.getElementById('assignedToContainerEdit').innerHTML += selectedAssignedUsersEditTemplate(userid, i, assignFirstLetters);
         } else {

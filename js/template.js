@@ -498,8 +498,8 @@ function newCategoryTemplate(categoryName, categoryColor, i){
 function assignToPlaceholderTemplate() {
     return `
         <div class="sectorTop">
-            <div id="selectedUsersPlaceholder">
-                <p id="assignedToHeader">Select contacts to assign</p>
+            <div id="selectedUsersPlaceholder" class="selectedUsersPlaceholder">
+                <div id="assignedToHeader">Select contacts to assign</div>
             </div>
             <img src="/img/Vector 2.png">
         </div>
