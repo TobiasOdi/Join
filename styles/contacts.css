@@ -935,15 +935,6 @@
 
 
 @media (max-width: 490px) {
-  .addContactContainer {
-    width: 100%;
-    height: 80%;
-  }
-
-  .addContactBackground {
-    padding: 10px;
-  }
-
   .contactsContainer {
     padding-left: 0.5rem;
     padding-right: 0.5rem;
@@ -951,6 +942,9 @@
 }
 
 @media (max-width: 480px) {
+  .addContactBackground {
+    padding: 10px;
+  }
 
   .contactsContentHeader {
     height: 125px;
@@ -980,6 +974,16 @@
     padding-top: 5px;
     padding-bottom: 5px;
     height: 40px;
+  }
+
+  .buttons {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+
+  .cancleButton,
+  .createContact {
+    width: auto;
   }
 }
 
@@ -1029,6 +1033,12 @@
   }
 }
 
+@media (max-width: 380px) {
+.buttons {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+}
 @media (max-width: 330px) {
 
   .addContactLeftSide {
@@ -1048,7 +1058,12 @@
 
   .contactInfo > div:last-of-type {
     gap: 10px;
-}
+  }
+
+  .contactInfo > form > .inputContainer,
+  .buttons {
+    padding: 0;
+  }
 }
 
 /* ===================================================== CLASSES ADD/REMOV =========================================================*/

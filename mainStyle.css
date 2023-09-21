@@ -32,6 +32,10 @@ a {
   cursor: pointer;
 }
 
+.buttonDark:hover {
+  box-shadow: 0 0 4px 2px rgba(0,0,0,0.5);
+  }
+
 .buttonDarkText {
   font-family: "Inter";
   font-weight: 700;
@@ -48,6 +52,10 @@ a {
   border-radius: 8px;
   gap: 10px;
   cursor: pointer;
+}
+
+.buttonLight:hover {
+  box-shadow: 0 0 4px 2px rgba(0,0,0,0.5);
 }
 
 .buttonLightText {

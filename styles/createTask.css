@@ -460,3 +460,16 @@ textarea {
     display: none;
   }
 }
+
+
+@media(max-width: 350px) {
+  .clearAndCreateButton {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .clearAndCreateButton > .buttonLight,
+  .clearAndCreateButton > .buttonDark {
+    width: 100%;
+  }
+}

@@ -648,7 +648,13 @@
   align-items: center;
 }
 
-.openTaskSubtaskEdit > div > input {
+.openTaskSubtaskEdit > div > div {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.openTaskSubtaskEdit > div > div > .addSubtaskEdit {
   width: 150px;
   height: 25px;
   border-radius: 10px 0 0 10px;
@@ -658,7 +664,7 @@
   outline: none;
 }
 
-.openTaskSubtaskEdit > div > button {
+.openTaskSubtaskEdit > div > div > button {
   width: 50px;
   height: 25px;
   border-radius: 0 10px 10px 0;
@@ -992,7 +998,7 @@
   .prioButtonsEdit {
     gap: 5px;
   }
-  .prioButtonEdit {
+  .prioButtonsEdit > button {
     width: 40px;
   }
   .prioButtonEdit > div:first-of-type{
@@ -1019,6 +1025,19 @@
   .openTaskDate > div:last-of-type {
     font-size: 18px;
   }
+
+  .openTaskSubtaskEdit > div:first-of-type {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .openTaskSubtaskEdit > div > div > .addSubtaskEdit {
+    margin: 0;
+  }
+
+  .openTaskMain > div > div:first-of-type {
+    margin-right: 0;
+  }
 }
 
 @media (max-width: 320px) {
@@ -1040,6 +1059,4 @@
   .openTaskSubtask {
     min-height: 90px;
   }
-
-
 }

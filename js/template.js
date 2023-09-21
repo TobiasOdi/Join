@@ -273,8 +273,10 @@ function editOpenTaskTemplate(currentTask) {
                 <div class="openTaskSubtask openTaskSubtaskEdit">
                     <div>
                         <div>Subtasks:</div>
-                        <input id="addSubtaskEdit" type="text">
-                        <button onclick="addSubtaskEdit(${currentTask})">Add</button>
+                        <div>
+                            <input id="addSubtaskEdit" class="addSubtaskEdit" type="text">
+                            <button onclick="addSubtaskEdit(${currentTask})">Add</button>
+                        </div>
                     </div>
                     <div id="subtaskContainerEdit" class="boardSubtaskContainer">
 
