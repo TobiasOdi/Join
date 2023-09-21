@@ -171,6 +171,8 @@ a {
 
 .mainLegalNoticeContainerDisplay {
   display: none;
+  height: calc(100vh - 187px);
+  overflow: hidden;
 }
 
 .mainhelpContainerDisplay {
@@ -491,7 +493,7 @@ a {
 .addTaskMainSubContainer::-webkit-scrollbar,
 .innerHelpContainer::-webkit-scrollbar, 
 .innerLegalNoticeContainer::-webkit-scrollbar,
-.summaryLeftContainer::-webkit-scrollbar,
+.summaryBothContainer::-webkit-scrollbar,
 .openTaskBackground::-webkit-scrollbar  {
   width: 10px;
   scrollbar-gutter: stable;
@@ -510,7 +512,7 @@ a {
 .addTaskMainSubContainer::-webkit-scrollbar-thumb,
 .innerHelpContainer::-webkit-scrollbar-thumb, 
 .innerLegalNoticeContainer::-webkit-scrollbar-thumb,
-.summaryLeftContainer::-webkit-scrollbar-thumb,
+.summaryBothContainer::-webkit-scrollbar-thumb,
 .openTaskBackground::-webkit-scrollbar-thumb {
   background-color: #a8a8a8;
   border: 2px solid white;
@@ -525,7 +527,7 @@ a {
 .addTaskMainSubContainer::-webkit-scrollbar-button,
 .innerHelpContainer::-webkit-scrollbar-button, 
 .innerLegalNoticeContainer::-webkit-scrollbar-button,
-.summaryLeftContainer::-webkit-scrollbar-button,
+.summaryBothContainer::-webkit-scrollbar-button,
 .openTaskBackground::-webkit-scrollbar-button  {
   color: #a8a8a8;
 }
@@ -538,7 +540,7 @@ a {
 .addTaskMainSubContainer::-webkit-scrollbar-button,
 .innerHelpContainer::-webkit-scrollbar-button, 
 .innerLegalNoticeContainer::-webkit-scrollbar-button,
-.summaryLeftContainer::-webkit-scrollbar-button,
+.summaryBothContainer::-webkit-scrollbar-button,
 .openTaskBackground::-webkit-scrollbar-button {
   display: block;
   background-repeat: no-repeat;
@@ -565,7 +567,7 @@ a {
 .addTaskMainSubContainer::-webkit-scrollbar-button:vertical:start:decrement,
 .innerHelpContainer::-webkit-scrollbar-button:vertical:start:decrement, 
 .innerLegalNoticeContainer::-webkit-scrollbar-button:vertical:start:decrement,
-.summaryLeftContainer::-webkit-scrollbar-button:vertical:start:decrement,
+.summaryBothContainer::-webkit-scrollbar-button:vertical:start:decrement,
 .openTaskBackground::-webkit-scrollbar-button:vertical:start:decrement {
   display: none;
 }
@@ -578,7 +580,7 @@ a {
 .addTaskMainSubContainer::-webkit-scrollbar-button:vertical:end:increment,
 .innerHelpContainer::-webkit-scrollbar-button:vertical:end:increment, 
 .innerLegalNoticeContainer::-webkit-scrollbar-button:vertical:end:increment,
-.summaryLeftContainer::-webkit-scrollbar-button:vertical:end:increment,
+.summaryBothContainer::-webkit-scrollbar-button:vertical:end:increment,
 .openTaskBackground::-webkit-scrollbar-button:vertical:end:increment {
   display: none;
 }

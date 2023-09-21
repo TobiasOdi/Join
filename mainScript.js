@@ -370,6 +370,7 @@ function displayPage(pageId) {
  * @param {number} pageId - number of the the id
  */
 function displayPageLogin(pageId, n, arrowId) {
+    //document.getElementById('signUpField').style.display = "none";
     document.getElementById('contentContainerLogin' + n).classList.add('displayPageLogin');
     document.getElementById(pageId + n).style.display = "flex";
     document.getElementById(arrowId + n).style.display = "flex";

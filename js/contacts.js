@@ -205,7 +205,7 @@ function activeContact(c) {
     let currentElement = document.getElementById('contactID' + c);
     let allElements = document.querySelectorAll('.contact');
     allElements.forEach((element) => {
-        element.style.backgroundColor = '#FFFFFF';
+        element.style.backgroundColor = '#F6F7F8';
         element.style.color = 'black';
     })
     currentElement.style.backgroundColor = '#2A3647';
