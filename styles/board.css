@@ -35,12 +35,6 @@
   gap: 20px;
 }
 
-/* .placeholderBoardTopRight > .inputContainer {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-} */
-
 .placeholderBoardTopRight .inputContainer {
   width: 300px;
   height: 45px;
@@ -860,6 +854,10 @@
     margin-bottom: 10px;
   }
 
+  .placeholderBoardTopRight {
+    width: 100%;
+  }
+
   .inputFields {
     width: 200px;
     height: 40px;
@@ -875,6 +873,10 @@
 
   .boardParts {
     width: 100%;
+  }
+
+  .placeholderBoardTopRight {
+    justify-content: space-between;
   }
 }
 
@@ -894,6 +896,16 @@
   .placeholderBoardTopRight .inputFields {
     height: 45px;
   }
+
+  
+  .addTaskButton {
+    width: 45px;
+  }
+
+  .addTaskButton > span {
+    display: none;
+  }
+}
 
 @media (max-width: 480px) {
   .openTaskBackground {
@@ -928,10 +940,6 @@
 
   .placeholderBoardTopRight .inputContainer {
     width: 200px;
-  }
-
-  .placeholderBoardTopRight .addTaskButton {
-    width: 80px;
   }
 
   .placeholderBoardTopRight {
@@ -983,7 +991,7 @@
   .prioButtonsEdit {
     width: 100%;
     }
-  }
+  
   .prioButtonEdit {
     max-width: 120px;
     max-height: 40px;

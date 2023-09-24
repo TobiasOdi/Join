@@ -425,11 +425,19 @@ function renderSubtasks(currentTask){
  * @param {index} currentTask - index of the current task
  */
 async function deleteTask(currentTask) {
-    tasks.splice(currentTask, 1);
-    await saveTasks();
-    await init();
-    updateHTML();
-    document.getElementById('openTaskBackground').style.display = 'none';
+    if(tasks.length > 1) {
+        tasks.splice(currentTask, 1);
+        await saveTasks();
+        await init();
+        await initBoard();
+        document.getElementById('openTaskBackground').style.display = 'none';
+    } else {
+        tasks.splice(currentTask, 1);
+        await saveTasks();
+        await includeHTML()
+        await initBoard();
+        document.getElementById('openTaskBackground').style.display = 'none';
+    }
 }
 
 /* ======================================================================= EDIT TASK ================================================================================= */

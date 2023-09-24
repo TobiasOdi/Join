@@ -44,12 +44,10 @@ async function includeHTML() {
             element.innerHTML = 'Page not found';
         }
     }
-
     await init();
     updateHTML();
     searchFunction();
     counters();
-    //addAssignedToList();
     setDateToday();
 }
 
@@ -264,17 +262,19 @@ function guestLogin() {
  */
 function checkForCorrectEmail() {
     let sendEmailToResetPw = document.getElementById('sendEmailToResetPw').value;
-    let existingEmail = users.find(u => u.email == sendEmailToResetPw);
+    //let existingEmail = users.find(u => u.email == sendEmailToResetPw);
     //let correctUser = users.indexOf(existingEmail);
-    
+
     if ((users.find(u => u.email == sendEmailToResetPw)) == null) {
         displaySnackbar('userDoesNotExist2');
         return false;
+    } else {
+        displaySnackbar('sendEmail');
+        document.getElementById('sendEmailToResetPw').value = '';
+        setInterval(backToLoginScreen, 1200);
+        return true;
     }
-    displaySnackbar('sendEmail');
-    document.getElementById('sendEmailToResetPw').value = '';
-    setInterval(backToLoginScreen, 1200);
-    return true;
+
 } 
 
 /* ================================================================= RESET PASSWORD ================================================================= */

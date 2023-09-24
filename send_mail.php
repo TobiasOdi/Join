@@ -4,12 +4,12 @@
 $recipient = $_POST['sendEmailToResetPw'];
 $redirect = 'http://127.0.0.1:5500/login.html';
 $name = 'JOIN Support Team';
-$message = 'Hi there,\n
-\nClick on the following link to reset your JOIN password for your ' . $recipient . ' account.\n
-\nhttps://tobias-odermatt.developerakademie.net/Join/templates/resetPw.html?email=' . $recipient '\n
+$message = "Hi there,\n
+\nClick on the following link to reset your JOIN password for your $recipient account.\n
+\nhttps://tobias-odermatt.developerakademie.net/Join/templates/resetPw.html?email=$recipient\n
 \nIf you did not ask to reset your password, you can ignore this email.\n
 \nThanks,\n
-\nYour JOIN team\n';
+Your JOIN team";
 
 ########### CONFIG END ###########
 
@@ -35,14 +35,15 @@ switch ($_SERVER['REQUEST_METHOD']) {
 
         $subject = "Contact From " . $name;
         $headers = "From:  noreply@https://tobias-odermatt.developerakademie.net";
+        # noreply@tobias-odermatt.developerakademie.net
+        # noreply@https://tobias-odermatt.developerakademie.net"
         # $headers = "From:  noreply@developerakademie.com";
-
-        $result = mail($recipient, $subject, $message, $headers);
-        print($result);
-        #header("Location: " . $redirect);
+        mail($recipient, $subject, $message, $headers);
+        header("refresh:5; url=http://127.0.0.1:5500/login.html")
+        //header("Location: " . $redirect);
 
         break;
-        default: //Reject any non POST or OPTIONS requests.
+    default: //Reject any non POST or OPTIONS requests.
         header("Allow: POST", true, 405);
         exit;
 }
