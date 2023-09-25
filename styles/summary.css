@@ -5,7 +5,7 @@
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
-  padding: 2rem;
+  padding: 1rem;
   padding-right: 0;
   overflow: hidden;
 }
@@ -22,8 +22,9 @@
 }
 
 .summaryBothContainer {
+  width: 100%;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: flex-start;
   gap: 30px;
   overflow: auto;
@@ -279,14 +280,15 @@
 
   .summaryMainContainer {
     padding-left: 1rem;
-    padding-right: 1rem;
   }
 }
 
 @media (max-width: 720px){
   .summaryMainContainer {
     justify-content: center;
-    height: 100%;
+    height: calc(100vh - 154px);
+    padding-top: 1rem;
+    padding-bottom: 1rem;
   }
   
   .summaryHeadline {

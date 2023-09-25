@@ -65,18 +65,9 @@
 
       <!--============================== LOGIN SECTION ================================-->
       <div class="contentContainer" id="contentContainerLogin1">
+
         <!-- == Legal Notice - w3-include-html ==-->
-        <div
-          class="arrowBackLegalNotice"
-          id="arrowBackLegalNotice1"
-          onclick="back('mainLegalNoticeContainerDisplay','1', 'arrowBackLegalNotice')"
-        >
-          <img src="./img/arrowLeft.svg" />
-        </div>
-        <div
-          class="mainLegalNoticeContainerDisplay"
-          id="mainLegalNoticeContainerDisplay1"
-        >
+        <div class="mainLegalNoticeContainerDisplay" id="mainLegalNoticeContainerDisplay1" >
           <div w3-include-html="./templates/legalNotice.html"></div>
         </div>
         <!-- =================================== -->
@@ -90,26 +81,14 @@
           <form name="login_form" onsubmit="login();return false">
             <div class="inputContainer">
               <div class="inputFieldContainer">
-                <input
-                  id="emailLog"
-                  class="inputFields"
-                  type="email"
-                  placeholder="Email"
-                  required
-                />
+                <input id="emailLog" class="inputFields" type="email" placeholder="Email" required/>
                 <img src="img/letter.svg" class="img" />
               </div>
             </div>
 
             <div class="inputContainer">
               <div class="inputFieldContainer">
-                <input
-                  id="passwordLog"
-                  class="inputFields"
-                  type="password"
-                  placeholder="Password"
-                  required
-                />
+                <input id="passwordLog" class="inputFields" type="password" placeholder="Password" required/>
                 <img src="img/lock.svg" class="img" />
               </div>
             </div>
@@ -137,9 +116,7 @@
       </div>
 
       <div class="policies" id="policies1">
-        <div
-          onclick="displayPageLogin('mainLegalNoticeContainerDisplay', '1', 'arrowBackLegalNotice')"
-        >
+        <div onclick="displayPageLogin('mainLegalNoticeContainerDisplay1', '1', 'arrowBackLegalNotice')">
           Legal notice
         </div>
       </div>

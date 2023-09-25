@@ -14,6 +14,22 @@
     font-size: 61px;
 }
 
+.h1Back {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-right: 2rem;
+}
+
+.exitLegalNotice {
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
 .legalNoticeContainer h2, .helpContainer h2 {
     font-size: 27px;
     margin-bottom: 0;

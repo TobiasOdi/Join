@@ -163,13 +163,16 @@ function backToLoginScreen() {
  * @param {string} n - id coun
  * @param {string} arrowId - id of a container 
  */
-function back(pageId, n, arrowId) {
-    document.getElementById(pageId + n).style.display = "none";
-    document.getElementById(arrowId + n).style.display = "none";
+/* function back(pageId, n) {
+    document.getElementById(pageId).style.display = "none";
     document.getElementById('loginScreen' + n).style.display = "flex";
     document.getElementById('policies' + n).style.display = "flex";
     document.getElementById('contentContainerLogin' + n).classList.remove('displayPageLogin');
     document.getElementById('innerLegalNoticeContainer').classList.remove('innerLegalNoticeContainerLogin');
+} */
+
+function back() {
+    document.querySelector('.mainLegalNoticeContainerDisplay') .style.display = "none";
 }
 
 /**
@@ -374,17 +377,20 @@ function displayPage(pageId) {
  * This function displays the html template legal notice.
  * @param {number} pageId - number of the the id
  */
-function displayPageLogin(pageId, n, arrowId) {
-    //document.getElementById('signUpField').style.display = "none";
+/* function displayPageLogin(pageId, n) {
     document.getElementById('contentContainerLogin' + n).classList.add('displayPageLogin');
-    document.getElementById(pageId + n).style.display = "flex";
-    document.getElementById(arrowId + n).style.display = "flex";
+    document.getElementById(pageId).style.display = "flex";
     document.getElementById('loginScreen' + n).style.display = "none";
     document.getElementById('policies' + n).style.display = "none";
     document.getElementById('innerLegalNoticeContainer').classList.add('innerLegalNoticeContainerLogin');
+} */
+
+function displayPageLogin() {
+    document.querySelector('.mainLegalNoticeContainerDisplay').style.display = "flex";
 }
 
-/* ================================================================= SNACKBAR ================================================================= */
+
+/* ================================================================== SNACKBAR ================================================================= */
 /**
  * This funktion displays the snackbars.
  * @param {string} popupId - id of the snackbar
@@ -411,7 +417,6 @@ function activeTab(tab) {
     })
     currentElement.classList.add('activeTab');
 }
-
 
 // ================================================ DATEN SPEICHERN ==========================================================
 // IM LOCAL STORAGE
