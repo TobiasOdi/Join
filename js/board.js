@@ -507,8 +507,6 @@ function changeCategoryColor() {
  */
 function renderSubtasksEdit(currentTask){
     document.getElementById('subtaskContainerEdit').innerHTML = "";
-    //let userSubtasks = tasks[currentTask]['subtasks'];
-    //subtasksEdit = tasks[currentTask]['subtasks'];
     if(subtasksEdit == "") {
         document.getElementById('subtaskContainerEdit').innerHTML += `
             <div>No subtasks</div>
@@ -552,6 +550,7 @@ function deleteSubtaskEdit(j) {
     subtasksEdit.splice(j, 1);
     renderSubtasksEdit();
 }
+
 /**
  * This function renders the users of the current task to select more or deselect them.
  * @param {index} currentTask - index of the current task
@@ -629,6 +628,11 @@ async function saveEditedTask(currentTask) {
     document.getElementById('openTaskBackground').style.display = 'none';
 }
 
+/**
+ * This function returns the current category color.
+ * @param {string} editCategory - name of the chosen category
+ * @returns 
+ */
 function addBackgroundColorCategory(editCategory) {
     let existingCategory = categories.find(c => c.categoryName == editCategory);
     let currentCategory = categories.indexOf(existingCategory);
@@ -667,6 +671,12 @@ function searchFunction() {
     keydownEvent(input);
 }
 
+/**
+ * This function starts the eventListener when the search functio is called.
+ * @param {*} input 
+ * @param {*} originalToDos 
+ * @param {*} emptyCategory 
+ */
 function inputValueEvent(input, originalToDos, emptyCategory) {
     input.addEventListener('input', debounce(function (event) {
         let selectedValue = event.target.value.toLowerCase().trim();
@@ -696,12 +706,19 @@ function inputValueEvent(input, originalToDos, emptyCategory) {
     }, 200));
 }
 
+/**
+ * This function hides all elements in the category that is empty.
+ * @param {array} emptyCategory - current category that contains task that do not contain the search value
+ */
 function hideEmptyCategoryPlaceholder(emptyCategory) {
     for(var i = 0; i < emptyCategory.length; i++){
         emptyCategory[i].style.display = "none";
     }
 }
 
+/**
+ * This function hides all the tasks that do not contain the search value
+ */
 function hideShowTasks() {
     if (tasks.length > 0) {
         Array.from(document.getElementsByClassName("boardContainer")).forEach((card) => {
@@ -714,6 +731,10 @@ function hideShowTasks() {
     }
 }
 
+/**
+ * This function initializes the event if a cerain key is pressed. 
+ * @param {string} input - input field that conatins the search value
+ */
 function keydownEvent(input) {
     input.addEventListener('keydown', function (event) {
         if (event.key === 'Backspace' || event.key === 'Delete') {

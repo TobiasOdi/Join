@@ -8,7 +8,6 @@ let contactEmail = document.getElementById('contactEmail');
 let contactPhone = document.getElementById('contactPhone');
 let contactPhoneValue;
 
-
 let editName = document.getElementById('editContactName');
 let editSurname = document.getElementById('editContactSurname');
 let editEmail = document.getElementById('editContactEmail');

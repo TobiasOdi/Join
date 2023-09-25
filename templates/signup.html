@@ -47,16 +47,7 @@
           <div w3-include-html="./legalNotice.html"></div>
         </div>
         <!-- =================================== -->
-<!--
-        ===== Privacy Policy - w3-include-html =====
-        <div class="arrowBackLegalNotice" id="arrowBackPrivacyPolicy2" onclick="back('mainPrivacyPolicyContainerDisplay','2', 'arrowBackPrivacyPolicy')">
-          <img src="../img/arrowLeft.svg">
-        </div> 
-        <div class="mainLegalNoticeContainerDisplay" id="mainPrivacyPolicyContainerDisplay2">
-          <div w3-include-html="./privacyPolicy.html"></div>
-        </div>
-        ============================================
--->
+
         <div class="loginScreen signUpScreen" id="loginScreen2">
 
           <div class="arrowBack" onclick="backToLoginScreen()">
@@ -145,16 +136,15 @@
       </div>
 
       <div class="policies" id="policies2">
-<!--         <div onclick="displayPageLogin('mainPrivacyPolicyContainerDisplay', '2','arrowBackPrivacyPolicy')">Privacy Policy</div>
- -->        <div onclick="displayPageLogin('mainLegalNoticeContainerDisplay', '2', 'arrowBackLegalNotice')">Legal notice</div>
+        <div onclick="displayPageLogin('mainLegalNoticeContainerDisplay', '2', 'arrowBackLegalNotice')">Legal notice</div>
       </div>
     </div>
 
-<!-- ================================== SNACKBAR ALREADY SIGNE UP ======================================= -->
-<div id="alreadySignedUp">You have already signed up, go back to login</div>
+  <!-- ================================== SNACKBAR ALREADY SIGNE UP ======================================= -->
+  <div id="alreadySignedUp">You have already signed up, go back to login</div>
 
-<!-- ================================== SNACKBAR SUCCESSFULLY SIGNED UP ======================================= -->
-<div id="successfullySignedUp">You have successfully signed up!</div>
+  <!-- ================================== SNACKBAR SUCCESSFULLY SIGNED UP ======================================= -->
+  <div id="successfullySignedUp">You have successfully signed up!</div>
 
   <script>includeHTMLLogin();</script>
 </body>

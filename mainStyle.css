@@ -11,8 +11,17 @@ body {
   background-color: #f6f7f8;
   font-size: 16px;
   font-style: normal;
-/*   line-height: 120%;
- */}
+}
+
+li {
+  text-decoration: none;
+  list-style: none;
+  display: flex;
+  gap: 18px;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 20px 0px;
+}
 
 a {
   color: inherit;
@@ -34,7 +43,7 @@ a {
 
 .buttonDark:hover {
   box-shadow: 0 0 4px 2px rgba(0,0,0,0.5);
-  }
+}
 
 .buttonDarkText {
   font-family: "Inter";
@@ -146,45 +155,18 @@ a {
 }
 
 /* ================================================================ SIDEBAR / TOPBAR / MAIN CONTAINER ====================================================== */
-li {
-  text-decoration: none;
-  list-style: none;
-  display: flex;
-  gap: 18px;
-  justify-content: flex-start;
-  align-items: center;
-  margin: 20px 0px;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-.mainBoardContainerDisplay {
-  display: none;
-}
-
-.mainSummaryContainerDisplay {
-  display: block;
-}
-
-.mainAddTaskContainerDisplay {
-  display: none;
-}
-
-.mainContactsContainerDisplay {
+.mainBoardContainerDisplay,
+.mainSummaryContainerDisplay,
+.mainAddTaskContainerDisplay,
+.mainContactsContainerDisplay,
+.mainLegalNoticeContainerDisplay,
+.mainhelpContainerDisplay {
   display: none;
 }
 
 .mainLegalNoticeContainerDisplay {
-  display: none;
   height: calc(100vh - 187px);
   overflow: hidden;
-}
-
-.mainhelpContainerDisplay {
-  display: none;
 }
 
 .mainContainer {
@@ -379,7 +361,6 @@ a {
   display: none;
 }
 
-/* SideBar */
 .svg {
   width: 25px;
   height: 25px;
@@ -394,7 +375,6 @@ a {
 .activeTab {
   background-color: rgb(9, 25, 49);
 }
-
 
 /* ================================================================ SNACKBAR ====================================================== */
 /* The snackbar - position it at the bottom and in the middle of the screen */
@@ -518,10 +498,6 @@ a {
   width: 10px;
   scrollbar-gutter: stable;
 }
-
-/* .contactList::-webkit-scrollbar-track {
-  background-color: white;
-} */
 
 .placeholderBoardBottom::-webkit-scrollbar-thumb,
 .assignedToContainer::-webkit-scrollbar-thumb,
@@ -666,7 +642,6 @@ a {
     padding: 0;
   }
 
-
   .sideNavBarLogo {
     display: none;
   }
@@ -680,6 +655,7 @@ a {
     display: flex;
     flex-direction: column;
   }
+
   .placeholderBottom {
     height: 100%;
   }
@@ -687,6 +663,7 @@ a {
   .whiteLogo {
     display: none;
   }
+
   .blackLogo {
     display: flex;
     z-index: 2;
@@ -731,7 +708,7 @@ a {
     gap: 10px;
     width: 327px;
     height: 41px;
-}
+  }
   
   ::placeholder {
     width: 100%;
@@ -776,6 +753,7 @@ a {
   .privacyPolicyContainer > div > div {
     font-size: 12px;
   }
+  
   .privacyPolicyContainer > input {
     width: 14px;
     height: 14px;

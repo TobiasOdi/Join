@@ -105,7 +105,6 @@ async function addUser() {
     let userColor = document.getElementById('userColor');
     let userColorValue = userColor.options[userColor.selectedIndex].value;
     checkForExistingUserId(id);
-
     let userData = {name: name.value, surname: surname.value, email: email.value, password: password.value, userColor: userColorValue, userid: userId};
     let contactData = {name: name.value, surname: surname.value, email: email.value, phone: '-', contactColor: userColorValue};
     let user = users.find(u => u.email == email.value);
@@ -216,7 +215,7 @@ function login() {
 }
 
 /**
- * This function validates the login up form and throws an error if necessary.
+ * This function validates the login form and throws an error if necessary.
  */
 function validateLogin(emailLog, passwordLog, existingUser, existingPw, user) {
     if(emailLog.value == '' || passwordLog.value == '') {
@@ -228,13 +227,8 @@ function validateLogin(emailLog, passwordLog, existingUser, existingPw, user) {
             displaySnackbar('userDoesNotExist')
         } else if(user) {
             //********************************** */
-            let userName = user.name;
-            localStorage.setItem('userName', userName);
-
-            let userIdLogin = user.userid;
-            localStorage.setItem('userIdLogin', userIdLogin);
+            setUserName(user);
             //********************************** */
-    
             let currentUser = users.indexOf(existingUser);
             let userId = users[currentUser]['userid'];
             let userColor = users[currentUser]['userColor'];
@@ -243,6 +237,17 @@ function validateLogin(emailLog, passwordLog, existingUser, existingPw, user) {
             window.location.href = 'http://127.0.0.1:5500/join.html?id=' + userId // => IMMER ANPASSEN!!!
         }
     }
+}
+
+/**
+ * This function saves the name of the user in the local storage of the browser that is login in 
+ * @param {array} user - uses array
+ */
+function setUserName(user) {
+    let userName = user.name;
+    localStorage.setItem('userName', userName);
+    let userIdLogin = user.userid;
+    localStorage.setItem('userIdLogin', userIdLogin);
 }
 
 /**

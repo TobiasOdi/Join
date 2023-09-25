@@ -447,7 +447,6 @@ function selectLowEdit() {
  */
 function select(id, idsToDeselect, filtersToDeselect, idsToSelect, filtersToSelect) {
     saveSelectedPriority(id);
-
     // Set background and color for IDs to deselect
     deselectPriorityButtons(idsToDeselect, filtersToDeselect);
 

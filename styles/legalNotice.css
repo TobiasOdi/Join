@@ -1,3 +1,5 @@
+
+/* ================================================================= LEGAL NOTICE / HELP PAGE ============================================================= */
 .legalNoticeContainer *, .helpContainer * {
     box-sizing: border-box;
     font-family: 'Inter';
@@ -7,7 +9,6 @@
 .legalNoticeContainer h1, .helpContainer h1, .helpContainer h2, .legalNoticeContainer h2, .helpContainer h3, .legalNoticeContainer h3, .helpContainer p, .legalNoticeContainer p, .helpContainer li, .legalNoticeContainer li {
     hyphens: auto;
 }
-
 
 .legalNoticeContainer h1, .helpContainer h1 {
     font-size: 61px;
@@ -54,7 +55,7 @@
     list-style-type: circle;
 }
 
-/* ================================ RESPONSIVENESS ====================================== */
+/* ================================================================= RESPONSIVENESS ============================================================= */
 @media(max-width: 950px) {
     .legalNoticeContainer h1, .helpContainer h1 {
         font-size: 50px;
@@ -65,14 +66,6 @@
     .legalNoticeContainer, .helpContainer {
         height: calc(100vh - 154px);
     }
-
-    /* .innerHelpContainer, .innerLegalNoticeContainer {
-        padding: 1rem 1rem 1rem 1rem;  
-    }
-    .helpContainer {
-        padding-left: 1rem;
-        padding-right: 1rem;
-    } */
 
     .legalNoticeContainer h1, .helpContainer h1 {
     font-size: 40px;

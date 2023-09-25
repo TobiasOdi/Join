@@ -44,75 +44,6 @@
   height: 45px;
 }
 
-
-
-
-/* .findTaskInputField {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  padding: 13px 21px;
-  gap: 10px;
-  width: 251px;
-  height: 51px;
-  background: #FFFFFF;
-  border: 1px solid #A8A8A8;
-  border-radius: 10px;
-}
-
-.inputFields {
-  box-sizing: border-box;
-  gap: 10px; 
-  padding: 10px;
-  width: 251px;
-  height: 51px;
-  background: #ffffff;
-  border: 1px solid #d1d1d1;
-  border-radius: 10px;
-} */
-
-/* ::placeholder {
-  width: 100px;
-  height: 25px;
-  font-family: "Inter";
-  font-style: normal;
-  font-weight: 400;
-  font-size: 21px;
-  line-height: 120%;
-  color: #d1d1d1;
-} */
-
-/* .inputContainer {
-  flex: none;
-  order: 0;
-  flex-grow: 0;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-}
-
-.inputContainer img {
-  width: 20px;
-  height: 18px;
-} */
-
-/* .inputFieldContainer {
-  position: relative;
-}
-
-.inputFieldContainer img {
-  position: absolute;
-  top: 50%;
-  right: 10px;
-  transform: translateY(-50%);
-  width: 20px;
-  height: 20px;
-} */
-
-/* .img {
-  right: 22px;
-} */
-
 .addTaskButton {
   display: flex;
   flex-direction: row;
@@ -214,7 +145,6 @@
 
 /* =========================================================================== TASKS ============================================================================= */
 .boardContainer {
-  /* height: 100%; */
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -358,36 +288,6 @@
   margin-left: -10px;
 }
 
-/* .userBubbleTwo {
-  position: absolute;
-  left: 27px;
-  width: 35px;
-  height: 35px;
-  border-radius: 100%;
-  background-color: #ee00d6;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: white;
-  border: 1px solid white;
-  font-size: 12px;
-}
-
-.userBubbleConcatenation {
-  position: absolute;
-  left: 54px;
-  width: 35px;
-  height: 35px;
-  border-radius: 100%;
-  background-color: #2a3647;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: white;
-  border: 1px solid white;
-  font-size: 12px;
-} */
-
 /* =========================================================================== OPEN/EDIT TASKS ============================================================================= */
 .openTaskBackground {
   position: absolute;
@@ -486,12 +386,10 @@
   align-items: center;
 }
 
-
 .openTaskTop > div:last-of-type:hover {
   box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.1);
   cursor: pointer;
 }
-
 
 .openTaskHeader {
   width: 100%;
@@ -501,7 +399,6 @@
   justify-content: flex-start;
   gap: 10px;
   hyphens: auto;
-
 }
 
 .openTaskHeader > h1 {
@@ -534,7 +431,6 @@
 
 .openTaskHeader input {
   border: none;
-  /* border-bottom: 1px solid #2a3647; */
   padding-left: 0;
   color: #2a3647;
   width: 100%;
@@ -550,10 +446,6 @@
   font-size: 21px;
   width: 160px;
 }
-
-/* .openTaskHeader > div:last-of-type > div:first-of-type {
-  width: 100%;
-} */
 
 .openTaskMain {
   height: 100%;
@@ -592,7 +484,6 @@
 
 .openTaskDate > input {
   border: none;
-  /* border-bottom: 1px solid #2a3647; */
 }
 
 .openTaskPriorityEdit {
@@ -722,10 +613,6 @@
   padding-right: 10px;
 }
 
-/* .openSubtask {
-  position: relative;
-} */
-
 .openTaskAssignedPerson > div:first-of-type {
   display: flex;
   justify-content: center;
@@ -733,7 +620,6 @@
   width: 45px;
   height: 45px;
   border-radius: 50%;
-  /*   background-color: #9327ff; */
 }
 
 .openTaskAssignedPerson span {
@@ -747,7 +633,6 @@
   width: 100%;
   height: 25px;
   border-radius: 50%;
-  /*   background-color: #9327ff; */
 }
 
 .openSubtask > img {
@@ -758,9 +643,7 @@
 
 .coverCheckbox {
   position: absolute;
-/*   top: -2px;
-  left: -2px;
- */  height: 100%;
+  height: 100%;
   width: 100%;
   opacity: 0;
 }
@@ -896,7 +779,6 @@
   .placeholderBoardTopRight .inputFields {
     height: 45px;
   }
-
   
   .addTaskButton {
     width: 45px;
@@ -978,14 +860,6 @@
    bottom: 10px;
   }
 }
-
-/* @media (max-width: 400px) {
-
-.prioButtonsEdit {
-  flex-wrap: nowrap !important;
-}
-
-} */
 
 @media (max-width: 450px) {
   .prioButtonsEdit {

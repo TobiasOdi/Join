@@ -1,3 +1,4 @@
+/* =========================================================================== MAIN ============================================================= */
 .summaryMainContainer {
   height: calc(100vh - 89px);
   width: 100%;
@@ -8,7 +9,6 @@
   padding-right: 0;
   overflow: hidden;
 }
-
 
 .summaryLeftContainer {
   height:  100%;
@@ -64,6 +64,7 @@
   color: #2a3647;
 }
 
+/* =========================================================================== CARDS ============================================================= */
 .summaryLeftCards {
   display: flex;
   justify-content: center;
@@ -217,28 +218,9 @@
   color: #29abe2;
 }
 
-/* .bottomCardLeft > .bottomCardsImg {
-  background-image: url('../img/todo.svg');
-}
-
-.bottomCardRight > .bottomCardsImg {
-  background-image: url('../img/done.svg');
-} */
-
 .topCard:hover, .middleCard:hover, .bottomCard:hover {
   background-color: #2a3647;
 }
-
-/* .bottomCardLeft:hover img {
-  background-color: #2a3647;
-  background: url('./img/todo_white.svg');
-}
-
-.bottomCardRight:hover img {
-  background-color: #2a3647;
-  background: url('./img/todo_white.svg');
-} */
-
 
 .topCard:hover div, .middleCard:hover div, .middleCard:hover span, .bottomCard:hover div {
   color: white;
@@ -249,9 +231,11 @@
   .summaryDescription {
     font-size: 20.25px;
   }
+
   .allCardsNumberFontSize {
     font-size: 48px;
   }
+
   .allTopCards{
     gap: 26.25px;
   }
@@ -260,6 +244,7 @@
     width: 127.5px;
     height: 127.5px;
   }
+
   .topCardText {
     font-size: 15.75px;
   }
@@ -302,7 +287,6 @@
   .summaryMainContainer {
     justify-content: center;
     height: 100%;
-
   }
   
   .summaryHeadline {
@@ -310,7 +294,7 @@
   }
 }
 
-@media (max-width: 480px){
+@media (max-width: 480px) {
   .topCardText {
     width: 150px;
   }
@@ -407,19 +391,19 @@
     height: 50px;
     width: 50px;
   }
+}
+
+@media (max-width: 380px) {
+  .middleCard {
+    gap: 10px;
   }
 
-  @media (max-width: 380px) {
-    .middleCard {
-      gap: 10px;
-    }
-
-    .middleCardDeadlineDate {
-      font-size: 16px;
-    }
-  
-    .middleCardDeadlineText {
-      font-size: 12px;
-    }
+  .middleCardDeadlineDate {
+    font-size: 16px;
   }
+
+  .middleCardDeadlineText {
+    font-size: 12px;
+  }
+}
 

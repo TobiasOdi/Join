@@ -117,9 +117,7 @@
 }
 
 .signUpScreen {
-/*   height: 540px;
- */
-padding: 1rem;
+  padding: 1rem;
 } 
 
 .signUpScreen h1 {
@@ -388,16 +386,9 @@ padding: 1rem;
 }
 
 @media (max-width: 720px) {
-
-/*   .contentContainer {
-    padding-left: 50px;
-    padding-right: 50px;
-  } */
-  
   .arrowBackLegalNotice {
     padding-left: 0;
   }
-
   
   .contentContainer {
     padding-left: 1rem;
@@ -617,29 +608,28 @@ padding: 1rem;
 }
 
 @media (max-width: 380px) {
- .contentContainer {
-    margin-left: 1rem;
-    margin-right: 1rem;
- }
+  .contentContainer {
+      margin-left: 1rem;
+      margin-right: 1rem;
+  }
 
- .loginHeading > h1 {
-    font-size: 2.2rem;
- }
+  .loginHeading > h1 {
+      font-size: 2.2rem;
+  }
 
- .signUpField > div:first-of-type {
-  font-size: 16px;
-  width: auto;
-}
+  .signUpField > div:first-of-type {
+    font-size: 16px;
+    width: auto;
+  }
 
-.signUpField > button {
-  width: 80px;
-  height: 35px;
-}
+  .signUpField > button {
+    width: 80px;
+    height: 35px;
+  }
 
-.signUpField > button > a {
-  font-size: 14px;
-}
-
+  .signUpField > button > a {
+    font-size: 14px;
+  }
 }
 
 @media (max-width: 320px) {
@@ -653,7 +643,7 @@ padding: 1rem;
   .loginButtons > button:last-of-type {
     width: 120px;
     height: 35px;
- }
+  }
 
   .buttonDarkText,
   .buttonLightText {
@@ -679,11 +669,6 @@ padding: 1rem;
   #forgotPwForm > button > div {
     font-size: 12px;
   }
-
-/*   .signUpField {
-    height: auto;
-    flex-direction: column;
-  } */
 }
 
 @media (max-width: 300px) {
@@ -695,6 +680,7 @@ padding: 1rem;
     gap: 5px;
   }
 }
+
 /* ======================================== WIDTH ====================================== */
 @media (max-height: 660px) {
   .loginScreen {

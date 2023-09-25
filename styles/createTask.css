@@ -178,7 +178,41 @@ textarea {
   border: white;
 }
 
-/* ================================================ ASSIGN USER  ========================================================== */
+.middleGap {
+  border-left: 1px solid #d1d1d1;
+}
+
+.clearAndCreateButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.clearAndCreateButton > .buttonLight {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 110px;
+}
+
+.clearAndCreateButton > .buttonDark {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 200px;
+
+}
+
+
+.clearAndCreateButton button {
+  font-size: 1.5rem;
+  border-radius: 10px;
+  padding: 10px 10px;
+  transition: background 255ms ease-in-out;
+}
+
+/* ======================================================= ASSIGN USER  ========================================================== */
 .assignedToChoices {
   display: flex;
   flex-direction: column;
@@ -238,8 +272,7 @@ textarea {
 }
 
 .avatarSelectedIcon {
-/*   border: 3px solid #2a3647;
- */  box-shadow: 0 0 2px 2px black;
+  box-shadow: 0 0 2px 2px black;
 }
 
 .avatarSelectedIconPlaceholder {
@@ -247,12 +280,7 @@ textarea {
   box-shadow: none;
 }
 
-/* ======================================================================================================================== */
-
-.middleGap {
-  border-left: 1px solid #d1d1d1;
-}
-
+/* ======================================================= DATE / PRIO / SUBTASK  ========================================================== */
 .dueDateAndClearCreateButton {
   display: flex;
   flex-direction: column;
@@ -350,36 +378,6 @@ textarea {
   cursor: pointer;
 }
 
-.clearAndCreateButton {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 20px;
-}
-
-.clearAndCreateButton > .buttonLight {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 110px;
-}
-
-.clearAndCreateButton > .buttonDark {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 200px;
-
-}
-
-
-.clearAndCreateButton button {
-  font-size: 1.5rem;
-  border-radius: 10px;
-  padding: 10px 10px;
-  transition: background 255ms ease-in-out;
-}
-
 /* =============================================================== CLASSES ADD/REMOVE =================================================================== */
 .d-none {
   display: none;
@@ -412,25 +410,9 @@ textarea {
     height: calc(100vh - 163px);
   }
 
-  /* .topNavBarRightImg {
-    display: none;
-  } */
-
-   .addTaskMainSubContainer h1 {
+  .addTaskMainSubContainer h1 {
     font-size: 47px;
   }
-
-
-/*.addTaskMobile {
-    background-color: #f6f7f8;
-    border: none;
-    z-index: 11;
-    display: block !important;
-    position: fixed;
-    top: 110px;
-    right: 27px;
-    cursor: pointer;
-  } */
 }
 
 @media(max-width: 450px) {
@@ -461,7 +443,6 @@ textarea {
     display: none;
   }
 }
-
 
 @media(max-width: 350px) {
   .clearAndCreateButton {

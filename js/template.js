@@ -1,4 +1,4 @@
-/* ========================================================== BOARD TASKS TEMPLATE ========================================= */
+/* ========================================================== BOARD TASKS TEMPLATES ========================================= */
 /**
  * This function returns the template for the tasks in the "todo" category.
  * @param {number} element - index of the current task in the filtered category.
@@ -148,7 +148,7 @@ function progressbarTasksTemplate(progress, numerator, denominator) {
     <div class="progressInNumbers">${numerator}/${denominator} Subtasks</div>`;
 }
 
-/* ========================================= OPEN TASK TEMPLATE ========================================= */
+/* ================================================================ OPEN TASK TEMPLATE ================================================================== */
 /**
  * This function return the template for an opened task.
  * @param {number} currentTask - index of the current task
@@ -214,9 +214,7 @@ function openTaskTemplate(currentTask) {
      `;
 }
 
-/* ========================================= EDIT TASK TEMPLATE ========================================= */
-/* <img class="selectArrow" src="./img/arrowDown.png">  */
-
+/* ================================================================ EDIT TASK TEMPLATE ================================================================== */
 /**
  * This function returns the template of an opened task that can be edited.
  * @param {number} currentTask - index of the current task
@@ -303,15 +301,6 @@ function editOpenTaskTemplate(currentTask) {
         </div>
     `;
 }
-/* Select Options */
-/* 
-    <option value="Marketing" style="background-color: #0038ff;">Marketing</option>
-    <option value="Media" style="background-color: #ffc702;">Media</option>
-    <option value="Backoffice" style="background-color: #1FD7C1;">Backoffice</option>
-    <option value="Design" style="background-color: #ff7a00;">Design</option>
-    <option value="Sales" style="background-color: #fc71ff;">Sales</option>
-
-*/
 
 /* ========================================= OPEN TASK - SUBTASKS TEMPLATE ========================================= */
 /**
@@ -343,6 +332,12 @@ function renderSubtasksTemplate(subtask) {
     `;
 }
 /* ========================================= EDIT TASK - CATEGORY TEMPLATE ========================================= */
+/**
+ * This function returns the template for a category in the dropdown.
+ * @param {*} categoryName - name of the category
+ * @param {*} categoryColor - color of the category
+ * @returns 
+ */
 function editCategoryTemplate(categoryName, categoryColor) {
     return `
         <option value="${categoryName}" style="background-color: ${categoryColor};">${categoryName}</option>
@@ -682,14 +677,6 @@ function contactInfoTemplate(firstLetters, contactInfoName, contactInfoSurname, 
 
         `;
 }
-
-/* function saveChangesButtonTemplate(i) {
-    return `
-        <button class="createContact" onclick="saveChanges(${i});return false">  
-            <span>Save</span>
-        </button>
-    `;
-} */
 
 /**
  * This function returns the template of the big contact icon of the contact information. 
