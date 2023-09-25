@@ -173,6 +173,7 @@ function backToLoginScreen() {
 
 function back() {
     document.querySelector('.mainLegalNoticeContainerDisplay') .style.display = "none";
+    document.querySelector('.mainhelpContainerDisplay').style.display = "none";
 }
 
 /**
@@ -385,8 +386,12 @@ function displayPage(pageId) {
     document.getElementById('innerLegalNoticeContainer').classList.add('innerLegalNoticeContainerLogin');
 } */
 
-function displayPageLogin() {
+function displayPageLegalNotice() {
     document.querySelector('.mainLegalNoticeContainerDisplay').style.display = "flex";
+}
+
+function displayPageHelp() {
+    document.querySelector('.mainhelpContainerDisplay').style.display = "flex";
 }
 
 

@@ -164,6 +164,7 @@ a {
   display: none;
 }
 
+.mainhelpContainerDisplay,
 .mainLegalNoticeContainerDisplay {
   position: absolute;
   top: 0;
