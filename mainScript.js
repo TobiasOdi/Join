@@ -158,21 +158,16 @@ function backToLoginScreen() {
 }
 
 /**
- * This function closes the legal notice/privacy policy on the login/sing up page.
- * @param {string} pageId - id of a container
- * @param {string} n - id coun
- * @param {string} arrowId - id of a container 
+ * This function exits the legal notice page.
  */
-/* function back(pageId, n) {
-    document.getElementById(pageId).style.display = "none";
-    document.getElementById('loginScreen' + n).style.display = "flex";
-    document.getElementById('policies' + n).style.display = "flex";
-    document.getElementById('contentContainerLogin' + n).classList.remove('displayPageLogin');
-    document.getElementById('innerLegalNoticeContainer').classList.remove('innerLegalNoticeContainerLogin');
-} */
-
-function back() {
+function exitLegalNoticePage() {
     document.querySelector('.mainLegalNoticeContainerDisplay') .style.display = "none";
+}
+
+/**
+ * This function exits the help page.
+ */
+function exitHelpPage(){
     document.querySelector('.mainhelpContainerDisplay').style.display = "none";
 }
 
@@ -201,7 +196,7 @@ window.addEventListener('keydown', (event) => {
  * This function navigates you to the sign up screen.
  */
 function goToSignup() {
-    window.location.href = './templates/signup.html';
+    window.location.href = './signup.html';
 }
 
 /**
@@ -375,25 +370,18 @@ function displayPage(pageId) {
 }
 
 /**
- * This function displays the html template legal notice.
- * @param {number} pageId - number of the the id
+ * This function displays the legal notice page.
  */
-/* function displayPageLogin(pageId, n) {
-    document.getElementById('contentContainerLogin' + n).classList.add('displayPageLogin');
-    document.getElementById(pageId).style.display = "flex";
-    document.getElementById('loginScreen' + n).style.display = "none";
-    document.getElementById('policies' + n).style.display = "none";
-    document.getElementById('innerLegalNoticeContainer').classList.add('innerLegalNoticeContainerLogin');
-} */
-
 function displayPageLegalNotice() {
     document.querySelector('.mainLegalNoticeContainerDisplay').style.display = "flex";
 }
 
+/**
+ * This function displays the help page.
+ */
 function displayPageHelp() {
     document.querySelector('.mainhelpContainerDisplay').style.display = "flex";
 }
-
 
 /* ================================================================== SNACKBAR ================================================================= */
 /**

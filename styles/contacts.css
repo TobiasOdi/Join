@@ -1,5 +1,6 @@
 /* ================================================== MAIN CONTAINER / CONTACT LIST ============================================== */
 .contactsMainContainer {
+  position: relative;
   display: flex;
   width: 100%;
   height: calc(100vh - 89px);
@@ -544,7 +545,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  gap: 20px;
+  gap: 15px;
   width: 100%;
   height: 100%;
 }
@@ -751,8 +752,8 @@
   }
 
   .newContactButton {
-    top: 110px;
-    right: 35px;
+    top: 20px;
+    right: 20px;
   }
 
   .contactsContentHeader {
@@ -781,7 +782,7 @@
 
 @media (max-width: 830px) {
   .addContactContainer {
-    height: 650px;
+    height: 550px;
     width: 450px;
     flex-direction: column;
   }
@@ -835,12 +836,61 @@
     display: none;
   }
 
+  .contactImg > div {
+    width: 100px;
+    height: 100px;
+  }
+
   .buttons {
     justify-content: space-between;
   }
 
   .editButton {
     justify-content: center;
+  }
+
+  .addContactBackground {
+    padding: 10px;
+  }
+
+  .addContactLeftSide h1 {
+    font-size: 50px;
+  }
+
+  .addContactLeftSide span {
+    font-size: 23px;
+  }
+
+  .inputContainer {
+    width: 100%;
+  }
+  
+  .inputFieldContainer > input {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    height: 40px;
+  }
+
+  .buttons {
+    padding-left: 2rem;
+    padding-right: 2rem;
+    justify-content: center;
+    padding: 0;
+  }
+
+  .cancleButton,
+  .createContact {
+    width: auto;
+  }
+
+  .editButton > .createContact {
+    width: 150px;
+  }
+
+  .buttons span,
+  .inputFields,
+  ::placeholder {
+    font-size: 16px;
   }
 }
 
@@ -925,24 +975,12 @@
 }
 
 @media (max-width: 480px) {
-  .addContactBackground {
-    padding: 10px;
-  }
-
   .contactsContentHeader {
     height: 125px;
   }
 
   .contactsBar {
     padding-bottom: 0;
-  }
-
-  .addContactLeftSide h1 {
-    font-size: 50px;
-  }
-
-  .addContactLeftSide span {
-    font-size: 23px;
   }
 
   .contactDetails {
@@ -953,21 +991,10 @@
     gap: 10px;
   }
 
-  .inputFieldContainer > input {
-    padding-top: 5px;
-    padding-bottom: 5px;
-    height: 40px;
+  .contactInfo form > div {
+    padding: 0;
   }
 
-  .buttons {
-    padding-left: 2rem;
-    padding-right: 2rem;
-  }
-
-  .cancleButton,
-  .createContact {
-    width: auto;
-  }
 }
 
 @media (max-width: 430px) {
@@ -985,21 +1012,6 @@
 
   .contactInfo {
     width: 100%;
-  }
-
- .inputContainer {
-    width: 100%;
-  }
-
-  .cancleButton span,
-  .createContact span,
-  .inputFields,
-  ::placeholder {
-    font-size: 16px;
-  }
-
-  .buttons {
-    gap: 10px;
   }
 
   .contactImg > div{

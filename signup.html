@@ -7,22 +7,22 @@
     <title>SignUp</title>
     
     <!-- ============================== CSS FILES ================================= -->
-    <link rel="stylesheet" href="../mainStyle.css" />
-    <link rel="stylesheet" href="../styles/login.css" />
-    <link rel="stylesheet" href="../styles/legalNotice.css">
-    <link rel="stylesheet" href="../styles/fonts.css">
+    <link rel="stylesheet" href="./mainStyle.css" />
+    <link rel="stylesheet" href="./styles/login.css" />
+    <link rel="stylesheet" href="./styles/legalNotice.css">
+    <link rel="stylesheet" href="./styles/fonts.css">
 
     <!-- ============================== SCRIPTS ================================= -->
-    <script src="../mainScript.js"></script>
-    <script src="../js/contacts.js"></script>
-    <script src="../js/mini_backend.js"></script>
+    <script src="./mainScript.js"></script>
+    <script src="./js/contacts.js"></script>
+    <script src="./js/mini_backend.js"></script>
 
     <!-- ============================ Favicon =========================== -->
-    <link rel="apple-touch-icon" sizes="180x180" href="../img/favicon/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="../img/favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="../img/favicon/favicon-16x16.png">
-    <link rel="manifest" href="../img/favicon/site.webmanifest">
-    <link rel="mask-icon" href="../img/favicon/safari-pinned-tab.svg" color="#2a3647">
+    <link rel="apple-touch-icon" sizes="180x180" href="./img/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./img/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./img/favicon/favicon-16x16.png">
+    <link rel="manifest" href="./img/favicon/site.webmanifest">
+    <link rel="mask-icon" href="./img/favicon/safari-pinned-tab.svg" color="#2a3647">
     <meta name="msapplication-TileColor" content="#2a3647">
     <meta name="theme-color" content="#2a3647">
 
@@ -33,7 +33,7 @@
 
       <div class="header">
         <div class="startScreen startSignUpScreen">
-          <img id="startScreenLogo" class="logo logoSignUp" src="../img/blacklogo.svg"/>
+          <img id="startScreenLogo" class="logo logoSignUp" src="./img/blacklogo.svg"/>
         </div>
       </div>
 
@@ -41,14 +41,14 @@
       <div class="contentContainer" id="contentContainerLogin2">
         <!-- == Legal Notice - w3-include-html ==-->
         <div class="mainLegalNoticeContainerDisplay" id="mainLegalNoticeContainerDisplay2">
-          <div w3-include-html="./legalNotice.html"></div>
+          <div w3-include-html="./templates/legalNotice.html"></div>
         </div>
         <!-- =================================== -->
 
         <div class="loginScreen signUpScreen" id="loginScreen2">
 
           <div class="arrowBack" onclick="backToLoginScreen()">
-            <img src="../img/arrowLeft.svg">
+            <img src="./img/arrowLeft.svg">
           </div>
 
           <div class="loginHeading">
@@ -60,28 +60,28 @@
             <div class="inputContainer">
               <div class="inputFieldContainer">
                 <input id="name" class="inputFields" type="text" placeholder="Name" required/>
-                <img src="../img/name.svg" class="img" />
+                <img src="./img/name.svg" class="img" />
               </div>
             </div>
   
             <div class="inputContainer">
               <div class="inputFieldContainer">
                 <input id="surname" class="inputFields" type="text" placeholder="Surname" required/>
-                <img src="../img/name.svg" class="img" />
+                <img src="./img/name.svg" class="img" />
               </div>
             </div>
   
             <div class="inputContainer">
               <div class="inputFieldContainer">
                 <input id="email" class="inputFields" type="email" placeholder="Email" required/>
-                <img src="../img/letter.svg" class="img" />
+                <img src="./img/letter.svg" class="img" />
               </div>
             </div>
   
             <div class="inputContainer">
               <div class="inputFieldContainer">
                 <input id="password" class="inputFields" type="password" placeholder="Password" required/>
-                <img src="../img/lock.svg" class="img" />
+                <img src="./img/lock.svg" class="img" />
               </div>
             </div>
   
@@ -133,7 +133,9 @@
       </div>
 
       <div class="policies" id="policies2">
-        <div onclick="displayPageLogin('mainLegalNoticeContainerDisplay2', '2', 'arrowBackLegalNotice')">Legal notice</div>
+        <div onclick="displayPageLegalNotice()">
+          Legal notice
+        </div>
       </div>
     </div>
 

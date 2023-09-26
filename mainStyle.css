@@ -173,6 +173,7 @@ a {
   height: calc(100vh - 187px);
   background-color: #F6F7F8;
   overflow: hidden;
+  z-index: 10;
 }
 
 .mainContainer {
