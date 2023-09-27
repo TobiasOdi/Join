@@ -57,7 +57,7 @@
 }
 100% {
   height: 100px;
-  width: auto;
+  width: 83px;
   background-color: transparent;
   margin-left: 48px;
   margin-top: 25px;
@@ -87,7 +87,6 @@ animation-name: startLogo;
   width: auto;
 }
 }
-
 /* ==================================================================== */
 
 .signUpField {
@@ -400,15 +399,7 @@ animation-name: startLogo;
 @media (max-width: 600px) {
   .loginScreen {
     padding: 1rem;
-  }
- 
-  .startScreen,
-  .startSignUpScreen {
-    margin-left: 25px;
-  }
-  
-  .loginScreen {
-   justify-content: flex-start;
+    justify-content: flex-start;
    width: 100%;
   }
 
@@ -477,58 +468,48 @@ animation-name: startLogo;
 }
 
 @media (max-width: 480px) {
+  /* ================================= LOGO ============================= */
+  .header {
+    height: 100px;
+    padding-left: 1.5rem;
+  }
+
+  .loginLogo > img {
+    height: 70px;
+    width: 58px;
+  }
+
+  /* =========================== START SCREEN ANIMATION ================= */
   @keyframes startAnimation {
-    0% {
-      width: 100%;
-      height: 100%;
-      background-color: #2a3647;
-    }
-    10% {
-      background-color: transparent;
-    }
-    100% {
-      height: 100px;
-      width: 111px;
-      background-color: transparent;
+  0% {
+    width: 100%;
+    height: 100%;
+    background-color: #2a3647;
+  }
+  10% {
+    background-color: transparent;
+  }
+  100% {
+    height: 70px;
+    width: 58px;
+    background-color: transparent;
+    margin-left: 24px;
+    margin-top: 12.5px;
+    display: none;
     }
   }
 
   @keyframes startLogo {
-    0% {
-      height: 150px;
-    }
-    100% {
-      height: 75px;
-      width: auto;
-    }
-  }
-
- .logo {
-    height: 75px;
-    width: auto;
-  }
-
-  .header {
+  0% {
     height: 100px;
-  }
-
-  .startScreen,
-  .startSignUpScreen {
-    margin-left: 15px;
-  }
-
-  .startSignUpScreen{
-    animation: none;
-    height: 125px;
-    width: 111px;
-    background-color: transparent;
-  }
-
-  .logoSignUp {
-    height: 75px;
     width: auto;
   }
-
+  100% {
+    height: 75px;
+    width: 58px;
+  }
+  }
+  /* ==================================================================== */
   .loginScreen {
     padding-left: 10px;
     padding-right: 10px;
