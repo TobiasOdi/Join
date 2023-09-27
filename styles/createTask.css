@@ -415,6 +415,18 @@ textarea {
   }
 }
 
+@media(max-width: 480px) {
+  .titleInput,
+  textarea,
+  .sectorTop p,
+  .date,
+  .prioButton,
+  .assignedToHeader,
+  .clearAndCreateButton > button > div {
+    font-size: 18px;
+  }
+}
+
 @media(max-width: 450px) {
   .addTaskMainSubContainer > form, .addTaskMainSubContainer > form > div {
     width: 100%;
@@ -453,5 +465,15 @@ textarea {
   .clearAndCreateButton > .buttonLight,
   .clearAndCreateButton > .buttonDark {
     width: 100%;
+  }
+
+  .titleInput,
+  textarea,
+  .sectorTop p,
+  .date,
+  .prioButton,
+  .assignedToHeader,
+  .clearAndCreateButton > button > div {
+    font-size: 16px;
   }
 }

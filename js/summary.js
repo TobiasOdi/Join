@@ -31,9 +31,7 @@ function taskCounter() {
 function todoCounter() {
     let toDoCounter = tasks.filter(t => t["statusCategory"] == "toDo");
     toDoCounter = toDoCounter.length;
-    document.getElementById("todoCounter").innerHTML = `
-    ${toDoCounter}
-    `;
+    document.getElementById("todoCounter").innerHTML = `${toDoCounter}`;
 }
 
 /**

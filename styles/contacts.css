@@ -9,7 +9,7 @@
 .contactsBar {
   width: 453px;
   height: inherit;
-  box-shadow: 4px 0px 6px 0px rgba(0, 0, 0, 0.08);
+  box-shadow: 4px 0px 4px -4px rgba(0, 0, 0, 0.08);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -145,8 +145,7 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
-  padding: 1.5rem;
-  padding-left: 4rem;
+  padding: 1.5rem 0 1.5rem 1.5rem;
   width: 100%;
   height: calc(100vh - 89px);
   background-color: #f5f5f5;
@@ -183,7 +182,6 @@
 .contactsContentHeader h1 {
   font-size: 61px;
   font-weight: bold;
-  columns: rgba(0, 0, 0, 1);
   margin: 0;
 }
 
@@ -747,7 +745,6 @@
 
   .contactsContainer {
     width: 100%;
-    padding-right: 1.5rem;
     display: none;
   }
 
@@ -928,6 +925,15 @@
   .contactsContentHeader h1 {
     font-size: 47px;
   }
+
+  .contactDetails {
+    gap: 10px;
+  }
+
+  .contactIconBig {
+    width: 80px;
+    height: 80px;
+  }
 }
 
 @media (max-width: 600px) {
@@ -995,6 +1001,14 @@
     padding: 0;
   }
 
+  .contactImg > div {
+    width: 90px;
+    height: 90px;
+  }
+
+  .contactImg span {
+    font-size: 35px;
+  }
 }
 
 @media (max-width: 430px) {
@@ -1029,10 +1043,21 @@
 }
 
 @media (max-width: 380px) {
-.buttons {
+  .buttons {
     padding-left: 0.5rem;
     padding-right: 0.5rem;
   }
+
+  .contactImg > div {
+    width: 80px;
+    height: 80px;
+  }
+
+  .contactImg span {
+    font-size: 30px;
+  }
+
+
 }
 
 @media (max-width: 330px) {

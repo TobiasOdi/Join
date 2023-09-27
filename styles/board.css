@@ -494,8 +494,6 @@
 
 .prioButtonsEdit > button:hover {
   box-shadow: 0 4px 4px 0 rgb(0 0 0 / 25%);
-  width: 110%;
-
 }
 
 .prioButton2 {
@@ -532,12 +530,17 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 10px;
 }
 
 .openTaskSubtaskEdit > div {
   display: flex;
   justify-content: flex-start;
   align-items: center;
+}
+
+#subtaskContainerEdit > div {
+  justify-content: flex-start;
 }
 
 .openTaskSubtaskEdit > div > div {
@@ -548,6 +551,7 @@
 
 .openTaskSubtaskEdit > div > div > .addSubtaskEdit {
   width: 150px;
+  min-width: 80px;
   height: 25px;
   border-radius: 10px 0 0 10px;
   border: 1px solid #d1d1d1;
@@ -574,6 +578,10 @@
   overflow-x: hidden;
   overflow-y: scroll;
   overflow: auto;
+}
+
+.boardSubtaskContainer > div {
+  width: 100%;
 }
 
 .openTaskAssigned {
@@ -707,8 +715,8 @@
   border: 1px solid #2a3647;
   font-weight: bold;
   cursor: pointer;
-  margin-right: 1rem;
   gap: 15px;
+  margin-right: 10px;
 }
 
 .saveChangesTask {
@@ -863,23 +871,28 @@
   } 
 
   .openTaskButtonContainer {
-   right: 10px; 
+   right: 30px; 
    bottom: 10px;
+   display: flex;
   }
-}
 
-@media (max-width: 450px) {
-  .prioButtonsEdit {
-    width: 100%;
-    }
-  
-  .prioButtonEdit {
-    max-width: 120px;
-    max-height: 40px;
+  .openTaskTop > div:first-of-type,
+  .selectCategory {
+    width: 120px;
+    height: 30px;
   }
-}
 
-@media (max-width: 410px) {
+  .openTaskTop > div:first-of-type > p,
+  .openTaskHeader > div > div:first-of-type, 
+  .prioButton2 > span {
+    font-size: 18px;
+  }
+
+  .boardSubtaskContainer,
+  .openTaskAssigned {
+    gap: 5px;
+  }
+
   .openTaskPriorityEdit {
     flex-direction: row;
   }
@@ -901,22 +914,18 @@
     font-size: 25px;
   }
 
-  .openTaskHeader > p,
-  #descriptionEdit {
-    font-size: 18px;
-  }
-
   .openTaskTop > div:first-of-type > p {
     font-size: 22px;
   }
 
+  .openTaskHeader > p,
+  #descriptionEdit,
   .openTaskMain > div > div:first-of-type,
   .openTaskDate > div:last-of-type {
     font-size: 18px;
   }
 
   .openTaskSubtaskEdit > div:first-of-type {
-    flex-direction: column;
     align-items: flex-start;
   }
 
@@ -926,6 +935,15 @@
 
   .openTaskMain > div > div:first-of-type {
     margin-right: 0;
+  }
+
+  .placeholderBoardBottom {
+    padding: 0.5rem;
+    padding-right: 0;
+  }
+
+  .openTaskSubtaskEdit > div > div > .addSubtaskEdit {
+    width: 100%;
   }
 }
 
@@ -941,18 +959,24 @@
   .openTaskHeader > div > div:first-of-type {
     width: 120px;
   }
+
+  .prioButton2 > span {
+    font-size: 16px;
+  }
+
+  .openTaskHeader > div > div:first-of-type {
+    width: 100px;
+  }
 }
 
 /* ================================ HEIGHT =============================== */
 @media (max-height: 570px) {
   .openTask {
-    padding-top: 1rem;
-    padding-bottom: 1rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
   }
-}
 
-@media (max-height: 690px) {
   .openTaskSubtask {
-    min-height: 90px;
+    min-height: 75px;
   }
 }

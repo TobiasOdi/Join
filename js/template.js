@@ -171,7 +171,7 @@ function openTaskTemplate(currentTask) {
                  <p>${tasks[currentTask]['description']}</p>
                  <div class="openTaskDate">
                     <div>Due date:</div>
-                    <div>${tasks[currentTask]['dueDate']}</div>
+                    <div id="dateNumber">${tasks[currentTask]['dueDate']}</div>
                 </div>
 
                 <div class="openTaskPriority">

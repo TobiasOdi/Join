@@ -19,7 +19,6 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-right: 2rem;
 }
 
 .exitLegalNotice {
@@ -103,14 +102,9 @@
 }
 
 @media(max-width: 480px) {
-    .helpContainer {
-        padding: 0;
-    }
-
     .legalNoticeContainer, .helpContainer {
         position: relative;
         top: 0;
-        height: inherit;
     }
 
     .legalNoticeContainer h1, .helpContainer h1 {

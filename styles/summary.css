@@ -132,6 +132,26 @@
   gap: 32.5px;
 }
 
+.bottomCardsImgTodo {
+  background: url("../img/todo.svg");
+  width: 70px;
+  height: 70px;
+}
+
+.bottomCardsImgDone {
+  background: url("../img/done.svg");
+  width: 70px;
+  height: 70px;
+}
+
+.bottomCard:hover .bottomCardsImgTodo {
+  background: url("../img/todo_white.svg");
+}
+
+.bottomCard:hover .bottomCardsImgDone {
+  background: url("../img/done_white.svg");
+}
+
 .cardNumberTopBottom {
   font-weight: 600;
   font-size: 64px;
