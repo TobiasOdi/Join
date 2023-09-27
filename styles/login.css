@@ -13,13 +13,82 @@
   align-items: center;
 }
 
+/* ================================= LOGO ============================= */
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 100%;
   height: 150px;
+  padding-left: 3rem;
 }
+
+.loginLogo > img {
+  height: 100px;
+  width: auto;
+}
+
+/* =========================== START SCREEN ANIMATION ================= */
+.startScreen {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 20;
+  animation-duration: 0.5s;
+  animation-timing-function: ease-in-out;
+  animation-delay: 750ms;
+  animation-fill-mode: both;
+  animation-name: startAnimation;
+}
+
+@keyframes startAnimation {
+0% {
+  width: 100%;
+  height: 100%;
+}
+10% {
+  background-color: transparent;
+}
+100% {
+  height: 100px;
+  width: auto;
+  background-color: transparent;
+  margin-left: 48px;
+  margin-top: 25px;
+  display: none;
+  }
+}
+
+.logo {
+height: 150px;
+width: auto;
+opacity: 1;
+z-index: 99;
+animation-duration: 1s;
+animation-timing-function: ease-in-out;
+animation-delay: 400ms;
+animation-fill-mode: both;
+animation-name: startLogo;
+}
+
+@keyframes startLogo {
+0% {
+  height: 150px;
+  width: auto;
+}
+100% {
+  height: 100px;
+  width: auto;
+}
+}
+
+/* ==================================================================== */
 
 .signUpField {
   position: absolute;
@@ -292,96 +361,6 @@
 
 .userIdForgotPw {
   display: none;
-}
-
-/* =========================================================================== START SCREEN ANIMATION ============================================================= */
-.startScreen,
-.startSignUpScreen {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 20;
-    animation-duration: 0.5s;
-    animation-timing-function: ease-in-out;
-    animation-delay: 750ms;
-    animation-fill-mode: both;
-    animation-name: startAnimation;
-}
-
-.startSignUpScreen {
-  animation: none;
-  height: 100px;
-  width: 83px;
-  background-color: transparent;
-  margin-left: 50px;
-}
-
-@keyframes startAnimation {
-  0% {
-    width: 100%;
-    height: 100%;
-/*     background-color: white;
- */  }
-  10% {
-    background-color: transparent;
-  }
-  100% {
-    height: 100px;
-    width: 83px;
-    background-color: transparent;
-    margin-left: 50px;
-    margin-top: 25px;
-
-  }
-}
-
-.forgotPwScreen{
-  animation: none;
-  height: 100px;
-  width: 83px;
-  background-color: transparent;
-  margin-left: 50px;
-  margin-top: 25px;
-}
-
-.logo {
-  height: 150px;
-  width: 124px;
-  opacity: 1;
-  z-index: 99;
-  animation-duration: 1s;
-  animation-timing-function: ease-in-out;
-  animation-delay: 400ms;
-  animation-fill-mode: both;
-  animation-name: startLogo;
-}
-
-.logoSignUp {
-  animation: none;
-  height: 100px;
-  width: 83px;
-}
-
-@keyframes startLogo {
-  0% {
-    height: 150px;
-  }
-  100% {
-    height: 100px;
-    width: 83px;
-  }
-}
-
-.logoForgotPwScreen {
-  animation: none;
-  height: 100px;
-  width: 83px;
 }
 
 /* =========================================================================== RESPONSIVENESS ============================================================= */
