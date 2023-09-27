@@ -268,7 +268,7 @@ function editOpenTaskTemplate(currentTask) {
                     </div>
                 </div>
 
-                <div class="openTaskSubtask openTaskSubtaskEdit">
+                <div id="openTaskSubtask" class="openTaskSubtask openTaskSubtaskEdit">
                     <div>
                         <div>Subtasks:</div>
                         <div>
