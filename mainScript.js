@@ -264,22 +264,39 @@ function guestLogin() {
 /**
  * This function validates the forgot password form and throws an error if necessary.
  */
-function checkForCorrectEmail() {
+async function checkForCorrectEmail(event) {
+    event.preventDefault(); // Prevent default Form Action
     let sendEmailToResetPw = document.getElementById('sendEmailToResetPw').value;
-    //let existingEmail = users.find(u => u.email == sendEmailToResetPw);
-    //let correctUser = users.indexOf(existingEmail);
+    let formData = new FormData(event.target) // create a FormData based on our Form Element in HTML
+    let response = await action(formData);
 
     if ((users.find(u => u.email == sendEmailToResetPw)) == null) {
         displaySnackbar('userDoesNotExist2');
         return false;
-    } else {
+    }
+    if(response.ok) {   
         displaySnackbar('sendEmail');
         document.getElementById('sendEmailToResetPw').value = '';
         setInterval(backToLoginScreen, 1200);
-        return true;
-    }
 
-} 
+        console.log('Email was sent!');
+    } else {
+        console.log('Email not sent!');
+    }
+}
+
+function action(formData) {
+    const input = "https://tobias-odermatt.developerakademie.net/Projekte/Join/send_mail.php";
+    const requestInit = {
+        method: 'post',
+        body: formData
+    };
+
+    return fetch (
+        input,
+        requestInit
+    );
+}
 
 /* ================================================================= RESET PASSWORD ================================================================= */
 /**

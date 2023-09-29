@@ -39,6 +39,7 @@ a {
   border-radius: 8px;
   gap: 10px;
   cursor: pointer;
+  color: white;
 }
 
 .buttonDark:hover {
@@ -46,6 +47,7 @@ a {
 }
 
 .buttonDarkText {
+  cursor: pointer;
   font-family: "Inter";
   font-weight: 700;
   font-size: 21px;

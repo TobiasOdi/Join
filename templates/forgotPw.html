@@ -31,7 +31,7 @@
       <div class="header">
         <!-- ================================== LOGO  ==================================== -->
         <div class="loginLogo">
-          <img src="./img/blacklogo.svg">
+          <img src="../img/blacklogo.svg">
         </div>
       </div>
 
@@ -48,16 +48,16 @@
             </div>
 
             <span>Don't worry! We will send you an email with the instructions to reset your password.</span>
+            
+            <!-- action="https://tobias-odermatt.developerakademie.net/Projekte/Join/send_mail.php" -->
 
-            <form id="forgotPwForm" class="inputContainer" action="https://tobias-odermatt.developerakademie.net/Projekte/Join/send_mail.php" method="post">
+            <form id="forgotPwForm" name="forgotPwForm" class="inputContainer" onsubmit="checkForCorrectEmail(event)">
               <div class="inputFieldContainer">
                   <input id="sendEmailToResetPw" name="sendEmailToResetPw" class="inputFields" type="email" placeholder="Email" required/>
                   <img src="../img/letter.svg" class="img" />
               </div>
 
-              <button id="submitButton" type="submit" onclick="return checkForCorrectEmail()" class="buttonDark">
-                <div class="buttonDarkText">Send me the email</div>
-              </button>
+              <input id="submitButton" type="submit" class="buttonDark" value="Send email">
             </form>
         </div>
       </div>

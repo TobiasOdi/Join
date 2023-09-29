@@ -33,13 +33,12 @@ switch ($_SERVER['REQUEST_METHOD']) {
     case ("POST"): //Send the email;
         header("Access-Control-Allow-Origin: *");
 
-        $subject = "Contact From " . $name;
+        $subject = "Reset password for JOIN App";
         $headers = "From:  noreply@https://tobias-odermatt.developerakademie.net";
         # noreply@tobias-odermatt.developerakademie.net
         # noreply@https://tobias-odermatt.developerakademie.net"
         # $headers = "From:  noreply@developerakademie.com";
         mail($recipient, $subject, $message, $headers);
-        header("refresh:5; url=http://127.0.0.1:5500/login.html")
         //header("Location: " . $redirect);
 
         break;
