@@ -623,6 +623,7 @@ async function saveEditedTask(currentTask) {
     tasks[currentTask]['subtasks'] = subtasksEdit;
     await saveTasks();
     updateHTML();
+    priority = "";
     selectedUsersEdit = [];
     subtasksEdit = [];
     document.getElementById('openTaskBackground').style.display = 'none';

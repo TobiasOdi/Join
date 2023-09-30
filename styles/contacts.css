@@ -385,10 +385,6 @@
   gap: 10px;
 }
 
-.deleteContact > div:hover {
-  scale: 1.05;
-}
-
 .deleteContact span {
   color: #ff0000;
   font-size: 16px;

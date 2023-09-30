@@ -634,7 +634,7 @@ function contactInfoTemplate(firstLetters, contactInfoName, contactInfoSurname, 
                                 <span>${contactInfoSurname}</span>
                             </div>
                         </div>
-                        <div onclick="initCreateTask(), displayPage('mainAddTaskContainerDisplay')" class="addTask">
+                        <div onclick="initCreateTask(), displayPage('mainAddTaskContainerDisplay'), initCreateTask(), activeTab('addTask')" class="addTask">
                             <img src="../img/plus.svg"><span>Add Task</span>
                         </div>
                     </div>

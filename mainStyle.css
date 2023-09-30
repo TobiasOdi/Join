@@ -291,6 +291,12 @@ a {
   display: flex;
   justify-content: center;
   align-items: center;
+  border-radius: 50%;
+}
+
+.topNavBarRightImg a > img {
+  border-radius: 50%;
+
 }
 
 .topNavBarRightImgQuestionmark {
@@ -383,6 +389,14 @@ a {
 /* ================================================================ CLASSES ADD/REMOVE ====================================================== */
 .activeTab {
   background-color: rgb(9, 25, 49);
+}
+
+.activeLegalNoticeTab {
+  background-color: rgb(9, 25, 49);
+}
+
+.acitveHelpPage {
+  box-shadow: 0 0 4px 4px grey; 
 }
 
 /* ================================================================ SNACKBAR ====================================================== */

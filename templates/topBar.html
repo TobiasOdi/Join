@@ -4,10 +4,10 @@
     </div>
     <div class="topNavBarLeftText">Kanban Project Management Tool</div>
     <div class="topNavBarRightImg">
-        <a onclick="displayPage('mainLegalNoticeContainerDisplay')">
+        <a id="legalNoticeTopTab" class="tab" onclick="displayPageLegalNotice(), activeHelp('legalNoticeTopTab')">
             <img src="../img/legalnotice.svg" class="topNavBarRightImgExclamationmark">
         </a>
-        <a onclick="displayPageHelp()">
+        <a id="pageHelpTab" class="tab" onclick="displayPageHelp(), activeHelp('pageHelpTab')">
             <img src="../img/questionmark.svg" class="topNavBarRightImgQuestionmark">
         </a>
         <img src="../img/user.svg" id="topNavBarRightImgPicture" class="topNavBarRightImgPicture" onclick="toggleLogoutButton()">

@@ -162,6 +162,13 @@ function backToLoginScreen() {
  */
 function exitLegalNoticePage() {
     document.querySelector('.mainLegalNoticeContainerDisplay') .style.display = "none";
+
+    if (document.getElementById("legalNoticeTopTab") !== null) {
+        document.getElementById("legalNoticeTopTab")[0].classList.remove('acitveHelpPage');
+    }
+    if (document.getElementById("legalNoticeTab") !== null) {
+        document.getElementById("legalNoticeTab")[0].classList.remove('acitveHelpPage');
+    }
 }
 
 /**
@@ -169,6 +176,7 @@ function exitLegalNoticePage() {
  */
 function exitHelpPage(){
     document.querySelector('.mainhelpContainerDisplay').style.display = "none";
+    document.getElementById('pageHelpTab').classList.remove('acitveHelpPage');
 }
 
 /**
@@ -416,7 +424,7 @@ function displaySnackbar(popupId) {
 
 /* ================================================================= ACTIVE TAB ================================================================= */
 /**
- * This funciton displays the active tab on the side nav bar.
+ * This functoon highlights the active tab on the side nav bar.
  */
 function activeTab(tab) {
     let currentElement = document.getElementById(tab + "Tab");
@@ -426,6 +434,24 @@ function activeTab(tab) {
         element.classList.remove('activeTab');
     })
     currentElement.classList.add('activeTab');
+    document.getElementById('pageHelpTab').classList.remove('acitveHelpPage');
+    document.getElementById('legalNoticeTab').classList.remove('activeLegalNoticeTab');
+}
+
+/**
+ * This function highlights the icon of the legal notice pagea.
+ */
+function activeLegalNotice() {
+    let legalNoticeTab = document.getElementById('legalNoticeTab');
+    legalNoticeTab.classList.add('activeLegalNoticeTab');
+}
+
+/**
+ * This function highlights the icon of the help page.
+ */
+function activeHelp(id) {
+    let pageHelpTab = document.getElementById(id);
+    pageHelpTab.classList.add('acitveHelpPage');
 }
 
 // ================================================ DATEN SPEICHERN ==========================================================
