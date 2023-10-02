@@ -1,8 +1,6 @@
 // ================================================ VARIABLES ==========================================================
 let users = [];
 let tasks = [];
-let id;
-let taskId;
 
 let black = "#000000";
 let white = "#FFFFFF";
@@ -45,10 +43,6 @@ async function includeHTML() {
         }
     }
     await init();
-    updateHTML();
-    searchFunction();
-    counters();
-    setDateToday();
 }
 
 // ================================================ INIT FUNCTION ==========================================================
@@ -62,6 +56,7 @@ async function init() {
     tasks = JSON.parse(backend.getItem('tasks')) || [];
     contacts = JSON.parse(backend.getItem('contacts')) || [];
     categories = JSON.parse(backend.getItem('categories')) || [];
+    counters();
     setInterval(setUserColor, 200);
 }
 
@@ -164,10 +159,10 @@ function exitLegalNoticePage() {
     document.querySelector('.mainLegalNoticeContainerDisplay') .style.display = "none";
 
     if (document.getElementById("legalNoticeTopTab") !== null) {
-        document.getElementById("legalNoticeTopTab")[0].classList.remove('acitveHelpPage');
+        document.getElementById("legalNoticeTopTab").classList.remove('acitveHelpPage');
     }
     if (document.getElementById("legalNoticeTab") !== null) {
-        document.getElementById("legalNoticeTab")[0].classList.remove('acitveHelpPage');
+        document.getElementById("legalNoticeTab").classList.remove('activeLegalNoticeTab');
     }
 }
 

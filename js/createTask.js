@@ -108,7 +108,7 @@ async function createTask() {
         displaySnackbar('taskCreated');
         clearAllInputs();
         document.getElementById('avatarPicker').classList.add('d-none');
-        await updateHTML();
+        updateHTML();
         displayPage('mainBoardContainerDisplay');
     } else {
         highlightInputs(); 
@@ -128,6 +128,7 @@ function setTaskParameters() {
     let assignTo = selectedUsers;
     let dueDate = document.getElementById('dueDate');
     let priorityValue = priority;
+    // subtasks array> is beeing set wehn adding an subtask
     taskData = {taskId: taskId, statusCategory: statusCategory, title: title.value, description: description.value, category: category, categoryColor: categoryColor, assignTo: assignTo, dueDate: dueDate.value, priorityValue: priorityValue, subtasks: subtasks};
 }
 

@@ -129,7 +129,9 @@ animation-name: startLogo;
   padding-top: 1rem;
 }
 
-#mainLegalNoticeContainerDisplay1 {
+#mainLegalNoticeContainerDisplay1,
+#mainLegalNoticeContainerDisplay2 {
+  height: calc(100vh - 150px);
   position: absolute;
   top: 0;
   left: 0;
@@ -137,10 +139,15 @@ animation-name: startLogo;
   z-index: 10;
 }
 
-#mainLegalNoticeContainerDisplay1 .legalNoticeContainer,
-#mainLegalNoticeContainerDisplay2 .legalNoticeContainer {
+#mainLegalNoticeContainerDisplay1 > div,
+#mainLegalNoticeContainerDisplay1 > div > div,
+#mainLegalNoticeContainerDisplay2 > div,
+#mainLegalNoticeContainerDisplay2 > div > div {
   height: calc(100vh - 150px);
 }
+
+
+
 
 .displayPageLogin {
   align-items: flex-start;
@@ -159,6 +166,13 @@ animation-name: startLogo;
   height: auto;
   border-radius: 30px;
   box-shadow: 0px 0px 14px 3px rgba(0, 0, 0, 0.04);
+}
+
+
+.loginScreenPw {
+  padding-left: 3rem;
+  padding-right: 3rem;
+  width: 620px;
 }
 
 .loginScreen > form {
@@ -197,16 +211,12 @@ animation-name: startLogo;
   width: 110px;
 }
 
-.signUpScreen {
-  padding: 1rem;
-} 
-
 .signUpScreen h1 {
   margin-top: 10px;
 }
 
 .signUpScreen > form {
-  gap: 10px;
+  gap: 50px;
 }
 
 .arrowBack {
@@ -368,6 +378,15 @@ animation-name: startLogo;
 }
 
 /* =========================================================================== RESPONSIVENESS ============================================================= */
+
+
+@media (max-height: 570px) {
+  .signUpScreen {
+    margin-top: -50px;
+    padding: 1rem;
+    scale: 0.8;
+  } 
+}
 /* ======================================== WIDTH ====================================== */
 @media (max-width: 900px) {
     .contentContainer {
@@ -379,6 +398,10 @@ animation-name: startLogo;
 @media (max-width: 780px) {
     .loginHeading > h1 {
         font-size: 2.5rem;
+    }
+
+    .loginScreen {
+      width: 500px;
     }
 }
 
@@ -399,13 +422,17 @@ animation-name: startLogo;
   .startScreen {
     background-color: #2a3647;
   }
+
+  .loginScreenPw {
+    width: 550px;
+  }
 }
 
 @media (max-width: 600px) {
   .loginScreen {
     padding: 1rem;
     justify-content: flex-start;
-   width: 100%;
+    width: 450px;
   }
 
   .signUpScreen > form {
@@ -470,6 +497,10 @@ animation-name: startLogo;
     padding-left: 25px;
     padding-right: 25px;
   }
+
+  #submitButton {
+    width: 180px;
+  }
 }
 
 @media (max-width: 480px) {
@@ -482,6 +513,10 @@ animation-name: startLogo;
   .loginLogo > img {
     height: 70px;
     width: 58px;
+  }
+
+  .loginScreen {
+    width: 100%;
   }
 
   /* =========================== START SCREEN ANIMATION ================= */
@@ -524,6 +559,12 @@ animation-name: startLogo;
   .loginScreen > form {
     gap: 15px;
   }
+
+  .signUpScreen {
+    margin-top: -10px;
+    padding: 1rem;
+    scale: 0.9;
+  } 
 
   .signUpScreen > form {
     gap: 5px;
@@ -663,15 +704,11 @@ animation-name: startLogo;
 
 /* ======================================== HEIGHT ====================================== */
 @media (max-height: 570px) {
-  #mainLegalNoticeContainerDisplay1,
-  #mainLegalNoticeContainerDisplay1 .legalNoticeContainer {
-    height: calc(100vh - 100px);
-  }
-
   .loginScreen {
     padding-top: 1rem;
     padding-bottom: 1rem;
   }
+
 
   .loginScreen > form {
     gap: 10px;
@@ -688,6 +725,7 @@ animation-name: startLogo;
   .policies > div {
     padding-bottom: 5px;
   }
+
 }
 
 

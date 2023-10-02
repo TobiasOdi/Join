@@ -25,7 +25,7 @@ function generateToDoHTMLToDo(element, currentStatusCategory) {
             <div class="boardContainerDescripton">
                 <span>${element["description"]}</span>
             </div>
-            <div id="boardContainerProgress(${element["taskId"]})" class="boardContainerProgress" onclick="openTask(${element["taskId"]})" >
+            <div id="boardContainerProgress(${element["taskId"]})" class="boardContainerProgress">
             </div>
             <div class="boardContainerUserBubbles">
                 <div class="userBubble" id="userBubble${element["taskId"]}"></div>
@@ -66,7 +66,7 @@ function generateToDoHTML(element, currentStatusCategory) {
             <div class="boardContainerDescripton">
                 <span>${element["description"]}</span>
             </div>
-            <div id="boardContainerProgress(${element["taskId"]})" class="boardContainerProgress" onclick="openTask(${element["taskId"]})" >
+            <div id="boardContainerProgress(${element["taskId"]})" class="boardContainerProgress">
             </div>
             <div class="boardContainerUserBubbles">
                 <div class="userBubble" id="userBubble${element["taskId"]}"></div>
@@ -104,7 +104,7 @@ function generateToDoHTMLDone(element, currentStatusCategory) {
             <div class="boardContainerDescripton">
                 <span>${element["description"]}</span>
             </div>
-            <div id="boardContainerProgress(${element["taskId"]})" class="boardContainerProgress" onclick="openTask(${element["taskId"]})" >
+            <div id="boardContainerProgress(${element["taskId"]})" class="boardContainerProgress">
             </div>
             <div class="boardContainerUserBubbles">
                 <div class="userBubble" id="userBubble${element["taskId"]}"></div>

@@ -6,9 +6,6 @@ let currentDraggedElement;
 let priorityValueEdit;
 let startWithLetter = [];
 let selectedUsersEdit = [];
-let numerator;
-let denominator;
-let progress;
 let subtasksEdit = [];
 
 /* ============================================================================ INIT BOARD ======================================================================== */
@@ -17,6 +14,7 @@ let subtasksEdit = [];
  */
 function initBoard() {
     updateHTML();
+    searchFunction();
 }
 
 /* ============================================================================ BOARD FUNCTIONS ======================================================================== */
@@ -25,16 +23,12 @@ function initBoard() {
  */
 function updateHTML() {
     if(tasks.length > 0) {
-        for (let index = 0; index < tasks.length; index++) {
+        //for (let index = 0; index < tasks.length; index++) {
             filterToDo();
             filterInProgress();
             filterAwaitingFeedback();
             filterDone();
-            let taskId = tasks[index]['taskId'];
-            let subtasksProgress;
-            calculateProgressbar(index, subtasksProgress, numerator, denominator);
-            generateProgressbarHtml(index, taskId, progress, numerator, denominator);
-        }
+        //}
         createBubbles();
     }     
     checkForEmptyCategories();
@@ -49,6 +43,7 @@ function filterToDo() {
     for (let i = 0; i < toDo.length; i++) {
         let element = toDo[i]; 
         document.getElementById("toDo").innerHTML += generateToDoHTMLToDo(element, 'toDo');
+        calculateProgressbar(element);
     }
 }
 
@@ -61,6 +56,7 @@ function filterInProgress() {
     for (let i = 0; i < inProgress.length; i++) {
         let element = inProgress[i];
         document.getElementById("inProgress").innerHTML += generateToDoHTML(element, 'inProgress');
+        calculateProgressbar(element);
     }
 }
 
@@ -73,8 +69,10 @@ function filterAwaitingFeedback() {
     for (let i = 0; i < awaitingFeedback.length; i++) {
         let element = awaitingFeedback[i];
         document.getElementById("awaitingFeedback").innerHTML += generateToDoHTML(element, 'awaitingFeedback');
+        calculateProgressbar(element);
     }
 }
+
 
 /**
  * This function filters all the tasks that have the category "done".
@@ -85,41 +83,41 @@ function filterDone() {
     for (let i = 0; i < done.length; i++) {
         let element = done[i];
         document.getElementById("done").innerHTML += generateToDoHTMLDone(element, 'done');
+        calculateProgressbar(element);
     }
 }
 
 /**
  * This function calculates the values for the progressbar of the subtasks.
- * @param {index} i - index of the current task
+ * @param {index} element - index of the current task in the respective category array (toDo, inProgress etc.)
  */
-function calculateProgressbar(i) {
-    subtasksProgress = tasks[i]['subtasks'];
-    numerator = 0;
-    denominator = tasks[i]['subtasks'].length;
-    for (let j = 0; j < subtasksProgress.length; j++) {
-        let subtask = tasks[i]['subtasks'][j]['status'];
-        if(!subtask.includes('undone')) {
-            numerator++;
+function calculateProgressbar(element) {
+    let numerator = 0;
+    let denominator = element['subtasks'].length;
+    if(element['subtasks'].length !== 0) {
+        for (let j = 0; j < element['subtasks'].length; j++) {
+            if(!element['subtasks'][j]['status'].includes('undone')) {
+                numerator++;
+            }
         }
+        let progress = numerator / denominator;
+        progress = progress * 100;
+        generateProgressbarHtml(element, progress, numerator, denominator);
     }
-    progress = numerator / denominator;
-    progress = progress * 100;
 }
 
 /**
- * This function calculates renders the progressbar of the subtasks.
- * @param {index} i - index of the current task
- * @param {number} taskId - id of the current task
+ * This function renders the progressbar of the subtasks.
+ * @param {index} element - index of the current task in the respective category array (toDo, inProgress etc.)
  * @param {%} progress - percentage of the done subtasks
  * @param {number} numerator - value "0"
  * @param {number} denominator - length of the subtask array of the current task
  */
-function generateProgressbarHtml(i, taskId, progress, numerator, denominator) {
-    if(tasks[i]['subtasks'].length == 0) {
-    } else if(tasks[i]['subtasks'].length === 1) {
-        document.getElementById(`boardContainerProgress(${taskId})`).innerHTML = progressbarTaskTemplate(progress, numerator, denominator);
+function generateProgressbarHtml(element, progress, numerator, denominator) {
+    if(element['subtasks'].length === 1) {
+        document.getElementById(`boardContainerProgress(${element["taskId"]})`).innerHTML = progressbarTaskTemplate(progress, numerator, denominator);
     } else {
-        document.getElementById(`boardContainerProgress(${taskId})`).innerHTML = progressbarTasksTemplate(progress, numerator, denominator);
+        document.getElementById(`boardContainerProgress(${element["taskId"]})`).innerHTML = progressbarTasksTemplate(progress, numerator, denominator);
     }
 }
 
@@ -662,86 +660,21 @@ function closeTask(priority, currentTask) {
 
 /* ======================================================================= SEARCH FUNCTION ================================================================================= */
 /**
- * This function renders the tasks that containt the searched values.
+ * This function shows only the tasks (title, description or category) that contain the serach value.
  */
 function searchFunction() {
-    let emptyCategory = document.getElementsByClassName("emptyCategory");
-    let originalToDos = tasks;
-    let input = document.getElementById('searchValue');
-    inputValueEvent(input, originalToDos, emptyCategory);
-    keydownEvent(input);
-}
+    //let input = document.getElementById('searchValue');
+    let originalTasks = tasks;
 
-/**
- * This function starts the eventListener when the search functio is called.
- * @param {*} input 
- * @param {*} originalToDos 
- * @param {*} emptyCategory 
- */
-function inputValueEvent(input, originalToDos, emptyCategory) {
-    input.addEventListener('input', debounce(function (event) {
-        let selectedValue = event.target.value.toLowerCase().trim();
-        let newArray;
-        if (selectedValue === '') {
-            newArray = [...originalToDos];
-            tasks = originalToDos;
-            hideEmptyCategoryPlaceholder(emptyCategory);
-        } else {
-            newArray = tasks.filter(item => {
-                if (item.description.toLowerCase().includes(selectedValue) || item.title.toLowerCase().includes(selectedValue) || item.category.toLowerCase().includes(selectedValue)) {
-                    return item;
-                }
-            });
-            if (newArray.length === 0 || selectedValue.length > 0) {
-                newArray = originalToDos.filter(item => {
-                    if (item.description.toLowerCase().includes(selectedValue) || item.title.toLowerCase().includes(selectedValue) || item.category.toLowerCase().includes(selectedValue)) {
-                        return item;
-                    }
-                });
-            }
-            hideEmptyCategoryPlaceholder(emptyCategory);
-        }
-        tasks = newArray;
+    if(document.getElementById('searchValue').value !== "") {
+        let newSearchArray = tasks.filter( task =>  {
+            return task.title.toLowerCase().includes(document.getElementById('searchValue').value) || task.description.toLowerCase().includes(document.getElementById('searchValue').value) || task.category.toLowerCase().includes(document.getElementById('searchValue').value);
+        })
+        tasks = newSearchArray;
         updateHTML();
-        hideShowTasks();
-    }, 200));
-}
-
-/**
- * This function hides all elements in the category that is empty.
- * @param {array} emptyCategory - current category that contains task that do not contain the search value
- */
-function hideEmptyCategoryPlaceholder(emptyCategory) {
-    for(var i = 0; i < emptyCategory.length; i++){
-        emptyCategory[i].style.display = "none";
-    }
-}
-
-/**
- * This function hides all the tasks that do not contain the search value
- */
-function hideShowTasks() {
-    if (tasks.length > 0) {
-        Array.from(document.getElementsByClassName("boardContainer")).forEach((card) => {
-            card.style.display = "block";
-        });
+        tasks = originalTasks;
     } else {
-        Array.from(document.getElementsByClassName("boardContainer")).forEach((card) => {
-            card.style.display = "none";
-        });
+        tasks = originalTasks;
+        updateHTML();
     }
 }
-
-/**
- * This function initializes the event if a cerain key is pressed. 
- * @param {string} input - input field that conatins the search value
- */
-function keydownEvent(input) {
-    input.addEventListener('keydown', function (event) {
-        if (event.key === 'Backspace' || event.key === 'Delete') {
-            input.dispatchEvent(new Event('input'));
-        }
-    });
-}
-
- 

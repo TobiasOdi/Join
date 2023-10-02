@@ -26,6 +26,12 @@
   padding-right: 15px;
 }
 
+.subtaskContainer > input {
+  height: 100%;
+  width: 100%;
+  font-size: 21px;
+}
+
 .selectWrapperHeight {
   padding: 0px;
 }
@@ -76,6 +82,10 @@ textarea {
   flex-direction: column;
   gap: 30px;
   height: 100%;
+}
+
+.createTaskForm ::placeholder {
+  font-family: 21px;
 }
 
 .addTaskContainer {
@@ -422,7 +432,8 @@ textarea {
   .date,
   .prioButton,
   .assignedToHeader,
-  .clearAndCreateButton > button > div {
+  .clearAndCreateButton > button > div,
+  .subtaskContainer > input {
     font-size: 18px;
   }
 }
@@ -473,7 +484,8 @@ textarea {
   .date,
   .prioButton,
   .assignedToHeader,
-  .clearAndCreateButton > button > div {
+  .clearAndCreateButton > button > div,
+  .subtaskContainer > input {
     font-size: 16px;
   }
 }
