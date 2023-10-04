@@ -369,11 +369,11 @@ function renderprioritySymbol(currentTask) {
     let currentPriority = tasks[currentTask]['priorityValue'];
     let priorityOpenTask = document.getElementById('priorityOpenTask');
     if (currentPriority == 'urgent') {
-        priorityOpenTask.innerHTML += `<img id="openTaskImgPriority" src="../img/urgent.svg">`;
+        priorityOpenTask.innerHTML += `<img id="openTaskImgPriority" src="./img/urgent.svg">`;
     } else if (currentPriority == 'medium') {
-        priorityOpenTask.innerHTML += `<img id="openTaskImgPriority" src="../img/medium.svg">`;
+        priorityOpenTask.innerHTML += `<img id="openTaskImgPriority" src="./img/medium.svg">`;
     } else if (currentPriority == 'low') {
-        priorityOpenTask.innerHTML += `<img id="openTaskImgPriority" src="../img/low.svg">`;
+        priorityOpenTask.innerHTML += `<img id="openTaskImgPriority" src="./img/low.svg">`;
     }
 }
 

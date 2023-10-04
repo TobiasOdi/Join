@@ -216,7 +216,7 @@ animation-name: startLogo;
 }
 
 .signUpScreen > form {
-  gap: 50px;
+  gap: 15px;
 }
 
 .arrowBack {
@@ -380,7 +380,7 @@ animation-name: startLogo;
 /* =========================================================================== RESPONSIVENESS ============================================================= */
 
 
-@media (max-height: 570px) {
+@media (max-height: 700px) {
   .signUpScreen {
     margin-top: -50px;
     padding: 1rem;

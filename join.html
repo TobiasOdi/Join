@@ -33,14 +33,13 @@
     <meta name="theme-color" content="#2a3647" />
   </head>
 
-  <body onload="init(), displayPage('mainSummaryContainerDisplay'), activeTab('summary');
-  ;">
+  <body onload="displayPage('mainSummaryContainerDisplay'), activeTab('summary')">
     <div class="mainContainer">
       <!-- Sidebar -->
       <div class="placeholderLeft">
         <!-- LogoTopLeftCorner -->
         <div class="sideNavBarLogo" onclick="displayPage('mainSummaryContainerDisplay'), activeTab('summary')">
-          <img id="startScreenLogo" src="img/whitelogo.svg" class="whiteLogo" />
+          <img id="startScreenLogo" src="./img/whitelogo.svg" class="whiteLogo" />
         </div>
 
         <div w3-include-html="templates\sideNavBar.html">

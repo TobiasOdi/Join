@@ -9,13 +9,13 @@
                 <div class="inputFieldContainer">
                     <input class="inputFields" placeholder="Find Task" id="searchValue" onkeyup="searchFunction()"/>
                     <div class="inputFieldVerticalLine"></div>
-                    <img src="../img/searchicon.svg" class="img"/>
+                    <img src="./img/searchicon.svg" class="img"/>
                 </div>
             </div>
 
             <button class="addTaskButton" onclick="displayPage('mainAddTaskContainerDisplay'), initCreateTask(), activeTab('addTask')">
                 <span>Add task</span>
-                <img src="../img/whiteplus.svg">
+                <img src="./img/whiteplus.svg">
             </button>
 
         </div>
@@ -25,7 +25,7 @@
         <div class="boardParts" ondrop="moveTo('toDo'); removeHighlight('toDo')" ondragleave="removeHighlight('toDo')" ondragover="allowDrop(event); highlight('toDo')">
             <div class="boardTask">
                 <div>To do</div>
-                <div onclick="displayPage('mainAddTaskContainerDisplay'), setStatusCategory('toDo')"><img src="../img/plusbuttonv1.svg" style="height: 15px;"></div>
+                <div onclick="displayPage('mainAddTaskContainerDisplay'), setStatusCategory('toDo')"><img src="./img/plusbuttonv1.svg" style="height: 15px;"></div>
             </div>
             <div id="toDo" class="boardCategoryContainer"></div>
         </div>
@@ -34,7 +34,7 @@
             <!-- inProgress -->
             <div class="boardTask">
                 <div>In Progress</div>
-                <div onclick="displayPage('mainAddTaskContainerDisplay'), setStatusCategory('inProgress')"><img src="../img/plusbuttonv1.svg" style="height: 15px;"></div>
+                <div onclick="displayPage('mainAddTaskContainerDisplay'), setStatusCategory('inProgress')"><img src="./img/plusbuttonv1.svg" style="height: 15px;"></div>
             </div>
             <div id="inProgress" class="boardCategoryContainer"></div>
         </div>
@@ -43,7 +43,7 @@
             <!-- AwaitingFeedback -->
             <div class="boardTask">
                 <div>Awaiting Feedback</div>
-                <div onclick="displayPage('mainAddTaskContainerDisplay'), setStatusCategory('awaitingFeedback')"><img src="../img/plusbuttonv1.svg" style="height: 15px;"></div>
+                <div onclick="displayPage('mainAddTaskContainerDisplay'), setStatusCategory('awaitingFeedback')"><img src="./img/plusbuttonv1.svg" style="height: 15px;"></div>
             </div>
             <div id="awaitingFeedback" class="boardCategoryContainer"></div>
         </div>
@@ -52,7 +52,7 @@
             <!-- Done -->
             <div class="boardTask">
                 <div>Done</div>
-                <div onclick="displayPage('mainAddTaskContainerDisplay'), setStatusCategory('done')"><img src="../img/plusbuttonv1.svg" style="height: 15px;"></div>
+                <div onclick="displayPage('mainAddTaskContainerDisplay'), setStatusCategory('done')"><img src="./img/plusbuttonv1.svg" style="height: 15px;"></div>
             </div>
             <div id="done" class="boardCategoryContainer"></div>
         </div>

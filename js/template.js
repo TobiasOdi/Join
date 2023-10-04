@@ -30,7 +30,7 @@ function generateToDoHTMLToDo(element, currentStatusCategory) {
             <div class="boardContainerUserBubbles">
                 <div class="userBubble" id="userBubble${element["taskId"]}"></div>
                 <div>
-                    <img class="priorityImg" src="../img/${element["priorityValue"]}.svg">
+                    <img class="priorityImg" src="./img/${element["priorityValue"]}.svg">
                 </div>
             </div>
         </div>
@@ -71,7 +71,7 @@ function generateToDoHTML(element, currentStatusCategory) {
             <div class="boardContainerUserBubbles">
                 <div class="userBubble" id="userBubble${element["taskId"]}"></div>
                 <div>
-                    <img class="priorityImg" src="../img/${element["priorityValue"]}.svg">
+                    <img class="priorityImg" src="./img/${element["priorityValue"]}.svg">
                 </div>
             </div>
         </div>
@@ -109,7 +109,7 @@ function generateToDoHTMLDone(element, currentStatusCategory) {
             <div class="boardContainerUserBubbles">
                 <div class="userBubble" id="userBubble${element["taskId"]}"></div>
                 <div>
-                    <img class="priorityImg" src="../img/${element["priorityValue"]}.svg">
+                    <img class="priorityImg" src="./img/${element["priorityValue"]}.svg">
                 </div>
             </div>
         </div>
@@ -162,7 +162,7 @@ function openTaskTemplate(currentTask) {
                     <p>${tasks[currentTask]['category']}</p>
                 </div>
                 <div onclick="closeTask()">
-                    <img src="../img/close.svg">
+                    <img src="./img/close.svg">
                 </div>
             </div>
 
@@ -232,7 +232,7 @@ function editOpenTaskTemplate(currentTask) {
                 </div>
 
                 <div onclick="closeTask()">
-                    <img src="../img/close.svg">
+                    <img src="./img/close.svg">
                 </div>
             </div>
 
@@ -449,7 +449,7 @@ function categoryPlaceholderTemplate() {
  return `
     <div class="sectorTop" id='placeholderCategory'>
         <p>Select task category</p>
-        <img src="/img/arrow.svg">
+        <img src="./img/arrow.svg">
     </div>
 
     <div class="categoryChoices d-none" id="categoryChoices"></div>
@@ -481,7 +481,7 @@ function defaultCategoryTemplate(categoryName, categoryColor){
 function newCategoryTemplate(categoryName, categoryColor, i){
     return `
         <div class="category" onclick="saveSelectedCategory('${categoryName}', '${categoryColor}'), doNotAdd(event)">
-            <div>${categoryName} <img src="../img/delete.svg" onclick="deleteNewCategory(${i}), doNotAdd(event)">
+            <div>${categoryName} <img src="./img/delete.svg" onclick="deleteNewCategory(${i}), doNotAdd(event)">
             </div>
             <div class="circle" style="background: ${categoryColor};"></div>
         </div>
@@ -498,7 +498,7 @@ function assignToPlaceholderTemplate() {
             <div id="selectedUsersPlaceholder" class="selectedUsersPlaceholder">
                 <div id="assignedToHeader">Select contacts to assign</div>
             </div>
-            <img src="/img/Vector 2.png">
+            <img src="./img/Vector 2.png">
         </div>
 
         <div class="assignedToChoices d-none" id="avatarPicker"></div>
@@ -634,8 +634,8 @@ function contactInfoTemplate(firstLetters, contactInfoName, contactInfoSurname, 
                                 <span>${contactInfoSurname}</span>
                             </div>
                         </div>
-                        <div onclick="initCreateTask(), displayPage('mainAddTaskContainerDisplay'), initCreateTask(), activeTab('addTask')" class="addTask">
-                            <img src="../img/plus.svg"><span>Add Task</span>
+                        <div onclick="initCreateTask(), displayPage('mainAddTaskContainerDisplay'), activeTab('addTask')" class="addTask">
+                            <img src="./img/plus.svg"><span>Add Task</span>
                         </div>
                     </div>
                 </div>
@@ -647,7 +647,7 @@ function contactInfoTemplate(firstLetters, contactInfoName, contactInfoSurname, 
                                 <span>Contact Information</span>
                             </div>
                             <div class="editContact" onclick="editContact(${c})">
-                                <img src="../img/edit.svg">
+                                <img src="./img/edit.svg">
                                 <span>Edit Contact</span>
                             </div>
                         </div>
@@ -666,7 +666,7 @@ function contactInfoTemplate(firstLetters, contactInfoName, contactInfoSurname, 
                         <div class="deleteContact">
                             <div onclick="deleteContact(${c})">
                                 <span>Delete contact</span>
-                                <img src="../img/delete.svg">
+                                <img src="./img/delete.svg">
                             </div>
                         </div>
         

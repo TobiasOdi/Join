@@ -11,6 +11,10 @@ let categories = [
     {'categoryName': 'Design', 'color': 'rgb(255, 122, 0)', 'categoryType': 'default'},
     {'categoryName': 'Sales', 'color': 'rgb(252, 113, 255)', 'categoryType': 'default'}
 ];
+
+// "categories":"[{\"categoryName\":\"Marketing\",\"color\":\"rgb(0, 56, 255)\",\"categoryType\":\"default\"}, {\"categoryName\":\"Media\",\"color\":\"rgb(255, 199, 2)\",\"categoryType\":\"default\"}, {\"categoryName\":\"Backoffice\",\"color\":\"rgb(31, 215, 193)\",\"categoryType\":\"default\"}, {\"categoryName\":\"Design\",\"color\":\"rgb(255, 122, 0)\",\"categoryType\":\"default\"}, {\"categoryName\":\"Sales\",\"color\":\"rgb(252, 113, 255)\",\"categoryType\":\"default\"}]"
+
+
 let statusCategory;
 let editedTaskPriority = [];
 let firstLettersAvailableUser;
@@ -547,7 +551,7 @@ function saveSelectedCategory(categoryName, categoryColor) {
             <div>${categoryName}</div>
             <div class="circle" style="background: ${categoryColor};"></div>
         </div>
-        <img src="/img/arrow.svg">
+        <img src="./img/arrow.svg">
     `;
 }
 
@@ -611,7 +615,7 @@ async function deleteNewCategory(i) {
     placeholderCategory.innerHTML = `
         <div class="sectorTop" id='placeholderCategory'>
         <p>Select task category</p>
-        <img src="/img/arrow.svg">
+        <img src="./img/arrow.svg">
         </div>`;
     renderCategories();
 }
@@ -656,7 +660,7 @@ function renderAddSubtasks() {
         document.getElementById('subtaskList').innerHTML += `
         <div class="subtask">
             <div>- ${subtaskRender}</div>
-            <img src="../img/delete.svg" onclick="deleteAddSubtask(${i})">
+            <img src="./img/delete.svg" onclick="deleteAddSubtask(${i})">
         </div>`;
     }
 }
