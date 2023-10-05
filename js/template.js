@@ -291,8 +291,8 @@ function editOpenTaskTemplate(currentTask) {
         </div>
 
         <div class="openTaskButtonContainer">
-            <div class="cancleTaskEditButton" onclick="closeTask()">
-                Cancle
+            <div class="cancelTaskEditButton" onclick="closeTask()">
+                Cancel
             </div>
             <div class="saveChangesTask" onclick="saveEditedTask(${currentTask})">
                 Save
@@ -402,15 +402,15 @@ function renderAssignedUserTemplate(assignColor, assignFirstLetters, assignName,
 /* ========================================= EDIT TASK - ASSIGNED USERS TEMPLATE ========================================= */
 /**
  * This function returns the template for the selected user that are assigned to the current opened edited task.
- * @param {number} userid - id of the current task
+ * @param {number} userId - id of the current task
  * @param {string} j - index of the current user
  * @param {string} assignFirstLetters - first letters of the assigned user
  * @returns 
  */
-function selectedAssignedUsersEditTemplate(userid, i, assignFirstLetters) {
+function selectedAssignedUsersEditTemplate(userId, i, assignFirstLetters) {
     return `
-        <div id="edit${userid}" class="avatarContainer avatarSelected" onclick="saveSelectedUsersEdit(${userid})">
-            <div id="editIcon${userid}" class="avatar avatarSelectedIcon" style="background-color: ${users[i]['userColor']};">
+        <div id="edit${userId}" class="avatarContainer avatarSelected" onclick="saveSelectedUsersEdit(${userId})">
+            <div id="editIcon${userId}" class="avatar avatarSelectedIcon" style="background-color: ${users[i]['userColor']};">
                 <div>${assignFirstLetters}</div>
             </div>
             <div class="nameText">
@@ -422,15 +422,15 @@ function selectedAssignedUsersEditTemplate(userid, i, assignFirstLetters) {
 
 /**
  * This function returns the template for the available/deselected user in the opened edited task.
- * @param {number} userid - id of the current task
+ * @param {number} userId - id of the current task
  * @param {string} j - index of the current user
  * @param {string} assignFirstLetters - first letters of the assigned user
  * @returns 
  */
-function notSelectedAssignedUsersEditTemplate(userid, i, assignFirstLetters) {
+function notSelectedAssignedUsersEditTemplate(userId, i, assignFirstLetters) {
     return `
-        <div id="edit${userid}" class="avatarContainer" onclick="saveSelectedUsersEdit(${userid})">
-            <div id="editIcon${userid}" class="avatar" style="background-color: ${users[i]['userColor']};">
+        <div id="edit${userId}" class="avatarContainer" onclick="saveSelectedUsersEdit(${userId})">
+            <div id="editIcon${userId}" class="avatar" style="background-color: ${users[i]['userColor']};">
                 <div>${assignFirstLetters}</div>
             </div>
             <div class="nameText">

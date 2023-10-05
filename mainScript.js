@@ -64,13 +64,13 @@ async function init() {
  * This function sets the color of the user. Border around the user icon in the top right corner.
  */
 function setUserColor() {
-    // http://127.0.0.1:5500/join.html' 
-    if(window.location.href === 'https://tobias-odermatt.developerakademie.net/Projekte/Join/join.html' + window.location.search) { // => IMMER ANPASSEN!!!
+    //  'https://tobias-odermatt.developerakademie.net/Projekte/Join/join.html'
+    if(window.location.href === 'http://127.0.0.1:5500/join.html' + window.location.search) { // => IMMER ANPASSEN!!!
      let queryString = window.location.search.slice(4);
      let urlId = parseInt(queryString);
  
      if(queryString) {
-         let existingUser = users.find(u => u.userid == urlId);
+         let existingUser = users.find(u => u.userId == urlId);
          let currentUser = users.indexOf(existingUser);
          let userColor = users[currentUser]['userColor'];
          document.getElementById('topNavBarRightImgPicture').style.borderColor = userColor;
@@ -100,8 +100,8 @@ async function addUser() {
     let userColor = document.getElementById('userColor');
     let userColorValue = userColor.options[userColor.selectedIndex].value;
     checkForExistingUserId(id);
-    let userData = {name: name.value, surname: surname.value, email: email.value, password: password.value, userColor: userColorValue, userid: userId};
-    let contactData = {name: name.value, surname: surname.value, email: email.value, phone: '-', contactColor: userColorValue};
+    let userData = {name: name.value, surname: surname.value, email: email.value, password: password.value, userColor: userColorValue, userId: userId};
+    let contactData = {name: name.value, surname: surname.value, email: email.value, phone: '-', contactColor: userColorValue, contactId: userId};
     let user = users.find(u => u.email == email.value);
     validateSignup(userData, contactData, user, name, surname, email, password);
 }
@@ -112,7 +112,7 @@ async function addUser() {
  */
 function checkForExistingUserId(id){
     for (let i = 0; i < users.length; i++) {
-        if (users[i]['userid'].includes === id) {
+        if (users[i]['userId'].includes === id) {
             generateUserId();
         }
     }
@@ -148,15 +148,15 @@ async function validateSignup(userData, contactData, user, name, surname, email,
   * This function brings you back to the main login.html.
   */
 function backToLoginScreen() {
-    window.location.href = 'https://tobias-odermatt.developerakademie.net/Projekte/Join/login.html'; // => IMMER ANPASSEN!!!
-    // 'http://127.0.0.1:5500/login.html'
+    window.location.href = 'http://127.0.0.1:5500/login.html'; // => IMMER ANPASSEN!!!
+    //  'https://tobias-odermatt.developerakademie.net/Projekte/Join/login.html'
 }
 
 /**
  * This function exits the legal notice page.
  */
 function exitLegalNoticePage() {
-    document.querySelector('.mainLegalNoticeContainerDisplay') .style.display = "none";
+    document.querySelector('.mainLegalNoticeContainerDisplay').style.display = "none";
 
     if (document.getElementById("legalNoticeTopTab") !== null) {
         document.getElementById("legalNoticeTopTab").classList.remove('acitveHelpPage');
@@ -187,8 +187,8 @@ async function saveUsers() {
  * This event listener lets you lets you login with the enter key.
  */
 window.addEventListener('keydown', (event) => {
-    // 'http://127.0.0.1:5500/login.html'
-    if(window.location.href === 'https://tobias-odermatt.developerakademie.net/Projekte/Join/login.html') { // => IMMER ANPASSEN!!!
+    //  'https://tobias-odermatt.developerakademie.net/Projekte/Join/login.html'
+    if(window.location.href === 'http://127.0.0.1:5500/login.html') { // => IMMER ANPASSEN!!!
         if(event.keyCode == 13) {
             login();
         }
@@ -232,11 +232,11 @@ function validateLogin(emailLog, passwordLog, existingUser, existingPw, user) {
             setUserName(user);
             //********************************** */
             let currentUser = users.indexOf(existingUser);
-            let userId = users[currentUser]['userid'];
+            let userId = users[currentUser]['userId'];
             let userColor = users[currentUser]['userColor'];
 
-            // 'http://127.0.0.1:5500/join.html?id=' / 'https://tobias-odermatt.developerakademie.net/Projekte/Join/join.html?id='
-            window.location.href = 'https://tobias-odermatt.developerakademie.net/Projekte/Join/join.html?id=' + userId // => IMMER ANPASSEN!!!
+            //  / 'https://tobias-odermatt.developerakademie.net/Projekte/Join/join.html?id='
+            window.location.href = 'http://127.0.0.1:5500/join.html?id=' + userId // => IMMER ANPASSEN!!!
         }
     }
 }
@@ -426,7 +426,9 @@ function activeTab(tab) {
     allTabs.forEach((element) => {
         element.classList.remove('activeTab');
     })
-    currentElement.classList.add('activeTab');
+    if(currentElement !== null) {
+        currentElement.classList.add('activeTab');
+    }
 
     if (document.getElementById('pageHelpTab') !== null) {
         document.getElementById('pageHelpTab').classList.remove('acitveHelpPage');

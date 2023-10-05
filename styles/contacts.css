@@ -94,6 +94,10 @@
   cursor: pointer;
 }
 
+.contact:hover {
+  background-color: rgba(0,0,0,0.2);
+}
+
 .contact > div:first-of-type {
   display: flex;
   justify-content: center;
@@ -411,7 +415,11 @@
   gap: 10px;
   background-color: rgba(42, 54, 71, 1);
   cursor: pointer;
-  z-index: 4;
+}
+
+.newContactButton:hover {
+  box-shadow: 0 0 4px 2px rgba(0,0,0,0.5);
+
 }
 
 .newContactButton > span {

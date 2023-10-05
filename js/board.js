@@ -176,7 +176,7 @@ function bubblesMoreThanThree(j, bubbleTaskId) {
  */
 function getFirstLetter(assignedUsers, i) {
     let assignedUser = assignedUsers[i];
-    let existingUser = users.find(u => u.userid == parseInt(assignedUser));
+    let existingUser = users.find(u => u.userId == parseInt(assignedUser));
     let correctUser = users.indexOf(existingUser);
     let assignName = users[correctUser]['name'];
     let assignSurname = users[correctUser]['surname'];
@@ -192,7 +192,7 @@ function getFirstLetter(assignedUsers, i) {
  */
 function getUserColor(assignedUsers, i) {
     let assignedUser = assignedUsers[i];
-    let existingUser = users.find(u => u.userid == parseInt(assignedUser));
+    let existingUser = users.find(u => u.userId == parseInt(assignedUser));
     let correctUser = users.indexOf(existingUser);
     let assignColor = users[correctUser]['userColor'];
     return assignColor;
@@ -385,7 +385,7 @@ function renderAssignedUsers(currentTask) {
     let assignedUsers = tasks[currentTask]['assignTo'];
     for (let i = 0; i < assignedUsers.length; i++) {
         let assignedUser = assignedUsers[i];
-        let existingAssignUser = users.find(u => u.userid == assignedUser)
+        let existingAssignUser = users.find(u => u.userId == assignedUser)
         let currentAssignUser = users.indexOf(existingAssignUser);
         let assignName = users[currentAssignUser]['name'];
         let assignSurname = users[currentAssignUser]['surname'];
@@ -561,15 +561,15 @@ function renderAssignedUsersEdit(currentTask) {
         selectedUsersEdit.push(assignedUser);
     }
     for (let i = 0; i < users.length; i++) {
-        let userid = users[i]['userid'];
+        let userId = users[i]['userId'];
         let assignName = users[i]['name'];
         let assignSurname = users[i]['surname'];
         //let assignColor = users[i]['userColor'];
         let assignFirstLetters = assignName.charAt(0).toUpperCase() + assignSurname.charAt(0).toUpperCase();
-        if (assignedUsersToCurrentTask.includes(userid)) {
-            document.getElementById('assignedToContainerEdit').innerHTML += selectedAssignedUsersEditTemplate(userid, i, assignFirstLetters);
+        if (assignedUsersToCurrentTask.includes(userId)) {
+            document.getElementById('assignedToContainerEdit').innerHTML += selectedAssignedUsersEditTemplate(userId, i, assignFirstLetters);
         } else {
-            document.getElementById('assignedToContainerEdit').innerHTML += notSelectedAssignedUsersEditTemplate(userid, i, assignFirstLetters);
+            document.getElementById('assignedToContainerEdit').innerHTML += notSelectedAssignedUsersEditTemplate(userId, i, assignFirstLetters);
         }
     }
 }
@@ -663,18 +663,20 @@ function closeTask(priority, currentTask) {
  * This function shows only the tasks (title, description or category) that contain the serach value.
  */
 function searchFunction() {
-    //let input = document.getElementById('searchValue');
     let originalTasks = tasks;
 
     if(document.getElementById('searchValue').value !== "") {
         let newSearchArray = tasks.filter( task =>  {
             return task.title.toLowerCase().includes(document.getElementById('searchValue').value) || task.description.toLowerCase().includes(document.getElementById('searchValue').value) || task.category.toLowerCase().includes(document.getElementById('searchValue').value);
-        })
+        });
         tasks = newSearchArray;
         updateHTML();
         tasks = originalTasks;
+
     } else {
         tasks = originalTasks;
         updateHTML();
     }
+
+    
 }

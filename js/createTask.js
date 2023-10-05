@@ -100,6 +100,35 @@ function inputChangeNewCatIcons() {
     document.getElementById('addNewCategoryImg').classList.remove('d-none');
 }
 
+/**
+ * This function prevents the selection of pasted dates.
+ */
+document.addEventListener("DOMContentLoaded", () => {
+    var dateToday = new Date();
+    var month = dateToday.getMonth() + 1;
+    var day = dateToday.getDate();
+    var year = dateToday.getFullYear();
+    if (month < 10)
+      month = '0' + month.toString();
+    if (day < 10)
+      day = '0' + day.toString();
+    var maxDate = year + '-' + month + '-' + day;
+    document.getElementById('dueDate')?.setAttribute('min', maxDate);
+});
+
+/* $(document).ready(function() { //DISABLED PAST DATES IN APPOINTMENT DATE
+    var dateToday = new Date();
+    var month = dateToday.getMonth() + 1;
+    var day = dateToday.getDate();
+    var year = dateToday.getFullYear();
+    if (month < 10)
+      month = '0' + month.toString();
+    if (day < 10)
+      day = '0' + day.toString();
+    var maxDate = year + '-' + month + '-' + day;
+    $('#dueDate').attr('min', maxDate);
+  });
+ */
 // ================================================ CREATE TASK ==========================================================
 /**
  * This function creates a task if all the required fields/values are filled in.
@@ -295,7 +324,7 @@ function renderAvailableUsers() {
     let avatarPicker = document.getElementById('avatarPicker');
     avatarPicker.innerHTML = "";
     for (let i = 0; i < users.length; i++) {
-        let availableUserId = users[i]['userid'];
+        let availableUserId = users[i]['userId'];
         let userName = users[i]['name'];
         let userSurname = users[i]['surname'];
         let userColor = users[i]['userColor']
@@ -374,7 +403,7 @@ function selectedUsersAvailableLessThenTen() {
     selectedUsersPlaceholder.innerHTML = "";
     for (let i = 0; i < selectedUsers.length; i++) {
         let userId = selectedUsers[i];
-        let existingUser = users.find(u => u.userid == userId);
+        let existingUser = users.find(u => u.userId == userId);
         let currentUser = users.indexOf(existingUser);
         let userColor = users[currentUser]['userColor'];
         getFirstLetterAvailableUser(currentUser)
@@ -389,7 +418,7 @@ function selectedUsersAvailableMoreThenTen() {
     selectedUsersPlaceholder.innerHTML = "";
     for (let i = 0; i < 9; i++) {
         let userId = selectedUsers[i];
-        let existingUser = users.find(u => u.userid == userId);
+        let existingUser = users.find(u => u.userId == userId);
         let currentUser = users.indexOf(existingUser);
         let userColor = users[currentUser]['userColor'];
         getFirstLetterAvailableUser(currentUser)

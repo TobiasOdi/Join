@@ -175,7 +175,7 @@ a {
   height: calc(100vh - 187px);
   background-color: #F6F7F8;
   overflow: hidden;
-  z-index: 10;
+  z-index: 1;
 }
 
 .mainContainer {
@@ -314,6 +314,13 @@ a {
   width: 40px;
 }
 
+.topNavBarRightImgPicture:hover,
+.topNavBarRightImgQuestionmark:hover,
+.topNavBarRightImgExclamationmark:hover {
+  box-shadow: 0 0 4px 2px rgba(0,0,0,0.5);
+}
+
+
 .topNavBarRightImgExclamationmark {
   height: 33px;
   width: 33px;
@@ -334,16 +341,13 @@ a {
   padding: 15px;
   background-color: rgba(42, 54, 71, 1);
   cursor: pointer;
+  z-index: 10;
 }
 
 .logoutButton > span {
   color: white;
   font-weight: bold;
   font-size: 16px;
-}
-
-.topNavBarRightImgPicture:hover {
-  scale: 1.05;
 }
 
 .placeholderBottom {
@@ -815,4 +819,3 @@ a {
     margin-right: 10px;
   }  
 }
-

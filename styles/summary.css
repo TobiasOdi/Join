@@ -100,7 +100,7 @@
 .topCard {
   width: 160px;
   height: 160px;
-
+  cursor: pointer;
 }
 
 .middleCard {
@@ -110,6 +110,7 @@
   justify-content: center;
   align-items: center;
   gap: 40px;
+  cursor: pointer;
 }
 
 .allBottomCards {
@@ -130,6 +131,7 @@
   justify-content: center;
   align-items: center;
   gap: 32.5px;
+  cursor: pointer;
 }
 
 .bottomCardsImgTodo {
