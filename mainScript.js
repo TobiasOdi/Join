@@ -1,6 +1,7 @@
 // ================================================ VARIABLES ==========================================================
 let users = [];
 let tasks = [];
+let id;
 
 let black = "#000000";
 let white = "#FFFFFF";
@@ -80,13 +81,6 @@ function setUserColor() {
 
 // ================================================ SIGN UP ==========================================================
 /**
- * This function generates the user id.
- */
-function generateUserId() {
-    id = Math.floor((Math.random() * 1000000) + 1);
-}
-
-/**
  * This function adds a new user to the users array and saves it on the ftp server.
  */
 async function addUser() {
@@ -99,7 +93,6 @@ async function addUser() {
     let userId = id;
     let userColor = document.getElementById('userColor');
     let userColorValue = userColor.options[userColor.selectedIndex].value;
-    checkForExistingUserId(id);
     let userData = {name: name.value, surname: surname.value, email: email.value, password: password.value, userColor: userColorValue, userId: userId};
     let contactData = {name: name.value, surname: surname.value, email: email.value, phone: '-', contactColor: userColorValue, contactId: userId};
     let user = users.find(u => u.email == email.value);
@@ -107,13 +100,13 @@ async function addUser() {
 }
 
 /**
- * This function checkes if the user id already exists.
- * @param {number} id - index of the current user
+ * This function generates the user id.
  */
-function checkForExistingUserId(id){
+function generateUserId() {
+    id = Math.floor((Math.random() * 1000000) + 1);
     for (let i = 0; i < users.length; i++) {
         if (users[i]['userId'].includes === id || contacts[i]['contactId'].includes === id) {
-            generateUserId();
+            id = Math.floor((Math.random() * 1000000) + 1);
         }
     }
 }

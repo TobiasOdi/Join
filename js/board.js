@@ -14,7 +14,6 @@ let subtasksEdit = [];
  */
 function initBoard() {
     updateHTML();
-    searchFunction();
 }
 
 /* ============================================================================ BOARD FUNCTIONS ======================================================================== */
@@ -22,15 +21,11 @@ function initBoard() {
  * This function renders the tasks to the correct category.
  */
 function updateHTML() {
-    if(tasks.length > 0) {
-        //for (let index = 0; index < tasks.length; index++) {
-            filterToDo();
-            filterInProgress();
-            filterAwaitingFeedback();
-            filterDone();
-        //}
-        createBubbles();
-    }     
+    filterToDo();
+    filterInProgress();
+    filterAwaitingFeedback();
+    filterDone();
+    createBubbles();
     checkForEmptyCategories();
 }
 
@@ -458,6 +453,23 @@ function editTask(currentTask) {
     renderSubtasksEdit(currentTask);
     renderAssignedUsersEdit(currentTask);
     changeCategoryColor();
+    editDateInput();
+}
+
+/**
+ * This function prevents the selection of pasted dates.
+ */
+function editDateInput() {
+        var dateToday = new Date();
+        var month = dateToday.getMonth() + 1;
+        var day = dateToday.getDate();
+        var year = dateToday.getFullYear();
+        if (month < 10)
+          month = '0' + month.toString();
+        if (day < 10)
+          day = '0' + day.toString();
+        var maxDate = year + '-' + month + '-' + day;
+        document.getElementById('editDueDate').setAttribute('min', maxDate);
 }
 
 /**
@@ -609,21 +621,25 @@ async function saveCompletedSubtasks(j, currentTask) {
  * @param {index} currentTask - index of the current task
  */
 async function saveEditedTask(currentTask) {
-    let editCategory = document.getElementById('editSelectCategory').value;
-    tasks[currentTask]['category'] = editCategory;
-    tasks[currentTask]['categoryColor'] = addBackgroundColorCategory(editCategory);
-    tasks[currentTask]['title'] = document.getElementById('titleEdit').value;
-    tasks[currentTask]['description'] = document.getElementById('descriptionEdit').value;
-    tasks[currentTask]['dueDate'] = document.getElementById('editDueDate').value;
-    tasks[currentTask]['priorityValue'] = priorityValueEdit;
-    tasks[currentTask]['assignTo'] = selectedUsersEdit;
-    tasks[currentTask]['subtasks'] = subtasksEdit;
-    await saveTasks();
-    updateHTML();
-    priority = "";
-    selectedUsersEdit = [];
-    subtasksEdit = [];
-    document.getElementById('openTaskBackground').style.display = 'none';
+    if(document.getElementById('titleEdit').value !== 0 && selectedUsersEdit.length !== 0) {
+        let editCategory = document.getElementById('editSelectCategory').value;
+        tasks[currentTask]['category'] = editCategory;
+        tasks[currentTask]['categoryColor'] = addBackgroundColorCategory(editCategory);
+        tasks[currentTask]['title'] = document.getElementById('titleEdit').value;
+        tasks[currentTask]['description'] = document.getElementById('descriptionEdit').value;
+        tasks[currentTask]['dueDate'] = document.getElementById('editDueDate').value;
+        tasks[currentTask]['priorityValue'] = priorityValueEdit;
+        tasks[currentTask]['assignTo'] = selectedUsersEdit;
+        tasks[currentTask]['subtasks'] = subtasksEdit;
+        await saveTasks();
+        updateHTML();
+        priority = "";
+        selectedUsersEdit = [];
+        subtasksEdit = [];
+        document.getElementById('openTaskBackground').style.display = 'none';
+    } else {
+        highlightInputsEditTask(); 
+    }
 }
 
 /**
@@ -657,6 +673,39 @@ function closeTask(priority, currentTask) {
     document.getElementById('openTaskBackground').style.display = 'none';
 }
 
+/**
+ * This function runs the highlight functions.
+ */
+function highlightInputsEditTask() {
+    highlightEmptyTitleInputEdit();
+    highlightEmptySelectedUsersInputEdit();
+    displaySnackbar('missingInput');
+}
+
+
+/**
+ * This function highlights the title input field if empty when the form is beeing submitted.
+ */
+function highlightEmptyTitleInputEdit() {
+    if(!document.getElementById('titleEdit').value) {
+        document.getElementById('titleEdit').classList.add('redBorder');
+    } else if(document.getElementById('titleEdit').value) {
+        document.getElementById('titleEdit').classList.remove('redBorder');
+    } 
+}
+
+/**
+ * This function highlights the selected users input field if empty when the form is beeing submitted.
+ */
+function highlightEmptySelectedUsersInputEdit() {
+    if(selectedUsersEdit.length == 0){
+        document.getElementById('assignedToContainerEdit').classList.add('redBorder');
+    } else if(selectedUsersEdit.length !== 0){
+        document.getElementById('assignedToContainerEdit').classList.remove('redBorder');
+    } 
+}
+
+
 /* ======================================================================= SEARCH FUNCTION ================================================================================= */
 /**
  * This function shows only the tasks (title, description or category) that contain the serach value.
@@ -669,13 +718,12 @@ function searchFunction() {
             return task.title.toLowerCase().includes(document.getElementById('searchValue').value) || task.description.toLowerCase().includes(document.getElementById('searchValue').value) || task.category.toLowerCase().includes(document.getElementById('searchValue').value);
         });
         tasks = newSearchArray;
+        console.log(newSearchArray);
+        console.log(tasks);
         updateHTML();
         tasks = originalTasks;
-
     } else {
         tasks = originalTasks;
         updateHTML();
     }
-
-    
 }

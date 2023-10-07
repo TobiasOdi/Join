@@ -7,6 +7,7 @@ let contactSurname = document.getElementById('contactSurname');
 let contactEmail = document.getElementById('contactEmail');
 let contactPhone = document.getElementById('contactPhone');
 let contactPhoneValue;
+let idContact;
 
 let editName = document.getElementById('editContactName');
 let editSurname = document.getElementById('editContactSurname');
@@ -134,7 +135,8 @@ function doNotClose(event) {
 async function createContact() {
     randomBackground();
     checkForPhoneNumber();
-    let newContact = {name: document.getElementById('contactName').value, surname: document.getElementById('contactSurname').value, email: document.getElementById('contactEmail').value, phone: contactPhoneValue, contactColor: bgColor};
+    generateContactId();
+    let newContact = {name: document.getElementById('contactName').value, surname: document.getElementById('contactSurname').value, email: document.getElementById('contactEmail').value, phone: contactPhoneValue, contactColor: bgColor, contactId: idContact};
     contacts.push(newContact);
     await saveContacts();
     document.getElementById('contactName').value = '';
@@ -154,6 +156,18 @@ function randomBackground() {
     let y = Math.floor(Math.random() * 256)
     let z = Math.floor(Math.random() * 256)
     bgColor = `rgb(${x}, ${y}, ${z})`;
+}
+
+/**
+ * This function generates a contact id.
+ */
+function generateContactId() {
+    idContact = Math.floor((Math.random() * 1000000) + 1);
+    for (let i = 0; i < contacts.length; i++) {
+        if(contacts[i]['contactId'].includes === idContact) {
+            generateContactId();
+        }
+    }
 }
 
 /**
