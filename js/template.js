@@ -407,14 +407,14 @@ function renderAssignedUserTemplate(assignColor, assignFirstLetters, assignName,
  * @param {string} assignFirstLetters - first letters of the assigned user
  * @returns 
  */
-function selectedAssignedUsersEditTemplate(userId, i, assignFirstLetters) {
+function selectedAssignedUsersEditTemplate(contactId, i, assignFirstLetters) {
     return `
-        <div id="edit${userId}" class="avatarContainer avatarSelected" onclick="saveSelectedUsersEdit(${userId})">
-            <div id="editIcon${userId}" class="avatar avatarSelectedIcon" style="background-color: ${users[i]['userColor']};">
+        <div id="edit${contactId}" class="avatarContainer avatarSelected" onclick="saveSelectedUsersEdit(${contactId})">
+            <div id="editIcon${contactId}" class="avatar avatarSelectedIcon" style="background-color: ${contacts[i]['contactColor']};">
                 <div>${assignFirstLetters}</div>
             </div>
             <div class="nameText">
-                <div>${users[i]['name']} ${users[i]['surname']}</div>
+                <div>${contacts[i]['name']} ${contacts[i]['surname']}</div>
             </div>
         </div>
 `;
@@ -427,14 +427,14 @@ function selectedAssignedUsersEditTemplate(userId, i, assignFirstLetters) {
  * @param {string} assignFirstLetters - first letters of the assigned user
  * @returns 
  */
-function notSelectedAssignedUsersEditTemplate(userId, i, assignFirstLetters) {
+function notSelectedAssignedUsersEditTemplate(contactId, i, assignFirstLetters) {
     return `
-        <div id="edit${userId}" class="avatarContainer" onclick="saveSelectedUsersEdit(${userId})">
-            <div id="editIcon${userId}" class="avatar" style="background-color: ${users[i]['userColor']};">
+        <div id="edit${contactId}" class="avatarContainer" onclick="saveSelectedUsersEdit(${contactId})">
+            <div id="editIcon${contactId}" class="avatar" style="background-color: ${contacts[i]['contactColor']};">
                 <div>${assignFirstLetters}</div>
             </div>
             <div class="nameText">
-                <div>${users[i]['name']} ${users[i]['surname']}</div>
+                <div>${contacts[i]['name']} ${contacts[i]['surname']}</div>
             </div>
         </div>
     `;

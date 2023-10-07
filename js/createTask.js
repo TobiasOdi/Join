@@ -323,11 +323,11 @@ function renderAvailableUsers() {
     assignedToForm.innerHTML += assignToPlaceholderTemplate();
     let avatarPicker = document.getElementById('avatarPicker');
     avatarPicker.innerHTML = "";
-    for (let i = 0; i < users.length; i++) {
-        let availableUserId = users[i]['userId'];
-        let userName = users[i]['name'];
-        let userSurname = users[i]['surname'];
-        let userColor = users[i]['userColor']
+    for (let i = 0; i < contacts.length; i++) {
+        let availableUserId = contacts[i]['contactId'];
+        let userName = contacts[i]['name'];
+        let userSurname = contacts[i]['surname'];
+        let userColor = contacts[i]['contactColor']
         getFirstLetterAvailableUser(i)
         avatarPicker.innerHTML += assignUserTemplate(availableUserId, userColor, firstLettersAvailableUser, userName, userSurname);
     }
@@ -338,9 +338,9 @@ function renderAvailableUsers() {
  * @param {index} i - index of the current user
  */
 function getFirstLetterAvailableUser(i) {
-    let x = users[i]['name'];
+    let x = contacts[i]['name'];
     x = x.split(' ').map(word => word.charAt(0)).join('');
-    let y = users[i]['surname'];
+    let y = contacts[i]['surname'];
     y = y.split(' ').map(word => word.charAt(0)).join('');
     firstLettersAvailableUser = x.toUpperCase() + y.toUpperCase();
 }
@@ -402,10 +402,10 @@ function selectedUsersAvailable() {
 function selectedUsersAvailableLessThenTen() {
     selectedUsersPlaceholder.innerHTML = "";
     for (let i = 0; i < selectedUsers.length; i++) {
-        let userId = selectedUsers[i];
-        let existingUser = users.find(u => u.userId == userId);
-        let currentUser = users.indexOf(existingUser);
-        let userColor = users[currentUser]['userColor'];
+        let contactId = selectedUsers[i];
+        let existingUser = contacts.find(u => u.contactId == contactId);
+        let currentUser = contacts.indexOf(existingUser);
+        let userColor = contacts[currentUser]['contactColor'];
         getFirstLetterAvailableUser(currentUser)
         selectedUsersPlaceholder.innerHTML += selectedUsersPlaceholderTemplate(userColor, firstLettersAvailableUser);
     }
@@ -417,10 +417,10 @@ function selectedUsersAvailableLessThenTen() {
 function selectedUsersAvailableMoreThenTen() {
     selectedUsersPlaceholder.innerHTML = "";
     for (let i = 0; i < 9; i++) {
-        let userId = selectedUsers[i];
-        let existingUser = users.find(u => u.userId == userId);
-        let currentUser = users.indexOf(existingUser);
-        let userColor = users[currentUser]['userColor'];
+        let contactId = selectedUsers[i];
+        let existingUser = contacts.find(u => u.contactId == contactId);
+        let currentUser = contacts.indexOf(existingUser);
+        let userColor = contacts[currentUser]['contactColor'];
         getFirstLetterAvailableUser(currentUser)
         selectedUsersPlaceholder.innerHTML += selectedUsersPlaceholderTemplate(userColor, firstLettersAvailableUser);
     }

@@ -112,7 +112,7 @@ async function addUser() {
  */
 function checkForExistingUserId(id){
     for (let i = 0; i < users.length; i++) {
-        if (users[i]['userId'].includes === id) {
+        if (users[i]['userId'].includes === id || contacts[i]['contactId'].includes === id) {
             generateUserId();
         }
     }
