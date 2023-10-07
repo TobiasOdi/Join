@@ -65,8 +65,8 @@ async function init() {
  * This function sets the color of the user. Border around the user icon in the top right corner.
  */
 function setUserColor() {
-    //  'https://tobias-odermatt.developerakademie.net/Projekte/Join/join.html'
-    if(window.location.href === 'http://127.0.0.1:5500/join.html' + window.location.search) { // => IMMER ANPASSEN!!!
+    // 'http://127.0.0.1:5500/join.html'
+    if(window.location.href === 'https://tobias-odermatt.developerakademie.net/Projekte/Join/join.html' + window.location.search) { // => IMMER ANPASSEN!!!
      let queryString = window.location.search.slice(4);
      let urlId = parseInt(queryString);
  
@@ -141,8 +141,8 @@ async function validateSignup(userData, contactData, user, name, surname, email,
   * This function brings you back to the main login.html.
   */
 function backToLoginScreen() {
-    window.location.href = 'http://127.0.0.1:5500/login.html'; // => IMMER ANPASSEN!!!
-    //  'https://tobias-odermatt.developerakademie.net/Projekte/Join/login.html'
+    window.location.href = 'https://tobias-odermatt.developerakademie.net/Projekte/Join/login.html'; // => IMMER ANPASSEN!!!
+    //   'http://127.0.0.1:5500/login.html'
 }
 
 /**
@@ -180,8 +180,8 @@ async function saveUsers() {
  * This event listener lets you lets you login with the enter key.
  */
 window.addEventListener('keydown', (event) => {
-    //  'https://tobias-odermatt.developerakademie.net/Projekte/Join/login.html'
-    if(window.location.href === 'http://127.0.0.1:5500/login.html') { // => IMMER ANPASSEN!!!
+    //   'http://127.0.0.1:5500/login.html'
+    if(window.location.href === 'https://tobias-odermatt.developerakademie.net/Projekte/Join/login.html') { // => IMMER ANPASSEN!!!
         if(event.keyCode == 13) {
             login();
         }
@@ -228,8 +228,8 @@ function validateLogin(emailLog, passwordLog, existingUser, existingPw, user) {
             let userId = users[currentUser]['userId'];
             let userColor = users[currentUser]['userColor'];
 
-            //  / 'https://tobias-odermatt.developerakademie.net/Projekte/Join/join.html?id='
-            window.location.href = 'http://127.0.0.1:5500/join.html?id=' + userId // => IMMER ANPASSEN!!!
+            //  /  'http://127.0.0.1:5500/join.html?id='
+            window.location.href = 'https://tobias-odermatt.developerakademie.net/Projekte/Join/join.html?id=' + userId // => IMMER ANPASSEN!!!
         }
     }
 }
