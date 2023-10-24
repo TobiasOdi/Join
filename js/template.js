@@ -383,16 +383,16 @@ function subtasksEditTemplate(j, currentTask, subtask) {
 /**
  * This function returns the template for the user that are assigned to the current opened task.
  * @param {string} assignColor - color of the assigned user
- * @param {string} assignFirstLetters - first letters of the assigned user
+ * @param {string} firstLetters - first letters of the assigned user
  * @param {string} assignName - name of the assigned user
  * @param {string} assignSurname - surname of the assigned user
  * @returns 
  */
-function renderAssignedUserTemplate(assignColor, assignFirstLetters, assignName, assignSurname){
+function renderAssignedUserTemplate(assignColor, firstLetters, assignName, assignSurname){
     return `
         <div class="openTaskAssignedPerson">
             <div style="background-color: ${assignColor};">
-                <span>${assignFirstLetters.toUpperCase()}</span>
+                <span>${firstLetters.toUpperCase()}</span>
             </div>
             <div>${assignName} ${assignSurname}</div>
         </div>
@@ -404,14 +404,14 @@ function renderAssignedUserTemplate(assignColor, assignFirstLetters, assignName,
  * This function returns the template for the selected user that are assigned to the current opened edited task.
  * @param {number} userId - id of the current task
  * @param {string} j - index of the current user
- * @param {string} assignFirstLetters - first letters of the assigned user
+ * @param {string} firstLetters - first letters of the assigned user
  * @returns 
  */
-function selectedAssignedUsersEditTemplate(contactId, i, assignFirstLetters) {
+function selectedAssignedUsersEditTemplate(contactId, i, firstLetters) {
     return `
         <div id="edit${contactId}" class="avatarContainer avatarSelected" onclick="saveSelectedUsersEdit(${contactId})">
             <div id="editIcon${contactId}" class="avatar avatarSelectedIcon" style="background-color: ${contacts[i]['contactColor']};">
-                <div>${assignFirstLetters}</div>
+                <div>${firstLetters}</div>
             </div>
             <div class="nameText">
                 <div>${contacts[i]['name']} ${contacts[i]['surname']}</div>
@@ -424,14 +424,14 @@ function selectedAssignedUsersEditTemplate(contactId, i, assignFirstLetters) {
  * This function returns the template for the available/deselected user in the opened edited task.
  * @param {number} userId - id of the current task
  * @param {string} j - index of the current user
- * @param {string} assignFirstLetters - first letters of the assigned user
+ * @param {string} firstLetters - first letters of the assigned user
  * @returns 
  */
-function notSelectedAssignedUsersEditTemplate(contactId, i, assignFirstLetters) {
+function notSelectedAssignedUsersEditTemplate(contactId, i, firstLetters) {
     return `
         <div id="edit${contactId}" class="avatarContainer" onclick="saveSelectedUsersEdit(${contactId})">
             <div id="editIcon${contactId}" class="avatar" style="background-color: ${contacts[i]['contactColor']};">
-                <div>${assignFirstLetters}</div>
+                <div>${firstLetters}</div>
             </div>
             <div class="nameText">
                 <div>${contacts[i]['name']} ${contacts[i]['surname']}</div>
@@ -509,16 +509,16 @@ function assignToPlaceholderTemplate() {
  * This function returns the template for the available users.
  * @param {number} availableUserId - id the of the user
  * @param {string} userColor - color of the user
- * @param {string} firstLettersAvailableUser - first letter of the name and surname
+ * @param {string} firstLetters - first letter of the name and surname
  * @param {string} userName - name of the user 
  * @param {string} userSurname  - surname of the user
  * @returns 
  */
-function assignUserTemplate(availableUserId, userColor, firstLettersAvailableUser, userName, userSurname) {
+function assignUserTemplate(availableUserId, userColor, firstLetters, userName, userSurname) {
     return `
         <div id="${availableUserId}" class="avatarContainer" onclick="selectUser(${availableUserId}), doNotAdd(event)">
             <div id="icon${availableUserId}"class="avatar" style="background-color: ${userColor};">
-                <div>${firstLettersAvailableUser}</div>
+                <div>${firstLetters}</div>
             </div>
             <div class="nameText">
                 <div>${userName} ${userSurname}</div>
@@ -530,14 +530,14 @@ function assignUserTemplate(availableUserId, userColor, firstLettersAvailableUse
 /**
  * This function returns the template for the selected users in the placeholder container.
  * @param {string} userColor - color of the user
- * @param {string} firstLettersAvailableUser  - first letter of the name and surname
+ * @param {string} firstLetters  - first letter of the name and surname
  * @returns 
  */
-function selectedUsersPlaceholderTemplate(userColor, firstLettersAvailableUser) {
+function selectedUsersPlaceholderTemplate(userColor, firstLetters) {
     return `
         <div class="avatarContainer avatarContainerSelected">
             <div class="avatar avatarSelectedIconPlaceholder" style="background-color: ${userColor};">
-                <div>${firstLettersAvailableUser}</div>
+                <div>${firstLetters}</div>
             </div>
         </div>
     `;

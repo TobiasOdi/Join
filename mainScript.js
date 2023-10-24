@@ -79,6 +79,18 @@ function setUserColor() {
  }
 }
 
+// ================================================ GENERAL FUNCTIONS ==========================================================
+function getFirstletterNew(i) {
+    firstLetters = "";
+    let x = contacts[i]['name'];
+    x = x.split(' ').map(word => word.charAt(0)).join('');
+    let y = contacts[i]['surname'];
+    y = y.split(' ').map(word => word.charAt(0)).join('');
+    firstLetters = x.toUpperCase() + y.toUpperCase();
+    return firstLetters;
+}
+
+
 // ================================================ SIGN UP ==========================================================
 /**
  * This function adds a new user to the users array and saves it on the ftp server.

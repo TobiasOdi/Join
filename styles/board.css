@@ -443,7 +443,6 @@
 }
 
 .openTaskHeader input {
-  border: none;
   padding-left: 0;
   color: #2a3647;
   width: 100%;
@@ -717,7 +716,7 @@
   box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.1);
 }
 
-.cancleTaskEditButton {
+.cancelTaskEditButton {
   display: flex;
   justify-content: center;
   align-items: center;

@@ -70,8 +70,9 @@ function sortContacts(letter, sortedContacts) {
         let contactEmail = contacts[c]['email'];
         let contactBgColor = contacts[c]['contactColor'];
         randomBackground();
-        nameGetFirstLetter(c);
-        if (firstLetters.charAt(0).toUpperCase() == letter) {
+        //nameGetFirstLetter(c);
+        getFirstletterNew(c);
+        if(firstLetters.charAt(0).toUpperCase() == letter) {
             sortedContacts.innerHTML += sortedContactsTemplate(c, contactBgColor, firstLetters, contactListName, contactListSurname, contactEmail);
         }
     }
@@ -93,13 +94,13 @@ function checkForEmptyLetters(i) {
  * This function returns the first letter form the name and surname of the contact.
  * @param {index} c - index of the current contact of the "contactsSorted" array.
  */
-function nameGetFirstLetter(c) {
-    let x = contacts[c]['name'];
+/* function nameGetFirstLetter(i) {
+    let x = contacts[i]['name'];
     x = x.split(' ').map(word => word.charAt(0)).join('');
-    let y = contacts[c]['surname'];
+    let y = contacts[i]['surname'];
     y = y.split(' ').map(word => word.charAt(0)).join('');
     firstLetters = x.toUpperCase() + y.toUpperCase();
-}
+} */
 
 // ================================================ ADD NEW CONTACT ==========================================================
 /**
@@ -192,7 +193,8 @@ function openContactInfo(c) {
     let contactInfoEmail = contacts[c]['email'];
     let contactInfoPhone = contacts[c]['phone'];
     let contactInfoBgColor = contacts[c]['contactColor'];
-    nameGetFirstLetter(c);
+    //nameGetFirstLetter(c);
+    getFirstletterNew(c);
     contactInformation.innerHTML += contactInfoTemplate(firstLetters, contactInfoName, contactInfoSurname, c, contactInfoEmail, contactInfoPhone, contactInfoBgColor);
     document.getElementById('contactIconBig' + c).style.backgroundColor = contactInfoBgColor;
     document.getElementById('contactDetails' + c).style.animation = 'flying 225ms ease-in-out';
@@ -243,7 +245,8 @@ function editContact(i) {
     renderSaveChangesForm(i);
     getCurrentContactData(i);
     let contactInfoBgColor = contacts[i]['contactColor'];
-    nameGetFirstLetter(i);
+    //nameGetFirstLetter(i);
+    getFirstletterNew(i);
     document.getElementById('contactImg').innerHTML = contactBigImgTemplate(i, firstLetters);
     document.getElementById('contactImgBg' + i).style.backgroundColor = contactInfoBgColor;
 }

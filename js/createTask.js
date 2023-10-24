@@ -314,9 +314,10 @@ function renderAvailableUsers() {
         let availableUserId = contacts[i]['contactId'];
         let userName = contacts[i]['name'];
         let userSurname = contacts[i]['surname'];
-        let userColor = contacts[i]['contactColor']
-        getFirstLetterAvailableUser(i)
-        avatarPicker.innerHTML += assignUserTemplate(availableUserId, userColor, firstLettersAvailableUser, userName, userSurname);
+        let userColor = contacts[i]['contactColor'];
+        getFirstletterNew(i);
+        //getFirstLetterAvailableUser(i);
+        avatarPicker.innerHTML += assignUserTemplate(availableUserId, userColor, firstLetters, userName, userSurname);
     }
 }
 
@@ -324,13 +325,13 @@ function renderAvailableUsers() {
  * This function returns the first letter of the name and surname of the current user.
  * @param {index} i - index of the current user
  */
-function getFirstLetterAvailableUser(i) {
+/* function getFirstLetterAvailableUser(i) {
     let x = contacts[i]['name'];
     x = x.split(' ').map(word => word.charAt(0)).join('');
     let y = contacts[i]['surname'];
     y = y.split(' ').map(word => word.charAt(0)).join('');
     firstLettersAvailableUser = x.toUpperCase() + y.toUpperCase();
-}
+} */
 
 /**
  * This function selects a user. Adds classes to the div's and pushes the user id to the "selectedUsers" array.
@@ -393,8 +394,9 @@ function selectedUsersAvailableLessThenTen() {
         let existingUser = contacts.find(u => u.contactId == contactId);
         let currentUser = contacts.indexOf(existingUser);
         let userColor = contacts[currentUser]['contactColor'];
-        getFirstLetterAvailableUser(currentUser)
-        selectedUsersPlaceholder.innerHTML += selectedUsersPlaceholderTemplate(userColor, firstLettersAvailableUser);
+        //getFirstLetterAvailableUser(currentUser);
+        getFirstletterNew(currentUser);
+        selectedUsersPlaceholder.innerHTML += selectedUsersPlaceholderTemplate(userColor, firstLetters);
     }
 }
 
@@ -408,8 +410,9 @@ function selectedUsersAvailableMoreThenTen() {
         let existingUser = contacts.find(u => u.contactId == contactId);
         let currentUser = contacts.indexOf(existingUser);
         let userColor = contacts[currentUser]['contactColor'];
-        getFirstLetterAvailableUser(currentUser)
-        selectedUsersPlaceholder.innerHTML += selectedUsersPlaceholderTemplate(userColor, firstLettersAvailableUser);
+        //getFirstLetterAvailableUser(currentUser);
+        getFirstletterNew(currentUser);
+        selectedUsersPlaceholder.innerHTML += selectedUsersPlaceholderTemplate(userColor, firstLetters);
     }
     let remainingUsers = selectedUsers.length - 9;
     selectedUsersPlaceholder.innerHTML += selectedUsersPlaceholderTemplateOthers(remainingUsers);

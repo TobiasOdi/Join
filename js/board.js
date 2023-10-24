@@ -139,7 +139,7 @@ function createBubbles() {
 function bubblesLessThanThree(j, bubbleTaskId) {
     for (let i = 0; i < tasks[j]["assignTo"].length; i++) {
         let assignedUsers = tasks[j]['assignTo'];
-        let name = getFirstLetter(assignedUsers, i);
+        let name = getName(assignedUsers, i);
         document.getElementById(`userBubble${[bubbleTaskId]}`).innerHTML += `
             <div class="userBubbleOne" id="userBubbleOne${[j]}${[i]}">${name}</div>`;
         let userBubble = document.getElementById(`userBubbleOne${[j]}${[i]}`);
@@ -155,7 +155,7 @@ function bubblesLessThanThree(j, bubbleTaskId) {
 function bubblesMoreThanThree(j, bubbleTaskId) {
     for (let i = 0; i < 2; i++) {
         let assignedUsers = tasks[j]['assignTo'];
-        let name = getFirstLetter(assignedUsers, i);
+        let name = getName(assignedUsers, i);
         document.getElementById(`userBubble${[bubbleTaskId]}`).innerHTML += `
             <div class="userBubbleOne" id="userBubbleOne${[j]}${[i]}">${name}</div>`;
         let userBubble = document.getElementById(`userBubbleOne${[j]}${[i]}`);
@@ -169,15 +169,17 @@ function bubblesMoreThanThree(j, bubbleTaskId) {
  * @param {index} i - index
  * @returns 
  */
-function getFirstLetter(assignedUsers, i) {
+function getName(assignedUsers, i) {
     let assignedUser = assignedUsers[i];
     let existingUser = contacts.find(u => u.contactId == parseInt(assignedUser));
     let correctUser = contacts.indexOf(existingUser);
-    let assignName = contacts[correctUser]['name'];
-    let assignSurname = contacts[correctUser]['surname'];
-    let assignFirstLetters = assignName.charAt(0).toUpperCase() + assignSurname.charAt(0).toUpperCase();
-    return assignFirstLetters;
+    getFirstletterNew(correctUser);
+    //let assignName = contacts[correctUser]['name'];
+    //let assignSurname = contacts[correctUser]['surname'];
+    //let assignFirstLetters = assignName.charAt(0).toUpperCase() + assignSurname.charAt(0).toUpperCase();
+    //return assignFirstLetters;
 }
+
 
 /**
  * This function returns the color of the user.
@@ -382,11 +384,12 @@ function renderAssignedUsers(currentTask) {
         let assignedUser = assignedUsers[i];
         let existingAssignUser = contacts.find(u => u.contactId == assignedUser)
         let currentAssignUser = contacts.indexOf(existingAssignUser);
-        let assignName = contacts[currentAssignUser]['name'];
-        let assignSurname = contacts[currentAssignUser]['surname'];
-        let assignFirstLetters = assignName.charAt(0) + assignSurname.charAt(0);
+        getFirstletterNew(currentAssignUser);
+        //let assignName = contacts[currentAssignUser]['name'];
+        //let assignSurname = contacts[currentAssignUser]['surname'];
+        //let assignFirstLetters = assignName.charAt(0) + assignSurname.charAt(0);
         let assignColor = contacts[currentAssignUser]['contactColor'];
-        document.getElementById('assignedToContainer').innerHTML += renderAssignedUserTemplate(assignColor, assignFirstLetters, assignName, assignSurname);
+        document.getElementById('assignedToContainer').innerHTML += renderAssignedUserTemplate(assignColor, firstLetters, assignName, assignSurname);
     }
 }
 
@@ -574,13 +577,14 @@ function renderAssignedUsersEdit(currentTask) {
     }
     for (let i = 0; i < contacts.length; i++) {
         let contactId = contacts[i]['contactId'];
-        let assignName = contacts[i]['name'];
-        let assignSurname = contacts[i]['surname'];
-        let assignFirstLetters = assignName.charAt(0).toUpperCase() + assignSurname.charAt(0).toUpperCase();
+        //let assignName = contacts[i]['name'];
+        //let assignSurname = contacts[i]['surname'];
+        //let assignFirstLetters = assignName.charAt(0).toUpperCase() + assignSurname.charAt(0).toUpperCase();
+        getFirstletterNew(i);
         if (assignedUsersToCurrentTask.includes(contactId)) {
-            document.getElementById('assignedToContainerEdit').innerHTML += selectedAssignedUsersEditTemplate(contactId, i, assignFirstLetters);
+            document.getElementById('assignedToContainerEdit').innerHTML += selectedAssignedUsersEditTemplate(contactId, i, firstLetters);
         } else {
-            document.getElementById('assignedToContainerEdit').innerHTML += notSelectedAssignedUsersEditTemplate(contactId, i, assignFirstLetters);
+            document.getElementById('assignedToContainerEdit').innerHTML += notSelectedAssignedUsersEditTemplate(contactId, i, firstLetters);
         }
     }
 }
@@ -621,7 +625,7 @@ async function saveCompletedSubtasks(j, currentTask) {
  * @param {index} currentTask - index of the current task
  */
 async function saveEditedTask(currentTask) {
-    if(document.getElementById('titleEdit').value !== 0 && selectedUsersEdit.length !== 0) {
+    if(document.getElementById('titleEdit').value !== "" && selectedUsersEdit.length !== 0) {
         let editCategory = document.getElementById('editSelectCategory').value;
         tasks[currentTask]['category'] = editCategory;
         tasks[currentTask]['categoryColor'] = addBackgroundColorCategory(editCategory);
