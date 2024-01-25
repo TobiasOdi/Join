@@ -51,7 +51,6 @@ function renderLetters() {
 function renderContacts(i, letter) {
     let sortedContacts = document.getElementById('sortedContacts' + i);
     sortedContacts.innerHTML = '';
-
     contactsSorted = contacts.sort((a, b) => {if (a.name < b.name) {
             return -1;
         }
@@ -71,7 +70,7 @@ function sortContacts(letter, sortedContacts) {
         let contactBgColor = contacts[c]['contactColor'];
         randomBackground();
         //nameGetFirstLetter(c);
-        getFirstletterNew(c);
+        getFirstletter(c);
         if(firstLetters.charAt(0).toUpperCase() == letter) {
             sortedContacts.innerHTML += sortedContactsTemplate(c, contactBgColor, firstLetters, contactListName, contactListSurname, contactEmail);
         }
@@ -194,7 +193,7 @@ function openContactInfo(c) {
     let contactInfoPhone = contacts[c]['phone'];
     let contactInfoBgColor = contacts[c]['contactColor'];
     //nameGetFirstLetter(c);
-    getFirstletterNew(c);
+    getFirstletter(c);
     contactInformation.innerHTML += contactInfoTemplate(firstLetters, contactInfoName, contactInfoSurname, c, contactInfoEmail, contactInfoPhone, contactInfoBgColor);
     document.getElementById('contactIconBig' + c).style.backgroundColor = contactInfoBgColor;
     document.getElementById('contactDetails' + c).style.animation = 'flying 225ms ease-in-out';
@@ -246,7 +245,7 @@ function editContact(i) {
     getCurrentContactData(i);
     let contactInfoBgColor = contacts[i]['contactColor'];
     //nameGetFirstLetter(i);
-    getFirstletterNew(i);
+    getFirstletter(i);
     document.getElementById('contactImg').innerHTML = contactBigImgTemplate(i, firstLetters);
     document.getElementById('contactImgBg' + i).style.backgroundColor = contactInfoBgColor;
 }

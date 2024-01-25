@@ -21,18 +21,44 @@ function initBoard() {
  * This function renders the tasks to the correct category.
  */
 function updateHTML() {
-    filterToDo();
-    filterInProgress();
-    filterAwaitingFeedback();
-    filterDone();
+    //filterToDo();
+    //filterInProgress();
+    //filterAwaitingFeedback();
+    //filterDone();
+
+    filterTasks('toDo');
+    filterTasks('inProgress');
+    filterTasks('awaitingFeedback');
+    filterTasks('done');
+    
     createBubbles();
     checkForEmptyCategories();
 }
 
 /**
+ * This function filters all the tasks to the correct status.
+ * @param {string} taskStatus - name of the task status
+ */
+function filterTasks(taskStatus) {
+    let currentStatus = tasks.filter(t => t["statusCategory"] == taskStatus);
+    document.getElementById(taskStatus).innerHTML = ``;
+    for (let i = 0; i < currentStatus.length; i++) {
+        let element = currentStatus[i]; 
+        if(taskStatus == "toDo") {
+            document.getElementById(taskStatus).innerHTML += generateToDoHTMLToDo(element, taskStatus);
+        } else if(taskStatus == "inProgress" || taskStatus == "awaitingFeedback") {
+            document.getElementById(taskStatus).innerHTML += generateToDoHTML(element, taskStatus);
+        } else if(taskStatus == "done") {
+            document.getElementById(taskStatus).innerHTML += generateToDoHTMLDone(element, taskStatus);
+        }
+        calculateProgressbar(element);
+    }
+}
+
+/**
  * This function filters all the tasks that have the category "toDo".
  */
-function filterToDo() {
+/* function filterToDo() {
     let toDo = tasks.filter(t => t["statusCategory"] == "toDo");
     document.getElementById("toDo").innerHTML = ``;
     for (let i = 0; i < toDo.length; i++) {
@@ -40,12 +66,12 @@ function filterToDo() {
         document.getElementById("toDo").innerHTML += generateToDoHTMLToDo(element, 'toDo');
         calculateProgressbar(element);
     }
-}
+} */
 
 /**
  * This function filters all the tasks that have the category "inProgress".
  */
-function filterInProgress() {
+/* function filterInProgress() {
     let inProgress = tasks.filter(t => t["statusCategory"] == "inProgress");
     document.getElementById("inProgress").innerHTML = ``;
     for (let i = 0; i < inProgress.length; i++) {
@@ -53,12 +79,12 @@ function filterInProgress() {
         document.getElementById("inProgress").innerHTML += generateToDoHTML(element, 'inProgress');
         calculateProgressbar(element);
     }
-}
+} */
 
 /**
  * This function filters all the tasks that have the category "awaitingFeedback".
  */
-function filterAwaitingFeedback() {
+/* function filterAwaitingFeedback() {
     let awaitingFeedback = tasks.filter(t => t["statusCategory"] == "awaitingFeedback");
     document.getElementById("awaitingFeedback").innerHTML = ``;
     for (let i = 0; i < awaitingFeedback.length; i++) {
@@ -66,13 +92,13 @@ function filterAwaitingFeedback() {
         document.getElementById("awaitingFeedback").innerHTML += generateToDoHTML(element, 'awaitingFeedback');
         calculateProgressbar(element);
     }
-}
+} */
 
 
 /**
  * This function filters all the tasks that have the category "done".
  */
-function filterDone() {
+/* function filterDone() {
     let done = tasks.filter(t => t["statusCategory"] == "done");
     document.getElementById("done").innerHTML = ``;
     for (let i = 0; i < done.length; i++) {
@@ -80,7 +106,7 @@ function filterDone() {
         document.getElementById("done").innerHTML += generateToDoHTMLDone(element, 'done');
         calculateProgressbar(element);
     }
-}
+} */
 
 /**
  * This function calculates the values for the progressbar of the subtasks.
@@ -123,39 +149,27 @@ function createBubbles() {
     for (let j = 0; j < tasks.length; j++) {
         let bubbleTaskId = tasks[j]["taskId"];
         if(tasks[j]["assignTo"].length <= 3) {
-            bubblesLessThanThree(j, bubbleTaskId);
+            let bubbleCount = tasks[j]["assignTo"].length;
+            userBubbles(j, bubbleTaskId, bubbleCount);
         } else if (tasks[j]["assignTo"].length > 3) {
-            bubblesMoreThanThree(j, bubbleTaskId);
+            let bubbleCount = 2;
+            userBubbles(j, bubbleTaskId, bubbleCount);
             getRemainingCount(j, bubbleTaskId);
         }
     }
 }
 
 /**
- * This function renders the assigend users if there are three or less.
+ * This function renders the bubbles of the assigend users.
  * @param {index} j - index of the current task
- * @param {number} bubbleTaskId - id of the bubble
+ * @param {number} bubbleTaskId - id of the current task
+ * @param {number} bubbleCount - count how many bubbles need to be rendered
  */
-function bubblesLessThanThree(j, bubbleTaskId) {
-    for (let i = 0; i < tasks[j]["assignTo"].length; i++) {
+function userBubbles(j, bubbleTaskId, bubbleCount) {
+    for (let i = 0; i < bubbleCount; i++) {
         let assignedUsers = tasks[j]['assignTo'];
-        let name = getName(assignedUsers, i);
-        document.getElementById(`userBubble${[bubbleTaskId]}`).innerHTML += `
-            <div class="userBubbleOne" id="userBubbleOne${[j]}${[i]}">${name}</div>`;
-        let userBubble = document.getElementById(`userBubbleOne${[j]}${[i]}`);
-        userBubble.style.backgroundColor = getUserColor(assignedUsers, i);
-    }
-}
-
-/**
- * This function renders the assigend users if there are more then three.
- * @param {*} j - index of the current task
- * @param {*} bubbleTaskId - id of the bubble
- */
-function bubblesMoreThanThree(j, bubbleTaskId) {
-    for (let i = 0; i < 2; i++) {
-        let assignedUsers = tasks[j]['assignTo'];
-        let name = getName(assignedUsers, i);
+        getName(assignedUsers, i);
+        let name = firstLetters;
         document.getElementById(`userBubble${[bubbleTaskId]}`).innerHTML += `
             <div class="userBubbleOne" id="userBubbleOne${[j]}${[i]}">${name}</div>`;
         let userBubble = document.getElementById(`userBubbleOne${[j]}${[i]}`);
@@ -173,11 +187,7 @@ function getName(assignedUsers, i) {
     let assignedUser = assignedUsers[i];
     let existingUser = contacts.find(u => u.contactId == parseInt(assignedUser));
     let correctUser = contacts.indexOf(existingUser);
-    getFirstletterNew(correctUser);
-    //let assignName = contacts[correctUser]['name'];
-    //let assignSurname = contacts[correctUser]['surname'];
-    //let assignFirstLetters = assignName.charAt(0).toUpperCase() + assignSurname.charAt(0).toUpperCase();
-    //return assignFirstLetters;
+    getFirstletter(correctUser);
 }
 
 
@@ -384,9 +394,9 @@ function renderAssignedUsers(currentTask) {
         let assignedUser = assignedUsers[i];
         let existingAssignUser = contacts.find(u => u.contactId == assignedUser)
         let currentAssignUser = contacts.indexOf(existingAssignUser);
-        getFirstletterNew(currentAssignUser);
-        //let assignName = contacts[currentAssignUser]['name'];
-        //let assignSurname = contacts[currentAssignUser]['surname'];
+        getFirstletter(currentAssignUser);
+        let assignName = contacts[currentAssignUser]['name'];
+        let assignSurname = contacts[currentAssignUser]['surname'];
         //let assignFirstLetters = assignName.charAt(0) + assignSurname.charAt(0);
         let assignColor = contacts[currentAssignUser]['contactColor'];
         document.getElementById('assignedToContainer').innerHTML += renderAssignedUserTemplate(assignColor, firstLetters, assignName, assignSurname);
@@ -580,7 +590,7 @@ function renderAssignedUsersEdit(currentTask) {
         //let assignName = contacts[i]['name'];
         //let assignSurname = contacts[i]['surname'];
         //let assignFirstLetters = assignName.charAt(0).toUpperCase() + assignSurname.charAt(0).toUpperCase();
-        getFirstletterNew(i);
+        getFirstletter(i);
         if (assignedUsersToCurrentTask.includes(contactId)) {
             document.getElementById('assignedToContainerEdit').innerHTML += selectedAssignedUsersEditTemplate(contactId, i, firstLetters);
         } else {

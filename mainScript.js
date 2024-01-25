@@ -52,7 +52,7 @@ async function includeHTML() {
  * This function accesses the users, tasks and contacts data that is stored on the ftp server.
  */
 async function init() {
-    setURL('https://tobias-odermatt.developerakademie.net/Projekte/Join/smallest_backend_ever');
+    setURL('https://tobias-odermatt.ch/html/projekte/Join/smallest_backend_ever');
     await downloadFromServer();
     users = JSON.parse(backend.getItem('users')) || [];
     tasks = JSON.parse(backend.getItem('tasks')) || [];
@@ -65,8 +65,7 @@ async function init() {
  * This function sets the color of the user. Border around the user icon in the top right corner.
  */
 function setUserColor() {
-    // 'http://127.0.0.1:5500/join.html'
-    if(window.location.href === 'https://tobias-odermatt.developerakademie.net/Projekte/Join/join.html' + window.location.search) { // => IMMER ANPASSEN!!!
+    if(window.location.href === 'https://tobias-odermatt.ch/html/projekte/Join/index.html' + window.location.search) { // => IMMER ANPASSEN!!!
      let queryString = window.location.search.slice(4);
      let urlId = parseInt(queryString);
  
@@ -80,7 +79,7 @@ function setUserColor() {
 }
 
 // ================================================ GENERAL FUNCTIONS ==========================================================
-function getFirstletterNew(i) {
+function getFirstletter(i) {
     firstLetters = "";
     let x = contacts[i]['name'];
     x = x.split(' ').map(word => word.charAt(0)).join('');
@@ -153,8 +152,7 @@ async function validateSignup(userData, contactData, user, name, surname, email,
   * This function brings you back to the main login.html.
   */
 function backToLoginScreen() {
-    window.location.href = 'https://tobias-odermatt.developerakademie.net/Projekte/Join/login.html'; // => IMMER ANPASSEN!!!
-    //   'http://127.0.0.1:5500/login.html'
+    window.location.href = 'https://tobias-odermatt.ch/html/projekte/Join/login.html'; // => IMMER ANPASSEN!!!
 }
 
 /**
@@ -192,8 +190,7 @@ async function saveUsers() {
  * This event listener lets you lets you login with the enter key.
  */
 window.addEventListener('keydown', (event) => {
-    //   'http://127.0.0.1:5500/login.html'
-    if(window.location.href === 'https://tobias-odermatt.developerakademie.net/Projekte/Join/login.html') { // => IMMER ANPASSEN!!!
+    if(window.location.href === 'https://tobias-odermatt.ch/html/projekte/Join/login.html') { // => IMMER ANPASSEN!!!
         if(event.keyCode == 13) {
             login();
         }
@@ -240,8 +237,7 @@ function validateLogin(emailLog, passwordLog, existingUser, existingPw, user) {
             let userId = users[currentUser]['userId'];
             let userColor = users[currentUser]['userColor'];
 
-            //  /  'http://127.0.0.1:5500/join.html?id='
-            window.location.href = 'https://tobias-odermatt.developerakademie.net/Projekte/Join/join.html?id=' + userId // => IMMER ANPASSEN!!!
+            window.location.href = 'https://tobias-odermatt.ch/html/projekte/Join/index.html?id=' + userId // => IMMER ANPASSEN!!!
         }
     }
 }
@@ -263,7 +259,7 @@ function setUserName(user) {
 function guestLogin() {
     let userName = "Guest";
     localStorage.setItem('userName', userName);
-    window.location.href = 'join.html';
+    window.location.href = 'index.html';
     let userIdLogin = '';
     localStorage.setItem('userIdLogin', userIdLogin);
 }
@@ -292,7 +288,7 @@ async function checkForCorrectEmail(event) {
 }
 
 function action(formData) {
-    const input = "https://tobias-odermatt.developerakademie.net/Projekte/Join/send_mail.php";
+    const input = "https://tobias-odermatt.ch/html/projekte/Join/send_mail.php"; // => immer anpassen!!
     const requestInit = {
         method: 'post',
         body: formData

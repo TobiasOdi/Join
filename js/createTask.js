@@ -315,7 +315,7 @@ function renderAvailableUsers() {
         let userName = contacts[i]['name'];
         let userSurname = contacts[i]['surname'];
         let userColor = contacts[i]['contactColor'];
-        getFirstletterNew(i);
+        getFirstletter(i);
         //getFirstLetterAvailableUser(i);
         avatarPicker.innerHTML += assignUserTemplate(availableUserId, userColor, firstLetters, userName, userSurname);
     }
@@ -395,7 +395,7 @@ function selectedUsersAvailableLessThenTen() {
         let currentUser = contacts.indexOf(existingUser);
         let userColor = contacts[currentUser]['contactColor'];
         //getFirstLetterAvailableUser(currentUser);
-        getFirstletterNew(currentUser);
+        getFirstletter(currentUser);
         selectedUsersPlaceholder.innerHTML += selectedUsersPlaceholderTemplate(userColor, firstLetters);
     }
 }
@@ -411,7 +411,7 @@ function selectedUsersAvailableMoreThenTen() {
         let currentUser = contacts.indexOf(existingUser);
         let userColor = contacts[currentUser]['contactColor'];
         //getFirstLetterAvailableUser(currentUser);
-        getFirstletterNew(currentUser);
+        getFirstletter(currentUser);
         selectedUsersPlaceholder.innerHTML += selectedUsersPlaceholderTemplate(userColor, firstLetters);
     }
     let remainingUsers = selectedUsers.length - 9;

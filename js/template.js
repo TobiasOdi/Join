@@ -2,10 +2,10 @@
 /**
  * This function returns the template for the tasks in the "todo" category.
  * @param {number} element - index of the current task in the filtered category.
- * @param {string} currentStatusCategory - The current category in which the task is.
+ * @param {string} taskStatus - The current category in which the task is.
  * @returns 
  */
-function generateToDoHTMLToDo(element, currentStatusCategory) {
+function generateToDoHTMLToDo(element, taskStatus) {
     return `
         <div class="boardContainer" draggable="true" ondragstart="startDragging(${element["taskId"]})" onclick="openTask(${element["taskId"]})">
             <div class="boardContainerTop">
@@ -13,7 +13,7 @@ function generateToDoHTMLToDo(element, currentStatusCategory) {
                     <div>${element["category"]}</div>
                 </div>
                 <div onclick="doNotOpenTask(event)">
-                     <div id="pushToNextCategory${element["taskId"]}" onclick="pushToNextCategory('${currentStatusCategory}', ${element["taskId"]})">
+                     <div id="pushToNextCategory${element["taskId"]}" onclick="pushToNextCategory('${taskStatus}', ${element["taskId"]})">
                         <img src="./img/next.svg">
                     </div>
                 </div>
@@ -40,10 +40,10 @@ function generateToDoHTMLToDo(element, currentStatusCategory) {
 /**
  * This function returns the template for the tasks in the "inProgress" and "awaitingFeedback" category.
  * @param {number} element - index of the current task in the filtered category.
- * @param {string} currentStatusCategory - The current category in which the task is.
+ * @param {string} taskStatus - The current category in which the task is.
  * @returns 
  */
-function generateToDoHTML(element, currentStatusCategory) {
+function generateToDoHTML(element, taskStatus) {
     return `
         <div class="boardContainer" draggable="true" ondragstart="startDragging(${element["taskId"]})" onclick="openTask(${element["taskId"]})">
             <div class="boardContainerTop">
@@ -51,10 +51,10 @@ function generateToDoHTML(element, currentStatusCategory) {
                     <div>${element["category"]}</div>
                 </div>
                 <div onclick="doNotOpenTask(event)">
-                    <div id="pushToPreviousCategory${element["taskId"]}" onclick="pushToPreviousCategory('${currentStatusCategory}', ${element["taskId"]})">
+                    <div id="pushToPreviousCategory${element["taskId"]}" onclick="pushToPreviousCategory('${taskStatus}', ${element["taskId"]})">
                         <img src="./img/previous.svg">
                     </div>
-                    <div id="pushToNextCategory${element["taskId"]}" onclick="pushToNextCategory('${currentStatusCategory}', ${element["taskId"]})">
+                    <div id="pushToNextCategory${element["taskId"]}" onclick="pushToNextCategory('${taskStatus}', ${element["taskId"]})">
                         <img src="./img/next.svg">
                     </div>
                 </div>
@@ -81,10 +81,10 @@ function generateToDoHTML(element, currentStatusCategory) {
 /**
  * This function returns the template for the tasks in the "done" category.
  * @param {number} element - index of the current task in the filtered category.
- * @param {string} currentStatusCategory - The current category in which the task is.
+ * @param {string} taskStatus - The current category in which the task is.
  * @returns 
  */
-function generateToDoHTMLDone(element, currentStatusCategory) {
+function generateToDoHTMLDone(element, taskStatus) {
     return `
         <div class="boardContainer" draggable="true" ondragstart="startDragging(${element["taskId"]})" onclick="openTask(${element["taskId"]})">
             <div class="boardContainerTop">
@@ -92,7 +92,7 @@ function generateToDoHTMLDone(element, currentStatusCategory) {
                     <div>${element["category"]}</div>
                 </div>
                 <div onclick="doNotOpenTask(event)">
-                    <div id="pushToPreviousCategory${element["taskId"]}" onclick="pushToPreviousCategory('${currentStatusCategory}', ${element["taskId"]})">
+                    <div id="pushToPreviousCategory${element["taskId"]}" onclick="pushToPreviousCategory('${taskStatus}', ${element["taskId"]})">
                         <img src="./img/previous.svg">
                     </div>
                 </div>
