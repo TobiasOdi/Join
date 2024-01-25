@@ -2,11 +2,11 @@
 
 ########### CONFIG ###############
 $recipient = $_POST['sendEmailToResetPw'];
-$redirect = 'http://127.0.0.1:5500/login.html';
+$redirect = 'https://join.tobias-odermatt.ch/login.html';
 $name = 'JOIN Support Team';
 $message = "Hi there,\n
 \nClick on the following link to reset your JOIN password for your $recipient account.\n
-\nhttps://tobias-odermatt.developerakademie.net/Join/templates/resetPw.html?email=$recipient\n
+\nhttps://join.tobias-odermatt.ch/templates/resetPw.html?email=$recipient\n
 \nIf you did not ask to reset your password, you can ignore this email.\n
 \nThanks,\n
 Your JOIN team";
@@ -35,9 +35,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
 
         $subject = "Reset password for JOIN App";
         $headers = "From:  noreply@https://tobias-odermatt.developerakademie.net";
-        # noreply@tobias-odermatt.developerakademie.net
-        # noreply@https://tobias-odermatt.developerakademie.net"
-        # $headers = "From:  noreply@developerakademie.com";
+        // $headers = "From:  noreply@https://tobias-odermatt.developerakademie.net";
         mail($recipient, $subject, $message, $headers);
         //header("Location: " . $redirect);
 

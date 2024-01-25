@@ -9,6 +9,14 @@ let orange = "#FF3D00";
 let lightorange = "#FFA800";
 let green = "#7AE229";  
 
+/* ===================== DATABASE JSON ========================= */
+// {"categories":"[ {\"categoryName\":\"Marketing\",\"color\":\"rgb(0, 56, 255)\",\"categoryType\":\"default\"},
+//                  {\"categoryName\":\"Media\",\"color\":\"rgb(255, 199, 2)\",\"categoryType\":\"default\"},
+//                  {\"categoryName\":\"Backoffice\",\"color\":\"rgb(31, 215, 193)\",\"categoryType\":\"default\"},
+//                  {\"categoryName\":\"Design\",\"color\":\"rgb(255, 122, 0)\",\"categoryType\":\"default\"},
+//                  {\"categoryName\":\"Sales\",\"color\":\"rgb(252, 113, 255)\",\"categoryType\":\"default\"}
+//                ]"}
+
 /* ======================================================= INCLUDE HTML ========================================================== */
 /**
  * This function adds the html template to the correct container.
@@ -52,7 +60,7 @@ async function includeHTML() {
  * This function accesses the users, tasks and contacts data that is stored on the ftp server.
  */
 async function init() {
-    setURL('https://tobias-odermatt.ch/html/projekte/Join/smallest_backend_ever');
+    setURL('/smallest_backend_ever');
     await downloadFromServer();
     users = JSON.parse(backend.getItem('users')) || [];
     tasks = JSON.parse(backend.getItem('tasks')) || [];
@@ -65,7 +73,7 @@ async function init() {
  * This function sets the color of the user. Border around the user icon in the top right corner.
  */
 function setUserColor() {
-    if(window.location.href === 'https://tobias-odermatt.ch/html/projekte/Join/index.html' + window.location.search) { // => IMMER ANPASSEN!!!
+    if(window.location.href === 'https://join.tobias-odermatt.ch/index.html' + window.location.search) { // => IMMER ANPASSEN!!!
      let queryString = window.location.search.slice(4);
      let urlId = parseInt(queryString);
  
@@ -152,7 +160,7 @@ async function validateSignup(userData, contactData, user, name, surname, email,
   * This function brings you back to the main login.html.
   */
 function backToLoginScreen() {
-    window.location.href = 'https://tobias-odermatt.ch/html/projekte/Join/login.html'; // => IMMER ANPASSEN!!!
+    window.location.href = 'https://join.tobias-odermatt.ch/login.html'; // => IMMER ANPASSEN!!!
 }
 
 /**
@@ -190,7 +198,7 @@ async function saveUsers() {
  * This event listener lets you lets you login with the enter key.
  */
 window.addEventListener('keydown', (event) => {
-    if(window.location.href === 'https://tobias-odermatt.ch/html/projekte/Join/login.html') { // => IMMER ANPASSEN!!!
+    if(window.location.href === 'https://join.tobias-odermatt.ch/login.html') { // => IMMER ANPASSEN!!!
         if(event.keyCode == 13) {
             login();
         }
@@ -237,7 +245,7 @@ function validateLogin(emailLog, passwordLog, existingUser, existingPw, user) {
             let userId = users[currentUser]['userId'];
             let userColor = users[currentUser]['userColor'];
 
-            window.location.href = 'https://tobias-odermatt.ch/html/projekte/Join/index.html?id=' + userId // => IMMER ANPASSEN!!!
+            window.location.href = 'https://join.tobias-odermatt.ch/index.html?id=' + userId // => IMMER ANPASSEN!!!
         }
     }
 }
@@ -288,7 +296,7 @@ async function checkForCorrectEmail(event) {
 }
 
 function action(formData) {
-    const input = "https://tobias-odermatt.ch/html/projekte/Join/send_mail.php"; // => immer anpassen!!
+    const input = "https://join.tobias-odermatt.ch/send_mail.php"; // => immer anpassen!!
     const requestInit = {
         method: 'post',
         body: formData
