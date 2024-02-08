@@ -56,6 +56,13 @@ function openDropdown(id) {
     }
 }
 
+function closeDropdown() {
+    if(!document.getElementById('categoryChoices').classList.contains('d-none') || !document.getElementById('avatarPicker').classList.contains('d-none') ) {
+        document.getElementById('categoryChoices').classList.add('d-none');
+        document.getElementById('avatarPicker').classList.add('d-none');
+    }
+}
+
 /**
  * This function sets the date.
  */
@@ -580,6 +587,10 @@ function saveSelectedCategory(categoryName, categoryColor) {
  */
 function doNotAdd(event) {
     event.stopPropagation();
+}
+
+function doNotClose(event) {
+    event.stopPropagation(); 
 }
 
 /**

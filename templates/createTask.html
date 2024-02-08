@@ -1,4 +1,4 @@
-<div class="addTaskMainContainer">
+<div class="addTaskMainContainer" onclick="closeDropdown()">
     <div class="addTaskMainSubContainer">
         <form class="createTaskForm" onsubmit="createTask();return false">
             <h1>Add Task</h1>
@@ -16,7 +16,7 @@
 
                     <div class="selectionContainer preventSelect">
                         <span>Category</span>
-                        <div class="selectWrapper selectWrapperHeight" id="selectCategoryForm" onclick="openDropdown('categoryChoices')">
+                        <div class="selectWrapper selectWrapperHeight" id="selectCategoryForm" onclick="openDropdown('categoryChoices'); doNotClose(event)">
 
                         </div>
 
@@ -77,7 +77,7 @@
                         </div>
                         <div class="selectionContainer preventSelect">
                             <span>Assigned To</span>
-                            <div class="selectWrapper selectWrapperHeight assignedToWrapper" id="assignedToForm" onclick="openDropdown('avatarPicker')">
+                            <div class="selectWrapper selectWrapperHeight assignedToWrapper" id="assignedToForm" onclick="openDropdown('avatarPicker'); doNotClose(event)">
     
                             </div>
                         </div>
